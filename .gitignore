@@ -6,3 +6,6 @@ latex/*.pdf
 textbooks
 Others
 *.tar
+*.swo
+*.swp
+

@@ -22,4 +22,4 @@
 \contentsline {chapter}{\numberline {2}Introduction to the papers}{9}{chapter.2}
 \contentsline {chapter}{\numberline {3}Scientific results}{11}{chapter.3}
 \contentsline {section}{\numberline {3.1}Paper title}{13}{section.3.1}
-\contentsline {chapter}{\numberline {A}Some appendix}{17}{appendix.A}
+\contentsline {chapter}{\numberline {A}Some appendix}{37}{appendix.A}
