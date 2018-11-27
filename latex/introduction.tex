@@ -1,0 +1,318 @@
+
+%
+% CUSTOM THEOREMS (MI)
+%
+\newtheorem{theorem}{\textbf{Theorem}}
+%\newtheorem{observation}[theorem]{\textbf{Observation}}
+%\newtheorem{definition}{\textbf{Definition}}
+\newtheorem{problem}[theorem]{\textbf{Problem}}
+%\newtheorem{proposition}[theorem]{\textbf{Proposition}}
+\newtheorem{remark}[theorem]{\textbf{Remark}}
+%\newtheorem{lemma}[theorem]{\textbf{Lemma}}
+
+
+\chapter{Introduction}
+%
+This dissertation focuses three optimization problems of which common denominator is communication among multiple devices.
+
+The first two topics concern NP-hard combinatorial network optimization problems, and can naturally be formulated as integer linear programs (ILP).
+Instances of limited sizes can be solved to optimality using traditional methdos for solving ILP such as Branch and Bound (B\&B).
+In case of larger instances, where finding optimal solution is prohibitively time consuming, methods without guarantee of optimality such as heuristic algorithms are employed.
+ILP models are also useful whenever the optimality has to be given up due to the excessive instance size.
+Continuous relaxations of ILP models help to evaluate quality of a studied inexact method.
+The stronger model, the better assessment it provides.
+Devising strong ILP models is therefore of our great interest.
+%A common optimization criterium in is energy consumption, as the devices are typically heavily energy constrained due to the use batteries as energy sources.
+%Another criterium is time during which a communication session takes place.
+The cornerstone of the first two problems is a set of devices of fixed locations with the ability of communicating with each other.
+The task is always to disseminate a message initiated at certain source devices to the remaining ones while abiding by certain communication rules and restrictions.
+In practical applications, there are various optimization criteria in network communication problems.
+The first two problems studied herein require minimizing the power consumption and time during which a communication session takes place.
+
+The last problem belongs to the artificial intelligence (AI) world, particularly to the family of multi-robot path planning problems.
+The most general variant, cooperative path-finding \cite{silver05} is NP-hard, and assumse a set of agents deployed in an environment.
+Each agent is assigned a target location in the environment, and their task is to reach these locations by a simultaneous movement while obeying several rules.
+There are three most common optimization criteria \cite{yu13} to be pursued:
+\begin{itemize}
+	\item Minimum total arrival time - total number of time steps that the agents need before arrivin in their targets.
+	\item Minimum makespan - the number of time steps needed by the latest arriving agent
+	\item Minimum total distance - total number of moves performed by the agents
+\end{itemize}
+Various modifications have been proposed in the literature, and they will be discussed in detail in Section \ref{sec:app}.
+An extension of the problem considers agents divided into two adversarial teams, where the teams can have either symmetric or asymmetric objectives.
+After introducing the adversarial element, the problem becomes PSPACE-hard, like many two player games with alternating turns.
+Additional requirement of preserving a communication possibility during the agets' movement has also been studied.
+
+The remainder of this chapter is structured as follows: 
+Section~\ref{sec:back} contains an overview of general underlying mathematical and algorithmical tools and methods employed in the attached papers.
+In Section~\ref{sec:smt}, we discuss ad-hoc wireless networks and describe several optimization problems in this area.
+In particular, we focus on the shared multicast tree problem and provide an insigt into its relation to other similar problems.
+Section~\ref{sec:mbt} introduces the minimum broadcast tree problem and discusses other relevant problems.
+In Section~\ref{sec:app}, we describe the problems in multi-robot path planning, and summarize their properties.
+An emphasis is given to the area protection problem.
+
+%This is the introduction~\cite{deb01, pyprop}\ldots
+
+\section{Background}\label{sec:back}
+
+%\subsection{Notation and Terminology}
+
+\subsection{Graph Terminology}
+
+A \emph{graph} $G$ is a pair $(V,E)$ of \emph{vertices} and \emph{edges}, where $E\subseteq {{V}\choose{2}}$.
+If this inclusion is an equality, $G$ is said to be \emph{complete}.
+A \emph{path} in graph is a sequence of edges connecting a sequence of distinct vertices.
+A graph is said to be \emph{connected} if there exists a path between every two vertices, otherwise it is \emph{disconnected}.
+A \emph{cycle} of a graph $G$ is a subset of $E$ that form a path such that the first node of the path corresponds to the last. 
+If $G$ contains a cycle, $G$ is called, \emph{cyclic}, otherwise it is called \emph{acyclic}.
+\begin{definition}
+A tree is a graph that is connected and acyclic.
+\end{definition}
+For a vertex $v\in V$, a \emph{neighbourhood} of $v$ (open neighbourhood), denoted as $N(v)$, is the set of vertices adjacent to $v$.
+The size of neighbourhood of $v$ is called a \emph{degree} of $v$.
+A \emph{subgraph} of $G=(V,E)$ is a graph $G'=(V',E')$ such that $V'\subseteq V$ and $E'\subseteq E$.
+This relation is often written as $G\subseteq G'$.
+\begin{definition}
+A spanning tree of graph $G=(V,E)$ is a tree $T=(V_T,E_T)$ such that $T\subseteq G$ and $V_T=V$.
+\end{definition}
+
+In a \emph{weighted graph} $G=(V,E,w)$, a \emph{weight} or \emph{cost} $w_e$ is associated witch each edge $e\in E$.
+A weight of $G$ is $\sum_{e\in E}w(e)$.
+A spanning tree of $G$ with minimum weight is called a \emph{minimum spanning tree} of $G$.
+Similar concept is used in paths in graphs.
+A \emph{shoretst path} from $u$ to $v$ in a weighted graph is a path consisting of edges of minimum sum of weights connecting $u$ and $v$.
+\begin{definition}
+	For a graph $G=(V,E)$ and a subset of vertices $D\subseteq V$, a Steiner tree of $G$ and $D$ is a tree $T=(V',E')$ such that $T\subseteq G$ and $D\subseteq V'$.
+\end{definition}
+Analogously in weighted graphs, a \emph{minimum Steiner tree} is a Steiner tree of minimum weight.
+
+If edges have a direction associated with them, we call such a graph a \emph{directed graph}, and its edges are referred to as \emph{arcs}
+Let $G=(V,A)$ be a directed graph. 
+By \emph{in-degree} and \emph{out-degree} of a vertex $v\in V$ we mean the sizes of sets $|\{(u,v): u\in V, (u,v) \in A\}|$ and $|\{(v,u): u\in V, (v,u) \in A\}|$ , respectively.
+An \emph{arborescence} rooted at vertex $r$ is a directed tree with arcs directed from $r$.
+
+\subsection{Combinatorial Optimization}
+
+Combinatorial optimization (CO) is a part of applied mathematics that taclkes optimization problems over discrete structures.
+It combines methods from graph theory, linear programming, combinatorics and the theory of algorithms.
+In this section, we briefly introduce main concepts in CO used later in the text.
+For a comprehensive rendition of this topic, an interested reader is referred to \cite{wolsey98} and \cite{nemhauser88}.
+
+Combinatorial problems arise in many areas of computer science with a wide range of applications in various industrial disciplines 
+such as production scheduling, logistics, communication network design and many more.
+The core solving a problem by methods of CO is the identification of a discrete mathematical structure hidden in the problem,
+and finding a sufficient abstraction.
+
+CO concerns problems of minimization or maximization of an \emph{objective function} of several variables 
+subject to inequality and equality \emph{constraints} and integrality restriction on at least some of the variables.
+In this work, both the objective function and constraints are assumed to be linear.
+Combinatorial problems are often formulated as \emph{mixed integer linear programs} (MILP) of the standard form
+\begin{equation}
+\begin{array}{r@{}l}
+	\max\limits_{x,y}c^\top x + h^\top y & \\
+	\text{subject to}& \\
+	  Ax + Gy &\leq b, \\
+	  x \in \mathbb{Z}^{n}_+, y & \in\mathbb{R}^{p}_+. 
+\end{array}
+\end{equation}
+
+The problem instance is specified by the input data $c\in \mathbb{R}^n$, $h \in \mathbb{R}^n$, $A \in \mathbb{R}^{m\times n}$  $G \in\mathbb{R}^{m\times p}$ and $b \in \mathbb{R}^m$.
+A MILP that is not in the standard form, for example if the objective is to minimize or if the constraints contain equalities, can be straightforwardly converted into the standard form.
+If the integrality constraints are not present, we talk about a \emph{linear program} (LP)
+
+
+The set of points $S=\{(x_0,y_0):  x_0 \in \mathbb{Z}^{n}_+, y_0  \in\mathbb{R}^{p}_+, Ax_0 + Gy_0 \leq b\}$ is called the \emph{feasible region},  
+and a point $(x_0,y_0)\in S$ is referred to as a \emph{feasible point} (feasible solution) with \emph{objective function value} $c^\top x_0 + h^\top y_0$. 
+A feasible point $(x^*,y^*)$ is called an \emph{optimal solution} if for every feasible points $(x_0,y_0)$ we have that $c^\top x_0 + h^\top y_0 \leq c^\top x^* + h^\top y^*$. 
+Expression $c^\top x^* + h^\top y^*$ is then called the \emph{optimal value}. 
+
+\subsubsection{Relaxation and Bounds}
+
+\begin{definition}
+	Let $S\subseteq \mathbb{R}^n$ and $\mathcal{F}$ be a MILP $\max\{f(x):x\in S\}$.
+	The problem $\mathcal{R}: \max\{g(x):x\in T\}$ is a relaxation of $\mathcal{F}$ if and only if
+	\begin{enumerate}
+		\item $T\supseteq S$, and
+		\item $g(x)\geq f(x) \forall x\in S$.
+	\end{enumerate}
+\end{definition}
+
+
+Let $z^*$ and $\underline{z}$ be the optimal value of a MILP and its relaxation, respectively. 
+Further, let $\bar{z}$ be the objective function value of some feasible point.
+Then, $\underline{z}\leq z^* \leq \bar{z}$.
+Values $\underline{z}$ and $\bar{z}$ are referred to as a lower bound and an upper bound, respectively.
+
+A \emph{combinatorial relaxation} of a MILP is achieved by omitting one or more constraints. 
+By omitting the integrality constraints of a MILP $\mathcal{F}$ we obtain its \emph{continuous relaxation}, also called \emph{LP relaxation}, denoted as LP$(\mathcal{F})$.
+
+\subsubsection{Duality}
+
+\subsubsection{Solving methods}
+
+Linear programs are commonly solved in polynomial time by the \emph{simplex algorithm}.
+A MILP can be solved by the \emph{branch and bound} (B\&B) method which may take exponential time.
+These and other algorithms are an integral parts of most of the modern solvers such as CPLEX and GUROBI.
+
+\subsubsection{Problems and Complexity}\label{sect:probcomp}
+
+A \emph{computational problem} (problem) is an infinite collection of instances together with a solution for each instance.
+A problem that can be posed as a yes-no question of the input values is referred to as \emph{decision problem}.
+An example of a decision problem is the clique problem: Given a graph $G$ and an integer $k$, is there a clique in $G$ of size at least $k$?
+In \emph{optimization problems}, the task is to find a ``best possible'' solution from among the set of all feasible solutions the problem instance.
+The optimization version of the clique problem asks for finding the maximum clique in a given graph $G$.
+An optimizatoin problem can be solved by answering a sequence of decision problems:
+Assume there is an oracle that is able to answer the clique problem for a given $(G,k)$.
+The maximum clique problem can then be solved by answering its optimization version for $k=1,2,\dots$ until the answer is ``no'' for some $k'$, and so the maximum clique has the size $k'-1$.
+
+Throughout this thesis, we use several well known concepts from the complexity theory, which we state in the following.
+Detailed explanations of the terminology can be found in any textbook on this topic such as \cite{sipser06}.
+
+An \emph{algorithm} is a procedure that solves a given problem in a finite number of steps.
+Computational complexity of an algorithm is the amount of time needed for its run, and is measured in terms of the input size.
+A \emph{polynomial} algorithm runs in time $\mathcal{O}(n^c)$, for some constant $c$ and input $w$ of size $|w|=n$.
+A \emph{verifier} is an algorithm that determines whether a given certificate is a proof to the fact that $w$ is a yes-instance.
+An example of a certificate in the clique problem is some subset of nodes of size $k$.
+It can be verified in polynomial time whether there exists an edge between every two nodes.
+\begin{definition}
+	$P$ is the class of decision problems for which there exists a polynomial algorithm that solves them.
+\end{definition}
+\begin{definition}
+	$NP$ is the class of decision problems for which there exists a polynomial verifier. 
+\end{definition}
+\begin{definition}
+	Problem $X$ is polynomial time reducible to problem $X'$, if a polynomial computable function $f$ exists where for every $w$, 
+	$w$ is a yes-instance of $X\Leftrightarrow f(w)$ is a yes instance of $X'$.
+\end{definition}
+\begin{definition}\label{def:npc}
+	Decision problem $X$ is NP-complete if it satisfies:
+	\begin{enumerate}
+		\item $X$ is in NP.
+		\item Every $X'$ in NP is polynomial time reducible to $X$.
+	\end{enumerate}
+\end{definition}
+Remark:
+A verifier does not decide whether a certificate is an optimal solution to a given optimization problem instance. 
+When addressing optimization problems, we consider only the second property in Def.~\ref{def:npc}. 
+If this property is satisfied, we say that the problem is NP-hard.
+
+There are many well know examples of NP-hard problems, and they can be formulated as ILP.
+Therefore, ILP itself is also NP-hard.
+
+\begin{definition}
+	PSPACE is the class of decision problems for which there exists an algorithm that solves them in a polynomial space.
+\end{definition}
+\begin{definition}\label{def:psc}
+	Decision problem $X$ is PSPACE-complete if it satisfies:
+	\begin{enumerate}
+		\item $X$ is in PSPACE.
+		\item Every $X'$ in PSPACE is polynomial time reducible to $X$.
+	\end{enumerate}
+\end{definition}
+If $X$ satisfies only the second condition in Def.~\ref{def:psc} we say that $X$ is \emph{PSPACE-hard}.
+
+
+\subsection{Path Planning}
+
+Basic path-finding in (weighted) graphs is a well known task in computer science. The aim 
+is to find a route between two selected vertices. We also use the term \emph{source} and
+\emph{target} to refer to the initial vertex and target vertex, respectively.
+
+%\subsubsection{Dijkstra's algorithm}
+
+A shortest path can be found using \emph{Dijkstra's algorithm} \cite{dijkstra59}, which guarantees optimality.
+Dijkstra’s Algorithm visits vertices in the graph starting with the source. 
+It then repeatedly inspects the vertex which was not yet visited that lies closest to the source. 
+It expands outwards from the source until it reaches the target. 
+A drawback of this approach is that it may expand too many vertices that later turn out to lie very far from the target.
+
+%\subsubsection{Best first search}
+
+Another possibility is the greedy \emph{best first search} algorithm which can find the target faster, but the selected path is not guaranteed to be optimal.
+Instead of expanding vertices close to the source, it selects those close to the target.
+Obviously, which node is exactly the closest is not known without a previous preprocessing, and so it uses a heuristic estimation which guides the way towards the target.
+
+%\subsubsection{A*}
+
+The \emph{A*} algorithm combines the advantages of Dijkstra's and best first search algorithm.
+It guarantees to find an optimal path and also exploits a heuristic estimation of the distance to the target which helps to avoid expanding unsuitable vertices.
+
+The heuristic estimation is particularly useful when there is an incomplete information about the graph.
+For that reason, A* is popular in video game development, where the exact distances can not be predicted due to a frequent change of the environment. 
+
+Let us denote the source and target by $s$ and $t$, respectively.
+The following values are considered for every vertex $v$:
+\begin{itemize}
+	\item $g_v$, a distance from $s$ to $v$,
+	\item $h_v$, heuristic estimation of distance between $v$ and $t$, 
+	\item $f_v=g_v+h_v$.
+\end{itemize}
+
+
+\section{Power Minimizing Trees in Ad-hoc Wireless Netowrks}\label{sec:smt}
+
+A Wireless Ad-hoc Network (WANET) is a decentralized type of wireless network.
+Unlike cellular and wired networks, WANET does not depend on any pre-existing infrastructure.
+The set of wireless communication devices with fixed locations are connected via wireless links depending on 
+distance between the nodes, thier transmission power, error control scheme, background noise and interference.
+Each device is equipped with an omnidirectional antenna with a communication range schematically illustrated in Fig. \ref{fig:omniantenna}.
+Hence, a signal reaches all nodes within the communication range of its sender.
+This range is determined by the power assigned to the sender, and this power can be changed over time.
+The power necessary for relaying a signal to multiple devices is the maximum rather than the sum of the powers necessary to reach all intended receivers.
+This feature is referred to as the \emph{wireless advantage} \cite{wieselthierXX}
+Each device works as a transceiver, which means that it can both transmit and receive a signal.
+
+The absence of infrastructure, and therefore thier quick deployment and simple configuration, makes them useful in emergency situations such as disaster relief and military operations.
+
+Fig. \ref{fig:communication} depicts different types of communication in wireless networks.
+Consider a group of devices and a specific sender who initiates a signal transmission. 
+A \emph{unicast} means that there is a single recipient.
+Whenever the recepients are all the remaining devices within the group, we talk about a \emph{broadcast}.
+Finally, a \emph{multicast} means that only some of the devices must receive the message. 
+The remaining ones do not have to, but they can serve as intermediate devices forwarding the signal.
+
+\subsection{Related Problems}
+
+\section{Minimum Broadcast Trees}\label{sec:mbt}
+
+\section{Multi-Agent Path Finidng}\label{sec:app}
+
+In multi-robot path finding (MPF) we consider an environment with several identical moving entities referred to as 
+\emph{agents}. Source and target locations are uniquely determined for each agent. The objective
+is to find a route for every agent from its source to its target.
+Agents must not collide with obstacles and other agents that are also moving along
+planned routes towards their own targets.
+The environment is modeled as an undirected graph, where the agents are placed in the vertices, and move along the edges from one vertex to another. 
+Continuous time is divided into discrete time steps, where the relocation of an agent from one vertex to its neighbor takes exactly 1 time step.
+
+Different variants and restrictions have been studied.
+
+\emph{Muliti-agent path-finding} (MPF) \cite{source1}  supposes a group of agents in a given
+environment, where initial and target positions are determined for each agent.
+All individual agents must avoid collisions. Movement of the agents is carried
+out in discrete time steps. Agent can shift from one vertex to its neighbor on
+condition that the neighbor is either unoccupied or is being left by other agent
+in the same time step. At most one agent is allowed to pass an edge within one
+time step. That is, agents are not allowed to exchange their positions within one
+time step.
+
+\emph{Pebble motion on graphs} \cite{source1,source2} is a very similar problem as MPF. It can
+be regarded as a restricted variant of MPF. The difference consists in rules for
+movement. While MPF enables entering a vertex that is simultaneously being
+left by other agent, such transfer is not permissible in pebble motion. As an
+illustration we can mention 15 puzzle also known as Lloyd’s 15 \cite{lloydXX}.
+
+\emph{Cooperative Path-finding} \cite{cpf} is a special case of MPF where each agent is
+assumed to have a full knowledge of all other agents and their planned routes.
+Precisely speaking, solving algorithm can take into account paths planned for
+agents that were processed earlier, and adjust paths searched later according to
+them.
+
+\subsection{Scenarios with adversaries}
+
+\subsubsection{Adversarial Cooperative Path Finding}
+
+\subsubsection{Area Protection Problem}
+
+\subsubsection{Area Protection Problem with Communication maintenance}
+

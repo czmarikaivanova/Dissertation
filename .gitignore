@@ -1,0 +1,8 @@
+*.aux
+*.log
+latex/*.pdf
+*.tar.gz
+*.zip
+textbooks
+Others
+*.tar
