@@ -1,0 +1,20 @@
+\documentclass[border={30pt 0pt 0pt 0pt}]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \shade [outer color=white, inner color=blue!50] (0,0) circle (1.8);
+  \draw[thick,->] (0,0) -- (0,1.6);
+  \draw[thick,->] (0,0) -- (1.6,0);
+  \draw[thick,->] (0,0) -- (-1.6,0);
+  \draw[thick,->] (0,0) -- (0,-1.6);
+  \draw[thick,->] (0,0) -- (1.1314,-1.1314);
+  \draw[thick,->] (0,0) -- (-1.1314,-1.1314);
+  \draw[thick,->] (0,0) -- (-1.1314,1.1314);
+  \draw[thick,->] (0,0) -- (1.1314,-1.1314);
+  \draw[thick,->] (0,0) -- (1.1314,1.1314);
+  \end{tikzpicture}
+
+	  \end{document}
