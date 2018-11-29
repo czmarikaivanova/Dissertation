@@ -253,7 +253,7 @@ The following values are considered for every vertex $v$:
 
 A Wireless Ad-hoc Network (WANET) is a decentralized type of wireless network.
 Unlike cellular and wired networks, WANET does not depend on any pre-existing infrastructure.
-The set of wireless communication devices with fixed locations are connected via wireless links depending on 
+The set of uniform wireless communication devices with fixed locations are connected via wireless links depending on 
 distance between the nodes, thier transmission power, error control scheme, background noise and interference.
 Each device is equipped with an omnidirectional antenna with a communication range schematically illustrated in Fig. \ref{fig:omniantenna}.
 Hence, a signal reaches all nodes within the communication range of its sender.
@@ -282,13 +282,49 @@ The absence of infrastructure implies their quick deployment and simple configur
 The recent years have withnessed an increasing interest in WANETs, motivated by numerous both civil and military applications and by the continual progression in wireless technologies.
 Digital battlefield, disaster management, luggage handling in airports, context aware computing and mobile commerce are examples of the growing list of potential applications of WANETs \cite{younis06}.
 
-
 Fig. \ref{fig:communication} depicts different types of communication in wireless networks.
 Consider a group of devices and a specific sender who initiates a signal transmission. 
 A \emph{unicast} means that there is a single recipient.
 Whenever the recepients are all the remaining devices within the group, we talk about a \emph{broadcast}.
 Finally, a \emph{multicast} means that only some of the devices must receive the message. 
 The remaining ones do not have to, but they can serve as intermediate devices forwarding the signal.
+
+The wireless devices are typically heavily energy constrained due to the use of batteries as their energy source.
+Energy conservation in WANETs is therefore plentifully pursued research topic.
+Most of the energy is spent on signal transmission \cite{halgamuge09}, 
+and so it is desirable to design energy efficient transmission protocols that also satisfy certain requirements imposed on a WANET.
+
+\subsection{Wireless Sensor Networks}
+
+A related paradigm to WANET are Wireless Sensor Networks (WSN) which attracted a wide range of disciplines where close interactions with the physical environment are essential.
+WSNs consists of tiny sensor nodes, which act as both data generators and network relays \cite{akyildiz10}.
+Each node act as a senosr, a microprocessor and a transceiver.
+Sensor nodes have usually a fixed position and are powered by batteries.
+Data measured  by sensors are transmitted via wireless communication links
+
+There are countless of sensor types including seismic, electromagnetic and acoustic, suggesting a broad area of practical application areas such as 
+military, environmental, health, home and industrial applications.
+
+Multiple sensors are typically integrated into higher-level topologies varying in complexity.
+These topologies can be divided into flat and hierarchical architecture \cite{mcgrath13}.
+In a flat (peer to peer) architecture, every node has the same computational and communication capabilities.
+In a hierarchical architecture, simple sensor nodes operate in close proximity to their respective cluster heads which possess more processing capacity than an ordinary sensor node.
+
+WSNs are often built using the following configurations \cite{mcgrath13}:
+
+\begin{itemize}
+\item \emph{Point to point topology.} Links two endpoints either permanently or with the possibility of switching.
+\item \emph{Bus topology.} Each node is connected to a shared communication bus, in which a signal is transmitted in both directions. 
+\item \emph{Linear topology.} Two way link between one node and the next one, with two terminating nodes.
+\item \emph{Ring topology.} A networks set up in a circular fashion is similar to linear topology, but does not contain the terminating nodes.
+\item \emph{Star topology.} Consists of a single central node such as hub or a switch to which every node in the network is connected. 
+An intelligent central node is required as all data traffic flows through it.
+This topology is one of the most common WSN topologies.
+\item \emph{Tree topology.} A hierarchy of nodes where in the highest level of the hierarchy is a single root node connected to one or many nodes in the level below.
+The processing and power requirements in nodes increase as the data moves from the branches towards to root node.
+\item \emph{Mesh topology.} Nodes disseminate their own data and also act as relays to propagate the data from other nodes.
+The mesh topology can be partially connected  or fully connected (where there is a connection between every two nodes.
+\end{itemize}
 
 \subsection{Related Problems}
 

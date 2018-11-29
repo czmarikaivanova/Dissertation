@@ -1,9 +1,19 @@
 \begin{thebibliography}{1}
 
+\bibitem{akyildiz10}
+{\sc Akyildiz, I., and Vuran, M.~C.}
+\newblock {\em Wireless Sensor Networks}.
+\newblock John Wiley \& Sons, Inc., New York, NY, USA, 2010.
+
 \bibitem{dijkstra59}
 {\sc Dijkstra, E.~W.}
 \newblock A note on two problems in connexion with graphs.
 \newblock {\em Numer. Math. 1}, 1 (1959), 269--271.
+
+\bibitem{mcgrath13}
+{\sc McGrath, M.~J., and Scanaill, C.~N.}
+\newblock {\em Sensor Network Topologies and Design Considerations}.
+\newblock Apress, Berkeley, CA, 2013, pp.~79--95.
 
 \bibitem{nemhauser88}
 {\sc Nemhauser, G.~L., and Wolsey, L.~A.}
