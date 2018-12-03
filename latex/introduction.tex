@@ -5,7 +5,6 @@
 \newtheorem{theorem}{\textbf{Theorem}}
 %\newtheorem{observation}[theorem]{\textbf{Observation}}
 %\newtheorem{definition}{\textbf{Definition}}
-\newtheorem{problem}[theorem]{\textbf{Problem}}
 %\newtheorem{proposition}[theorem]{\textbf{Proposition}}
 \newtheorem{remark}[theorem]{\textbf{Remark}}
 %\newtheorem{lemma}[theorem]{\textbf{Lemma}}
@@ -326,7 +325,54 @@ The processing and power requirements in nodes increase as the data moves from t
 The mesh topology can be partially connected  or fully connected (where there is a connection between every two nodes.
 \end{itemize}
 
-\subsection{Related Problems}
+\subsection{Combinatorial optimization problems motivated by WANETs}
+
+As indicated above, energy conservation is a crucial requirement in the design of WANETs. 
+Combinatorial optimization is endowed with methods suitable for this task. 
+It is necessary to introduce a formal network model in order to apply suitable mathematical tools.
+
+\subsubsection{Network Model}
+
+A WANET is modeled by a complete weighted graph $(G=(V,E),p)$, where the function $p:E\to \mathbb{R}^+$ indicates the power requirement for sending a signal along a certain edge.
+This requirement depends on distance and environmental properties. 
+Assuming a homogenous environment, $p_{ij}=d_{ij}^\alpha$, 
+where $d_{ij}$ is a distance between the devices represented by vertices $i$ and $j$, and $\alpha$ is a constant typically valued between 2 and 4. 
+
+\subsubsection{Minimum Energy Broadcast}
+
+The minimum energy broadcast (MEB) problem has been introduced in \emph{mebXX} in 1999, and has been extensively studied since then.
+
+\begin{problem}
+Given a source $s\in V$, find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum sum s. t. 
+there exists a path from $s$ to each $t\in V\setminus\{s\}$ in $G'=(V,E^P)$, where $E^P=\{(i,j)\in \vec{E}: p_{ij}\leq P_i\}$.
+\end{problem}
+
+\subsubsection{Range Assignment Problem}
+
+The disadvantages by which the MEB concept is facing is addressed by the range assignemtn problem (RAP).
+\begin{problem}
+Find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum sum s. t. the induced graph $G'=(V,E^P)$ is connected, where $E^P=\{(i,j)\in E: p_{ij}\leq P_i\wedge p_{ij}\leq P_j\}$.
+\end{problem}
+\subsubsection{Shared Broadcast Trees}
+
+Another concept requiring to keep only a single communication tree is the Shared Broadcast Tree Problem (SBT).
+
+\subsubsection{Multicasting}
+
+Multicasting is a natural extension of all the problems described above.
+It is similar to the generalization of MST which leads to the Steiner minimum tree problem.
+In MEB, RAP and SBT, nodes that do not have to be part of the network are also allowed. 
+These nodes never initiate any transmission, nor they have to receive any signal.
+They can act as intermediate nodes relaying the signal, if improves the respective objective function value.
+Apart from the weighted graph $G=(V,E,p)$, the set of nodes $D\subseteq V$ called \emph{destinations} is also a part of the input.
+Nodes in $V\setminus D$ are referred to as \emph{non-destinations}.
+A feasible solution to multicast versions of the problems above is a tree $T\subseteq G$ spanning $D$.  
+The following section gives a particular attention to the multicast version of SBT.
+
+\subsection{Shared Multicat Trees}
+
+The Shared Multicast Tree (SMT) problem is a natural generalization of SBT.
+
 
 \section{Minimum Broadcast Trees}\label{sec:mbt}
 
