@@ -1,14 +1,34 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{akyildiz10}
 {\sc Akyildiz, I., and Vuran, M.~C.}
 \newblock {\em Wireless Sensor Networks}.
 \newblock John Wiley \& Sons, Inc., New York, NY, USA, 2010.
 
+\bibitem{clementi01}
+{\sc Clementi, A. E.~F., Crescenzi, P., Penna, P., Rossi, G., and Vocca, P.}
+\newblock On the complexity of computing minimum energy consumption broadcast
+  subgraphs.
+\newblock In {\em STACS 2001\/} (Berlin, Heidelberg, 2001), A.~Ferreira and
+  H.~Reichel, Eds., Springer Berlin Heidelberg.
+
+\bibitem{clementi99}
+{\sc Clementi, A. E.~F., Penna, P., and Silvestri, R.}
+\newblock Hardness results for the power range assignment problem in packet
+  radio networks.
+\newblock In {\em Randomization, Approximation, and Combinatorial Optimization.
+  Algorithms and Techniques\/} (1999), D.~S. Hochbaum, K.~Jansen, J.~D.~P.
+  Rolim, and A.~Sinclair, Eds., Springer Berlin Heidelberg, pp.~197--208.
+
 \bibitem{dijkstra59}
 {\sc Dijkstra, E.~W.}
 \newblock A note on two problems in connexion with graphs.
 \newblock {\em Numer. Math. 1}, 1 (1959), 269--271.
+
+\bibitem{kirousis00}
+{\sc Kirousis, L.~M., Kranakis, E., Krizanc, D., and Pelc, A.}
+\newblock Power consumption in packet radio networks.
+\newblock {\em Theor. Comput. Sci. 243}, 1-2 (July 2000), 289--305.
 
 \bibitem{mcgrath13}
 {\sc McGrath, M.~J., and Scanaill, C.~N.}

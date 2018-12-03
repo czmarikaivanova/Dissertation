@@ -9,7 +9,6 @@
 \newtheorem{remark}[theorem]{\textbf{Remark}}
 %\newtheorem{lemma}[theorem]{\textbf{Lemma}}
 
-
 \chapter{Introduction}
 %
 This dissertation focuses three optimization problems of which common denominator is communication among multiple devices.
@@ -251,7 +250,11 @@ The following values are considered for every vertex $v$:
 \section{Power Minimizing Trees in Ad-hoc Wireless Netowrks}\label{sec:smt}
 
 A Wireless Ad-hoc Network (WANET) is a decentralized type of wireless network.
-Unlike cellular and wired networks, WANET does not depend on any pre-existing infrastructure.
+Broadly speaking, there are two models of wireless networks: single-hop and multi-hop.
+The single-hop model is based on the cellular network model that provides one-hop wireless connectivity between mobile hosts and static nodes known as base stations \cite{clementi01}.
+This network type relies on a fixed backbone infrastructure that interconnects all base stations by wired links.
+Unlike cellular and wired networks, WANETs depend on neither a wired infrastructure nor pre-determined interconnectivity.
+
 The set of uniform wireless communication devices with fixed locations are connected via wireless links depending on 
 distance between the nodes, thier transmission power, error control scheme, background noise and interference.
 Each device is equipped with an omnidirectional antenna with a communication range schematically illustrated in Fig. \ref{fig:omniantenna}.
@@ -333,10 +336,23 @@ It is necessary to introduce a formal network model in order to apply suitable m
 
 \subsubsection{Network Model}
 
-A WANET is modeled by a complete weighted graph $(G=(V,E),p)$, where the function $p:E\to \mathbb{R}^+$ indicates the power requirement for sending a signal along a certain edge.
-This requirement depends on distance and environmental properties. 
-Assuming a homogenous environment, $p_{ij}=d_{ij}^\alpha$, 
-where $d_{ij}$ is a distance between the devices represented by vertices $i$ and $j$, and $\alpha$ is a constant typically valued between 2 and 4. 
+A WANET is modeled by a complete weighted graph $(G=(V,E),p)$, where the wireless devices are represented by nodes in $V$. 
+As no power limit is imposed on the nodes, a transmission can be established between any two nodes, and thus $G$ is complete.
+The function $p:E\to \mathbb{R}^+$ indicates the power requirement for sending a signal along a certain edge.
+This requirement depends on distance and environmental properties, and is given by  $p_{ij}=d_{ij}^\alpha$, 
+where $d_{ij}$ is the Euclidean distance between the devices represented by vertices $i$ and $j$, and $\alpha$ is the constant environmental factor typically valued between 2 and 4. 
+Some sources state the relation $p_{ij}=\kappa d_{ij}^\alpha$, where $\kappa\geq$ is a transmission quality parameter.
+The transmission range of a node $i$ depneds on the power supply $P_i$ assigned to it.
+The overal power assignment to individual nodes induces a directed transmission graph (see example in Fig.~\ref{fig:transgraph}. 
+\begin{figure}[htb!]
+  \centering
+  \includegraphics[scale=.8]{figurer/tran-graph.eps}
+  \caption{Power assignment to nodes (circles)  and corresponding induced transmission graph (blue arrows)}
+  \label{fig:transgraph}
+\end{figure}
+It is assumed that nodes are distributed in a Euclidean space.
+In the following combinatorial problems motivated by WANETs, the task is to assign powers to individual nodes while satisfying certain criteria so that the overall power is minimized.
+The total power is expressed by an objective function varying among the problem.
 
 \subsubsection{Minimum Energy Broadcast}
 
@@ -349,10 +365,19 @@ there exists a path from $s$ to each $t\in V\setminus\{s\}$ in $G'=(V,E^P)$, whe
 
 \subsubsection{Range Assignment Problem}
 
-The disadvantages by which the MEB concept is facing is addressed by the range assignemtn problem (RAP).
+In the range assignment problem (RAP) the task is to minimize the total power consumed under the constraint 
+that adequate power is provided to the nodes to ensure that the induced transmission graph is strongly connected.
+For instances consisting of colinear points, there exists an algorithm that solves the problem to optimality in $\mathcal{O}(n^4)$ \cite{kirousis00}.
+In \cite{clementi99} it is shown that RAP is NP-hard for instances in a $d$-dimensional Euclidean space for $d\geq 2$, and that for $d=3$, the problem is APX-complete.
+
+
+
 \begin{problem}
 Find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum sum s. t. the induced graph $G'=(V,E^P)$ is connected, where $E^P=\{(i,j)\in E: p_{ij}\leq P_i\wedge p_{ij}\leq P_j\}$.
 \end{problem}
+
+RAP has been studied in literature
+
 \subsubsection{Shared Broadcast Trees}
 
 Another concept requiring to keep only a single communication tree is the Shared Broadcast Tree Problem (SBT).

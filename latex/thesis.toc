@@ -11,20 +11,20 @@
 \contentsline {subsubsection}{Problems and Complexity}{4}{section*.10}
 \contentsline {subsection}{\numberline {1.1.3}Path Planning}{5}{subsection.1.1.3}
 \contentsline {section}{\numberline {1.2}Power Minimizing Trees in Ad-hoc Wireless Netowrks}{6}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}Wireless Sensor Networks}{6}{subsection.1.2.1}
-\contentsline {subsection}{\numberline {1.2.2}Combinatorial optimization problems motivated by WANETs}{7}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.1}Wireless Sensor Networks}{7}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Combinatorial optimization problems motivated by WANETs}{8}{subsection.1.2.2}
 \contentsline {subsubsection}{Network Model}{8}{section*.12}
-\contentsline {subsubsection}{Minimum Energy Broadcast}{8}{section*.13}
-\contentsline {subsubsection}{Range Assignment Problem}{8}{section*.14}
-\contentsline {subsubsection}{Shared Broadcast Trees}{8}{section*.15}
-\contentsline {subsubsection}{Multicasting}{8}{section*.16}
-\contentsline {subsection}{\numberline {1.2.3}Shared Multicat Trees}{8}{subsection.1.2.3}
+\contentsline {subsubsection}{Minimum Energy Broadcast}{8}{section*.14}
+\contentsline {subsubsection}{Range Assignment Problem}{9}{section*.15}
+\contentsline {subsubsection}{Shared Broadcast Trees}{9}{section*.16}
+\contentsline {subsubsection}{Multicasting}{9}{section*.17}
+\contentsline {subsection}{\numberline {1.2.3}Shared Multicat Trees}{9}{subsection.1.2.3}
 \contentsline {section}{\numberline {1.3}Minimum Broadcast Trees}{9}{section.1.3}
 \contentsline {section}{\numberline {1.4}Multi-Agent Path Finidng}{9}{section.1.4}
-\contentsline {subsection}{\numberline {1.4.1}Scenarios with adversaries}{9}{subsection.1.4.1}
-\contentsline {subsubsection}{Adversarial Cooperative Path Finding}{9}{section*.17}
-\contentsline {subsubsection}{Area Protection Problem}{9}{section*.18}
-\contentsline {subsubsection}{Area Protection Problem with Communication maintenance}{9}{section*.19}
+\contentsline {subsection}{\numberline {1.4.1}Scenarios with adversaries}{10}{subsection.1.4.1}
+\contentsline {subsubsection}{Adversarial Cooperative Path Finding}{10}{section*.18}
+\contentsline {subsubsection}{Area Protection Problem}{10}{section*.19}
+\contentsline {subsubsection}{Area Protection Problem with Communication maintenance}{10}{section*.20}
 \contentsline {chapter}{\numberline {2}Introduction to the papers}{11}{chapter.2}
 \contentsline {chapter}{\numberline {3}Scientific results}{13}{chapter.3}
 \contentsline {section}{\numberline {3.1}Shared Multicast Trees in Ad Hoc Wireless Networks}{15}{section.3.1}

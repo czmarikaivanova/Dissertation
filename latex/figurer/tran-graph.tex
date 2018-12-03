@@ -1,0 +1,27 @@
+\documentclass{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+\draw[->, blue, ultra thick] (0,0) -- (2.9,1.9);
+\draw[<->, blue, ultra thick] (3.1,1.93) -- (4.95,0.6);
+\draw[->, blue, ultra thick] (5,0.5) -- (5.0,-1.38);
+
+\draw (0,0) circle (4cm);
+\filldraw (0,0) circle (3.5pt);
+\node[below, ultra thick] at (0,-0.1) {\textbf{A}};
+\draw (3,2) circle (3cm);
+\filldraw (3,2) circle (3.5pt);
+\node[below] at (3.05,1.85) {\textbf{B}};
+\draw (5,0.5) circle (2.7cm);
+\filldraw (5,0.5) circle (3.5pt);
+\node[right] at (5.05,0.5) {\textbf{C}};
+\draw (5,-1.5) circle (1.1cm);
+\filldraw (5,-1.5) circle (3.5pt);
+\node[below] at (5,-1.6) {\textbf{D}};
+
+\end{tikzpicture}
+
+  \end{document}
