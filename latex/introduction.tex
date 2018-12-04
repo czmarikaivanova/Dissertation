@@ -88,6 +88,7 @@ If edges have a direction associated with them, we call such a graph a \emph{dir
 Let $G=(V,A)$ be a directed graph. 
 By \emph{in-degree} and \emph{out-degree} of a vertex $v\in V$ we mean the sizes of sets $|\{(u,v): u\in V, (u,v) \in A\}|$ and $|\{(v,u): u\in V, (v,u) \in A\}|$ , respectively.
 An \emph{arborescence} rooted at vertex $r$ is a directed tree with arcs directed from $r$.
+A directed graph is \emph{strongly connected}, if for all pair of vertices $u,v\in V$, there is a path from $u$ to $v$ and from $v$ to $u$.
 
 \subsection{Combinatorial Optimization}
 
@@ -209,6 +210,13 @@ Therefore, ILP itself is also NP-hard.
 \end{definition}
 If $X$ satisfies only the second condition in Def.~\ref{def:psc} we say that $X$ is \emph{PSPACE-hard}.
 
+For optimization problems, there exist similar complexity classes.
+An optimization problem consists of a set of instances of the problem, a set of possible solutions (each with a nonnegative cost) for each instance, and an objective (either minimize or maximize).
+For an optimization problem $A$, we use $OPT(A)$ to denote the cost of the optimal solution.
+The class NPO of optimizatio problems is analogous to the class NP of decision problems.
+A problem $A$ belongs to NPO, if all instances and solutions can be recognized in polynomial time, 
+all solutions have polynomial length, and the cost of a solution can also be computed in polynomial time.
+Assume an algorithm for an optimization problem. 
 
 \subsection{Path Planning}
 
@@ -296,6 +304,9 @@ Energy conservation in WANETs is therefore plentifully pursued research topic.
 Most of the energy is spent on signal transmission \cite{halgamuge09}, 
 and so it is desirable to design energy efficient transmission protocols that also satisfy certain requirements imposed on a WANET.
 
+Various levels of connectivity are required on WANETs.
+However, from a practical point of view, a topology which is ``too connected'' would often cause communication interference to occur even between nodes that are fart apart.
+Theoretical as well as practical experimental results suggest that the communication graph in WANETs should be as sparse as possible while preserving connectivity \cite{blough02}.
 \subsection{Wireless Sensor Networks}
 
 A related paradigm to WANET are Wireless Sensor Networks (WSN) which attracted a wide range of disciplines where close interactions with the physical environment are essential.
@@ -366,17 +377,29 @@ there exists a path from $s$ to each $t\in V\setminus\{s\}$ in $G'=(V,E^P)$, whe
 \subsubsection{Range Assignment Problem}
 
 In the range assignment problem (RAP) the task is to minimize the total power consumed under the constraint 
-that adequate power is provided to the nodes to ensure that the induced transmission graph is strongly connected.
-For instances consisting of colinear points, there exists an algorithm that solves the problem to optimality in $\mathcal{O}(n^4)$ \cite{kirousis00}.
-In \cite{clementi99} it is shown that RAP is NP-hard for instances in a $d$-dimensional Euclidean space for $d\geq 2$, and that for $d=3$, the problem is APX-complete.
-
-
-
+that adequate power is provided to the nodes to ensure a strong connectivity of the graph.
+Formally, the problem is stated as follows:
+%Therefore, only one broadcast tree is stored which is common for all possible sources.
 \begin{problem}
-Find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum sum s. t. the induced graph $G'=(V,E^P)$ is connected, where $E^P=\{(i,j)\in E: p_{ij}\leq P_i\wedge p_{ij}\leq P_j\}$.
+Find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum sum s. t. the induced graph $G'=(V,E^P)$ is strongly connected, 
+where $E^P=\{(i,j)\in \vec{E}: p_{ij}\leq P_i\}$.
+%every where $E^P=\{(i,j)\in E: p_{ij}\leq P_i\wedge p_{ij}\leq P_j\}$.
 \end{problem}
+In \cite{kirousis00}, it is shown that for instances consisting of colinear points, there exists an algorithm that solves the problem to optimality in $\mathcal{O}(n^4)$.
+The authors further prove by reduction from \textsc{Vertex Cover} that RAP in 3d-dimensional Euclidean space is NP-hard,
+and that there exists a $\mathcal{O}(n^2)$ time approximation algorithm which provides solutions with cost within a factor two of the optimum.
+The results are strengthened in \cite{clementi99}, where it is proved that RAP is NP-hard for instances in a 2-dimensional Euclidean space, 
+and that for 3-dimensional space, the problem is APX-complete, thus does not admit a PTAS unless P$\neq$NP.
 
-RAP has been studied in literature
+A further constraint requires that diameter of the transmission graph has to be at most some constant value $h$.
+On a family of instances limiting the proximity of two nodes, this variant of RAP is in APX \cite{clementi01b}.
+
+Another modifications requires symmetric communication links.
+This version is often found in the literature under the abbreviation SRAP.
+In a generalied version, weakly symmetric RAP (WSRAP), the symmetry requirement applies only to a pre-defined subset of edges.
+Other edges which are not essential for connectivity are allowed to be unidirectional.
+The motivation for studying WSRA stems from the observation that what is really important in the design of WANETs and WSNs is the existence of a connected backbone of symmetric edges \cite{santi05}.
+Imposing symmetry does not change the complexity of the problem, which remains NP-hard in two and three-dimensional networks \cite{blough02}.
 
 \subsubsection{Shared Broadcast Trees}
 

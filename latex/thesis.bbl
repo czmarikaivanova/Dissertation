@@ -5,6 +5,12 @@
 \newblock {\em Wireless Sensor Networks}.
 \newblock John Wiley \& Sons, Inc., New York, NY, USA, 2010.
 
+\bibitem{blough02}
+{\sc Blough, D.~M., Leoncini, M., Resta, G., and Santi, P.}
+\newblock {\em On the Symmetric Range Assignment Problem in Wireless Ad Hoc
+  Networks}.
+\newblock Springer US, Boston, MA, 2002, pp.~71--82.
+
 \bibitem{clementi01}
 {\sc Clementi, A. E.~F., Crescenzi, P., Penna, P., Rossi, G., and Vocca, P.}
 \newblock On the complexity of computing minimum energy consumption broadcast
@@ -19,6 +25,12 @@
 \newblock In {\em Randomization, Approximation, and Combinatorial Optimization.
   Algorithms and Techniques\/} (1999), D.~S. Hochbaum, K.~Jansen, J.~D.~P.
   Rolim, and A.~Sinclair, Eds., Springer Berlin Heidelberg, pp.~197--208.
+
+\bibitem{clementi01b}
+{\sc Clementi, A. E.~F., Penna, P., and Silvestri, R.}
+\newblock The power range assignment problem in radio networks on the plane.
+\newblock In {\em STACS 2000\/} (Berlin, Heidelberg, 2000), H.~Reichel and
+  S.~Tison, Eds., Springer Berlin Heidelberg, pp.~651--660.
 
 \bibitem{dijkstra59}
 {\sc Dijkstra, E.~W.}
@@ -39,6 +51,11 @@
 {\sc Nemhauser, G.~L., and Wolsey, L.~A.}
 \newblock {\em Integer and Combinatorial Optimization}.
 \newblock Wiley-Interscience, New York, NY, USA, 1988.
+
+\bibitem{santi05}
+{\sc Santi, P.}
+\newblock Topology control in wireless ad hoc and sensor networks.
+\newblock {\em ACM Comput. Surv. 37}, 2 (June 2005), 164--194.
 
 \bibitem{silver05}
 {\sc Silver, D.}
