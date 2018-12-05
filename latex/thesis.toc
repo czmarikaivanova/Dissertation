@@ -14,7 +14,7 @@
 \contentsline {subsection}{\numberline {1.2.1}Wireless Sensor Networks}{7}{subsection.1.2.1}
 \contentsline {subsection}{\numberline {1.2.2}Combinatorial optimization problems motivated by WANETs}{8}{subsection.1.2.2}
 \contentsline {subsubsection}{Network Model}{8}{section*.12}
-\contentsline {subsubsection}{Minimum Energy Broadcast}{8}{section*.14}
+\contentsline {subsubsection}{Minimum Energy Broadcast}{9}{section*.14}
 \contentsline {subsubsection}{Range Assignment Problem}{9}{section*.15}
 \contentsline {subsubsection}{Shared Broadcast Trees}{10}{section*.16}
 \contentsline {subsubsection}{Multicasting}{10}{section*.17}

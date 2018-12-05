@@ -210,7 +210,18 @@ Therefore, ILP itself is also NP-hard.
 \end{definition}
 If $X$ satisfies only the second condition in Def.~\ref{def:psc} we say that $X$ is \emph{PSPACE-hard}.
 
-For optimization problems, there exist similar complexity classes.
+\emph{Approximation algorithms} are polynomial algorithms that find approximate solution to NP-hard optimization problems with provable guarantee on the distane of the solution to the optimal one.
+An instance of an optimization problem cosists of a set of feasible solutions together with a cost function and a target which can be either minimization or maximization. 
+\begin{definition}
+	Given an algorithm $\mathcal{A}$ and a  minimization problem $A$ with a cost function $c$ and its instance $I$.
+	We say that $\mathcal{A}$ is a $\rho$-approximation algorithm for $A$ if 
+	$$
+	\max\left\{\frac{c(\mathcal{A}(I))}{opt(I)}\right\}\leq\rho,
+	$$
+	where $opt(I)$ is the cost of an optimal solution to $I$.
+\end{definition}
+
+%For optimization problems, there exist similar complexity classes.
 An optimization problem consists of a set of instances of the problem, a set of possible solutions (each with a nonnegative cost) for each instance, and an objective (either minimize or maximize).
 For an optimization problem $A$, we use $OPT(A)$ to denote the cost of the optimal solution.
 The class NPO of optimizatio problems is analogous to the class NP of decision problems.

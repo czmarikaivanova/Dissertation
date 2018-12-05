@@ -276,6 +276,9 @@ INPUT figurer/omni-top.eps
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT figurer/omni-side.eps
 INPUT figurer/omni-side.eps
+INPUT figurer/tran-graph.eps
+INPUT figurer/tran-graph.eps
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmrc8t.tfm
 OUTPUT introduction_papers.aux
 INPUT introduction_papers.tex
 INPUT introduction_papers.tex
@@ -387,7 +390,6 @@ INPUT thesis.brf
 INPUT ./thesis.brf
 INPUT ./thesis.brf
 OUTPUT thesis.brf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmrc8t.tfm
 INPUT thesis.aux
 INPUT acknowledgements.aux
 INPUT acknowledgements.aux
