@@ -211,23 +211,24 @@ Therefore, ILP itself is also NP-hard.
 If $X$ satisfies only the second condition in Def.~\ref{def:psc} we say that $X$ is \emph{PSPACE-hard}.
 
 \emph{Approximation algorithms} are polynomial algorithms that find approximate solution to NP-hard optimization problems with provable guarantee on the distane of the solution to the optimal one.
-An instance of an optimization problem cosists of a set of feasible solutions together with a cost function and a target which can be either minimization or maximization. 
-\begin{definition}
-	Given an algorithm $\mathcal{A}$ and a  minimization problem $A$ with a cost function $c$ and its instance $I$.
-	We say that $\mathcal{A}$ is a $\rho$-approximation algorithm for $A$ if 
-	$$
-	\max\left\{\frac{c(\mathcal{A}(I))}{opt(I)}\right\}\leq\rho,
-	$$
-	where $opt(I)$ is the cost of an optimal solution to $I$.
+\begin{definition}\cite{williamson11}
+A $\rho$-approximation algorithm for an optimization problem is a polynomial-time algorithm that for all instances of the problem produces a solution whose value is within a factor of
+$\rho$ of the value of an optimal solution.
 \end{definition}
-
-%For optimization problems, there exist similar complexity classes.
-An optimization problem consists of a set of instances of the problem, a set of possible solutions (each with a nonnegative cost) for each instance, and an objective (either minimize or maximize).
-For an optimization problem $A$, we use $OPT(A)$ to denote the cost of the optimal solution.
-The class NPO of optimizatio problems is analogous to the class NP of decision problems.
-A problem $A$ belongs to NPO, if all instances and solutions can be recognized in polynomial time, 
-all solutions have polynomial length, and the cost of a solution can also be computed in polynomial time.
-Assume an algorithm for an optimization problem. 
+The factor $\rho$ is called the \emph{approximation ratio} ro \emph{performance guarantee}.
+For minimization problems, $\rho > 1$, and for maximizations problems $\rho < 1$.
+\begin{definition}
+The class APX is the set of NP optimization problems that have an approximation algorithms with constant-ratio approximation algorithm.
+\end{definition}
+There are problems that are hard to approximate. 
+A problem for which there is a constant $\rho$ such that it is NP-hard to find an approximatin algorithm with approximation ratio better than $\rho$ is said to be APX-hard.
+\begin{definition}\cite{williamson11}
+A polynomial-time approximation scheme (PTAS) is a family of algorithms $\{\mathcal{A}_\epsilon\}$, where there is an algorithm for each $\epsilon > 0$ such that $\mathcal{A}_\epsilon$
+is a $(1+\epsilon)$-approximation algorithm for minimization problems and $(1-\epsilon)$-approximation algorithm for maximization problems.
+\end{definition}
+\begin{claim}
+APX-hard problems do not admit PTAS.
+\end{claim}
 
 \subsection{Path Planning}
 
@@ -278,7 +279,7 @@ The set of uniform wireless communication devices with fixed locations are conne
 distance between the nodes, thier transmission power, error control scheme, background noise and interference.
 Each device is equipped with an omnidirectional antenna with a communication range schematically illustrated in Fig. \ref{fig:omniantenna}.
 Hence, a signal reaches all nodes within the communication range of its sender.
-This range is determined by the power assigned to the sender, and this power can be changed over time.
+This range is determined by the power assigned to the sender, and this power can be adjusted over time.
 The power necessary for relaying a signal to multiple devices is the maximum rather than the sum of the powers necessary to reach all intended receivers.
 This feature is referred to as the \emph{wireless advantage} \cite{wieselthierXX}
 Each device works as a transceiver, which means that it can both transmit and receive a signal.
@@ -318,6 +319,12 @@ and so it is desirable to design energy efficient transmission protocols that al
 Various levels of connectivity are required on WANETs.
 However, from a practical point of view, a topology which is ``too connected'' would often cause communication interference to occur even between nodes that are fart apart.
 Theoretical as well as practical experimental results suggest that the communication graph in WANETs should be as sparse as possible while preserving connectivity \cite{blough02}.
+
+Models considered for WANETs are usually deterministic, that is, they assume that the nodes are fully reliable. 
+In reality, the nodes are devices that may be subject to temporary or permanent failure due to technical damage or battery draining.
+This fact leads to considering \emph{probabilistic} models whose aim is to capture the real world more plausibly by taking into account the uncertain character of nodes' availability.
+Besides minimizing the power consumptions of the network, it is also required to guarantee a certain level of reliability over the whole network.
+
 \subsection{Wireless Sensor Networks}
 
 A related paradigm to WANET are Wireless Sensor Networks (WSN) which attracted a wide range of disciplines where close interactions with the physical environment are essential.
@@ -366,24 +373,60 @@ where $d_{ij}$ is the Euclidean distance between the devices represented by vert
 Some sources state the relation $p_{ij}=\kappa d_{ij}^\alpha$, where $\kappa\geq$ is a transmission quality parameter.
 The transmission range of a node $i$ depneds on the power supply $P_i$ assigned to it.
 The overal power assignment to individual nodes induces a directed transmission graph (see example in Fig.~\ref{fig:transgraph}. 
+On the other hand, for a given transmission graph, the power assignment to a node corresponds to the longest outgoing arc.
 \begin{figure}[htb!]
   \centering
   \includegraphics[scale=.8]{figurer/tran-graph.eps}
   \caption{Power assignment to nodes (circles)  and corresponding induced transmission graph (blue arrows)}
   \label{fig:transgraph}
 \end{figure}
-It is assumed that nodes are distributed in a Euclidean space.
+It is assumed that nodes are distributed in a Euclidean space, although it is also possible to consider more general variants..
 In the following combinatorial problems motivated by WANETs, the task is to assign powers to individual nodes while satisfying certain criteria so that the overall power is minimized.
 The total power is expressed by an objective function varying among the problem.
 
 \subsubsection{Minimum Energy Broadcast}
 
-The minimum energy broadcast (MEB) problem has been introduced in \emph{mebXX} in 1999, and has been extensively studied since then.
-
+The Minimum Energy Broadcast (MEB) problem consists of a set $V$ and a specified source $s\in V$, that is supposed to initiate a transmission.
+All the remaining nodes must receive the signal via communication links induced by power assignment to the nodes.
 \begin{problem}
 Given a source $s\in V$, find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum sum s. t. 
 there exists a path from $s$ to each $t\in V\setminus\{s\}$ in $G'=(V,E^P)$, where $E^P=\{(i,j)\in \vec{E}: p_{ij}\leq P_i\}$.
 \end{problem}
+An optimal solution differs for different transmission sources.
+Hence, the nodes must by endowed with a mechanism that allows them to ajdust their power level for a corresponding transmission session.
+This places demands on the computational capacity and technological solution of the nodes.
+The advantage of this concept lays in the optimality of each broadcast session.
+
+MEB  and has received a significant attention during the last two decades.
+The problem has been introduced in \cite{wieselthier00}, where the authors propose a greedy algorithm called broadcast incremental power (BIP), which resembles Prim's algorithm for MST,
+and improve it by a ``sweep'' operation removing unnecessary transmissions.
+NP-hardness results are provided in \cite{cagalj02}, by reduction from \textsc{Set Cover}.
+
+An approximation by MST has been investigated by several authors, e.g., in \cite{clementi01}.
+After constructing an MST, the algorithm determines an orientation of arcs towards the leavs, starting from the source.
+The last step is to assign power levels to each node according to the longest arc outgoing from that node.
+This algorithm yields a solution no worse than 6 times the optimal one \cite{ambuhl05}.
+
+The approximation ratio of an algorithm that builds an MST and assigns power levels to nodes ac
+The algorithm that constructs a transmission tree based on MST first construct an MST, then 
+
+A special case, assuming that there are $k$ adjustable power levels $w_{i,1},w_{i,2},\dots w_{i,k}$ at each node $i$ is studied in \cite{liang02}.
+This problem remains NP-hard which is proved by reducing \textsc{3-CNF-SAT} to it.
+In addition, \cite{liang02} contains an approximation algorithm for this version of MEB with a performance guarantee $\mathcal{O}(n^\epsilon)$ and 
+time complexity $\mathcal{O}((k+1)^{\frac{1}{\epsilon}} n^{\frac{3}{\epsilon}}$ for $\epsilon\in \left(0,1\right]$.
+Further restriction pursued in \cite{liang02} assumes that each node has the same adjustable power levels, i.e., $w_{i,l}=w_{j,l}$ for $1\leq l\leq k$ and $1\leq i,j\leq n$.
+In this scenario, another approximation algorithm which delivers a solution within $\mathcal{O}(\log^3 n)$ times the optimum is devised.
+
+Probabilistic MEB where a node reliability is considered has also been investigated.
+Three ILP formulations of probabilistic MEB together with suitable solving methods are developed in \cite{montemanni08}.
+Another study of ILP formulations and suitable valid inequalitis is pursued by \cite{barta10}.
+
+A restriction of node locations can be imposed.
+One example is a random grid network, where nodes are chosen independently and randomly from points of $\sqrt{n}\times\sqrt{n}$ square grid in the plane.
+The probability distribution of existence of a node can be non-uniform.
+A lower bound on the objective function is proved in \cite{calamoneri08} together with a near optimal construction method.
+The 6-approximation of MST turns out to be too pessimistic for instances with restricted node locations which represent the real-life instances more closely.
+Authors in \cite{flammini07} argue that the approximation ratio of MST algorithm can be considered close to 4 for practical instances.
 
 \subsubsection{Range Assignment Problem}
 
@@ -397,13 +440,17 @@ where $E^P=\{(i,j)\in \vec{E}: p_{ij}\leq P_i\}$.
 %every where $E^P=\{(i,j)\in E: p_{ij}\leq P_i\wedge p_{ij}\leq P_j\}$.
 \end{problem}
 In \cite{kirousis00}, it is shown that for instances consisting of colinear points, there exists an algorithm that solves the problem to optimality in $\mathcal{O}(n^4)$.
-The authors further prove by reduction from \textsc{Vertex Cover} that RAP in 3d-dimensional Euclidean space is NP-hard,
-and that there exists a $\mathcal{O}(n^2)$ time approximation algorithm which provides solutions with cost within a factor two of the optimum.
+The authors further prove by reduction from \textsc{Vertex Cover} that RAP in 3-dimensional Euclidean space is NP-hard,
+and that there exists a $\mathcal{O}(n^2)$ time 2-approximation algorithm based on finding MST.
 The results are strengthened in \cite{clementi99}, where it is proved that RAP is NP-hard for instances in a 2-dimensional Euclidean space, 
-and that for 3-dimensional space, the problem is APX-complete, thus does not admit a PTAS unless P$\neq$NP.
+and that for 3-dimensional space, the problem is APX-complete, thus does not admit a PTAS unless P$=$NP.
+An approximation algorithm improving the performance guarantee approaching 1.69 is presented in~\cite{calinescu02}.
+A recent work \cite{carmi15} achieves an exact algorithm for the 1-dimensional problem that runs in $\mathcal{O}(n^2)$.
+
 
 A further constraint requires that diameter of the transmission graph has to be at most some constant value $h$.
 On a family of instances limiting the proximity of two nodes, this variant of RAP is in APX \cite{clementi01b}.
+The 1-dimensional problem with restricted diameter has been studied in \cite{clementi03}, where the authors introduce an exact algorithm that runs in $\mathcal{O}(hn^2)$.
 
 Another modifications requires symmetric communication links.
 This version is often found in the literature under the abbreviation SRAP.
@@ -412,20 +459,53 @@ Other edges which are not essential for connectivity are allowed to be unidirect
 The motivation for studying WSRA stems from the observation that what is really important in the design of WANETs and WSNs is the existence of a connected backbone of symmetric edges \cite{santi05}.
 Imposing symmetry does not change the complexity of the problem, which remains NP-hard in two and three-dimensional networks \cite{blough02}.
 
+An obvious advantage of RAP over MEB is that a single transmission graph is constructed in RAP regardless of the source node.
+However, this can lead to solutions optimal with respect to RAP, but for certain sources initiating the transmission, the solution can be too expensive.
+The following problem with a more complicated objective function combines advantages of both RAP and MEB.
+
 \subsubsection{Shared Broadcast Trees}
 
-Another concept requiring to keep only a single communication tree is the Shared Broadcast Tree Problem (SBT).
+A feasible solution to the Shared Broadcast Tree (SBT) problem is any (undirected) spanning tree.
+This concept is motivated by the intention of incorporating the frequency of use of each node for different broadcast sessions.
+Every node can transmit a signal, but some are actively transmitting more often than others.
+We assume that a node acts as a source with a uniform probability. 
+A leave $l$ transmits a signal only when $l$ is a source, other intermediate nodes transmit more often as they also realay signals initiated in other nodes.
 
-\subsubsection{Multicasting}
+Observe that a forwarding node that received a signal does not have to send it back to the node from which the signal was received.
+If the signal was received in a node $i$ from its most distant neighbor node $i_1$, it has to be forwarded to nodes that have not received it yet along the link to the second most distant node $i_2$..
+Due to the wireless advantage, all other neighbor nodes closer than $i_2$ receive it as well.
+Conversely, if the signal was received by $i$ from a neighbor node different from its most distant neighbor $i_1$, node $i$ has to forward it to $i_1$. 
+It is therefore evident that $i$ does not have to always transmit with the power corresponding to the most distant neighbour.
+It transmits either with power level $p_{ii_2}$, if the signal came from the most distant node $i_1$, or with power level $p_{ii_2}$, otherwise.
 
-Multicasting is a natural extension of all the problems described above.
+Consider an arc $(i,j)$ in a solution $T$ to SBT.
+Let $T_{i/j}$ denote the subtree of $T$ consisting of nodes whose path to $j$ contains $(i,j)$. 
+A node $i$ in $T$ contributes to the objective function by the expression $c_T(i)$ as follows:
+\begin{equation}
+c_T(i)=|T_{i_1/i}|p_{ii_2} + |T\setminus T_{i_1/i}|p_{ii_1}.
+\end{equation}
+We can also regart $c_T(i)$ as a weighted arithmetic mean of $i$'s power levels, with weights corresponding to the number of nodes whose signal is transmitted using the corresponding power level.
+The objective function $obj$ is to minimize overall nodes' contributionss, that is,
+\begin{equation}
+\min\limits_{T\in\mathcal{T}}\left\{\sum\limits_{i\in V}c_T(i) \right\},
+\end{equation}
+where $\mathcal{T}$ stands for the family of spanning trees in $G$.
+
+\subsubsection{Non-destination nodes}
+
+Additional assumption of the existence of nodes that never initiate any transmission is a natural extension of all the problems described above.
 It is similar to the generalization of MST which leads to the Steiner minimum tree problem.
 In MEB, RAP and SBT, nodes that do not have to be part of the network are also allowed. 
 These nodes never initiate any transmission, nor they have to receive any signal.
 They can act as intermediate nodes relaying the signal, if improves the respective objective function value.
 Apart from the weighted graph $G=(V,E,p)$, the set of nodes $D\subseteq V$ called \emph{destinations} is also a part of the input.
 Nodes in $V\setminus D$ are referred to as \emph{non-destinations}.
-A feasible solution to multicast versions of the problems above is a tree $T\subseteq G$ spanning $D$.  
+
+In MEB, the presentce of non-destinations leads to the Minimum Energy Multicast (MEM) problem introduced along with MEB in \cite{wieselthier00}.
+It is easy to see that MEM is NP-hard by reducing the Steinter tree problem to it.
+
+
+
 The following section gives a particular attention to the multicast version of SBT.
 
 \subsection{Shared Multicat Trees}

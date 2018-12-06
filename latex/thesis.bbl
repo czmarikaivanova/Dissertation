@@ -5,11 +5,40 @@
 \newblock {\em Wireless Sensor Networks}.
 \newblock John Wiley \& Sons, Inc., New York, NY, USA, 2010.
 
+\bibitem{ambuhl05}
+{\sc Amb{\"u}hl, C.}
+\newblock An optimal bound for the mst algorithm to compute energy efficient
+  broadcast trees in wireless networks.
+\newblock In {\em Automata, Languages and Programming\/} (Berlin, Heidelberg,
+  2005), L.~Caires, G.~F. Italiano, L.~Monteiro, C.~Palamidessi, and M.~Yung,
+  Eds., Springer Berlin Heidelberg, pp.~1139--1150.
+
+\bibitem{barta10}
+{\sc Barta, J., Leggieri, V., Montemanni, R., Nobili, P., and Triki, C.}
+\newblock Some valid inequalities for the probabilistic minimum power
+  multicasting problem.
+\newblock {\em Electronic Notes in Discrete Mathematics 36\/} (2010), 463 --
+  470.
+\newblock ISCO 2010 - International Symposium on Combinatorial Optimization.
+
 \bibitem{blough02}
 {\sc Blough, D.~M., Leoncini, M., Resta, G., and Santi, P.}
 \newblock {\em On the Symmetric Range Assignment Problem in Wireless Ad Hoc
   Networks}.
 \newblock Springer US, Boston, MA, 2002, pp.~71--82.
+
+\bibitem{calinescu02}
+{\sc Calinescu, G., Mandoiu, I., and Zelikovsky, A.}
+\newblock Symmetric connectivity with minimum power consumption in radio
+  networks.
+\newblock vol.~223, pp.~119--130.
+
+\bibitem{carmi15}
+{\sc Carmi, P., and Chaitman{-}Yerushalmi, L.}
+\newblock On the minimum cost range assignment problem.
+\newblock In {\em Algorithms and Computation - 26th International Symposium,
+  {ISAAC} 2015, Nagoya, Japan, December 9-11, 2015, Proceedings\/} (2015),
+  pp.~95--105.
 
 \bibitem{clementi01}
 {\sc Clementi, A. E.~F., Crescenzi, P., Penna, P., Rossi, G., and Vocca, P.}
@@ -17,6 +46,12 @@
   subgraphs.
 \newblock In {\em STACS 2001\/} (Berlin, Heidelberg, 2001), A.~Ferreira and
   H.~Reichel, Eds., Springer Berlin Heidelberg.
+
+\bibitem{clementi03}
+{\sc Clementi, A. E.~F., Ianni, M.~D., and Silvestri, R.}
+\newblock The minimum broadcast range assignment problem on linear multi-hop
+  wireless networks.
+\newblock {\em Theor. Comput. Sci. 299\/} (2003), 751--761.
 
 \bibitem{clementi99}
 {\sc Clementi, A. E.~F., Penna, P., and Silvestri, R.}
@@ -37,15 +72,36 @@
 \newblock A note on two problems in connexion with graphs.
 \newblock {\em Numer. Math. 1}, 1 (1959), 269--271.
 
+\bibitem{flammini07}
+{\sc Flammini, M., Navarra, A., and Perennes, S.}
+\newblock The \&ldquo;real\&rdquo; approximation factor of the mst heuristic
+  for the minimum energy broadcasting.
+\newblock {\em J. Exp. Algorithmics 11\/} (Feb. 2007).
+
 \bibitem{kirousis00}
 {\sc Kirousis, L.~M., Kranakis, E., Krizanc, D., and Pelc, A.}
 \newblock Power consumption in packet radio networks.
 \newblock {\em Theor. Comput. Sci. 243}, 1-2 (July 2000), 289--305.
 
+\bibitem{liang02}
+{\sc Liang, W.}
+\newblock Constructing minimum-energy broadcast trees in wireless ad hoc
+  networks.
+\newblock In {\em Proceedings of the 3rd ACM International Symposium on Mobile
+  Ad Hoc Networking \&Amp; Computing\/} (New York, NY, USA, 2002), MobiHoc '02,
+  ACM, pp.~112--122.
+
 \bibitem{mcgrath13}
 {\sc McGrath, M.~J., and Scanaill, C.~N.}
 \newblock {\em Sensor Network Topologies and Design Considerations}.
 \newblock Apress, Berkeley, CA, 2013, pp.~79--95.
+
+\bibitem{montemanni08}
+{\sc Montemanni, R., Leggieri, V., and Triki, C.}
+\newblock Mixed integer formulations for the probabilistic minimum energy
+  broadcast problem in wireless networks.
+\newblock {\em European Journal of Operational Research 190}, 2 (10 2008),
+  578--585.
 
 \bibitem{nemhauser88}
 {\sc Nemhauser, G.~L., and Wolsey, L.~A.}
@@ -67,6 +123,25 @@
 {\sc Sipser, M.}
 \newblock {\em Introduction to the Theory of Computation}, second~ed.
 \newblock Course Technology, 2006.
+
+\bibitem{cagalj02}
+{\sc \v{C}agalj, M., Hubaux, J.-P., and Enz, C.}
+\newblock Minimum-energy broadcast in all-wireless networks: Np-completeness
+  and distribution issues.
+\newblock In {\em Proceedings of the 8th Annual International Conference on
+  Mobile Computing and Networking\/} (New York, NY, USA, 2002), MobiCom '02,
+  ACM, pp.~172--182.
+
+\bibitem{wieselthier00}
+{\sc Wieselthier, J.~E., Nguyen, G.~D., and Ephremides, A.}
+\newblock On the construction of energy-efficient broadcast and multicast trees
+  in wireless networks.
+\newblock pp.~585--594.
+
+\bibitem{williamson11}
+{\sc Williamson, D.~P., and Shmoys, D.~B.}
+\newblock {\em The Design of Approximation Algorithms}, 1st~ed.
+\newblock Cambridge University Press, New York, NY, USA, 2011.
 
 \bibitem{wolsey98}
 {\sc Wolsey, L.}
