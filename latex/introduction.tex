@@ -388,7 +388,7 @@ The total power is expressed by an objective function varying among the problem.
 
 The Minimum Energy Broadcast (MEB) problem consists of a set $V$ and a specified source $s\in V$, that is supposed to initiate a transmission.
 All the remaining nodes must receive the signal via communication links induced by power assignment to the nodes.
-\begin{problem}
+\begin{problem}\label{prob:meb1}
 Given a source $s\in V$, find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum sum s. t. 
 there exists a path from $s$ to each $t\in V\setminus\{s\}$ in $G'=(V,E^P)$, where $E^P=\{(i,j)\in \vec{E}: p_{ij}\leq P_i\}$.
 \end{problem}
@@ -396,6 +396,17 @@ An optimal solution differs for different transmission sources.
 Hence, the nodes must by endowed with a mechanism that allows them to ajdust their power level for a corresponding transmission session.
 This places demands on the computational capacity and technological solution of the nodes.
 The advantage of this concept lays in the optimality of each broadcast session.
+
+The directed graph induced by power assignmetns as defined in Problem~\ref{prob:meb1} is not necessarily an arborescence.
+However, MEB could be stated slightly differently:
+\begin{problem}\label{prob:meb2}
+Given a source $s\in V$, find an arborescence spanning $G$ rooted at $s$ such that 
+the sum over weights of the heaviest outgoing arcs of all nodes is minimized.
+\end{problem}
+
+\begin{observation}
+The objective function value of a given instance is equal in Problem~\ref{prob:meb1} and~\ref{prob:meb2}.
+\end{observation}
 
 MEB  and has received a significant attention during the last two decades.
 The problem has been introduced in \cite{wieselthier00}, where the authors propose a greedy algorithm called broadcast incremental power (BIP), which resembles Prim's algorithm for MST,
@@ -485,12 +496,16 @@ A node $i$ in $T$ contributes to the objective function by the expression $c_T(i
 c_T(i)=|T_{i_1/i}|p_{ii_2} + |T\setminus T_{i_1/i}|p_{ii_1}.
 \end{equation}
 We can also regart $c_T(i)$ as a weighted arithmetic mean of $i$'s power levels, with weights corresponding to the number of nodes whose signal is transmitted using the corresponding power level.
-The objective function $obj$ is to minimize overall nodes' contributionss, that is,
+The objective function is to minimize overall nodes' contributionss, that is,
 \begin{equation}
-\min\limits_{T\in\mathcal{T}}\left\{\sum\limits_{i\in V}c_T(i) \right\},
+c(T)=\left\{\sum\limits_{i\in V}c_T(i) \right\},
+\label{eq:sbtcost}
 \end{equation}
-where $\mathcal{T}$ stands for the family of spanning trees in $G$.
-
+The problem under study is thus defined as follows:
+\begin{problem}
+Find a tree $T\subseteq G$ spanning $D$ minimizing \eqref{eq:sbtcost}.
+\end{problem}
+\emph{Remark:} The requirement that a solution must be a tree is necessary due to the nature of the objective function.
 \subsubsection{Non-destination nodes}
 
 Additional assumption of the existence of nodes that never initiate any transmission is a natural extension of all the problems described above.
@@ -503,7 +518,6 @@ Nodes in $V\setminus D$ are referred to as \emph{non-destinations}.
 
 In MEB, the presentce of non-destinations leads to the Minimum Energy Multicast (MEM) problem introduced along with MEB in \cite{wieselthier00}.
 It is easy to see that MEM is NP-hard by reducing the Steinter tree problem to it.
-
 
 
 The following section gives a particular attention to the multicast version of SBT.
