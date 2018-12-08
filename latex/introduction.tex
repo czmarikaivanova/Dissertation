@@ -488,6 +488,14 @@ Due to the wireless advantage, all other neighbor nodes closer than $i_2$ receiv
 Conversely, if the signal was received by $i$ from a neighbor node different from its most distant neighbor $i_1$, node $i$ has to forward it to $i_1$. 
 It is therefore evident that $i$ does not have to always transmit with the power corresponding to the most distant neighbour.
 It transmits either with power level $p_{ii_2}$, if the signal came from the most distant node $i_1$, or with power level $p_{ii_2}$, otherwise.
+The situation is depicted in Fig~\ref{fig:objexp}.
+\begin{figure}[htb!]
+  \centering
+  \includegraphics[scale=1.4]{figurer/objexp.eps}
+  \caption{Example instance explaining power levels necessary for transmitting a signal from different sources}
+  \label{fig:objexp}
+\end{figure}
+
 
 Consider an arc $(i,j)$ in a solution $T$ to SBT.
 Let $T_{i/j}$ denote the subtree of $T$ consisting of nodes whose path to $j$ contains $(i,j)$. 
@@ -505,6 +513,9 @@ The problem under study is thus defined as follows:
 \begin{problem}
 Find a tree $T\subseteq G$ spanning $D$ minimizing \eqref{eq:sbtcost}.
 \end{problem}
+
+
+
 \emph{Remark:} The requirement that a solution must be a tree is necessary due to the nature of the objective function.
 \subsubsection{Non-destination nodes}
 
