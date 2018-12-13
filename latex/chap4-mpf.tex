@@ -1,0 +1,41 @@
+\chapter{Multi-Agent Path Finidng}\label{sec:app}
+
+In multi-robot path finding (MPF) we consider an environment with several identical moving entities referred to as 
+\emph{agents}. Source and target locations are uniquely determined for each agent. The objective
+is to find a route for every agent from its source to its target.
+Agents must not collide with obstacles and other agents that are also moving along
+planned routes towards their own targets.
+The environment is modeled as an undirected graph, where the agents are placed in the vertices, and move along the edges from one vertex to another. 
+Continuous time is divided into discrete time steps, where the relocation of an agent from one vertex to its neighbor takes exactly 1 time step.
+
+Different variants and restrictions have been studied.
+
+\emph{Muliti-agent path-finding} (MPF) \cite{source1}  supposes a group of agents in a given
+environment, where initial and target positions are determined for each agent.
+All individual agents must avoid collisions. Movement of the agents is carried
+out in discrete time steps. Agent can shift from one vertex to its neighbor on
+condition that the neighbor is either unoccupied or is being left by other agent
+in the same time step. At most one agent is allowed to pass an edge within one
+time step. That is, agents are not allowed to exchange their positions within one
+time step.
+
+\emph{Pebble motion on graphs} \cite{source1,source2} is a very similar problem as MPF. It can
+be regarded as a restricted variant of MPF. The difference consists in rules for
+movement. While MPF enables entering a vertex that is simultaneously being
+left by other agent, such transfer is not permissible in pebble motion. As an
+illustration we can mention 15 puzzle also known as Lloyd’s 15 \cite{lloydXX}.
+
+\emph{Cooperative Path-finding} \cite{cpf} is a special case of MPF where each agent is
+assumed to have a full knowledge of all other agents and their planned routes.
+Precisely speaking, solving algorithm can take into account paths planned for
+agents that were processed earlier, and adjust paths searched later according to
+them.
+
+\section{Scenarios with adversaries}
+
+\subsection{Adversarial Cooperative Path Finding}
+
+\subsection{Area Protection Problem}
+
+\subsection{Area Protection Problem with Communication maintenance}
+

@@ -55,7 +55,7 @@ An emphasis is given to the area protection problem.
 
 %\subsection{Notation and Terminology}
 
-\subsection{Graph Terminology}
+\subsection{Graph Terminology}\label{sec:back:graph}
 
 A \emph{graph} $G$ is a pair $(V,E)$ of \emph{vertices} and \emph{edges}, where $E\subseteq {{V}\choose{2}}$.
 If this inclusion is an equality, $G$ is said to be \emph{complete}.
@@ -89,6 +89,17 @@ Let $G=(V,A)$ be a directed graph.
 By \emph{in-degree} and \emph{out-degree} of a vertex $v\in V$ we mean the sizes of sets $|\{(u,v): u\in V, (u,v) \in A\}|$ and $|\{(v,u): u\in V, (v,u) \in A\}|$ , respectively.
 An \emph{arborescence} rooted at vertex $r$ is a directed tree with arcs directed from $r$.
 A directed graph is \emph{strongly connected}, if for all pair of vertices $u,v\in V$, there is a path from $u$ to $v$ and from $v$ to $u$.
+
+A graph is \emph{planar}, if it can be drawn in a plane without crossing edges.
+According to this definition, every tree is planar. 
+A graphical representation of a graph $G$ is determined by function $\Phi(G):V\to\mathbb{R}\times\mathbb{R}$ that assigns a coordinate to each node in $V$. 
+We say that $\Phi(G)$ is is an \emph{embedding of $G$ in a plane}.
+\begin{definition}\label{def:planemb}
+The embedding $\Phi(G)$ is planar if it is drawn in such a way that its straight line segments intersect only at their endpoints.
+\end{definition}
+Clearly, whenever $\phi(G)$ is planar, then also $G$ is planar. 
+The opposite implication does not hold in general. 
+If $\Phi(G)$ is not planar, any two edges that intersect each other are referred to as \emph{crossing}.
 
 \subsection{Combinatorial Optimization}
 
@@ -411,7 +422,11 @@ The objective function value of a given instance is equal in Problem~\ref{prob:m
 MEB  and has received a significant attention during the last two decades.
 The problem has been introduced in \cite{wieselthier00}, where the authors propose a greedy algorithm called broadcast incremental power (BIP), which resembles Prim's algorithm for MST,
 and improve it by a ``sweep'' operation removing unnecessary transmissions.
-NP-hardness results are provided in \cite{cagalj02}, by reduction from \textsc{Set Cover}.
+NP-hardness results for both general and geometric MEB are provided in \cite{cagalj02} by reduction from \textsc{Set Cover} and \textsc{Planar 3-SAT}, respectively.
+In the former case, the network topology is represented by a generic graph with arbitrary weights, whereas in the latter a Euclidean distance is considered.
+The special case where $\alpha=1$, i. e., where the edge weights correspond to distances between the endpoints belongs to $P$.
+An optimal solution is determined trivially by assigning minimum power sufficient to reach all nodes in a single hop, regardless of the nodes' arrangement.
+
 
 An approximation by MST has been investigated by several authors, e.g., in \cite{clementi01}.
 After constructing an MST, the algorithm determines an orientation of arcs towards the leavs, starting from the source.
@@ -439,6 +454,26 @@ A lower bound on the objective function is proved in \cite{calamoneri08} togethe
 The 6-approximation of MST turns out to be too pessimistic for instances with restricted node locations which represent the real-life instances more closely.
 Authors in \cite{flammini07} argue that the approximation ratio of MST algorithm can be considered close to 4 for practical instances.
 
+Alternatively, a MEB instance can be defined by $G=(V,E)$ and its embeddding $\Phi(G)$ in a plane.
+We recall from Section \ref{sect:back:graph} that an embedding of a graph in a plane assigns coordinates to nodes in a Euclidean plane.
+These coordinates implicitly imply distance $d_{ij}$ between every two nodes $i$ and $j$.
+
+The question addressed here is whether optimal solutions to various MEB instances have planar embedding.
+By inspecting a large number of instances and their optimal solution, the planarity of the optimum cannot be guaranteed in general, even though in majority of cases, the optimum is indeed planar.
+Any crossing in a graph (tree) involves 4 nodes that form a convex quadrilateral. 
+We consider a quadrilateral $ABCD$ as depicted in Fig. \ref{fig:quad} with diagonals $AC$ and $BD$.
+%A feasible solution to a MEB problem is an arborescence.
+%The orientation of the diagonal edges can be arbitrary.
+The \emph{adjacent sides} of a diagonal arc in $ABCD$ are the sides incident to the origin of the arc. 
+So for example the adjacent sides of $(AC)$ are $AB$ and $AD$.
+\begin{figure}[htb!]
+  \centering
+  \includegraphics[scale=1.4]{figurer/quadrilat.eps}
+  \caption{Example of a crossing in a solution to an instance of MEB}
+  \label{fig:quad}
+\end{figure}
+
+
 \subsubsection{Range Assignment Problem}
 
 In the range assignment problem (RAP) the task is to minimize the total power consumed under the constraint 
@@ -461,7 +496,7 @@ A recent work \cite{carmi15} achieves an exact algorithm for the 1-dimensional p
 
 A further constraint requires that diameter of the transmission graph has to be at most some constant value $h$.
 On a family of instances limiting the proximity of two nodes, this variant of RAP is in APX \cite{clementi01b}.
-The 1-dimensional problem with restricted diameter has been studied in \cite{clementi03}, where the authors introduce an exact algorithm that runs in $\mathcal{O}(hn^2)$.
+The 1-dimensional problem with restricted diameter (number of hops) has been studied in \cite{clementi03}, where the authors introduce an exact algorithm that runs in $\mathcal{O}(hn^2)$.
 
 Another modifications requires symmetric communication links.
 This version is often found in the literature under the abbreviation SRAP.
@@ -514,9 +549,10 @@ The problem under study is thus defined as follows:
 Find a tree $T\subseteq G$ spanning $D$ minimizing \eqref{eq:sbtcost}.
 \end{problem}
 
-
-
 \emph{Remark:} The requirement that a solution must be a tree is necessary due to the nature of the objective function.
+
+Like in MEB, an optimal solution to SBT does not guarantee a planarity of the resulting tree, although vast majority of instances are planar. 
+As an example of non-planar optimum we state the instance depicted in Fig~\ref{fig:sbt-nonplanar}.
 \subsubsection{Non-destination nodes}
 
 Additional assumption of the existence of nodes that never initiate any transmission is a natural extension of all the problems described above.

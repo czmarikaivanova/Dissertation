@@ -113,12 +113,6 @@
 \newblock Topology control in wireless ad hoc and sensor networks.
 \newblock {\em ACM Comput. Surv. 37}, 2 (June 2005), 164--194.
 
-\bibitem{silver05}
-{\sc Silver, D.}
-\newblock Cooperative pathfinding.
-\newblock In {\em Proc. of the 1st Artificial Intelligence and Interactive
-  Digital Entertainment Conference, 2005\/} (2005), pp.~117--122.
-
 \bibitem{sipser06}
 {\sc Sipser, M.}
 \newblock {\em Introduction to the Theory of Computation}, second~ed.
@@ -153,13 +147,5 @@
 \newblock Wireless ad hoc networks: technologies and challenges.
 \newblock {\em Wireless Communications and Mobile Computing 6}, 7 (2006),
   889--892, \href{http://dx.doi.org/10.1002/wcm.449}{doi: 10.1002/wcm.449}.
-
-\bibitem{yu13}
-{\sc Yu, J., and LaValle, S.~M.}
-\newblock Structure and intractability of optimal multi-robot path planning on
-  graphs.
-\newblock In {\em Proceedings of the Twenty-Seventh {AAAI} Conference on
-  Artificial Intelligence, July 14-18, 2013, Bellevue, Washington, {USA.}\/}
-  (2013).
 
 \end{thebibliography}

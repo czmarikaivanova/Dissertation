@@ -72,10 +72,10 @@
 \usepackage{tikz}	
 \usepackage{subcaption}
      
-
+\usepackage{amsthm}
 %
 % The hyperref package allows advanced hyperlinking functionality
-%
+
 \usepackage[dvipdfmx,        % Use dvipdf driver
 			backref,         % List citing occurences in the References
 			colorlinks,      % Colored links
@@ -186,10 +186,10 @@
 %\include{scientific_environment}
 \include{acknowledgements}
 \include{abstract}
-\include{listofpublications}
+%\include{listofpublications}
 \tableofcontents
-\listoffigures
-\lstlistoflistings
+%\listoffigures
+%\lstlistoflistings
 
 %--------------------------------------------------------------------------------------------------
 % MAIN MATTER
@@ -199,7 +199,17 @@
 %
 % Main chapters
 %
-\include{introduction}         % Introduction
+\include{chap1-background}         % Introduction
+\include{chap2-adhoc}         % Introduction
+\include{chap3-mbt}         % Introduction
+\include{chap4-mpf}         % Introduction
+%
+% Modified mathematics bibliography. Uses acm.bst
+%
+\bibliographystyle{acm}
+
+\bibliography{thesis}
+
 \include{introduction_papers}  % Introduction to the papers
 \include{papers}               % The papers, with cover pages
 
@@ -224,12 +234,6 @@
 %
 %\bibliographystyle{iopart-num}
 
-%
-% Modified mathematics bibliography. Uses acm.bst
-%
-\bibliographystyle{acm}
-
-\bibliography{thesis}
 
 \end{document}
 
