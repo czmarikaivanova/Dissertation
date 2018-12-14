@@ -21,45 +21,45 @@ Warning--I didn't find a database entry for "cpf"
 Warning--can't use both author and editor fields in blough02
 Warning--empty booktitle in calinescu02
 Warning--empty booktitle in wieselthier00
-You've used 24 entries,
+You've used 26 entries,
             2293 wiz_defined-function locations,
-            721 strings with 9279 characters,
-and the built_in function-call counts, 9140 in all, are:
-= -- 882
-> -- 395
+            736 strings with 9638 characters,
+and the built_in function-call counts, 9903 in all, are:
+= -- 955
+> -- 434
 < -- 0
-+ -- 163
-- -- 133
-* -- 679
-:= -- 1418
-add.period$ -- 74
-call.type$ -- 24
-change.case$ -- 127
++ -- 179
+- -- 147
+* -- 752
+:= -- 1541
+add.period$ -- 80
+call.type$ -- 26
+change.case$ -- 140
 chr.to.int$ -- 0
-cite$ -- 27
-duplicate$ -- 388
-empty$ -- 768
-format.name$ -- 133
-if$ -- 1975
+cite$ -- 29
+duplicate$ -- 408
+empty$ -- 828
+format.name$ -- 147
+if$ -- 2130
 int.to.chr$ -- 0
-int.to.str$ -- 24
-missing$ -- 31
-newline$ -- 124
-num.names$ -- 56
-pop$ -- 167
+int.to.str$ -- 26
+missing$ -- 33
+newline$ -- 134
+num.names$ -- 60
+pop$ -- 178
 preamble$ -- 1
-purify$ -- 108
+purify$ -- 119
 quote$ -- 0
-skip$ -- 255
+skip$ -- 265
 stack$ -- 0
-substring$ -- 598
-swap$ -- 123
+substring$ -- 660
+swap$ -- 127
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 82
+type$ -- 90
 warning$ -- 3
-while$ -- 92
-width$ -- 26
-write$ -- 264
+while$ -- 99
+width$ -- 28
+write$ -- 284
 (There were 10 warnings)

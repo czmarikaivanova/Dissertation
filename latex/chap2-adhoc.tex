@@ -140,8 +140,9 @@ The objective function value of a given instance is equal in Problem~\ref{prob:m
 \end{observation}
 
 MEB has received a significant attention during the last two decades.
-The problem has been introduced in \cite{wieselthier00}, where the authors propose a greedy algorithm called broadcast incremental power (BIP), which resembles Prim's algorithm for MST,
-and improve it by a ``sweep'' operation removing unnecessary transmissions.
+The problem has been introduced in \cite{wieselthier00}, where the authors suggest three greedy heuristic methods:
+MST algorithm, shortest path tree (SPT) algorithm and most notably the broadcast incremental power (BIP), which resembles Prim's algorithm for MST,
+and improve them by a ``sweep'' operation removing unnecessary transmissions.
 BIP gradually constructs a tree as follows:
 \begin{itemize}
 \item Initially, the tree $T$ contains only the source $s$, and all nodes have zero power assignment.
@@ -154,18 +155,27 @@ BIP gradually constructs a tree as follows:
 then the transmission of $u$ can eliminated.
 \end{itemize}
 
+In the MST algorithm, a MST is constructed, and subsequently the edges are oriented towards the leaves, starting from the source.
+The last step is to assign power levels to each node according to the longest arc outgoing from that node.
+
+The SPT algorithm establishes a minimum-cost path from the source node to every other node. The broadcast tree consists of superpositions of these unicast paths.
+
 NP-hardness results for both general and geometric MEB are provided in \cite{cagalj02} by reduction from \textsc{Set Cover} and \textsc{Planar 3-SAT}, respectively.
 In the former case, the network topology is represented by a generic graph with arbitrary weights, whereas in the latter a Euclidean distance is considered.
 The special case where $\alpha=1$, i.e., where the edge weights correspond to distances between the endpoints belongs to $P$.
 An optimal solution is determined trivially by assigning minimum power sufficient to reach all nodes in a single hop, regardless of the nodes' arrangement.
 
-An approximation by MST has been investigated by several authors, e.g., in \cite{clementi01}.
-After constructing an MST, the algorithm determines an orientation of arcs towards the leaves, starting from the source.
-The last step is to assign power levels to each node according to the longest arc outgoing from that node.
-This algorithm yields a solution no worse than 6 times the optimal one \cite{ambuhl05}.
-
-The approximation ratio of an algorithm that builds an MST and assigns power levels to nodes ac
-The algorithm that constructs a transmission tree based on MST first construct an MST, then 
+The first analytical study of the three methods proposed in \cite{wieselthier00} is given in \cite{wan02}, where the authors provide quantitative characterization in terms of approximation ratios.
+The MST algorithm is showed to have an approximation ratio between 6 and 12, while BIP between 13/3 and 12.
+For the SPT algorithm the approximation ratio is at least $n/2$.
+These results were gradualy improved in several works. 
+The upper bound of the MST algorithm was improved to 6 in \cite{ambuhl05}, which closes the gap, and thus proves its optimality.
+This upper bound is valid for BIP as well due to Lemma in \cite{wan02}:
+\begin{lemma}
+For any broadcasting among a point set $K$ in a 2-dimensional plane, the total energy required by the BIP algorithm is at most $\sum_{e\in \text{MST}(K)}d_e^\alpha$.
+\end{lemma}
+The lower bound was strengthened to 4.498 in \cite{bauer09}. 
+This work also devises an implementation of BIP with improved time complexity $\mathcal{O}(|V|^2)$.
 
 A special case, assuming that there are $k$ adjustable power levels $w_{i,1},w_{i,2},\dots w_{i,k}$ at each node $i$ is studied in \cite{liang02}.
 This problem remains NP-hard which is proved by reducing \textsc{3-CNF-SAT} to it.

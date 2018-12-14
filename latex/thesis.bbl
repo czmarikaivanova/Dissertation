@@ -21,6 +21,12 @@
   470.
 \newblock ISCO 2010 - International Symposium on Combinatorial Optimization.
 
+\bibitem{bauer09}
+{\sc Bauer, J., Haugland, D., and Yuan, D.}
+\newblock New results on the time complexity and approximation ratio of the
+  broadcast incremental power algorithm.
+\newblock {\em Information Processing Letters 109}, 12 (2009), 615 -- 619.
+
 \bibitem{blough02}
 {\sc Blough, D.~M., Leoncini, M., Resta, G., and Santi, P.}
 \newblock {\em On the Symmetric Range Assignment Problem in Wireless Ad Hoc
@@ -125,6 +131,11 @@
 \newblock In {\em Proceedings of the 8th Annual International Conference on
   Mobile Computing and Networking\/} (New York, NY, USA, 2002), MobiCom '02,
   ACM, pp.~172--182.
+
+\bibitem{wan02}
+{\sc Wan, P.-J., C{\u{a}}linescu, G., Li, X.-Y., and Frieder, O.}
+\newblock Minimum-energy broadcasting in static ad hoc wireless networks.
+\newblock {\em Wireless Networks 8}, 6 (Nov 2002), 607--617.
 
 \bibitem{wieselthier00}
 {\sc Wieselthier, J.~E., Nguyen, G.~D., and Ephremides, A.}
