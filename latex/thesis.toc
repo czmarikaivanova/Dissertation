@@ -13,9 +13,13 @@
 \contentsline {section}{\numberline {2.2}Combinatorial optimization problems motivated by WANETs}{9}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Network Model}{9}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}Minimum Energy Broadcast}{10}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Range Assignment Problem}{13}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}Shared Broadcast Trees}{14}{subsection.2.2.4}
-\contentsline {subsection}{\numberline {2.2.5}Non-destination nodes}{15}{subsection.2.2.5}
+\contentsline {subsubsection}{Problem complexity and approximability}{11}{section*.6}
+\contentsline {subsubsection}{Problem variants}{12}{section*.7}
+\contentsline {subsubsection}{ILP models}{12}{section*.8}
+\contentsline {subsubsection}{Planarity of an optimal solution}{13}{section*.9}
+\contentsline {subsection}{\numberline {2.2.3}Range Assignment Problem}{14}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Shared Broadcast Trees}{15}{subsection.2.2.4}
+\contentsline {subsection}{\numberline {2.2.5}Non-destination nodes}{16}{subsection.2.2.5}
 \contentsline {section}{\numberline {2.3}Shared Multicat Trees}{16}{section.2.3}
 \contentsline {chapter}{\numberline {3}Minimum Broadcast Trees}{17}{chapter.3}
 \contentsline {chapter}{\numberline {4}Multi-Agent Path Finidng}{19}{chapter.4}

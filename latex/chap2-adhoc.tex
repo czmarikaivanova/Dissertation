@@ -160,6 +160,8 @@ The last step is to assign power levels to each node according to the longest ar
 
 The SPT algorithm establishes a minimum-cost path from the source node to every other node. The broadcast tree consists of superpositions of these unicast paths.
 
+\subsubsection{Problem complexity and approximability}
+
 NP-hardness results for both general and geometric MEB are provided in \cite{cagalj02} by reduction from \textsc{Set Cover} and \textsc{Planar 3-SAT}, respectively.
 In the former case, the network topology is represented by a generic graph with arbitrary weights, whereas in the latter a Euclidean distance is considered.
 The special case where $\alpha=1$, i.e., where the edge weights correspond to distances between the endpoints belongs to $P$.
@@ -176,6 +178,8 @@ For any broadcasting among a point set $K$ in a 2-dimensional plane, the total e
 \end{lemma}
 The lower bound was strengthened to 4.498 in \cite{bauer09}. 
 This work also devises an implementation of BIP with improved time complexity $\mathcal{O}(|V|^2)$.
+
+\subsubsection{Problem variants}
 
 A special case, assuming that there are $k$ adjustable power levels $w_{i,1},w_{i,2},\dots w_{i,k}$ at each node $i$ is studied in \cite{liang02}.
 This problem remains NP-hard which is proved by reducing \textsc{3-CNF-SAT} to it.
@@ -194,6 +198,28 @@ The probability distribution of existence of a node can be non-uniform.
 A lower bound on the objective function is proved in \cite{calamoneri08} together with a near optimal construction method.
 The 6-approximation of MST turns out to be too pessimistic for instances with restricted node locations which represent the real-life instances more closely.
 Authors in \cite{flammini07} argue that the approximation ratio of MST algorithm can be considered close to 4 for practical instances.
+
+\subsubsection{ILP models}
+
+Integer linear programs for MEB are studied in various works.
+Three ILP formulations are proposed in \cite{das03}.
+The first formulation assumes exactly one transmission from the sourcde $s$, and at most one transmission from each node in $V\setminus\{s\}$.
+This formulation operates with order of transmissions which helps to establish connectivity of the resulting solution.
+Power asssignments are straightforwardly modeled by continuous variables for each node leading to an objective function minimizing their sum.
+
+The same objective function is used in the second formulation.
+On the contrary, the second formulation allows at least one transmission from the source and arbitrary number of transmission from the other nodes.
+The necessary subtour elimination is achieved by additional ``sequencing variables'' proposed for the \textsc{Travelling Salesman Problem}.
+
+The last formulation is built upon a single-commodity network flow model and its interpretation follows from the second formulation.
+
+A similar formulation is proposed in \cite{yuan05}, where the continuous power variables for each node are replaced by binary variables $y_{ij}=1\Leftrightarrow$ the power of node $i$ equals $p_{ij}$,
+and the connectivity is achieved by multi-commodity flow variables.
+
+Authors in \cite{haugland11} provide a formal proofs that using binary power variables instead of continuous ones leads to a stronger formulation,
+which can be further strengthened by introducing the multi-commodity flow variables.
+
+\subsubsection{Planarity of an optimal solution}
 
 Alternatively, a MEB instance can be defined by $G=(V,E)$ and its embedding $\Phi(G)$ in a plane.
 We recall from Section \ref{sect:back:graph} that an embedding of a graph in a plane assigns coordinates to nodes in a Euclidean plane.

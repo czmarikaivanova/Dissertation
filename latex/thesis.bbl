@@ -73,6 +73,12 @@
 \newblock In {\em STACS 2000\/} (Berlin, Heidelberg, 2000), H.~Reichel and
   S.~Tison, Eds., Springer Berlin Heidelberg, pp.~651--660.
 
+\bibitem{das03}
+{\sc Das, A.~K.}
+\newblock Minimum power broadcast trees for wireless networks: Integer
+  programming formulations.
+\newblock In {\em INFOCOM\/} (2003).
+
 \bibitem{dijkstra59}
 {\sc Dijkstra, E.~W.}
 \newblock A note on two problems in connexion with graphs.
@@ -83,6 +89,12 @@
 \newblock The \&ldquo;real\&rdquo; approximation factor of the mst heuristic
   for the minimum energy broadcasting.
 \newblock {\em J. Exp. Algorithmics 11\/} (Feb. 2007).
+
+\bibitem{haugland11}
+{\sc Haugland, D., and Yuan, D.}
+\newblock {\em Compact Integer Programming Models for Power-optimal Trees in Ad
+  Hoc Wireless Networks}, vol.~158.
+\newblock 01 2011, pp.~219--246.
 
 \bibitem{kirousis00}
 {\sc Kirousis, L.~M., Kranakis, E., Krizanc, D., and Pelc, A.}
@@ -158,5 +170,13 @@
 \newblock Wireless ad hoc networks: technologies and challenges.
 \newblock {\em Wireless Communications and Mobile Computing 6}, 7 (2006),
   889--892, \href{http://dx.doi.org/10.1002/wcm.449}{doi: 10.1002/wcm.449}.
+
+\bibitem{yuan05}
+{\sc Yuan, D.}
+\newblock Computing optimal or near-optimal trees for minimum-energy in
+  wireless networks.
+\newblock In {\em Third International Symposium on Modeling and Optimization in
+  Mobile, Ad Hoc, and Wireless Networks (WiOpt'05)\/} (April 2005),
+  pp.~323--331.
 
 \end{thebibliography}
