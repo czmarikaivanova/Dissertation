@@ -4,7 +4,7 @@ A wireless ad-hoc network (WANET) is a collection of two or more devices with wi
 Broadly speaking, there are two models of wireless networks: single-hop and multi-hop.
 The single-hop model is based on the cellular network model that provides one-hop wireless connectivity between mobile hosts and static nodes known as base stations \cite{clementi01}.
 This network type relies on a fixed backbone infrastructure that interconnects all base stations by wired links.
-Unlike cellular and wired networks, WANETs depend on neither a wired infrastructure nor pre-determined interconnectivity, and is thus a decentralized type of wireless network.
+Unlike cellular and wired networks, WANETs depend on neither a wired infrastructure nor pre-determined interconnectivity, and are thus a decentralized type of wireless network.
 
 The set of uniform wireless communication devices with fixed locations are connected via wireless links depending on 
 distance between the nodes, their transmission power, error control scheme, background noise and interference.
@@ -33,7 +33,8 @@ Each device works as a transceiver, which means that it can both transmit and re
 
 The absence of infrastructure implies their quick deployment and simple configuration.
 The recent years have witnessed an increasing interest in WANETs, motivated by numerous both civil and military applications and by the continual progression in wireless technologies.
-Digital battlefield, disaster management, luggage handling in airports, context aware computing and mobile commerce are examples of the growing list of potential applications of WANETs \cite{younis06}.
+Digital battlefield, disaster management, luggage handling in airports, 
+context aware computing and mobile commerce are examples of the growing list of potential applications of WANETs \cite{younis06}.
 
 %Fig. \ref{fig:communication} depicts different types of communication in wireless networks.
 Consider a group of devices and a specific sender that initiates a signal transmission. 
@@ -45,12 +46,12 @@ The remaining ones do not have to, but they can serve as intermediate devices fo
 The wireless devices should be able to detect the presence of other such devices and to perform the necessary initialization to allow information sharing.
 Since the devices can take different forms, their computation, storage and communication capabilities and battery capacity vary tremendously \cite{toh01}.
 The wireless devices are typically heavily energy constrained due to the use of batteries as their energy source.
-Energy conservation in WANETs is therefore plentifully pursued research topic.
+Energy conservation in WANETs is therefore a plentifully pursued research topic.
 Most of the energy is spent on signal transmission \cite{halgamuge09}, 
 and so it is desirable to design energy efficient transmission protocols that also satisfy certain requirements imposed on a WANET.
 
 Various levels of connectivity are required on WANETs.
-However, from a practical point of view, a topology which is ``too connected'' would often cause communication interference to occur even between nodes that are fart apart.
+However, from a practical point of view, a topology which is ``too connected'' would often cause communication interference to occur even between nodes that are far apart.
 Theoretical as well as practical experimental results suggest that the communication graph in WANETs should be as sparse as possible while preserving connectivity \cite{blough02}.
 
 Models considered for WANETs are usually deterministic, that is, they assume that the nodes are fully reliable. 
@@ -62,17 +63,18 @@ Besides minimizing the power consumptions of the network, it is also required to
 
 A related paradigm to WANET are Wireless Sensor Networks (WSN) which attracted a wide range of disciplines where close interactions with the physical environment are essential.
 WSNs consists of tiny sensor nodes, which act as both data generators and network relays \cite{akyildiz10}.
-Each node act as a sensosr, a microprocessor and a transceiver.
+Each node act as a sensor, a microprocessor, and a transceiver.
 Sensor nodes have usually a fixed position and are powered by batteries.
-Data measured  by sensors are transmitted via wireless communication links
+Data measured  by sensors are transmitted via wireless communication links.
 
-There are countless of sensor types including seismic, electromagnetic and acoustic, suggesting a broad area of practical application areas such as 
-military, environmental, health, home and industrial applications.
+There are countless of sensor types, including seismic, electromagnetic, and acoustic, suggesting a broad area of practical application areas such as 
+military, environmental, health, home, and industrial applications.
 
 Multiple sensors are typically integrated into higher-level topologies varying in complexity.
 These topologies can be divided into flat and hierarchical architecture \cite{mcgrath13}.
 In a flat (peer to peer) architecture, every node has the same computational and communication capabilities.
-In a hierarchical architecture, simple sensor nodes operate in close proximity to their respective \emph{cluster heads} which possess more processing capacity than an ordinary sensor nodes.
+In a hierarchical architecture, simple sensor nodes operate in close proximity to their respective \emph{cluster heads},
+which possess more processing capacity than ordinary sensor nodes do.
 
 WSNs are often built using one of the following configurations \cite{mcgrath13}:
 
@@ -87,7 +89,7 @@ This topology is one of the most common WSN topologies.
 \item \emph{Tree topology.} A hierarchy of nodes where in the highest level of the hierarchy is a single root node connected to one or many nodes in the level below.
 The processing and power requirements in nodes increase as the data moves from the branches towards to root node.
 \item \emph{Mesh topology.} Nodes disseminate their own data and also act as relays to propagate the data from other nodes.
-The mesh topology can be partially connected  or fully connected (where there is a connection between every two nodes.
+The mesh topology can be partially connected  or fully connected (where there is a connection between every two nodes).
 \end{itemize}
 
 \section{Combinatorial optimization problems motivated by WANETs}
@@ -98,15 +100,17 @@ It is necessary to introduce a formal network model in order to apply suitable m
 
 \subsection{Network Model}
 
-A WANET is modeled by a complete weighted graph $(G=(V,E),p)$, where the wireless devices are represented by nodes in $V$. 
+A WANET is modeled by a complete graph $G=(V,E)$, and a function $p:E\mapsto \mathbb{R}^+$.
+The wireless devices are represented by nodes in $V$. 
 As no power limit is imposed on the nodes, a transmission can be established between any two nodes, and thus $G$ is complete.
-The function $p:E\mapsto \mathbb{R}^+$ indicates the power requirement for sending a signal along a certain edge.
-This requirement depends on distance and environmental properties, and is given by  $p_{ij}=d_{ij}^\alpha$, 
-where $d_{ij}$ is the Euclidean distance between the devices represented by vertices $i$ and $j$, and $\alpha$ is the constant environmental factor typically valued between 2 and 4. 
-Some sources state the relation $p_{ij}=\kappa d_{ij}^\alpha$, where $\kappa\geq$ is a transmission quality parameter.
+The function $p$ indicates the power requirement for sending a signal along a certain edge.
+This requirement depends on distance and environmental properties, and is given by  $p_{ij}=\kappa d_{ij}^\alpha$, 
+where $d_{ij}$ is the Euclidean distance between the devices represented by nodes $i$ and $j$, $\alpha$ is the constant environmentally dependent factor typically valued between 2 and 4,
+and $\kappa\geq 0$ is the transmission quality parameter. 
+Since the value of $\kappa$ does not affect the optimal solution, it is often assumed to be 1.
 The transmission range of a node $i$ depends on the power supply $P_i$ assigned to it.
-The overall power assignment to individual nodes induces a directed transmission graph (see example in Fig.~\ref{fig:transgraph}. 
-On the other hand, for a given transmission graph, the power assignment to a node corresponds to the longest outgoing arc.
+The overall power assignment to individual nodes induces a directed transmission graph (see the example in Fig.~\ref{fig:transgraph}). 
+On the other hand, for a given transmission graph, the power assignment to a node corresponds to its longest outgoing arc.
 \begin{figure}[htb!]
   \centering
   \includegraphics[scale=.8]{figurer/tran-graph.eps}
@@ -121,19 +125,20 @@ The total power is expressed by an objective function varying among the problems
 
 Additional assumption of the existence of nodes that never initiate any transmission, nor they have to receive any signal, is a natural extension of all the problems described above.
 These nodes can act as intermediate nodes relaying the signal, if improves the respective objective function value.
-Apart from the weighted graph $G=(V,E,p)$, the set of nodes $D\subseteq V$ called \emph{destinations} is also a part of the input.
+In addition to the graph $G$ and the power requirement vector $p$, the set of nodes $D\subseteq V$, called \emph{destinations}, is also a part of the input.
 Nodes in $V\setminus D$ are referred to as \emph{non-destinations}.
-It is similar to the generalization of MST which leads to the Steiner minimum tree problem.
+The inclusion of non-destination nodes resembles the generalization of MST leading to the \textsc{Minimum Steiner tree} problem.
 In WANET scenarios, the presence of such nodes is often referred to as a \emph{multicast} version.
 
 \subsection{Minimum Energy Broadcast}
 
-The Minimum Energy Broadcast (MEB) problem consists of a set $V$ and a specified source $s\in V$, that is supposed to initiate a transmission.
+The \textsc{Minimum Energy Broadcast} (MEB) problem consists of a node set $V$ and a specified source $s\in V$, that is supposed to initiate a transmission.
 All the remaining nodes must receive the signal via communication links induced by power assignment to the nodes.
 \begin{problem}\label{prob:meb1}
-Given a graph $G=(V,A)$ and a source $s\in V$, find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum sum such that
-there exists a path from $s$ to each $t\in V\setminus\{s\}$ in $G'=(V,A^P)$, where $A^P=\{(i,j)\in A: p_{ij}\leq P_i\}$.
+Given a directed graph $(V,A)$, a source $s\in V$, and power requirements $p$, find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum component sum such that
+there exists a path from $s$ to each $t\in V\setminus\{s\}$ in $(V,A^P)$, where $A^P=\{(i,j)\in A: p_{ij}\leq P_i\}$.
 \end{problem}
+For two distinct nodes $u$ and $u$  in $G$, the optimal solutions to MEB on the input $(G,u,p)$ and $(G,v,p)$ may differ.
 An optimal solution differs for different transmission sources.
 Hence, the nodes must by endowed with a mechanism that allows them to adjust their power level for a corresponding transmission session.
 This places demands on the computational capacity and technological solution of the nodes.
