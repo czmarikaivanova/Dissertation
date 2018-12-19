@@ -4,12 +4,14 @@
 
 A \emph{graph} $G$ is a pair $(V,E)$ of \emph{vertices} and \emph{edges}, where $E\subseteq {{V}\choose{2}}$.
 If this inclusion is an equality, $G$ is said to be \emph{complete}.
-A \emph{path} in graph is a sequence of edges connecting a sequence of distinct vertices.
-A graph is said to be \emph{connected} if there exists a path between every two vertices, otherwise it is \emph{disconnected}.
-A \emph{cycle} of a graph $G$ is a subset of $E$ that form a path such that the first node of the path corresponds to the last. 
+ The set $A$ of arcs is derived from $E$ by considering both directions of orientation of the edges.
+ Formally, $A=\left\{(i,j),(j,i):\left\{i,j\right\}\in E\right\}$.
+A~\emph{path} in graph is a sequence of edges connecting a sequence of distinct vertices.
+A~graph is said to be \emph{connected} if there exists a path between every two vertices, otherwise it is \emph{disconnected}.
+A~\emph{cycle} of a graph $G$ is a subset of $E$ that form a path such that the first node of the path corresponds to the last. 
 If $G$ contains a cycle, $G$ is called, \emph{cyclic}, otherwise it is called \emph{acyclic}.
 \begin{definition}
-A tree is a graph that is connected and acyclic.
+A~tree is a graph that is connected and acyclic.
 \end{definition}
 For a vertex $v\in V$, a \emph{neighbourhood} of $v$ (open neighbourhood), denoted as $N(v)$, is the set of vertices adjacent to $v$.
 The size of neighbourhood of $v$ is called a \emph{degree} of $v$.
@@ -20,10 +22,10 @@ A spanning tree of graph $G=(V,E)$ is a tree $T=(V_T,E_T)$ such that $T\subseteq
 \end{definition}
 
 In a \emph{weighted graph} $G=(V,E,w)$, a \emph{weight} or \emph{cost} $w_e$ is associated witch each edge $e\in E$.
-A weight of $G$ is $\sum_{e\in E}w(e)$.
-A spanning tree of $G$ with minimum weight is called a \emph{minimum spanning tree} of $G$.
+A~weight of $G$ is $\sum_{e\in E}w(e)$.
+A~spanning tree of $G$ with minimum weight is called a \emph{minimum spanning tree} of $G$.
 Similar concept is used in paths in graphs.
-A \emph{shortest path} from $u$ to $v$ in a weighted graph is a path consisting of edges of minimum sum of weights connecting $u$ and $v$.
+A~\emph{shortest path} from $u$ to $v$ in a weighted graph is a path consisting of edges of minimum sum of weights connecting $u$ and $v$.
 \begin{definition}
 	For a graph $G=(V,E)$ and a subset of vertices $D\subseteq V$, a Steiner tree of $G$ and $D$ is a tree $T=(V',E')$ such that $T\subseteq G$ and $D\subseteq V'$.
 \end{definition}
@@ -35,8 +37,8 @@ The downstream neighbourhood $N^-(v)$ of node $v$ is the set $\{(u,v): u\in V, (
 Similarly, the upstream neighbourhood $N^+(v)$ is $\{(v,u): u\in V, (v,u) \in A\}$.
 We use the standard notation $\text{deg}^-(v)=|N^-(v)|$ and $\text{deg}^+(v)=|N^+(v)|$.
 These values are called \emph{in-degree} and \emph{out-degree} of $v$, respectively.
-An \emph{arborescence} rooted at vertex $r$ is a directed tree with arcs directed from $r$.
-A directed graph is \emph{strongly connected}, if for all pair of vertices $u,v\in V$, there is a path from $u$ to $v$ and from $v$ to $u$.
+An~\emph{arborescence} rooted at vertex $r$ is a directed tree with arcs directed from $r$.
+A~directed graph is \emph{strongly connected}, if for all pair of vertices $u,v\in V$, there is a path from $u$ to $v$ and from $v$ to $u$.
 
 A graph is \emph{planar}, if it can be drawn in a plane without crossing edges.
 According to this definition, every tree is planar. 

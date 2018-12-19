@@ -5,6 +5,13 @@
 \newblock {\em Wireless Sensor Networks}.
 \newblock John Wiley \& Sons, Inc., New York, NY, USA, 2010.
 
+\bibitem{althaus03}
+{\sc Althaus, E., Calinescu, G., Mandoiu, I.~I., Prasad, S., Tchervenski, N.,
+  and Zelikovsky, A.}
+\newblock Power efficient range assignment in ad-hoc wireless networks.
+\newblock In {\em 2003 IEEE Wireless Communications and Networking, 2003. WCNC
+  2003.\/} (March 2003), vol.~3, pp.~1889--1894 vol.3.
+
 \bibitem{ambuhl05}
 {\sc Amb{\"u}hl, C.}
 \newblock An optimal bound for the mst algorithm to compute energy efficient
@@ -12,6 +19,13 @@
 \newblock In {\em Automata, Languages and Programming\/} (Berlin, Heidelberg,
   2005), L.~Caires, G.~F. Italiano, L.~Monteiro, C.~Palamidessi, and M.~Yung,
   Eds., Springer Berlin Heidelberg, pp.~1139--1150.
+
+\bibitem{ambuhl03}
+{\sc Amb{\"u}hl, C., Clementi, A. E.~F., Penna, P., Rossi, G., and Silvestri,
+  R.}
+\newblock Energy consumption in radio networks: Selfish agents and rewarding
+  mechanisms.
+\newblock In {\em WAOA\/} (2003).
 
 \bibitem{barta10}
 {\sc Barta, J., Leggieri, V., Montemanni, R., Nobili, P., and Triki, C.}
@@ -33,6 +47,14 @@
   Networks}.
 \newblock Springer US, Boston, MA, 2002, pp.~71--82.
 
+\bibitem{calamoneri08}
+{\sc Calamoneri, T., Clementi, A.~E., Monti, A., Rossi, G., and Silvestri, R.}
+\newblock Minimum-energy broadcast in random-grid ad-hoc networks:
+  Approximation and distributed algorithms.
+\newblock In {\em Proceedings of the 11th International Symposium on Modeling,
+  Analysis and Simulation of Wireless and Mobile Systems\/} (New York, NY, USA,
+  2008), MSWiM '08, ACM, pp.~354--361.
+
 \bibitem{calinescu02}
 {\sc Calinescu, G., Mandoiu, I., and Zelikovsky, A.}
 \newblock Symmetric connectivity with minimum power consumption in radio
@@ -45,6 +67,13 @@
 \newblock In {\em Algorithms and Computation - 26th International Symposium,
   {ISAAC} 2015, Nagoya, Japan, December 9-11, 2015, Proceedings\/} (2015),
   pp.~95--105.
+
+\bibitem{chu17}
+{\sc Chu, X., and Chen, Y.}
+\newblock Time division inter-satellite link topology generation problem:
+  Modeling and solution.
+\newblock {\em International Journal of Satellite Communications and Networking
+  36}, 2 (2017), 194--206.
 
 \bibitem{clementi01}
 {\sc Clementi, A. E.~F., Crescenzi, P., Penna, P., Rossi, G., and Vocca, P.}
@@ -79,6 +108,13 @@
   programming formulations.
 \newblock In {\em INFOCOM\/} (2003).
 
+\bibitem{das04}
+{\sc Das, A.~K., Marks, R.~J., El-Sharkawi, M., Arabshahi, P., and Gray, A.}
+\newblock Optimization methods for minimum power bidirectional topology
+  construction in wireless networks with sectored antennas.
+\newblock In {\em IEEE Global Telecommunications Conference, 2004. GLOBECOM
+  '04.\/} (Nov 2004), vol.~6, pp.~3962--3968 Vol.6.
+
 \bibitem{dijkstra59}
 {\sc Dijkstra, E.~W.}
 \newblock A note on two problems in connexion with graphs.
@@ -90,11 +126,23 @@
   for the minimum energy broadcasting.
 \newblock {\em J. Exp. Algorithmics 11\/} (Feb. 2007).
 
+\bibitem{halgamuge09}
+{\sc Halgamuge, M.~N., Zukerman, M., Ramamohanarao, K., and Vu, H.~L.}
+\newblock An estimation of sensor energy consumption.
+\newblock {\em Electromagnetics Research B}, 12 (2009), 259--295.
+
 \bibitem{haugland11}
 {\sc Haugland, D., and Yuan, D.}
 \newblock {\em Compact Integer Programming Models for Power-optimal Trees in Ad
   Hoc Wireless Networks}, vol.~158.
 \newblock 01 2011, pp.~219--246.
+
+\bibitem{ivanova16}
+{\sc Ivanov{\'{a}}, M.}
+\newblock Shared multicast trees in ad hoc wireless networks.
+\newblock In {\em Combinatorial Optimization - 4th International Symposium,
+  {ISCO} 2016, Vietri sul Mare, Italy, May 16-18, 2016, Revised Selected
+  Papers\/} (2016), pp.~273--284.
 
 \bibitem{kirousis00}
 {\sc Kirousis, L.~M., Kranakis, E., Krizanc, D., and Pelc, A.}
@@ -114,6 +162,24 @@
 \newblock {\em Sensor Network Topologies and Design Considerations}.
 \newblock Apress, Berkeley, CA, 2013, pp.~79--95.
 
+\bibitem{middendorf93}
+{\sc Middendorf, M.}
+\newblock Minimum broadcast time is np-complete for 3-regular planar graphs and
+  deadline 2.
+\newblock {\em Information Processing Letters 46}, 6 (1993), 281 -- 287.
+
+\bibitem{min06}
+{\sc Min, M., Prokopyev, O., and Pardalos, P.~M.}
+\newblock Optimal solutions to minimum total energy broadcasting problem in
+  wireless ad hoc networks.
+\newblock {\em Journal of Combinatorial Optimization 11}, 1 (Feb 2006), 59--69.
+
+\bibitem{montemanni05}
+{\sc Montemanni, R., and Gambardella, L.}
+\newblock Exact algorithms for the minimum power symmetric connectivity problem
+  in wireless networks.
+\newblock {\em Computers \& Operations Research 32}, 11 (2005), 2891 -- 2904.
+
 \bibitem{montemanni08}
 {\sc Montemanni, R., Leggieri, V., and Triki, C.}
 \newblock Mixed integer formulations for the probabilistic minimum energy
@@ -126,6 +192,12 @@
 \newblock {\em Integer and Combinatorial Optimization}.
 \newblock Wiley-Interscience, New York, NY, USA, 1988.
 
+\bibitem{papadimitriou06}
+{\sc Papadimitriou, I., and Georgiadis, l.}
+\newblock Minimum-energy broadcasting in multi-hop wireless networks using a
+  single broadcast tree.
+\newblock {\em Mobile Networks and Applications 11}, 3 (Jun 2006), 361--375.
+
 \bibitem{santi05}
 {\sc Santi, P.}
 \newblock Topology control in wireless ad hoc and sensor networks.
@@ -135,6 +207,16 @@
 {\sc Sipser, M.}
 \newblock {\em Introduction to the Theory of Computation}, second~ed.
 \newblock Course Technology, 2006.
+
+\bibitem{slater81}
+{\sc Slater, P., Cockayne, E., and Hedetniemi, S.}
+\newblock Information dissemination in trees.
+\newblock {\em SIAM Journal on Computing 10}, 4 (1981), 692--701.
+
+\bibitem{toh01}
+{\sc Toh, C.~K.}
+\newblock {\em Ad Hoc Wireless Networks: Protocols and Systems}, 1st~ed.
+\newblock Prentice Hall PTR, Upper Saddle River, NJ, USA, 2001.
 
 \bibitem{cagalj02}
 {\sc \v{C}agalj, M., Hubaux, J.-P., and Enz, C.}
@@ -178,5 +260,11 @@
 \newblock In {\em Third International Symposium on Modeling and Optimization in
   Mobile, Ad Hoc, and Wireless Networks (WiOpt'05)\/} (April 2005),
   pp.~323--331.
+
+\bibitem{yuan12}
+{\sc Yuan, D., and Haugland, D.}
+\newblock Dual decomposition for computational optimization of minimum-power
+  shared broadcast tree in wireless networks.
+\newblock {\em IEEE Transactions on Mobile Computing 11\/} (2012), 2008--2019.
 
 \end{thebibliography}

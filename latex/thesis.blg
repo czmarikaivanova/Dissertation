@@ -11,9 +11,8 @@ The style file: acm.bst
 A level-1 auxiliary file: introduction_papers.aux
 A level-1 auxiliary file: papers.aux
 Database file #1: thesis.bib
-Warning--I didn't find a database entry for "wieselthierXX"
-Warning--I didn't find a database entry for "halgamuge09"
-Warning--I didn't find a database entry for "calamoneri08"
+Warning--I didn't find a database entry for "garey79"
+Warning--I didn't find a database entry for "jansen93"
 Warning--I didn't find a database entry for "source1"
 Warning--I didn't find a database entry for "source2"
 Warning--I didn't find a database entry for "lloydXX"
@@ -22,45 +21,45 @@ Warning--can't use both author and editor fields in blough02
 Warning--empty booktitle in calinescu02
 Warning--empty publisher in haugland11
 Warning--empty booktitle in wieselthier00
-You've used 29 entries,
+You've used 43 entries,
             2293 wiz_defined-function locations,
-            751 strings with 10098 characters,
-and the built_in function-call counts, 10980 in all, are:
-= -- 1057
-> -- 460
+            829 strings with 12819 characters,
+and the built_in function-call counts, 16550 in all, are:
+= -- 1593
+> -- 698
 < -- 0
-+ -- 190
-- -- 155
-* -- 818
-:= -- 1690
-add.period$ -- 89
-call.type$ -- 29
-change.case$ -- 152
++ -- 289
+- -- 239
+* -- 1274
+:= -- 2535
+add.period$ -- 131
+call.type$ -- 43
+change.case$ -- 236
 chr.to.int$ -- 0
-cite$ -- 33
-duplicate$ -- 469
-empty$ -- 938
-format.name$ -- 155
-if$ -- 2382
+cite$ -- 47
+duplicate$ -- 676
+empty$ -- 1414
+format.name$ -- 239
+if$ -- 3583
 int.to.chr$ -- 0
-int.to.str$ -- 29
-missing$ -- 37
-newline$ -- 149
-num.names$ -- 66
-pop$ -- 205
+int.to.str$ -- 43
+missing$ -- 52
+newline$ -- 219
+num.names$ -- 94
+pop$ -- 299
 preamble$ -- 1
-purify$ -- 129
+purify$ -- 199
 quote$ -- 0
-skip$ -- 309
+skip$ -- 446
 stack$ -- 0
-substring$ -- 731
-swap$ -- 149
+substring$ -- 1168
+swap$ -- 213
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 100
+type$ -- 154
 warning$ -- 4
-while$ -- 109
-width$ -- 31
-write$ -- 314
-(There were 11 warnings)
+while$ -- 157
+width$ -- 45
+write$ -- 459
+(There were 10 warnings)

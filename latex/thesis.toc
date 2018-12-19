@@ -12,23 +12,29 @@
 \contentsline {section}{\numberline {2.1}Wireless Sensor Networks}{8}{section.2.1}
 \contentsline {section}{\numberline {2.2}Combinatorial optimization problems motivated by WANETs}{9}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}Network Model}{9}{subsection.2.2.1}
+\contentsline {subsubsection}{Multicasting}{10}{section*.6}
 \contentsline {subsection}{\numberline {2.2.2}Minimum Energy Broadcast}{10}{subsection.2.2.2}
-\contentsline {subsubsection}{Problem complexity and approximability}{11}{section*.6}
-\contentsline {subsubsection}{Problem variants}{12}{section*.7}
-\contentsline {subsubsection}{ILP models}{12}{section*.8}
-\contentsline {subsubsection}{Planarity of an optimal solution}{13}{section*.9}
+\contentsline {subsubsection}{Problem complexity and approximability}{11}{section*.7}
+\contentsline {subsubsection}{Problem variants}{12}{section*.8}
+\contentsline {subsubsection}{ILP models}{12}{section*.9}
+\contentsline {subsubsection}{Planarity of an optimal solution}{13}{section*.10}
 \contentsline {subsection}{\numberline {2.2.3}Range Assignment Problem}{14}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}Shared Broadcast Trees}{15}{subsection.2.2.4}
-\contentsline {subsection}{\numberline {2.2.5}Non-destination nodes}{16}{subsection.2.2.5}
-\contentsline {section}{\numberline {2.3}Shared Multicat Trees}{16}{section.2.3}
-\contentsline {chapter}{\numberline {3}Minimum Broadcast Trees}{17}{chapter.3}
-\contentsline {chapter}{\numberline {4}Multi-Agent Path Finidng}{19}{chapter.4}
-\contentsline {section}{\numberline {4.1}Scenarios with adversaries}{19}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Adversarial Cooperative Path Finding}{19}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Area Protection Problem}{19}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Area Protection Problem with Communication maintenance}{19}{subsection.4.1.3}
-\contentsline {chapter}{\numberline {5}Contribution of the Thesis and Prospective Research}{25}{chapter.5}
-\contentsline {chapter}{\numberline {6}Attached Papers}{27}{chapter.6}
-\contentsline {section}{\numberline {6.1}Shared Multicast Trees in Ad Hoc Wireless Networks}{29}{section.6.1}
-\contentsline {section}{\numberline {6.2}The Shared Broadcast Tree Problem and MST}{45}{section.6.2}
-\contentsline {section}{\numberline {6.3}Integer Programming Formulations for the Shared Multicast Tree Problem}{51}{section.6.3}
+\contentsline {subsubsection}{Problem complexity and approximability}{15}{section*.13}
+\contentsline {subsubsection}{Problem variants}{15}{section*.14}
+\contentsline {subsubsection}{ILP models}{15}{section*.15}
+\contentsline {subsection}{\numberline {2.2.4}Shared Broadcast Trees}{16}{subsection.2.2.4}
+\contentsline {chapter}{\numberline {3}Minimum Broadcast Time}{19}{chapter.3}
+\contentsline {section}{\numberline {3.1}Network Model and Definitions}{19}{section.3.1}
+\contentsline {section}{\numberline {3.2}Computational Complexity}{20}{section.3.2}
+\contentsline {section}{\numberline {3.3}Solution Techniques}{20}{section.3.3}
+\contentsline {chapter}{\numberline {4}Multi-Agent Path Finidng}{21}{chapter.4}
+\contentsline {section}{\numberline {4.1}Scenarios with adversaries}{21}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Adversarial Cooperative Path Finding}{21}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Area Protection Problem}{21}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Area Protection Problem with Communication maintenance}{21}{subsection.4.1.3}
+\contentsline {chapter}{\numberline {5}Contribution of the Thesis and Prospective Research}{27}{chapter.5}
+\contentsline {chapter}{\numberline {6}Attached Papers}{29}{chapter.6}
+\contentsline {section}{\numberline {6.1}Shared Multicast Trees in Ad Hoc Wireless Networks}{31}{section.6.1}
+\contentsline {section}{\numberline {6.2}The Shared Broadcast Tree Problem and MST}{47}{section.6.2}
+\contentsline {section}{\numberline {6.3}Integer Programming Formulations for the Shared Multicast Tree Problem}{53}{section.6.3}
+\contentsline {section}{\numberline {6.4}Computing the Broadcast Time of a Graph}{87}{section.6.4}

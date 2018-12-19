@@ -1,18 +1,18 @@
-\chapter{Power Minimizing Trees in Ad-hoc Wireless Networks}\label{sec:smt}
+\chapter{Power Minimizing Trees in Ad-hoc Wireless Networks}\label{chap:wanet}
 
-A Wireless Ad-hoc Network (WANET) is a decentralized type of wireless network.
+A wireless ad-hoc network (WANET) is a collection of two or more devices with wireless communication and networking capability.
 Broadly speaking, there are two models of wireless networks: single-hop and multi-hop.
 The single-hop model is based on the cellular network model that provides one-hop wireless connectivity between mobile hosts and static nodes known as base stations \cite{clementi01}.
 This network type relies on a fixed backbone infrastructure that interconnects all base stations by wired links.
-Unlike cellular and wired networks, WANETs depend on neither a wired infrastructure nor pre-determined interconnectivity.
+Unlike cellular and wired networks, WANETs depend on neither a wired infrastructure nor pre-determined interconnectivity, and is thus a decentralized type of wireless network.
 
 The set of uniform wireless communication devices with fixed locations are connected via wireless links depending on 
 distance between the nodes, their transmission power, error control scheme, background noise and interference.
-Each device is equipped with an omnidirectional antenna with a communication range schematically illustrated in Fig. \ref{fig:omniantenna}.
+Each device is equipped with an omnidirectional antenna with a communication range schematically illustrated in Fig.~\ref{fig:omni}.
 Hence, a signal reaches all nodes within the communication range of its sender.
 This range is determined by the power assigned to the sender, and this power can be adjusted over time.
 The power necessary for relaying a signal to multiple devices is the maximum rather than the sum of the powers necessary to reach all intended receivers.
-This feature is referred to as the \emph{wireless advantage} \cite{wieselthierXX}
+This feature is referred to as the \emph{wireless advantage} \cite{wieselthier00}.
 Each device works as a transceiver, which means that it can both transmit and receive a signal.
 
 \begin{figure}[htb!]
@@ -27,21 +27,23 @@ Each device works as a transceiver, which means that it can both transmit and re
         \caption{Side view}
         \label{fig:omni-side}
     \end{subfigure}
-  \label{fig:omni}
   \caption{Omnidirectional antenna}
+  \label{fig:omni}
 \end{figure}
 
 The absence of infrastructure implies their quick deployment and simple configuration.
 The recent years have witnessed an increasing interest in WANETs, motivated by numerous both civil and military applications and by the continual progression in wireless technologies.
 Digital battlefield, disaster management, luggage handling in airports, context aware computing and mobile commerce are examples of the growing list of potential applications of WANETs \cite{younis06}.
 
-Fig. \ref{fig:communication} depicts different types of communication in wireless networks.
-Consider a group of devices and a specific sender who initiates a signal transmission. 
+%Fig. \ref{fig:communication} depicts different types of communication in wireless networks.
+Consider a group of devices and a specific sender that initiates a signal transmission. 
 A \emph{unicast} means that there is a single recipient.
 Whenever the recipients are all the remaining devices within the group, we talk about a \emph{broadcast}.
 Finally, a \emph{multicast} means that only some of the devices must receive the message. 
 The remaining ones do not have to, but they can serve as intermediate devices forwarding the signal.
 
+The wireless devices should be able to detect the presence of other such devices and to perform the necessary initialization to allow information sharing.
+Since the devices can take different forms, their computation, storage and communication capabilities and battery capacity vary tremendously \cite{toh01}.
 The wireless devices are typically heavily energy constrained due to the use of batteries as their energy source.
 Energy conservation in WANETs is therefore plentifully pursued research topic.
 Most of the energy is spent on signal transmission \cite{halgamuge09}, 
@@ -60,7 +62,7 @@ Besides minimizing the power consumptions of the network, it is also required to
 
 A related paradigm to WANET are Wireless Sensor Networks (WSN) which attracted a wide range of disciplines where close interactions with the physical environment are essential.
 WSNs consists of tiny sensor nodes, which act as both data generators and network relays \cite{akyildiz10}.
-Each node act as a senosr, a microprocessor and a transceiver.
+Each node act as a sensosr, a microprocessor and a transceiver.
 Sensor nodes have usually a fixed position and are powered by batteries.
 Data measured  by sensors are transmitted via wireless communication links
 
@@ -70,9 +72,9 @@ military, environmental, health, home and industrial applications.
 Multiple sensors are typically integrated into higher-level topologies varying in complexity.
 These topologies can be divided into flat and hierarchical architecture \cite{mcgrath13}.
 In a flat (peer to peer) architecture, every node has the same computational and communication capabilities.
-In a hierarchical architecture, simple sensor nodes operate in close proximity to their respective cluster heads which possess more processing capacity than an ordinary sensor node.
+In a hierarchical architecture, simple sensor nodes operate in close proximity to their respective \emph{cluster heads} which possess more processing capacity than an ordinary sensor nodes.
 
-WSNs are often built using the following configurations \cite{mcgrath13}:
+WSNs are often built using one of the following configurations \cite{mcgrath13}:
 
 \begin{itemize}
 \item \emph{Point to point topology.} Links two endpoints either permanently or with the possibility of switching.
@@ -98,11 +100,11 @@ It is necessary to introduce a formal network model in order to apply suitable m
 
 A WANET is modeled by a complete weighted graph $(G=(V,E),p)$, where the wireless devices are represented by nodes in $V$. 
 As no power limit is imposed on the nodes, a transmission can be established between any two nodes, and thus $G$ is complete.
-The function $p:E\to \mathbb{R}^+$ indicates the power requirement for sending a signal along a certain edge.
+The function $p:E\mapsto \mathbb{R}^+$ indicates the power requirement for sending a signal along a certain edge.
 This requirement depends on distance and environmental properties, and is given by  $p_{ij}=d_{ij}^\alpha$, 
 where $d_{ij}$ is the Euclidean distance between the devices represented by vertices $i$ and $j$, and $\alpha$ is the constant environmental factor typically valued between 2 and 4. 
 Some sources state the relation $p_{ij}=\kappa d_{ij}^\alpha$, where $\kappa\geq$ is a transmission quality parameter.
-The transmission range of a node $i$ depnends on the power supply $P_i$ assigned to it.
+The transmission range of a node $i$ depends on the power supply $P_i$ assigned to it.
 The overall power assignment to individual nodes induces a directed transmission graph (see example in Fig.~\ref{fig:transgraph}. 
 On the other hand, for a given transmission graph, the power assignment to a node corresponds to the longest outgoing arc.
 \begin{figure}[htb!]
@@ -111,17 +113,26 @@ On the other hand, for a given transmission graph, the power assignment to a nod
   \caption{Power assignment to nodes (circles)  and corresponding induced transmission graph (blue arrows)}
   \label{fig:transgraph}
 \end{figure}
-It is assumed that nodes are distributed in a Euclidean space, although it is also possible to consider more general variants..
+It is usually assumed that nodes are distributed in a Euclidean space, although there are multiple results on variants where general input graphs are considered.
 In the following combinatorial problems motivated by WANETs, the task is to assign powers to individual nodes while satisfying certain criteria so that the overall power is minimized.
-The total power is expressed by an objective function varying among the problem.
+The total power is expressed by an objective function varying among the problems.
+
+\subsubsection{Multicasting}
+
+Additional assumption of the existence of nodes that never initiate any transmission, nor they have to receive any signal, is a natural extension of all the problems described above.
+These nodes can act as intermediate nodes relaying the signal, if improves the respective objective function value.
+Apart from the weighted graph $G=(V,E,p)$, the set of nodes $D\subseteq V$ called \emph{destinations} is also a part of the input.
+Nodes in $V\setminus D$ are referred to as \emph{non-destinations}.
+It is similar to the generalization of MST which leads to the Steiner minimum tree problem.
+In WANET scenarios, the presence of such nodes is often referred to as a \emph{multicast} version.
 
 \subsection{Minimum Energy Broadcast}
 
 The Minimum Energy Broadcast (MEB) problem consists of a set $V$ and a specified source $s\in V$, that is supposed to initiate a transmission.
 All the remaining nodes must receive the signal via communication links induced by power assignment to the nodes.
 \begin{problem}\label{prob:meb1}
-Given a source $s\in V$, find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum sum s. t. 
-there exists a path from $s$ to each $t\in V\setminus\{s\}$ in $G'=(V,E^P)$, where $E^P=\{(i,j)\in \vec{E}: p_{ij}\leq P_i\}$.
+Given a graph $G=(V,A)$ and a source $s\in V$, find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum sum such that
+there exists a path from $s$ to each $t\in V\setminus\{s\}$ in $G'=(V,A^P)$, where $A^P=\{(i,j)\in A: p_{ij}\leq P_i\}$.
 \end{problem}
 An optimal solution differs for different transmission sources.
 Hence, the nodes must by endowed with a mechanism that allows them to adjust their power level for a corresponding transmission session.
@@ -131,7 +142,7 @@ The advantage of this concept lays in the optimality of each broadcast session.
 The directed graph induced by power assignments as defined in Problem~\ref{prob:meb1} is not necessarily an arborescence.
 However, MEB could be stated slightly differently:
 \begin{problem}\label{prob:meb2}
-Given a source $s\in V$, find an arborescence spanning $G$ rooted at $s$ such that 
+Given a graph $G=(V,A)$ and a source $s\in V$, find an arborescence spanning $G$ rooted at $s$ such that 
 the sum over weights of the heaviest outgoing arcs of all nodes is minimized.
 \end{problem}
 
@@ -143,7 +154,7 @@ MEB has received a significant attention during the last two decades.
 The problem has been introduced in \cite{wieselthier00}, where the authors suggest three greedy heuristic methods:
 MST algorithm, shortest path tree (SPT) algorithm and most notably the broadcast incremental power (BIP), which resembles Prim's algorithm for MST,
 and improve them by a ``sweep'' operation removing unnecessary transmissions.
-BIP gradually constructs a tree as follows:
+BIP gradually constructs a broadcast tree as follows:
 \begin{itemize}
 \item Initially, the tree $T$ contains only the source $s$, and all nodes have zero power assignment.
 \item While there are some nodes outside of $T$
@@ -151,12 +162,13 @@ BIP gradually constructs a tree as follows:
 	\item Find a node $v$ whose addition to $T$ results in a minimum increase of power assignments of some node $u$ already in $T$, and add $v$ to $T$.
 	\item Increase  power assignment of $u$ so that $v$ is reached.
 \end{itemize}
-\item Sweep: Inspect non-leaf nodes in $T$ one by one, and if for some node $v$ there exists $u\in N^-(v)$ such that power assignment of $v$ is sufficient to reaches all nodes in $N^-(u)$, 
-then the transmission of $u$ can eliminated.
+\item Sweep: Inspect non-leaf nodes in $T$ one by one, and if for some node $v$ there exists $u\in N^-(v)$ such that power assignment of $v$ is sufficient to reach all nodes in $N^-(u)$, 
+then the transmission of $u$ is eliminated.
 \end{itemize}
+The sweep operation can be applied iteratively to its own input to further improve the solution.
 
 In the MST algorithm, a MST is constructed, and subsequently the edges are oriented towards the leaves, starting from the source.
-The last step is to assign power levels to each node according to the longest arc outgoing from that node.
+The last step is to assign power levels to each node $v$ according to the longest arc outgoing from $v$.
 
 The SPT algorithm establishes a minimum-cost path from the source node to every other node. The broadcast tree consists of superpositions of these unicast paths.
 
@@ -170,16 +182,19 @@ An optimal solution is determined trivially by assigning minimum power sufficien
 The first analytical study of the three methods proposed in \cite{wieselthier00} is given in \cite{wan02}, where the authors provide quantitative characterization in terms of approximation ratios.
 The MST algorithm is showed to have an approximation ratio between 6 and 12, while BIP between 13/3 and 12.
 For the SPT algorithm the approximation ratio is at least $n/2$.
-These results were gradualy improved in several works. 
+These results were gradually improved in several works. 
 The upper bound of the MST algorithm was improved to 6 in \cite{ambuhl05}, which closes the gap, and thus proves its optimality.
-This upper bound is valid for BIP as well due to Lemma in \cite{wan02}:
+This upper bound is valid for BIP as well due to a lemma in \cite{wan02}:
 \begin{lemma}
 For any broadcasting among a point set $K$ in a 2-dimensional plane, the total energy required by the BIP algorithm is at most $\sum_{e\in \text{MST}(K)}d_e^\alpha$.
 \end{lemma}
-The lower bound was strengthened to 4.498 in \cite{bauer09}. 
+The lower bound was strengthened to 4.598 in \cite{bauer09}. 
 This work also devises an implementation of BIP with improved time complexity $\mathcal{O}(|V|^2)$.
 
 \subsubsection{Problem variants}
+
+In MEB, the presence of non-destinations leads to the Minimum Energy Multicast (MEM) problem introduced along with MEB in \cite{wieselthier00}.
+It is easy to see that MEM is NP-hard due to the fact that MEB is a special case where $D=V$, or by reducing the Steiner tree problem to it.
 
 A special case, assuming that there are $k$ adjustable power levels $w_{i,1},w_{i,2},\dots w_{i,k}$ at each node $i$ is studied in \cite{liang02}.
 This problem remains NP-hard which is proved by reducing \textsc{3-CNF-SAT} to it.
@@ -203,9 +218,9 @@ Authors in \cite{flammini07} argue that the approximation ratio of MST algorithm
 
 Integer linear programs for MEB are studied in various works.
 Three ILP formulations are proposed in \cite{das03}.
-The first formulation assumes exactly one transmission from the sourcde $s$, and at most one transmission from each node in $V\setminus\{s\}$.
+The first formulation assumes exactly one transmission from the source $s$, and at most one transmission from each node in $V\setminus\{s\}$.
 This formulation operates with order of transmissions which helps to establish connectivity of the resulting solution.
-Power asssignments are straightforwardly modeled by continuous variables for each node leading to an objective function minimizing their sum.
+Power assignments are straightforwardly modeled by continuous variables for each node leading to an objective function minimizing their sum.
 
 The same objective function is used in the second formulation.
 On the contrary, the second formulation allows at least one transmission from the source and arbitrary number of transmission from the other nodes.
@@ -219,20 +234,22 @@ and the connectivity is achieved by multi-commodity flow variables.
 Authors in \cite{haugland11} provide a formal proofs that using binary power variables instead of continuous ones leads to a stronger formulation,
 which can be further strengthened by introducing the multi-commodity flow variables.
 
+Yet another network flow model formulation along with efficient solving techniques utilizes a fast solution of a combinatorial relaxation of the model \cite{min06}.
+
 \subsubsection{Planarity of an optimal solution}
 
-Alternatively, a MEB instance can be defined by $G=(V,E)$ and its embedding $\Phi(G)$ in a plane.
-We recall from Section \ref{sect:back:graph} that an embedding of a graph in a plane assigns coordinates to nodes in a Euclidean plane.
+Alternatively, a MEB instance can be defined by $G=(V,E)$ and coordinates $\left[x_v,y_v\right]$ for each node $v\in V$.
+%We recall from Section \ref{sect:back:graph} that an embedding of a graph in a plane assigns coordinates to nodes in a Euclidean plane.
 These coordinates implicitly imply distance $d_{ij}$ between every two nodes $i$ and $j$.
 
 We address the question whether an optimal solution to various MEB instances have planar embedding.
 To the best of our knowledge, the available literature does not provide results on this topic.
-The unpublished findings presented below assume the MEB problem as stated by Def.~\ref{def:meb:tree}.
+The unpublished findings presented below assume that a feasible solution to  MEB problem is a tree as stated by Prob.~\ref{prob:meb2}.
 
 By inspecting a large number of instances and their optimal solution, the planarity of the optimum cannot be guaranteed in general, even though in majority of cases, the optimum is indeed planar.
 \begin{proposition}\label{prop:mebplan}
 Consider nodes 4 nodes in an instance of MEB that form a convex quadrilateral $ABCD$.
-If two non-adjacent sides of the quadrilateral are shorter than the shorter diagonal, then in an optimal solution, edges with endpoints in $ABCD$ do not cross each other.
+If two non-adjacent sides of the quadrilateral are shorter than the shorter diagonal, then in an optimal solution, edges with both endpoints in $ABCD$ do not cross each other.
 \end{proposition}
 \begin{proof}
 Consider the quadrilateral as depicted in Fig~\ref{fig:quad}. 
@@ -247,12 +264,12 @@ By the law of cosine, we have that
 $$
 \cos{\beta}=\frac{d^2_{AB} + d^2_{BC} - d^2_{AC}}{2d_{AB}d_{BC}} \text{~~~ and ~~~}\cos{\delta}=\frac{d^2_{CD} + d^2_{AD} - d^2_{AC}}{2d_{CD}d_{AD}}.
 $$
-Since both numerators are positive, both $\beta$ and $\delta$ are acute, which immediately implies that $\alpha $ and $\gamma$ are obtuse.
+Both numerators are positive, both $\beta$ and $\delta$ are acute, which immediately implies that $\alpha $ and $\gamma$ are obtuse.
 
 Let $T=(V,A_T)$ be an optimal solution to the given instance.
-If $(AC)\in A_T$ and $(BD)\in A_T$, $(A,C)$ covers $B$ due to the wireless advantage, and $(B,D)$ covers $C$ because $\gamma$ is obtuse.
-Then, by replacing $(AC)$ with $(AB)$ we get rid of the crossing and all four nodes are covered.
-If $(AC)\in A_T$ and $(DB)\in A_T$, $(DB)$ covers both $A$ and $C$ as $\alpha$ and $\gamma$ are obtuse, thus $(A,C)$ can be removed without disconnecting the solution.
+If $(A,C)\in A_T$ and $(B,D)\in A_T$, $(A,C)$ covers $B$ due to the wireless advantage, and $(B,D)$ covers $C$ because $\gamma$ is obtuse.
+Then, by replacing $(A,C)$ with $(A,B)$ we get rid of the crossing and all four nodes are covered.
+If $(A,C)\in A_T$ and $(D,B)\in A_T$, $(D,B)$ covers both $A$ and $C$ as $\alpha$ and $\gamma$ are obtuse, thus $(A,C)$ can be removed without disconnecting the solution.
 The remaining cases are symmetric.
 \end{proof}
 If the condition that the shorter sides must not be adjacent is not met in Prop.~\ref{prop:mebplan}, a crossing may occur, as example in Fig.~\ref{fig:mebnonplan} demonstrates.
@@ -262,54 +279,81 @@ If the condition that the shorter sides must not be adjacent is not met in Prop.
   \caption{A unique optimal solution with crossing to a Euclidean instance of  MEB with source in node $A$.
   The blue edge weights correspond to the power requirements between two nodes. 
   The nodes have coordinates $A=[75,63]$, $B=[50,77]$, $C=[49,63]$, $D=[50,50]$, $X=[45,22]$ and $Y=[47,55]$.
-  For convenience, lengths of edges in the figure are not proportional.}
+  For convenient display, lengths of edges in the figure are not proportional.}
   \label{fig:mebnonplan}
 \end{figure}
 
 \subsection{Range Assignment Problem}
 
-In the range assignment problem (RAP) the task is to minimize the total power consumed under the constraint 
+In the range assignment problem (RAP), the task is to minimize the total power consumed under the constraint 
 that adequate power is provided to the nodes to ensure a strong connectivity of the graph.
 Formally, the problem is stated as follows:
 %Therefore, only one broadcast tree is stored which is common for all possible sources.
 \begin{problem}
-Find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum sum such that the induced graph $G'=(V,E^P)$ is strongly connected, 
-where $E^P=\{(i,j)\in \vec{E}: p_{ij}\leq P_i\}$.
+Given a graph $G=(V,A)$, find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum sum such that the induced graph $G'=(V,A^P)$ is strongly connected, 
+where $A^P=\{(i,j)\in A: p_{ij}\leq P_i\}$.
 %every where $E^P=\{(i,j)\in E: p_{ij}\leq P_i\wedge p_{ij}\leq P_j\}$.
 \end{problem}
+
+An obvious advantage of RAP over MEB is that a single transmission graph is constructed in RAP regardless of the source node.
+However, this can lead to solutions optimal with respect to RAP, but for certain sources initiating the transmission, the solution can be too expensive.
+Sect.~\ref{sec:sbt} describes a problem with a more complicated objective function that combines advantages of both RAP and MEB.
+
+\subsubsection{Problem complexity and approximability}
+
 In \cite{kirousis00}, it is shown that for instances consisting of collinear points, there exists an algorithm that solves the problem to optimality in $\mathcal{O}(n^4)$.
-The authors further prove by reduction from \textsc{Vertex Cover} that RAP in 3-dimensional Euclidean space is NP-hard,
+The authors further prove by reduction from \textsc{Vertex Cover} that RAP in 3-dimensional Euclidean space is NP-hard for any value of $\alpha$,
 and that there exists a $\mathcal{O}(n^2)$ time 2-approximation algorithm based on finding MST.
-The results are strengthened in \cite{clementi99}, where it is proved that RAP is NP-hard for instances in a 2-dimensional Euclidean space, 
+The results are strengthened in \cite{clementi99}, where it is proved that RAP is NP-hard for instances in a 2-dimensional Euclidean space for any $\alpha$, 
 and that for 3-dimensional space, the problem is APX-complete, thus does not admit a PTAS unless P$=$NP.
+Let us recall that unlike RAP, for $\alpha=1$, when the power requirements equal the distances, MEB  is solvable in polynomial time.
 An approximation algorithm improving the performance guarantee approaching 1.69 is presented in~\cite{calinescu02}.
+For the case $\alpha=1$, there exists an approximation algorithm with performance guarantee 1.5~\cite{ambuhl03}.
 A recent work \cite{carmi15} achieves an exact algorithm for the 1-dimensional problem that runs in $\mathcal{O}(n^2)$.
+
+\subsubsection{Problem variants}
 
 A further constraint requires that diameter of the transmission graph has to be at most some constant value $h$.
 On a family of instances limiting the proximity of two nodes, this variant of RAP is in APX \cite{clementi01b}.
 The 1-dimensional problem with restricted diameter (number of hops) has been studied in \cite{clementi03}, where the authors introduce an exact algorithm that runs in $\mathcal{O}(hn^2)$.
 
-Another modifications requires symmetric communication links.
+Another modifications imposes symmetric communication links.
 This version is often found in the literature under the abbreviation SRAP.
 In a generalized version, weakly symmetric RAP (WSRAP), the symmetry requirement applies only to a pre-defined subset of edges.
 Other edges which are not essential for connectivity are allowed to be unidirectional.
 The motivation for studying WSRA stems from the observation that what is really important in the design of WANETs and WSNs is the existence of a connected backbone of symmetric edges \cite{santi05}.
 Imposing symmetry does not change the complexity of the problem, which remains NP-hard in two and three-dimensional networks \cite{blough02}.
 
-An obvious advantage of RAP over MEB is that a single transmission graph is constructed in RAP regardless of the source node.
-However, this can lead to solutions optimal with respect to RAP, but for certain sources initiating the transmission, the solution can be too expensive.
-The following problem with a more complicated objective function combines advantages of both RAP and MEB.
+The abbreviation SRAP is sometimes used for the Steiner RAP, where there is a predefined subset $D\subseteq V$ of destination nodes that are required to be included in a solution.
+The remaining Steiner nodes take part in the solution only if their presence reduces the objective function value.
+If not stated otherwise, SRAP in this work refers to the Symmetric RAP.
 
-\subsection{Shared Broadcast Trees}
+\subsubsection{ILP models}
 
-A feasible solution to the Shared Broadcast Tree (SBT) problem is any (undirected) spanning tree.
+An ILP model with an exponential number of constraints along with a cutting plane method solving it is presented in \cite{althaus03}.
+A model based on network flows with polynomial number of constraints is introduced in \cite{das04}.
+Although this work concerns SRAP with directional antennas, their model can be adapted to the more common version with omnidirectional antennas.
+For modelling the power assignments, this model uses continuous power variables.
+By replacing them with binary ones and a corresponding adjustments in the model \cite{montemanni05, haugland11}, it is possible to achieve a stronger formulation.
+Even stronger model uses multi-commodity network flow variables \cite{haugland11}. 
+These strength results are analogous to those regarding MEB.
+Yet stronger formulation is obtained by using a multi-tree model \cite{haugland11}. 
+The authors employ binary variables indicating whether or not an arc $(i,j)$ is in the arborescence rooted at $t\in D$.
+This model is thus applicable for the Steiner RAP.
+
+\subsection{Shared Broadcast Trees}\label{sec:sbt}
+
+The idea of broadcasting using a single broadcast tree was first investigated in \cite{papadimitriou06}.
+The Shared Broadcast Tree (SBT) problem in the form presented here was pursued in \cite{yuan12}, where the authors present an ILP model along with a suitable solving method.
+
+A feasible solution to the SBT problem is any (undirected) spanning tree.
 This concept is motivated by the intention of incorporating the frequency of use of each node for different broadcast sessions.
 Every node can transmit a signal, but some are actively transmitting more often than others.
 We assume that a node acts as a source with a uniform probability. 
-A leave $l$ transmits a signal only when $l$ is a source, other intermediate nodes transmit more often as they also relay signals initiated in other nodes.
+A leave $l$ transmits a signal only when $l$ is the source, other intermediate nodes transmit more often as they also relay signals initiated in other nodes.
 
 Observe that a forwarding node that received a signal does not have to send it back to the node from which the signal was received.
-If the signal was received in a node $i$ from its most distant neighbor node $i_1$, it has to be forwarded to nodes that have not received it yet along the link to the second most distant node $i_2$..
+If the signal was received in a node $i$ from its most distant neighbor node $i_1$, it has to be forwarded to nodes that have not received it yet along the link to the second most distant node $i_2$.
 Due to the wireless advantage, all other neighbor nodes closer than $i_2$ receive it as well.
 Conversely, if the signal was received by $i$ from a neighbor node different from its most distant neighbor $i_1$, node $i$ has to forward it to $i_1$. 
 It is therefore evident that $i$ does not have to always transmit with the power corresponding to the most distant neighbour.
@@ -322,11 +366,10 @@ The situation is depicted in Fig~\ref{fig:objexp}.
   \label{fig:objexp}
 \end{figure}
 
-
 Consider an edge $\{i,j\}$ in a solution $T$ to SBT.
 Let $T_{i/j}$ denote the subtree of $T$ consisting of nodes whose path to $j$ contains $(i,j)$. 
 A node $i$ in $T$ contributes to the objective function by the expression $c_T(i)$ as follows:
-\begin{equation}
+\begin{equation}\label{eq:sbtnodecontr}
 c_T(i)=|T_{i_1/i}|p_{ii_2} + |T\setminus T_{i_1/i}|p_{ii_1}.
 \end{equation}
 We can also regard $c_T(i)$ as a weighted arithmetic mean of $i$'s power levels, with weights corresponding to the number of nodes whose signal is transmitted using the corresponding power level.
@@ -353,22 +396,24 @@ As an example of non-planar optimum we state the instance on five nodes depicted
   \label{fig:sbtnonplanar}
 \end{figure}
 
-\subsection{Non-destination nodes}
+The presence of Steiner nodes that are not required to be a part of the resulting tree leads to the Shared Multicast Tree (SMT).
+Some preliminary results were published in Paper I~\cite{ivanova16}, which contains ILP model and a heuristic methods with local search improvements.
+Further investigation of the ILP model and a more extensive experimental evaluation is given in Paper III.
 
-Additional assumption of the existence of nodes that never initiate any transmission is a natural extension of all the problems described above.
-It is similar to the generalization of MST which leads to the Steiner minimum tree problem.
-In MEB, RAP and SBT, nodes that do not have to be part of the network are also allowed. 
-These nodes never initiate any transmission, nor they have to receive any signal.
-They can act as intermediate nodes relaying the signal, if improves the respective objective function value.
-Apart from the weighted graph $G=(V,E,p)$, the set of nodes $D\subseteq V$ called \emph{destinations} is also a part of the input.
-Nodes in $V\setminus D$ are referred to as \emph{non-destinations}.
+In SMT, the objective function has to be adjusted accordingly. 
+The contribution of a single node must reflect the fact that non-destination nodes do not initiate any transmission.
+Let us define the function $\mu: G\mapsto \mathbb{N}^+_0$ that returns the number of destinations in a given graph $G$.
+The contribution of one node in a solution $T$ to the resulting objective function given by Eq.~\ref{eq:sbtnodecontr} is in SMT changed to 
+\begin{equation}\label{eq:smtnodecontr}
+c_T(i)=\mu(T_{i_1/i})p_{ii_2} + \mu(T\setminus T_{i_1/i})p_{ii_1}.
+\end{equation}
+This objective function takes into account energy consumption by transmission only.
+Available literature of multicast versions of MEB and RAP applies this energy model too, however, it is also possible to incorporate other,
+less significant energy consumption sources as indicated by \cite{halgamuge09}.
+As each node that participates in the solution poses an additional energy outlay $\epsilon$, the objective function~\ref{eq:sbtcost} would then become
+\begin{equation}
+c(T)=\epsilon|V_T|+\sum\limits_{i\in V}c_T(i),
+\label{eq:smtcostB}
+\end{equation}
+if the energy expenses of each node are homogeneous. 
 
-In MEB, the presence of non-destinations leads to the Minimum Energy Multicast (MEM) problem introduced along with MEB in \cite{wieselthier00}.
-It is easy to see that MEM is NP-hard by reducing the Steinter tree problem to it.
-
-
-The following section gives a particular attention to the multicast version of SBT.
-
-\section{Shared Multicat Trees}
-
-The Shared Multicast Tree (SMT) problem is a natural generalization of SBT.

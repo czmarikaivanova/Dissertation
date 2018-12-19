@@ -1,1 +1,76 @@
-\chapter{Minimum Broadcast Trees}\label{sec:mbt}
+\chapter{Minimum Broadcast Time}\label{sec:mbt}
+
+Broadcasting is the information dissemination process in a communication network.
+The Minimum Broadcast Time (MBT) problem is identified by a set of communication devices (nodes), among which some selected ones acts as an originators of a signal.
+The number of originators is at least one, and we refer them as \emph{sources}.
+The task is to spread a signal from the sources to the remaining nodes along the communication links defined by edges $E$ in a shortest possible time.
+The continuous time is divided into discrete time steps.
+The communication among the nodes must fulfill the following rules:
+\begin{enumerate}
+\item Each transmission takes place between two adjacent nodes
+\item Each transmission requires one time step
+\item Each node can participate in at most one transmission per one time step
+\end{enumerate}
+
+This communication protocol appears in various practical applications such as communication among computer processors and telephone networks.
+In satellite networks, even though the communication is wireless, signals have to cover large distances, 
+and so the information is sent from one satellite to one of its neighbours at a time.
+The MBT problem was studied in the context of an existing Chinese BeiDou Global Navigation Satellite System~\cite{chu17}.
+
+\section{Network Model and Definitions}
+
+The communication network is determined by a graph $G=(V,E)$ and a subset $S\subseteq V$ of sources.
+
+\begin{definition}
+The broadcast time $\tau(G,S)$ of $S\subseteq V$ in $G$ is defined as the smallest integer $t\geq 0$
+for which there exists a sequence $V_0\subseteq\dots\subseteq V_t$ of node sets and a function $\pi:V\setminus S\mapsto V$, satisfying:
+\begin{enumerate}
+\item $V_0=S$ and $V_t=V$,
+\item for all $v\in V\setminus S, \left\{v,\pi(v)\right\}\in E$,
+\item for all $k=1,\dots t$ and all $v\in V_k$, $\pi(v)\in V_{k-1}$, and
+\item for all $u,v\in V_k\setminus V_{k-1}$, $\pi(u)=\pi(v)$ only if $u=v$.
+\end{enumerate}
+\end{definition}
+
+The \emph{broadcast center} of a graph is the set of all nodes having the smallest broadcast times ,i.e., $\arg\min\left\{\tau(G,\{v\}):v\in V\right\}$.
+
+Formally, the optimization MEB problem is defined as follows:
+\begin{problem}\label{mbt:opt}
+Given $G=(V,E)$ and $S\subseteq V$, find $\tau(G,S)$. 
+\end{problem}
+
+In the literature, authors often consider the decision version, because some of the theoretical results depend on a given time limit.
+\begin{problem}\label{mbt:dec}
+Given $G=(V,E)$, $S\subseteq V$,  and a time limit $t$, does $\tau(G,S)\leq t$ hold? 
+\end{problem}
+%\section{Problem Definition}
+
+%\section{Broadcast Graphs}
+
+\section{Computational Complexity}
+
+MBT has been thoroughly studied from the perspective of computation complexity and approximability, particularly in the early 90'.
+ITS NP-completeness or belonging to P was shown for various graph classes and values of time limit $t$.
+
+It has been shown that the problem is NP-complete for arbitrary graphs in \cite{garey79} and few years later, 
+this result was obtained for arbitrary graphs with deadline $t=4$ and a single source by reduction from \textsc{3D Matching}~\cite{slater81}. 
+The same work also contains a $\mathcal{O}(n)$ algorithm for determining broadcast time of a tree with a single source. 
+As a by-product, this algorithm determines the broadcast center of the input tree.
+
+These results are improved and extended in~\cite{jansen93}, where the authors exploit the properties of NP-complete problem \textsc{Planar 3-SAT}.
+First, they prove that \textsc{Planar 3,4-SAT} is NP-complete, and subsequently use this property to show that MBT is NP-complete for:
+\begin{itemize}
+\item bipartite planar graphs, deadline $t=2$ and maximum degree at most 3,
+\item split graphs with deadline $t=2$,
+\item chordal graphs with a single source, 
+\item planar graphs with single source and maximum degree at most 3, 
+\item bipartite planar graphs with maximum degree at most 3 and a single source,
+\item grid graphs with deadline $t=2$ and maximum degree at most 3,
+\item grid graphs with a single source, and
+\item complete grid graphs with deadline $t=2$. 
+\end{itemize}
+The question whether MEB is NP complete for split graphs with a single source is stated as open.
+Another complexity result proving that MBT remains NP-complete for 3-regular planar graphs with constant deadline $t\geq 2$ 
+is given in \cite{middendorf93} by reduction from \textsc{Exactly-one-in-three-3SAT}.
+
+\section{Solution Techniques}
