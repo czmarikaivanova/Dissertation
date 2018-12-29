@@ -91,7 +91,8 @@ The processing and power requirements in nodes increase as the data moves from t
 \item \emph{Mesh topology.} Nodes disseminate their own data and also act as relays to propagate the data from other nodes.
 The mesh topology can be partially connected  or fully connected (where there is a connection between every two nodes).
 \end{itemize}
-
+There is a need to reduce energy consumption so as to enhance the performance of the network in terms of lifetime, and a selection of suitable topology is therefore crucial.
+Grid topology has been found energy efficient in theoretical comparison \cite{sharma13}, however, this may vary according to specific applications.
 \section{Combinatorial optimization problems motivated by WANETs}
 
 As indicated above, energy conservation is a crucial requirement in the design of WANETs. 
@@ -123,8 +124,11 @@ The total power is expressed by an objective function varying among the problems
 
 \subsubsection{Multicasting}
 
-Additional assumption of the existence of nodes that never initiate any transmission, nor they have to receive any signal, is a natural extension of all the problems described above.
-These nodes can act as intermediate nodes relaying the signal, if improves the respective objective function value.
+%Additional assumption of the existence of nodes that never initiate any transmission, nor they have to receive any signal, is a natural extension of all the problems described above.
+%These nodes can act as intermediate nodes relaying the signal, if improves the respective objective function value.
+In certain situations, some of the wireless nodes never initiate any transmission, nor they have to receive any signal.
+Including them in the network may lead to a more efficient communication.
+Assumption of the existence of these nodes is often studied as an extension of the problems described in the sections below.
 In addition to the graph $G$ and the power requirement vector $p$, the set of nodes $D\subseteq V$, called \emph{destinations}, is also a part of the input.
 Nodes in $V\setminus D$ are referred to as \emph{non-destinations}.
 The inclusion of non-destination nodes resembles the generalization of MST leading to the \textsc{Minimum Steiner tree} problem.
@@ -135,10 +139,10 @@ In WANET scenarios, the presence of such nodes is often referred to as a \emph{m
 The \textsc{Minimum Energy Broadcast} (MEB) problem consists of a node set $V$ and a specified source $s\in V$, that is supposed to initiate a transmission.
 All the remaining nodes must receive the signal via communication links induced by power assignment to the nodes.
 \begin{problem}\label{prob:meb1}
-Given a directed graph $(V,A)$, a source $s\in V$, and power requirements $p$, find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum component sum such that
-there exists a path from $s$ to each $t\in V\setminus\{s\}$ in $(V,A^P)$, where $A^P=\{(i,j)\in A: p_{ij}\leq P_i\}$.
+Given a directed graph $G=(V,A)$, a source $s\in V$, and power requirements $p$, find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum component sum such that
+there exists a path from $s$ to each $t\in V\setminus\{s\}$ in $G^P(V,A^P)$, where $A^P=\{(i,j)\in A: p_{ij}\leq P_i\}$.
 \end{problem}
-For two distinct nodes $u$ and $u$  in $G$, the optimal solutions to MEB on the input $(G,u,p)$ and $(G,v,p)$ may differ.
+For two distinct nodes $u$ and $v$  in $G$, the optimal solutions to MEB on the input $(G,u,p)$ and $(G,v,p)$ may differ.
 An optimal solution differs for different transmission sources.
 Hence, the nodes must by endowed with a mechanism that allows them to adjust their power level for a corresponding transmission session.
 This places demands on the computational capacity and technological solution of the nodes.
@@ -147,77 +151,79 @@ The advantage of this concept lays in the optimality of each broadcast session.
 The directed graph induced by power assignments as defined in Problem~\ref{prob:meb1} is not necessarily an arborescence.
 However, MEB could be stated slightly differently:
 \begin{problem}\label{prob:meb2}
-Given a graph $G=(V,A)$ and a source $s\in V$, find an arborescence spanning $G$ rooted at $s$ such that 
-the sum over weights of the heaviest outgoing arcs of all nodes is minimized.
+Given a directed graph $G=(V,A)$, a source $s\in V$, and power requirements $p$, find an arborescence $T$ spanning $G$ rooted at $s$ minimizing 
+	$$\sum\limits_{i\in V}\max\limits_{j\in N^-_{T}(i)}p_{ij}.$$
+%such that the sum of the weights of the heaviest outgoing arcs from all nodes is minimized.
 \end{problem}
 
 \begin{observation}
-The objective function value of a given instance is equal in Problem~\ref{prob:meb1} and~\ref{prob:meb2}.
+The optimal objective function value of a given instance is equal in Problem~\ref{prob:meb1} and~\ref{prob:meb2}.
 \end{observation}
 
 MEB has received a significant attention during the last two decades.
-The problem has been introduced in \cite{wieselthier00}, where the authors suggest three greedy heuristic methods:
-MST algorithm, shortest path tree (SPT) algorithm and most notably the broadcast incremental power (BIP), which resembles Prim's algorithm for MST,
-and improve them by a ``sweep'' operation removing unnecessary transmissions.
+The problem has been introduced in \cite{wieselthier00}, where the authors suggest three greedy heuristic methods and an additional ``sweep'' operation aiming to remove unncecessary transmission:
+\paragraph{MST algorithm.}
+A MST is constructed, and subsequently the edges are oriented towards the leaves, starting from the source.
+The last step is to assign power levels to each node $v$ according to the longest arc outgoing from $v$.
+\paragraph{SPT algorithm.}
+The shortest path tree (SPT) algorithm establishes a minimum-cost path from the source node to every other node.
+The broadcast tree consists of superpositions of these unicast paths.
+\paragraph{BIP algorithm.}
+The Broadcast Incremental Power (BIP) algorithm resembles Prim's algorithm for MST.
 BIP gradually constructs a broadcast tree as follows:
 \begin{itemize}
 \item Initially, the tree $T$ contains only the source $s$, and all nodes have zero power assignment.
 \item While there are some nodes outside of $T$
 \begin{itemize}
-	\item Find a node $v$ whose addition to $T$ results in a minimum increase of power assignments of some node $u$ already in $T$, and add $v$ to $T$.
-	\item Increase  power assignment of $u$ so that $v$ is reached.
+	\item Find a node $v$ not already in $T$ whose addition to $T$ results in a minimum increase of power assignments of some node $u$ already in $T$, and add $v$ to $T$.
+	\item Increase the power assignment of $u$ so that $v$ is reached.
 \end{itemize}
-\item Sweep: Inspect non-leaf nodes in $T$ one by one, and if for some node $v$ there exists $u\in N^-(v)$ such that power assignment of $v$ is sufficient to reach all nodes in $N^-(u)$, 
+\end{itemize}
+\paragraph{The sweep operation.}
+Sweep can be applied after a solution $T$ is constructed by one of the methods above.
+It can be called iteratively to its own input to further improve the solution.
+Non-leaf nodes in $T$ are inspected one by one, and if for some node $v$ there exists $u\in N^-(v)$ such that power assignment of $v$ is sufficient to reach all nodes in $N^-(u)$, 
 then the transmission of $u$ is eliminated.
-\end{itemize}
-The sweep operation can be applied iteratively to its own input to further improve the solution.
-
-In the MST algorithm, a MST is constructed, and subsequently the edges are oriented towards the leaves, starting from the source.
-The last step is to assign power levels to each node $v$ according to the longest arc outgoing from $v$.
-
-The SPT algorithm establishes a minimum-cost path from the source node to every other node. The broadcast tree consists of superpositions of these unicast paths.
 
 \subsubsection{Problem complexity and approximability}
 
 NP-hardness results for both general and geometric MEB are provided in \cite{cagalj02} by reduction from \textsc{Set Cover} and \textsc{Planar 3-SAT}, respectively.
 In the former case, the network topology is represented by a generic graph with arbitrary weights, whereas in the latter a Euclidean distance is considered.
-The special case where $\alpha=1$, i.e., where the edge weights correspond to distances between the endpoints belongs to $P$.
+The special case where $\alpha=1$, i.e., where the edge weights correspond to distances between the endpoints belongs to the complexity class $P$.
 An optimal solution is determined trivially by assigning minimum power sufficient to reach all nodes in a single hop, regardless of the nodes' arrangement.
 
 The first analytical study of the three methods proposed in \cite{wieselthier00} is given in \cite{wan02}, where the authors provide quantitative characterization in terms of approximation ratios.
-The MST algorithm is showed to have an approximation ratio between 6 and 12, while BIP between 13/3 and 12.
-For the SPT algorithm the approximation ratio is at least $n/2$.
+It has been showed that the approximation ratio of MST and BIP lies in the interval $\left[6,12\right]$ and $\left[13/3,12\right]$, respectively.
+The approximation ratio of SPT is proved to be at least $n/2$.
 These results were gradually improved in several works. 
-The upper bound of the MST algorithm was improved to 6 in \cite{ambuhl05}, which closes the gap, and thus proves its optimality.
-This upper bound is valid for BIP as well due to a lemma in \cite{wan02}:
-\begin{lemma}
-For any broadcasting among a point set $K$ in a 2-dimensional plane, the total energy required by the BIP algorithm is at most $\sum_{e\in \text{MST}(K)}d_e^\alpha$.
-\end{lemma}
-The lower bound was strengthened to 4.598 in \cite{bauer09}. 
+The upper bound of the MST algorithm was improved to 6 in \cite{ambuhl05}, which closes the gap. %, and thus proves its optimality.
+This upper bound is valid for BIP as well, due to a lemma in \cite{wan02},
+which says that for Euclidean instances of MEB, the objective function value of a solution obtained by BIP is at most the weight of a MST for this instance.
+The lower bound on the approximation ratio of BIP was strengthened to 4.598 in \cite{bauer09}. 
 This work also devises an implementation of BIP with improved time complexity $\mathcal{O}(|V|^2)$.
 
 \subsubsection{Problem variants}
 
-In MEB, the presence of non-destinations leads to the Minimum Energy Multicast (MEM) problem introduced along with MEB in \cite{wieselthier00}.
-It is easy to see that MEM is NP-hard due to the fact that MEB is a special case where $D=V$, or by reducing the Steiner tree problem to it.
+As an extension of MEB, the introduction of non-destinations leads to the Minimum Energy Multicast (MEM) problem, introduced along with MEB in \cite{wieselthier00}.
+It is easy to see that MEM is NP-hard due to the fact that MEB is a special case where $D=V$. %, or by reducing the \textsc{Minimum Steiner tree} problem to it.
 
-A special case, assuming that there are $k$ adjustable power levels $w_{i,1},w_{i,2},\dots w_{i,k}$ at each node $i$ is studied in \cite{liang02}.
+A variant of MEB, assuming that there are $k$ adjustable power levels $w_{i,1},w_{i,2},\dots w_{i,k}$ at each node $i$ is studied in \cite{liang02}.
 This problem remains NP-hard which is proved by reducing \textsc{3-CNF-SAT} to it.
 In addition, \cite{liang02} contains an approximation algorithm for this version of MEB with a performance guarantee $\mathcal{O}(n^\epsilon)$ and 
-time complexity $\mathcal{O}((k+1)^{\frac{1}{\epsilon}} n^{\frac{3}{\epsilon}}$ for $\epsilon\in \left(0,1\right]$.
-Further restriction pursued in \cite{liang02} assumes that each node has the same adjustable power levels, i.e., $w_{i,l}=w_{j,l}$ for $1\leq l\leq k$ and $1\leq i,j\leq n$.
-In this scenario, another approximation algorithm which delivers a solution within $\mathcal{O}(\log^3 n)$ times the optimum is devised.
+time complexity $\mathcal{O}((k+1)^{\frac{1}{\epsilon}} n^{\frac{3}{\epsilon}})$ for $\epsilon\in \left(0,1\right]$.
+Another restriction considered in \cite{liang02} is that each node has the same adjustable power levels, i.e., $w_{i,l}=w_{j,l}$ for $1\leq l\leq k$ and $1\leq i,j\leq n$.
+For this problem, another approximation algorithm, which delivers a solution within $\mathcal{O}(\log^3 n)$ times the optimum is devised.
 
-Probabilistic MEB where a node reliability is considered has also been investigated.
+Probabilistic MEB, where a node reliability is considered, has also been investigated.
 Three ILP formulations of probabilistic MEB together with suitable solving methods are developed in \cite{montemanni08}.
 Another study of ILP formulations and suitable valid inequalities is pursued by \cite{barta10}.
 
 A restriction of node locations can be imposed.
-One example is a random grid network, where nodes are chosen independently and randomly from points of $\sqrt{n}\times\sqrt{n}$ square grid in the plane.
+One example is a random grid network, where nodes are chosen independently and randomly from points of a $\sqrt{n}\times\sqrt{n}$ square grid in the plane.
 The probability distribution of existence of a node can be non-uniform.
-A lower bound on the objective function is proved in \cite{calamoneri08} together with a near optimal construction method.
+A lower bound on the optimal objective function value is proved in \cite{calamoneri08} together with a near optimal construction method.
 The 6-approximation of MST turns out to be too pessimistic for instances with restricted node locations which represent the real-life instances more closely.
-Authors in \cite{flammini07} argue that the approximation ratio of MST algorithm can be considered close to 4 for practical instances.
+The authors of~\cite{flammini07} argue that the approximation ratio of MST the algorithm can be considered close to 4 for practical instances.
 
 \subsubsection{ILP models}
 
@@ -225,33 +231,34 @@ Integer linear programs for MEB are studied in various works.
 Three ILP formulations are proposed in \cite{das03}.
 The first formulation assumes exactly one transmission from the source $s$, and at most one transmission from each node in $V\setminus\{s\}$.
 This formulation operates with order of transmissions which helps to establish connectivity of the resulting solution.
-Power assignments are straightforwardly modeled by continuous variables for each node leading to an objective function minimizing their sum.
+Power assignments are straightforwardly modeled by one continuous variable for each node, leading to an objective function minimizing their sum.
 
 The same objective function is used in the second formulation.
-On the contrary, the second formulation allows at least one transmission from the source and arbitrary number of transmission from the other nodes.
-The necessary subtour elimination is achieved by additional ``sequencing variables'' proposed for the \textsc{Travelling Salesman Problem}.
+In contrast, the second formulation allows at least one transmission from the source, and an arbitrary number of transmissions from the other nodes.
+The necessary subtour elimination is achieved by additional ``sequencing variables'', proposed for the \textsc{Traveling Salesman Problem}.
 
-The last formulation is built upon a single-commodity network flow model and its interpretation follows from the second formulation.
+The last formulation is built upon a single-commodity network flow model, and its interpretation follows from the second formulation.
 
-A similar formulation is proposed in \cite{yuan05}, where the continuous power variables for each node are replaced by binary variables $y_{ij}=1\Leftrightarrow$ the power of node $i$ equals $p_{ij}$,
-and the connectivity is achieved by multi-commodity flow variables.
+A similar formulation is proposed in \cite{yuan05}, where the continuous power variables for each node are replaced by binary variables $y_{ij}$ for each pair $(i,j)$ of nodes,
+attaining the value 1 if and only if the power of node $i$ equals $p_{ij}$.
+Connectivity is achieved by multi-commodity flow variables and associated flow conservation constraints.
 
-Authors in \cite{haugland11} provide a formal proofs that using binary power variables instead of continuous ones leads to a stronger formulation,
+The authors of~\cite{haugland11} provide a formal proof that using binary power variables instead of continuous ones leads to a stronger formulation,
 which can be further strengthened by introducing the multi-commodity flow variables.
 
-Yet another network flow model formulation along with efficient solving techniques utilizes a fast solution of a combinatorial relaxation of the model \cite{min06}.
+Yet another network flow model formulation along with efficient solution techniques utilizes a fast solution of a combinatorial relaxation of the model \cite{min06}.
 
 \subsubsection{Planarity of an optimal solution}
 
-Alternatively, a MEB instance can be defined by $G=(V,E)$ and coordinates $\left[x_v,y_v\right]$ for each node $v\in V$.
+Alternatively to Problem~\ref{prob:meb1} and \ref{prob:meb2}, a MEB instance can be specified by $G=(V,E)$, $s\in $V, and coordinates $\left[x_v,y_v\right]$ for each node $v\in V$.
 %We recall from Section \ref{sect:back:graph} that an embedding of a graph in a plane assigns coordinates to nodes in a Euclidean plane.
 These coordinates implicitly imply distance $d_{ij}$ between every two nodes $i$ and $j$.
 
-We address the question whether an optimal solution to various MEB instances have planar embedding.
+We address the question whether an optimal solution to various MEB instances has a planar embedding.
 To the best of our knowledge, the available literature does not provide results on this topic.
-The unpublished findings presented below assume that a feasible solution to  MEB problem is a tree as stated by Prob.~\ref{prob:meb2}.
+The unpublished findings presented below are based on the assumption that a feasible solution to MEB is a tree as stated by Prob.~\ref{prob:meb2}.
 
-By inspecting a large number of instances and their optimal solution, the planarity of the optimum cannot be guaranteed in general, even though in majority of cases, the optimum is indeed planar.
+By inspecting a large number of instances and their optimal solution, the planarity of the optimum cannot be guaranteed in general, even though in the majority of cases, the optimum is indeed planar.
 \begin{proposition}\label{prop:mebplan}
 Consider nodes 4 nodes in an instance of MEB that form a convex quadrilateral $ABCD$.
 If two non-adjacent sides of the quadrilateral are shorter than the shorter diagonal, then in an optimal solution, edges with both endpoints in $ABCD$ do not cross each other.
@@ -290,12 +297,12 @@ If the condition that the shorter sides must not be adjacent is not met in Prop.
 
 \subsection{Range Assignment Problem}
 
-In the range assignment problem (RAP), the task is to minimize the total power consumed under the constraint 
+In the \textsc{Range Assignment Problem} (RAP), the task is to minimize the total power consumed under the constraint 
 that adequate power is provided to the nodes to ensure a strong connectivity of the graph.
 Formally, the problem is stated as follows:
 %Therefore, only one broadcast tree is stored which is common for all possible sources.
 \begin{problem}
-Given a graph $G=(V,A)$, find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum sum such that the induced graph $G'=(V,A^P)$ is strongly connected, 
+Given a graph $G=(V,A)$ and power requirements $p$, find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum sum such that the induced graph $G^P=(V,A^P)$ is strongly connected, 
 where $A^P=\{(i,j)\in A: p_{ij}\leq P_i\}$.
 %every where $E^P=\{(i,j)\in E: p_{ij}\leq P_i\wedge p_{ij}\leq P_j\}$.
 \end{problem}

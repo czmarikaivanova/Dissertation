@@ -203,6 +203,10 @@
 \newblock Topology control in wireless ad hoc and sensor networks.
 \newblock {\em ACM Comput. Surv. 37}, 2 (June 2005), 164--194.
 
+\bibitem{sharma13}
+{\sc Sharma, D.~A., Verma, S., and Sharma, K.}
+\newblock Network topologies in wireless sensor networks : A review.
+
 \bibitem{sipser06}
 {\sc Sipser, M.}
 \newblock {\em Introduction to the Theory of Computation}, second~ed.
