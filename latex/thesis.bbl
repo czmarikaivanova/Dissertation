@@ -192,6 +192,11 @@
 \newblock {\em Integer and Combinatorial Optimization}.
 \newblock Wiley-Interscience, New York, NY, USA, 1988.
 
+\bibitem{papadimitriou94}
+{\sc Papadimitriou, C.~H.}
+\newblock {\em Computational complexity.}
+\newblock Addison-Wesley, 1994.
+
 \bibitem{papadimitriou06}
 {\sc Papadimitriou, I., and Georgiadis, l.}
 \newblock Minimum-energy broadcasting in multi-hop wireless networks using a
