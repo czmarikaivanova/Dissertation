@@ -21,7 +21,7 @@ The MBT problem was studied in the context of an existing Chinese BeiDou Global 
 
 The communication network is determined by a graph $G=(V,E)$ and a subset $S\subseteq V$ of sources.
 
-\begin{definition}
+\begin{definition}\label{def:mbt}
 The broadcast time $\tau(G,S)$ of $S\subseteq V$ in $G$ is defined as the smallest integer $t\geq 0$
 for which there exists a sequence $V_0\subseteq\dots\subseteq V_t$ of node sets and a function $\pi:V\setminus S\mapsto V$, satisfying:
 \begin{enumerate}
@@ -41,7 +41,7 @@ Given $G=(V,E)$ and $S\subseteq V$, find $\tau(G,S)$.
 
 In the literature, authors often consider the decision version, because some of the theoretical results depend on a given time limit.
 \begin{problem}\label{mbt:dec}
-Given $G=(V,E)$, $S\subseteq V$,  and a time limit $t$, does $\tau(G,S)\leq t$ hold? 
+Given $G=(V,E)$, $S\subseteq V$,  and a time limit $t\in \mathbb{Z}^+_0$, does $\tau(G,S)\leq t$ hold? 
 \end{problem}
 %\section{Problem Definition}
 
@@ -82,7 +82,7 @@ Note that in this particular version of 3SAT, it can no longer be assumed that e
 Further, the assumption about at most two occurrences of a literal is automatic, 
 because formula $\varphi$ that contains a variable $x$ that appears only as a positive or only as a negative literal can trivially be transformed into $\varphi'$ that does not contain $x$ at all, 
 such that $\varphi$ is satisfiable if and only if $\varphi'$ is satisfiable.
-\begin{lemma}
+\begin{lemma}\label{lemma:mbtred}
 Let $\varphi$ be an instance of \textsc{3-3-SAT}, and let $G=(V,E)$ and $S\subseteq V'$ be an instance of MEB constructed from $\varphi$. 
 Then, $\varphi$ is satisfiable if and only if $\tau(G,S)\leq 4$.
 \end{lemma}
@@ -112,17 +112,8 @@ Then, truth valuation of clauses can be retrieved by looking up nodes representi
 The correctness of the truth valuation is ensured by the existence of nodes $v_i$, so that the node representing literal that is evaluated as false is informed in time step 4, 
 and thereby cannot forward the signal to any clause nodes.
 \end{proof}
-\begin{proposition}
-MBT is NP-complete for graphs with maximum degree 4 and deadline 4.
-\end{proposition}
-\begin{proof}
-MBT  belongs to NP, because for a given broadcast tree $T$, it can be checked in polynomial-time whether the broadcast time is no greater than 4.
-As each literal appears at most twice in $\varphi$, the degree of nodes representing literals is at most 3. 
-Each clause node has degree at most 3 since $\varphi$ is in CNF.
-Degrees of nodes $s_i$, $u_i$, $v_i$, and $w_i$ do not depend on $\varphi$, and have degrees 1, 4, 2, and 1, respectively.
-Thus, no node degree in the constructed MBT instance exceeds 4.
-\end{proof}
-For illustrating the construction in the proof of Prop.~\ref{prop:mbtnpc}, consider the following instance of \textsc{3-3-SAT}
+
+For illustrating the construction in proof of Prop.~\ref{prop:mbtnpc}, consider the following instance of \textsc{3-3-SAT}
 \begin{equation}
 \varphi=(x_1\vee x_2\vee x_3)\wedge(\bar{x}_1\vee x_4)\wedge(x_2\vee \bar{x}_3 \vee\bar{x}_4)\wedge(\bar{x}_1\vee \bar{x}_3)\wedge \bar{x}_2 
 \label{eq:phi}
@@ -131,8 +122,23 @@ reducing to the instance of Problem \ref{mbt:dec} depicted in Fig. \ref{fig:mbtn
 \begin{figure}
 \centering
 \includegraphics{figurer/mbtnpc.eps}
-\caption{Reduction}
+\caption{Reduction from formula $\varphi$ (Eq.~\eqref{eq:phi}) of \textsc{3-3-SAT} to an instance of MBT with deadline 4 and maximum node degree 4}
 \label{fig:mbtnpc}
 \end{figure}
 
+\begin{proposition}
+MBT is NP-complete for graphs with maximum node degree 4 and deadline 4.
+\end{proposition}
+\begin{proof}
+In \cite{slater81}, a polynomial algorithm for MBT in trees is devised.
+As the sequence of vertices $V_0\subseteq\dots\subseteq V_t$ and function $\pi$ in Def.~\ref{def:mbt} determine a unique forest of arborescences $F$,
+it can be verified in polynomial time whether the broadcast time of $F$ is at most 4, proving that MBT belongs to NP.
+This concludes together with Lemma~\ref{lemma:mbtred} that MBT is NP-complete for deadline at most 4.
+
+It remains to show that the problem remains NP-complete for graphs with a maximum degree bounded by 4.
+As each literal appears at most twice in $\varphi$, the degree of nodes representing literals is at most 3. 
+Each clause node has degree at most 3 since $\varphi$ is in CNF.
+Degrees of nodes $s_i$, $u_i$, $v_i$, and $w_i$ do not depend on $\varphi$, and have degrees 1, 4, 2, and 1, respectively.
+Thus, none of the node degrees in the constructed MBT instance exceeds 4.
+\end{proof}
 \section{Solution Techniques}

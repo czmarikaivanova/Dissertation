@@ -169,12 +169,12 @@ These and other algorithms are an integral parts of most of the modern solvers s
 
 A \emph{computational problem} (problem) is an infinite collection of instances together with a solution for each instance.
 A problem that can be posed as a yes-no question of the input values is referred to as \emph{decision problem}.
-An example of a decision problem is the clique problem: Given a graph $G$ and an integer $k$, is there a clique in $G$ of size at least $k$?
+An example of a decision problem is the \textsc{Clique} problem: Given a graph $G$ and an integer $k$, is there a clique in $G$ of size at least $k$?
 In \emph{optimization problems}, the task is to find a ``best possible'' solution from among the set of all feasible solutions the problem instance.
-The optimization version of the clique problem asks for finding the maximum clique in a given graph $G$.
+The optimization version of \textsc{Clique} asks for finding the maximum clique in a given graph $G$.
 An optimization problem can be solved by answering a sequence of decision problems:
-Assume there is an oracle that is able to answer the clique problem for a given $(G,k)$.
-The maximum clique problem can then be solved by answering its optimization version for $k=1,2,\dots$ until the answer is ``no'' for some $k'$, and so the maximum clique has the size $k'-1$.
+Assume there is an oracle that is able to answer \textsc{Clique} problem for a given $(G,k)$.
+The \textsc{Maximum Clique} problem can then be solved by answering its optimization version for $k=1,2,\dots$ until the answer is ``no'' for some $k'$, and so the maximum clique has the size $k'-1$.
 
 Throughout this thesis, we use several well known concepts from the complexity theory, which we state in the following.
 Detailed explanations of the terminology can be found in any textbook on this topic such as \cite{sipser06}.
@@ -183,7 +183,7 @@ An \emph{algorithm} is a procedure that solves a given problem in a finite numbe
 Computational complexity of an algorithm is the amount of time needed for its run, and is measured in terms of the input size.
 A \emph{polynomial} algorithm runs in time $\mathcal{O}(n^c)$, for some constant $c$ and input $w$ of size $|w|=n$.
 A \emph{verifier} is an algorithm that determines whether a given certificate is a proof to the fact that $w$ is a yes-instance.
-An example of a certificate in the clique problem is some subset of nodes of size $k$.
+An example of a certificate to \textsc{clique} is some subset of nodes of size $k$.
 It can be verified in polynomial time whether there exists an edge between every two nodes.
 \begin{definition}
 	$P$ is the class of decision problems for which there exists a polynomial algorithm that solves them.

@@ -12,26 +12,23 @@
 \end{problemA}
 
 \begin{problemA}
-  \problemdefinition{A boolean formula is in 3CNF if it is a conjunction of clauses, where each clause is a disjunction of at most 3 literals}
   \problemtitle{\textsc{3-SAT}}
-  \probleminput{A Boolean formula $varphi$ in 3CNF.}
+  \problemdefinition{A boolean formula is in 3CNF if it is a conjunction of clauses, where each clause is a disjunction of at most 3 literals}
+  \probleminput{A Boolean formula $\varphi$ in 3CNF.}
   \problemquestion{Is there a truth assignment to variables of $\varphi$ such that $\varphi$ evaluates to TRUE?}
 \end{problemA}
 
 \begin{problemA}
-  \problemdefinition{See \textsc{3-SAT}. }
   \problemtitle{\textsc{3-3-SAT}}
-  \probleminput{A Boolean formula $varphi$ in 3CNF with an additional requirement that each variable appears at most three times and each literal at most twice.}
+  \problemdefinition{See \textsc{3-SAT}. }
+  \probleminput{A Boolean formula $\varphi$ in 3CNF with an additional requirement that each variable appears at most three times and each literal at most twice.}
   \problemquestion{Is there a truth assignment to variables of $\varphi$ such that $\varphi$ evaluates to TRUE?}
-\end{problemA}
-
-\begin{problemA}
-  \problemtitle{\textsc{At Least 1-in-3-SAT}}
 \end{problemA}
 
 \begin{problemA}
 	\problemtitle{\textsc{Boolean Satisfiability (SAT)}}
-  \probleminput{A Boolean formula $varphi$.}
+  \problemdefinition{}
+  \probleminput{A Boolean formula $\varphi$.}
   \problemquestion{Is there a truth assignment to variables of $\varphi$ such that $\varphi$ evaluates to TRUE?}
 \end{problemA}
 
@@ -45,32 +42,36 @@
 \begin{problemA}
 	\problemtitle{\textsc{Minimum Broadcast Time (MBT)}}
   \problemdefinition{
-	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
-	A Steiner tree in $G$ is a tree that spans $S$.		
+   The broadcast time $\tau(G,S)$ of $S\subseteq V$ in $G=(V,E)$ is the smallest integer $t\geq 0$
+   for which there exists a sequence $V_0\subseteq\dots\subseteq V_t$ of node sets and a function $\pi:V\setminus S\mapsto V$, satisfying:
+   \begin{enumerate}
+   \item $V_0=S$ and $V_t=V$,
+   \item for all $v\in V\setminus S, \left\{v,\pi(v)\right\}\in E$,
+   \item for all $k=1,\dots t$ and all $v\in V_k$, $\pi(v)\in V_{k-1}$, and
+   \item for all $u,v\in V_k\setminus V_{k-1}$, $\pi(u)=\pi(v)$ only if $u=v$.
+   \end{enumerate}
+
   }
-  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
-\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+  \probleminput{A graph $G=(V,E)$ and a subset $S\subseteq V$.}
+\problemquestion{Find $\tau(G,S)$.}
 \end{problemA}
 
 \begin{problemA}
-	\problemtitle{\textsc{Minimum Energy Broadcast (MEB)}}
-  \problemdefinition{
-	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
-	A Steiner tree in $G$ is a tree that spans $S$.		
-  }
-  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
-\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+  \problemtitle{\textsc{Minimum Energy Broadcast (MEB)}}
+  \problemdefinition{}
+  \probleminput{A directed graph $G=(V,A)$, a source $s\in V$, and power requirements $p:A\mapsto \mathbb{R}^+_0$ such that $p_{ij}=p_{ji}$ for each $(i,j)\in A$.}
+\problemquestion{Find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum component sum such that
+there exists a path from $s$ to each $t\in V\setminus\{s\}$ in $G^P=(V,A^P)$, where $A^P=\{(i,j)\in A: p_{ij}\leq P_i\}$.
+}
 \end{problemA}
 
 \begin{problemA}
 	\problemtitle{\textsc{Minimum Energy Multicast (MEM)}}
-  \problemdefinition{
-	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
-	A Steiner tree in $G$ is a tree that spans $S$.		
-  }
-  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
-\problemquestion{Find a minimum-weight Steiner tree in $G$.}
-\end{problemA}
+  \problemdefinition{}
+  \probleminput{A directed graph $G=(V,A)$, a subset $D\subseteq V$, a source $s\in D$, and power requirements $p:A\mapsto \mathbb{R}^+_0$ such that $p_{ij}=p_{ji}$ for each $(i,j)\in A$.}
+  \problemquestion{Find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum component sum such that
+there exists a path from $s$ to each $t\in D\setminus\{s\}$ in $G^P=(V,A^P)$, where $A^P=\{(i,j)\in A: p_{ij}\leq P_i\}$.}
+ \end{problemA}
 
 
 \begin{problemA}
@@ -86,51 +87,95 @@
 
 \begin{problemA}
   \problemtitle{\textsc{Range Assignment Problem (RAP)}}
-  \problemdefinition{
-	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
-	A Steiner tree in $G$ is a tree that spans $S$.		
-  }
-  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
-\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+  \problemdefinition{  }
+  \probleminput{A directed graph $G=(V,A)$ and power requirements $p:A\mapsto \mathbb{R}^+_0$ such that $p_{ij}=p_{ji}$ for each $(i,j)\in A$.}
+  \problemquestion{Find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum component sum such that the induced graph $G^P=(V,A^P)$ is strongly connected, where $A^P=\{(i,j)\in A: p_{ij}\leq P_i\}$.}
 \end{problemA}
 
 \begin{problemA}
   \problemtitle{\textsc{Minimum Shared Broadcast Tree (SBT)}}
   \problemdefinition{
-	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
-	A Steiner tree in $G$ is a tree that spans $S$.		
+	Consider an edge $\{i,j\}$ in a tree $T$.
+	Let $T_{i/j}$ denote the subtree of $T$ consisting of nodes whose path to $j$ contains $(i,j)$. 
   }
-  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
-\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+  \probleminput{A graph $G=(V,E)$ and power requirements $p:A\mapsto \mathbb{R}^+_0$ such that $p_{ij}=p_{ji}$ for each $(i,j)\in A$.}
+  \problemquestion{
+  	Find a spanning tree $T$ in $G$ minimizing 
+	$$\sum\limits_{i\in V}|T_{i_1/i}|p_{ii_2} + |T\setminus T_{i_1/i}|p_{ii_1}.$$}
 \end{problemA}
 
 \begin{problemA}
   \problemtitle{\textsc{Minimum Shared Mulicast Tree (SMT)}}
-  \problemdefinition{
-	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
-	A Steiner tree in $G$ is a tree that spans $S$.		
+  \problemdefinition{See SBT. }
+  \probleminput{A graph $G=(V,E)$, a subset $D\subseteq V$,  and power requirements $p:A\mapsto \mathbb{R}^+_0$ such that $p_{ij}=p_{ji}$ for each $(i,j)\in A$.}
+  \problemquestion{
+ 	Find a tree $T=(V_T,E_T)$ in $G$ spanning $D$ minimizing 
+ 	$$\sum\limits_{i\in V}\mu(T_{i_1/i})p_{ii_2} + \mu(T\setminus T_{i_1/i})p_{ii_1},$$
+	where $\mu(S)=|V_S\cap D|$ for a subtree $S=(V,S)$ of $T$.
+	}
+  \end{problemA}
+
+\begin{problemA}
+  \problemtitle{\textsc{Planar 3-SAT}}
+  \problemdefinition{See \textsc{3-SAT}}
+  \probleminput{
+    A set of unnegated variables $X=\{x_1,\dots,x_n\}$ and negated variables $X=\{\bar{x}_1,\dots,\bar{x}_n\}$, a collection of clauses $C$ over $X\cup \bar{X}$ such that
+   \begin{enumerate}
+   \item The graph $G = (X\cup C, E)$ with edge set $E = \{\{x,c\}: x \in c \vee \bar{x} \in c\}$ is planar.
+   \item Each clause $e \in C$ contains two or three literals $y \in X \cup \bar{X}$.
+   \end{enumerate} 
   }
-  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
-\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+\problemquestion{Does there exist a truth assignment for the variables such that each clause is satisfied?}
 \end{problemA}
 
 \begin{problemA}
-  \problemtitle{\textsc{Symmetric Range Assignment Problem (SRAP)}}
-  \problemdefinition{
-	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
-	A Steiner tree in $G$ is a tree that spans $S$.		
-  }
-  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
-\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+  \problemtitle{\textsc{Planar 3,4-SAT}}
+  \problemdefinition{See \textsc{3-SAT}.}
+  \probleminput{
+  	Same as \textsc{Planar 3-SAT} with an additional requirement 
+  	that each clause $c\in C$ contains exactly three literals and that each variable $x_i$ appears in at most four clauses.
+	}
+  \problemquestion{Is there a truth assignment to variables of $\varphi$ such that $\varphi$ evaluates to TRUE?}
 \end{problemA}
 
 \begin{problemA}
-  \problemtitle{\textsc{Weakly Symmetric Range Assignment Problem (WSRAP)}}
-  \problemdefinition{
-	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
-	A Steiner tree in $G$ is a tree that spans $S$.		
-  }
-  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
-\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+  \problemtitle{\textsc{Set Cover}}
+  \problemdefinition{  }
+  \probleminput{A universe $U=\{1,2,\dots,n\}$, a collection $\mathcal{S}$ of sets such that $\cup_{S\in\mathcal{S}}S=U$, and an integer $k$.} 
+  \problemquestion{Is there a sub-collection $\mathcal{S}'$ of $\mathcal{S}$ of size at most $k$ such that $\cup_{S\in\mathcal{S}'}S=U$?}
 \end{problemA}
+
+\begin{problemA}
+  \problemtitle{\textsc{Travelling Salesman Problem}}
+  \problemdefinition{  }
+  \probleminput{A complete graph $G=(V,E)$ with edge weights $c:E\mapsto\mathbb{R}^+_0$ and an integer $k$.} 
+  \problemquestion{Is there a path $P=(V,E')$ such that $E'\subseteq E$ and $\sum_{e\in E'}c(e)\leq k$?}
+\end{problemA}
+
+\begin{problemA}
+  \problemtitle{\textsc{Vertex Cover}}
+  \problemdefinition{ A vertex cover $V'$ of a graph $G=(V,E)$ is a subset of $V$ such that $\{u,v\}\in E\Rightarrow u\in V'$ or $v\in V'$. }
+  \probleminput{A graph $G=(V,E)$ and an integer $k$.} 
+  \problemquestion{Is there a vertex cover of $G$ of size at most $k$?}
+\end{problemA}
+
+%\begin{problemA}
+%  \problemtitle{\textsc{Symmetric Range Assignment Problem (SRAP)}}
+%  \problemdefinition{
+%	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
+%	A Steiner tree in $G$ is a tree that spans $S$.		
+%  }
+%  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
+%\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+%\end{problemA}
+%
+%\begin{problemA}
+%  \problemtitle{\textsc{Weakly Symmetric Range Assignment Problem (WSRAP)}}
+%  \problemdefinition{
+%	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
+%	A Steiner tree in $G$ is a tree that spans $S$.		
+%  }
+%  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
+%\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+%\end{problemA}
 
