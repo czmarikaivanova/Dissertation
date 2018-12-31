@@ -1,2 +1,136 @@
-\chapter{Some appendix}
+\chapter{List of NP-hard Problems}
+
+
+\begin{problemA}
+  \problemtitle{\textsc{3D-Matching}}
+  \problemdefinition{
+    Let $X$, $Y$, and $Z$ be finite, disjoint sets, and let $T$ be a subset of $X\times Y \times Z$. 
+    The set $M \subseteq T$ is a 3-dimensional matching if for any two distinct triples $(x_1, y_1, z_1) \in M$ and $(x_2, y_2, z_2) \in M$, we have $x_1 \neq x_2, y_1 \neq y_2$, and $z_1 \neq  z_2$.  
+  }
+  \probleminput{A set $T$ and an integer $k$.}
+  \problemquestion{Does there exist a 3-dimensional matching $M \subseteq T$ with $|M| \geq k$?}
+\end{problemA}
+
+\begin{problemA}
+  \problemdefinition{A boolean formula is in 3CNF if it is a conjunction of clauses, where each clause is a disjunction of at most 3 literals}
+  \problemtitle{\textsc{3-SAT}}
+  \probleminput{A Boolean formula $varphi$ in 3CNF.}
+  \problemquestion{Is there a truth assignment to variables of $\varphi$ such that $\varphi$ evaluates to TRUE?}
+\end{problemA}
+
+\begin{problemA}
+  \problemdefinition{See \textsc{3-SAT}. }
+  \problemtitle{\textsc{3-3-SAT}}
+  \probleminput{A Boolean formula $varphi$ in 3CNF with an additional requirement that each variable appears at most three times and each literal at most twice.}
+  \problemquestion{Is there a truth assignment to variables of $\varphi$ such that $\varphi$ evaluates to TRUE?}
+\end{problemA}
+
+\begin{problemA}
+  \problemtitle{\textsc{At Least 1-in-3-SAT}}
+\end{problemA}
+
+\begin{problemA}
+	\problemtitle{\textsc{Boolean Satisfiability (SAT)}}
+  \probleminput{A Boolean formula $varphi$.}
+  \problemquestion{Is there a truth assignment to variables of $\varphi$ such that $\varphi$ evaluates to TRUE?}
+\end{problemA}
+
+\begin{problemA}
+  \problemtitle{\textsc{Clique}}
+  \problemdefinition{A clique in a graph $G$ is a complete subgraph of $G$.}
+  \probleminput{A graph $G$ and a an integer $k$.}
+  \problemquestion{Does there exist a clique of size at least $k$ in $G$?}
+\end{problemA}
+
+\begin{problemA}
+	\problemtitle{\textsc{Minimum Broadcast Time (MBT)}}
+  \problemdefinition{
+	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
+	A Steiner tree in $G$ is a tree that spans $S$.		
+  }
+  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
+\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+\end{problemA}
+
+\begin{problemA}
+	\problemtitle{\textsc{Minimum Energy Broadcast (MEB)}}
+  \problemdefinition{
+	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
+	A Steiner tree in $G$ is a tree that spans $S$.		
+  }
+  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
+\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+\end{problemA}
+
+\begin{problemA}
+	\problemtitle{\textsc{Minimum Energy Multicast (MEM)}}
+  \problemdefinition{
+	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
+	A Steiner tree in $G$ is a tree that spans $S$.		
+  }
+  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
+\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+\end{problemA}
+
+
+\begin{problemA}
+  \problemtitle{\textsc{Minimum Steiner Tree}}
+  \problemdefinition{
+	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
+	A Steiner tree in $G$ is a tree that spans $S$.		
+  }
+  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
+\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+\end{problemA}
+
+
+\begin{problemA}
+  \problemtitle{\textsc{Range Assignment Problem (RAP)}}
+  \problemdefinition{
+	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
+	A Steiner tree in $G$ is a tree that spans $S$.		
+  }
+  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
+\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+\end{problemA}
+
+\begin{problemA}
+  \problemtitle{\textsc{Minimum Shared Broadcast Tree (SBT)}}
+  \problemdefinition{
+	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
+	A Steiner tree in $G$ is a tree that spans $S$.		
+  }
+  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
+\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+\end{problemA}
+
+\begin{problemA}
+  \problemtitle{\textsc{Minimum Shared Mulicast Tree (SMT)}}
+  \problemdefinition{
+	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
+	A Steiner tree in $G$ is a tree that spans $S$.		
+  }
+  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
+\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+\end{problemA}
+
+\begin{problemA}
+  \problemtitle{\textsc{Symmetric Range Assignment Problem (SRAP)}}
+  \problemdefinition{
+	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
+	A Steiner tree in $G$ is a tree that spans $S$.		
+  }
+  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
+\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+\end{problemA}
+
+\begin{problemA}
+  \problemtitle{\textsc{Weakly Symmetric Range Assignment Problem (WSRAP)}}
+  \problemdefinition{
+	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
+	A Steiner tree in $G$ is a tree that spans $S$.		
+  }
+  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
+\problemquestion{Find a minimum-weight Steiner tree in $G$.}
+\end{problemA}
 

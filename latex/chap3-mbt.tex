@@ -100,10 +100,28 @@ The auxiliary path $(u_x,v_x,w_x)$ ensures that the clause satisfaction is model
 As $t_{u_x,v_x}\leq 3$, one of $t_{u_x,x}$ and $t_{u_x,\bar{x}}$ must be 4, 
 and thereby the arc that would incorrectly indicate satisfaction of a clause that is not satisfied by the selected truth assignment would have cost 5, which is not allowed.
 It is possible to have and arc outgoing from a clause node of cost 4, but the second endpoint is always a node representing some literal $y$, but the arc $(u_y,y)$ is already a part of $T$.
+Using this construction we show the equivalence as the lemma states.
+
+Let $\varphi$ be satisfialbe.
+After a node $v_i$ receives the signal, it is always possible to forward it to a node representing literal so that in the next time steps,
+the signal is further relayed to the node representing clause that is satisfied by the literal.
+As each literal can cause satisfaction of up to two clauses, the corresponding clause nodes receive the signal from the respective literals within the time limit 4.
+
+Conversely, let the constructed instance of MBT have broadcast time less than 4.
+Then, truth valuation of clauses can be retrieved by looking up nodes representing literals that receive the signal in time step 2.
+The correctness of the truth valuation is ensured by the existence of nodes $v_i$, so that the node representing literal that is evaluated as false is informed in time step 4, 
+and thereby cannot forward the signal to any clause nodes.
 \end{proof}
 \begin{proposition}
-
+MBT is NP-complete for graphs with maximum degree 4 and deadline 4.
 \end{proposition}
+\begin{proof}
+MBT  belongs to NP, because for a given broadcast tree $T$, it can be checked in polynomial-time whether the broadcast time is no greater than 4.
+As each literal appears at most twice in $\varphi$, the degree of nodes representing literals is at most 3. 
+Each clause node has degree at most 3 since $\varphi$ is in CNF.
+Degrees of nodes $s_i$, $u_i$, $v_i$, and $w_i$ do not depend on $\varphi$, and have degrees 1, 4, 2, and 1, respectively.
+Thus, no node degree in the constructed MBT instance exceeds 4.
+\end{proof}
 For illustrating the construction in the proof of Prop.~\ref{prop:mbtnpc}, consider the following instance of \textsc{3-3-SAT}
 \begin{equation}
 \varphi=(x_1\vee x_2\vee x_3)\wedge(\bar{x}_1\vee x_4)\wedge(x_2\vee \bar{x}_3 \vee\bar{x}_4)\wedge(\bar{x}_1\vee \bar{x}_3)\wedge \bar{x}_2 
@@ -116,8 +134,5 @@ reducing to the instance of Problem \ref{mbt:dec} depicted in Fig. \ref{fig:mbtn
 \caption{Reduction}
 \label{fig:mbtnpc}
 \end{figure}
-
-
-
 
 \section{Solution Techniques}
