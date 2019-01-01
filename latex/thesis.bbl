@@ -102,6 +102,11 @@
 \newblock In {\em STACS 2000\/} (Berlin, Heidelberg, 2000), H.~Reichel and
   S.~Tison, Eds., Springer Berlin Heidelberg, pp.~651--660.
 
+\bibitem{cormen01}
+{\sc Cormen, T.~H., Leiserson, C.~E., Rivest, R.~L., and Stein, C.}
+\newblock {\em Introduction to Algorithms}, 2nd~ed.
+\newblock The MIT Press, 2001.
+
 \bibitem{das03}
 {\sc Das, A.~K.}
 \newblock Minimum power broadcast trees for wireless networks: Integer
@@ -191,11 +196,6 @@
 {\sc Nemhauser, G.~L., and Wolsey, L.~A.}
 \newblock {\em Integer and Combinatorial Optimization}.
 \newblock Wiley-Interscience, New York, NY, USA, 1988.
-
-\bibitem{papadimitriou94}
-{\sc Papadimitriou, C.~H.}
-\newblock {\em Computational complexity.}
-\newblock Addison-Wesley, 1994.
 
 \bibitem{papadimitriou06}
 {\sc Papadimitriou, I., and Georgiadis, l.}

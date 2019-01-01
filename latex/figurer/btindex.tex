@@ -1,0 +1,22 @@
+\documentclass{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+
+\begin{document}
+\begin{tikzpicture}[->,scale=.7,every node/.style = {scale=.6,draw,shape=circle, align=center, fill=gray!30}, level/.style={sibling distance=2.5cm/#1,level distance=1.0cm}]]
+   \node[] {1}
+   	   child[] { node {2}
+	   	   child {node {4}
+		  	child {node {8}}
+		   }
+		   child {node {6} }
+	   }
+   child[] { node {3}
+   	   child { node {7} }
+	   }
+   child[] { node {5}
+	}
+ ;
+\end{tikzpicture}
+
+  \end{document}

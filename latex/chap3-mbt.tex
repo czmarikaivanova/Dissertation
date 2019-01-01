@@ -31,18 +31,25 @@ for which there exists a sequence $V_0\subseteq\dots\subseteq V_t$ of node sets 
 \item for all $u,v\in V_k\setminus V_{k-1}$, $\pi(u)=\pi(v)$ only if $u=v$.
 \end{enumerate}
 \end{definition}
-
-The \emph{broadcast center} of a graph is the set of all nodes having the smallest broadcast times ,i.e., $\arg\min\left\{\tau(G,\{v\}):v\in V\right\}$.
+Any feasible solution determines a communication forest $\mathcal{F}$.
+It is easily verified that the \emph{communication forest} contains arborescences rooted at distinct sources.
+Individual arborescences in $\mathcal{F}$ are referred to as \emph{communication trees}.
+Let $T_s=\left(V_{T_s},A_{V_s}\right)$ denote the communication tree rooted at source $s\in S$, and define the function $\alpha:V\to S$ such that $v\in V_{T_{\alpha(v)}}$ for all $v\in V$.
+That is, $\alpha$ associates a node $v$ with the source at which the communication tree containing $v$ is rooted.
+For an arc $(i,j)$ in a given communication tree, the integer $t_{i,j}$ denotes the time step in which node $i$ informs $j$.
+%For any communication tree $T_s$, let $T^i_s$ be the subtree of $T_s$ induced by the set of nodes with distance at most $i$ edges from $s$.
+%Analogously, let $D^i=\left\{T_s^i: s\in S\right\}$.
 
 Formally, the optimization MEB problem is defined as follows:
 \begin{problem}\label{mbt:opt}
 Given $G=(V,E)$ and $S\subseteq V$, find $\tau(G,S)$. 
 \end{problem}
-
 In the literature, authors often consider the decision version, because some of the theoretical results depend on a given time limit.
 \begin{problem}\label{mbt:dec}
 Given $G=(V,E)$, $S\subseteq V$,  and a time limit $t\in \mathbb{Z}^+_0$, does $\tau(G,S)\leq t$ hold? 
 \end{problem}
+
+The \emph{broadcast center} of a graph is the set of all nodes having the smallest broadcast times ,i.e., $\arg\min\left\{\tau(G,\{v\}):v\in V\right\}$.
 %\section{Problem Definition}
 
 %\section{Broadcast Graphs}
@@ -71,45 +78,48 @@ First, they prove that \textsc{Planar 3,4-SAT} is NP-complete, and subsequently 
 \end{itemize}
 The question whether MBT is NP complete for split graphs with a single source is stated as open.
 Another complexity result proving that MBT remains NP-complete for 3-regular planar graphs with constant deadline $t\geq 2$ 
-is given in \cite{middendorf93} by reduction from \textsc{Exactly-one-in-three-3SAT}.
+is given in \cite{middendorf93} by reduction from \textsc{Exactly-one-in-three-3-SAT}.
 
 The complexity results above typically exploit sophisticated reductions.
-We provide a very simple and straightforward proof of NP-completeness of MEB for time limit at most $t=4$.
+We provide a very simple and straightforward proof of NP-completeness of MEB for time limit at most $t=3$ on graphs with maximum degree at most 3.
 There are many restrictions on SAT that preserve NP-completeness.
-We concentrate on the variant of 3SAT with the property that each variable is restricted to appear at most three times, and each literal at most twice. 
+We concentrate on the variant of 3-SAT with the property that each variable is restricted to appear at most three times, and each literal at most twice. 
 This problem is known as 3-3-SAT, and its NP-completeness proof can be found in~\cite{papadimitriou94}. 
-Note that in this particular version of 3SAT, it can no longer be assumed that each clause consists of exactly 3 literals.
+Note that in this particular version of 3-SAT, it can no longer be assumed that each clause consists of exactly 3 literals.
 Further, the assumption about at most two occurrences of a literal is automatic, 
 because formula $\varphi$ that contains a variable $x$ that appears only as a positive or only as a negative literal can trivially be transformed into $\varphi'$ that does not contain $x$ at all, 
 such that $\varphi$ is satisfiable if and only if $\varphi'$ is satisfiable.
 \begin{lemma}\label{lemma:mbtred}
 Let $\varphi$ be an instance of \textsc{3-3-SAT}, and let $G=(V,E)$ and $S\subseteq V'$ be an instance of MEB constructed from $\varphi$. 
-Then, $\varphi$ is satisfiable if and only if $\tau(G,S)\leq 4$.
+Then, $\varphi$ is satisfiable if and only if $\tau(G,S)\leq 3$.
 \end{lemma}
 \begin{proof}\label{prop:mbtnpc}
-An instance of Problem \ref{prob:dec} is constructed from an instance $\varphi(x_1,\dots,x_n)$ of 3-3-SAT as follows.
-For each variable $x_i$ in $\varphi$, we construct a gadget comprising six nodes $x_i$, $\bar{x}_i$, $u_i$, $v_i$, $w_i$ and a source $s_i$.
+An instance of Problem \ref{mbt:dec} is constructed from an instance $\varphi(x_1,\dots,x_n)$ of \textsc{3-3-SAT} as follows.
+For each variable $x_i$ $\varphi$, we construct a gadget comprising five $x_i$, $\bar{x}_i$, $u_i$, $v_i$, $w_i$, where $u_i$ is a source, $i=1,\dots n$ .
 The first two nodes represent possible literals associated with the variable $x_i$.
-The gadget further contains five edges $\{s_i,u_i\}$, $\{u_i,x_i\}$, $\{u_i,\bar{x}_i\}$, $\{u_i,v_i\}$, and $\{v_i,w_i\}$.
+The gadget further contains four edges, $\{u_i,x_i\}$, $\{u_i,\bar{x}_i\}$, $\{u_i,v_i\}$, and $\{v_i,w_i\}$.
 For each clause $c_j$, there is a node $c_j$ and whenever the clause $c_j$ contains a literal $x_i$ ($\bar{x}_i$), there is an edge $\{c,x_i\}$ ($\{c,\bar{x}_i\}$).
-We therefore have clause nodes of degree at most 3, because $\varphi$ is in 3-CNF.
-Nodes representing literals are connected to at most two clause nodes, which is implied by the restriction imposed on $\varphi$.
-In a solution $T$ to the constructed instance (highlighted as blue)  $\arg\min\limits_{v\in\{x,\bar{x}\}}\{t_{u_x,v}\}$ represents the assignment of truth value to the variable $x$.
-The presence of an arc entering a clause node $c$ in $T$ indicates that a truth value of certain variable caused satisfaction of clause $c$.
-The auxiliary path $(u_x,v_x,w_x)$ ensures that the clause satisfaction is modeled correctly.
-As $t_{u_x,v_x}\leq 3$, one of $t_{u_x,x}$ and $t_{u_x,\bar{x}}$ must be 4, 
-and thereby the arc that would incorrectly indicate satisfaction of a clause that is not satisfied by the selected truth assignment would have cost 5, which is not allowed.
-It is possible to have and arc outgoing from a clause node of cost 4, but the second endpoint is always a node representing some literal $y$, but the arc $(u_y,y)$ is already a part of $T$.
+%We therefore have clause nodes of degree at most 3, because $\varphi$ is in 3-CNF.
+%Nodes representing literals are connected to at most two clause nodes, which is implied by the restriction imposed on $\varphi$.
 Using this construction we show the equivalence as the lemma states.
 
 Let $\varphi$ be satisfialbe.
-After a node $v_i$ receives the signal, it is always possible to forward it to a node representing literal so that in the next time steps,
-the signal is further relayed to the node representing clause that is satisfied by the literal.
-As each literal can cause satisfaction of up to two clauses, the corresponding clause nodes receive the signal from the respective literals within the time limit 4.
+A source node $u_i$ sends the signal towards the node representing literal that is evaluated as true in the given truth assignment.
+In the next time steps, the signal is further relayed to the node representing clause that is satisfied by the literal.
+As each literal can cause satisfaction of up to two clauses, the corresponding clause nodes receive the signal from the respective literals within the time limit 3.
+Nodes $u_i$ must receive the signal in the time step 2, in order to reach $w_i$ on time.
+Thus, the node representing literal evaluated as false receives the signal in time step 3.
 
-Conversely, let the constructed instance of MBT have broadcast time less than 4.
-Then, truth valuation of clauses can be retrieved by looking up nodes representing literals that receive the signal in time step 2.
-The correctness of the truth valuation is ensured by the existence of nodes $v_i$, so that the node representing literal that is evaluated as false is informed in time step 4, 
+Conversely, let the constructed instance of MBT have broadcast time less than 3.
+In a solution $T$ to the instance (highlighted as blue)  $\arg\min_{v\in\{x,\bar{x}\}}\{t_{u_x,v}\}$ represents the assignment of truth value to the variable $x$.
+The presence of an arc entering a clause node $c$ in $T$ indicates that a truth value of certain variable caused satisfaction of clause $c$.
+%The truth evaluation of clauses can be retrieved by looking up nodes representing literals that receive the signal in time step 1.
+The auxiliary path $(u_x,v_x,w_x)$ ensures that the clause satisfaction is modeled correctly.
+As $t_{u_x,v_x}\leq 2$, one of $t_{u_x,x}$ and $t_{u_x,\bar{x}}$ must be 3, 
+and thereby the arc that would incorrectly indicate satisfaction of a clause that is not satisfied by the selected truth assignment would have cost 4, which is not allowed.
+It is possible to have an arc outgoing from a clause node of cost 3, but the second endpoint is always a node representing some literal $y$, but the arc $(u_y,y)$ is already a part of $T$.
+
+The correctness of the truth valuation is ensured by the existence of nodes $v_i$, so that the node representing literal that is evaluated as false is informed in time step 3, 
 and thereby cannot forward the signal to any clause nodes.
 \end{proof}
 
@@ -131,14 +141,309 @@ MBT is NP-complete for graphs with maximum node degree 4 and deadline 4.
 \end{proposition}
 \begin{proof}
 In \cite{slater81}, a polynomial algorithm for MBT in trees is devised.
-As the sequence of vertices $V_0\subseteq\dots\subseteq V_t$ and function $\pi$ in Def.~\ref{def:mbt} determine a unique forest of arborescences $F$,
-it can be verified in polynomial time whether the broadcast time of $F$ is at most 4, proving that MBT belongs to NP.
-This concludes together with Lemma~\ref{lemma:mbtred} that MBT is NP-complete for deadline at most 4.
+As the sequence of vertices $V_0\subseteq\dots\subseteq V_t$ and function $\pi$ in Def.~\ref{def:mbt} determine a unique forest of arborescences $\mathcal{F}$,
+it can be verified in polynomial time whether the broadcast time of each braodcast tree in $\mathcal{F}$ does not exceed 3, proving that MBT belongs to NP.
+This concludes together with Lemma~\ref{lemma:mbtred} that MBT is NP-complete for deadline at most 3.
 
-It remains to show that the problem remains NP-complete for graphs with a maximum degree bounded by 4.
+It remains to show that the problem remains NP-complete for graphs with maximum degree bounded by 3.
 As each literal appears at most twice in $\varphi$, the degree of nodes representing literals is at most 3. 
-Each clause node has degree at most 3 since $\varphi$ is in CNF.
-Degrees of nodes $s_i$, $u_i$, $v_i$, and $w_i$ do not depend on $\varphi$, and have degrees 1, 4, 2, and 1, respectively.
-Thus, none of the node degrees in the constructed MBT instance exceeds 4.
+Each clause node has degree at most 3 since $\varphi$ is in 3-CNF.
+Degrees of nodes $u_i$, $v_i$, and $w_i$ do not depend on $\varphi$, and have degrees 3, 2, and 1, respectively.
+Thus, none of the node degrees in the constructed MBT instance exceeds 3.
 \end{proof}
-\section{Solution Techniques}
+
+\section{Integer Linear Programming Models}
+
+A straightforward ILP formulation has been proposed in Paper IV together with a suitable solution method.
+A similar formulation has been recently published in \cite{mbtheurXX}.
+ILP formulation of the problem of \textsc{Minimum Broadcast Graph} are studied in \cite{McGarvey16}.
+The authors focus on the $c$-broadcasting  and $k$-fault-tolerant $c$-broadcasting variants of the problem.
+
+In the following, we present an unpublished ILP model for MBT.
+
+\subsection{Binomial Tree Model}
+
+A binomial tree $B^k$ of order $k$ is an ordered tree defined recursively as follow \cite{cormen01}:
+\begin{itemize}
+\item The binomial tree $B^0$ consists of a single node.
+\item The binomial tree $B^k$ has a root with $k$ children where the $i$-th child is the root of a binomial tree of order $k-i$, $i=1,\dots,k$.
+\end{itemize}
+An example of $B^3$ is depicted in Fig.\ref{fig:beta}.
+%If a solution to MBT consists of broadcast trees that are binomial, the number of informed nodes doubles in each time step.
+For a given time step $k$, the maximum number of informed nodes within $k$ steps is $|S|2^k$.
+This occurs when the solution of MBT consists of broadcast trees that are binomial.
+%Any broadcast tree can be regarded as pruned binomial tree.
+%Problem \ref{prob:min} can therefore be restated as finding a partition of $G$ into $m$ pruned binomial trees
+\begin{observation}
+\label{obs:btspread}
+if $r$ is the root of $B^k$, then $\tau(B^k,\{r\})=k$.
+\end{observation}
+\begin{figure}
+\centering
+	\includegraphics{figurer/btindex.eps}
+\caption{A binomial tree with nodes labeled by their positions}
+\label{fig:beta}
+\end{figure}
+
+\subsubsection{Binomial trees over positive integers}
+
+Let $k\in \mathbb{N}$ and $I=\{1,\dots,2^k\}$.
+A directed binomial tree $B^k=(V_{B^k},A_{B^k})$ with arcs oriented towards the leaves has a regular structure that allows to define a systematic numbering of nodes so that a node number determines unambiguously a position in $B^k$.
+That is, we need an applicable bijective function $\beta:V_{B^k}\to I$.
+A suitable bijection $\beta$ assigns values from $I$ to nodes increasingly with decreasing outgoing degree.
+If there is an ambiguity, a node whose parent has a lower number is assigned a lower number.
+This function is defined recursively as
+\begin{equation*}
+\label{eq:beta}
+\beta(v)=\begin{cases}
+1,\text{ if } v \text{ is the root of } B^k,\\
+\beta(u) + 2^{k-deg^+(v)-1}, (u,v)\in A_{B^k},\text{ otherwise}.
+\end{cases}
+\end{equation*}
+Nodes in Fig. \ref{fig:beta} are labeled with their $\beta$-values.
+Pairs of integers that are assigned to adjacent nodes in a binomial tree are defined by relation
+\begin{equation*}
+\label{eq:betarel}
+R=\{(i,j)\in\mathbb{N}\times\mathbb{N}:j=i+2^k,k\geq\log i,k\in \mathbb{Z}\}.
+\end{equation*}
+
+We further define the function $\pi':\mathbb{N}\to\mathbb{Z}_+$ that for a given integer $i$ associated with node $v$
+determines $\beta$-value of parent of $v$:
+\begin{align*}
+\label{eq:piprime}
+\pi'(1)&=0,& \\
+\pi'(j)&=j-2^{\lceil\log j\rceil -1}, &j > 1.
+\end{align*}
+Using functions $\alpha$, $\beta$, $\pi'$ and the relation $R$, we introduce the notion of binomial trees over positive integers.
+\begin{definition}
+A pair $(I,X)$ where $I=\{1,\dots,2^k\}$, $k\in\mathbb{Z}_+$, $(\alpha(u),\beta(u))=(\alpha(v),\beta(v))\Leftrightarrow u=v$ and
+$X=\{(i,j)\in R, i,j\in I\}$ is an \emph{integer binomial tree of order $k$}.
+
+$(I,X)$, where $I\subseteq\{1,\dots,2^k\}, k\in \mathbb{Z}_+,\pi(j)\in I$ for all $j\in I\setminus\{1\}$ and
+$X=\{(i,j)\in R, i,j\in I\}$ is an \emph{integer binomial tree of order $k$ pruned at $\{1,\dots,2^k\}\setminus I$}.
+\end{definition}
+We now develop a method for modelling Problem \ref{mbt:opt} whose main principle is finding a partition of $G$ into pruned binomial trees.
+For any integer $i$, let $I_i=\{2^{i-1}+1,\dots,2^i\}$.
+%\begin{problem}
+%\label{prob:dec}
+%Given $G=(V,E)$, $S\subseteq V$ and $t\in \mathbb{N}$, is there a sequence $S=V_0\subseteq\dots\subseteq V_t=V$
+%and a mapping $\pi:V\setminus S\to V$, such that for each $v\in V\setminus S:\{v,\pi(v)\}\in E$ and for each  $u,v\in V_i\setminus V_{i-1}: \pi(u)\neq \pi(v)\Leftrightarrow u\neq v$?
+%\end{problem}
+%For a delay $t$, at most $s\cdot 2^t$ nodes can be informed within $t$ steps.
+%Therefore, we assume $n\leq 2^ks.
+%This can be achieved when the broadcast forest $T$ consists of binomial trees $B^t$ of order $t$ rooted at sources $s\in S$.
+%Hence, if there is a partition of $G$ into $s$ pruned binomial trees of order at most $t$ rooted at sources, then $(G,S,t)$ is a YES instance of Problem \ref{prob:dec}.
+%Finding a partition of $G$ into $s$ pruned binomial trees can be equivalently formulated as finding a partition of $G''$ into $s$ (complete) binomial trees,
+%where $G''$ is constructed from $G$ as follows:
+%Let $\alpha\coloneqq s\cdot 2^k-|V|$, and let $K_\alpha=(V_\alpha,E_\alpha)$ be a complete graph on $\alpha$ nodes.
+%Each node in $K_\alpha$ is connected to every node $v\in V$ in the original graph $G$.
+%Thus, $G''=(V'',E'')$ with $V''=V\cup V_\alpha$ and $E''=E\cup E_\alpha\cup \{\{u,v\}: u\in V \wedge v\in V_\alpha\}$.
+%The set of arcs $A''$ is constructed by creating two arcs of opposite orientation for each edge, but arcs with orientation from $V_\alpha$ to $V$ are excluded.
+%Formally, $A''=A\cup\{(u,v),(v,u): \{u,v\}\in E_\alpha\}\cup\{(u,v):u\in V \wedge v\in V_\alpha\}$.
+
+%\begin{observation}\label{obs:deg}
+%For each $i\in\{1,\dots,t\}$, the set $\{v\in V^t: 1\leq\beta(v)\leq2^i\}\setminus\{v\in V^t:1\leq\beta(v)\leq2^{i-1}\}$ contains nodes with out-degree $t-i$.
+%\end{observation}
+%\begin{observation}\label{obs:childdeg}
+%Children of $v\in V^t$ with $\text{deg}^+(v)=\ell$ have out-degree $0,\dots,\ell-1$.
+%\end{observation}
+\begin{observation}\label{obs:eqbetalevel}
+$\pi'$ is injective.
+%For $i_1,i_2\in I_i$, $\pi'(i_1)=\pi'(i_2)\Leftrightarrow i_1=i_2$.
+\end{observation}
+\begin{proof}
+We notice that $\lceil\log (2^{i-1}+1)\rceil=\dots =\lceil\log 2^i\rceil$, and thus $\pi'(2^{i-1}+1),\dots,\pi'(2^i)$ are pairwise different.
+\end{proof}
+
+\begin{proposition}\label{lem:probeq}
+A graph $G=(V,E)$ and $S\subseteq V$ has $\tau(G,S)\leq k$ iff it is possible to assign integers to nodes
+such that they form $m$ (pruned) integer binomial trees of order $k$ or smaller rooted at sources.
+\end{proposition}
+\begin{proof}
+Assume nodes in $V$ can be labeled by integers from $I=\{1,\dots,2^k\}$ so that they form (pruned) integer integer binomial trees $B_\ell$ of order at most $k$, $1\leq\ell\leq m$.
+For $r\in V_{B_\ell}$ with $\alpha(r)=r$ and $\beta(r)=1$, by Obs. \ref{obs:btspread}, $\tau(B_\ell,\{r\})\leq k$.
+The sequence of node sets $V_0,\dots,V_k$ is constructed by setting $V_0=\{v\in V:\beta(v)=1\}$, and $V_{i}=V_{i-1}\cup\{v\in V: \beta(v)\in I_i\}$.
+Moreover, $\pi(v)=u\Leftrightarrow \alpha(v)=\alpha(u)~\&~\pi'(\beta(v))=\beta(u)$.
+Also, $\pi(u)=\pi(v)\Leftrightarrow u=v$ follows from Obs. \ref{obs:eqbetalevel}, because nodes in $V_i$ have $\beta$ values in $I_i$.
+
+Conversely, suppose there is a sequence of subsets and a function $\pi$ in $G$ with the desired properties.
+Nodes are associated with integers from $I$ assigned according to the following steps:
+\begin{enumerate}
+\item $\beta(s)=1$ for all $s\in V_0$,
+\item For $v\in V_i$, set $\beta(v)=j$ such that $j\in I_i$ and $(\pi'(\beta(v)),j)\in R, 1\leq i\leq k$.
+\end{enumerate}
+\qed
+\end{proof}
+\subsubsection{The formulation}
+Consider a graph $G'=(V',E')$ constructed  by adding a universal node $v_0$ to $G$.
+The set of nodes and edges is then $V'=V\cup \{v_0\}$ and $E'=E\cup\{\{v_0,v\}:v\in V\}$.
+Apart from $z$-variables introduced in model \eqref{mod:basic}, the ILP formulation based on partition into binomial trees uses
+$$
+y_{is}^v=\begin{cases}
+1, \text{ if } \beta(v)=i \text{ and } \alpha(v)=s,\\
+0, \text{ otherwise},\\
+\end{cases}
+$$
+where $v\in V'$, $i\in I$, $s\in S$ and $0\leq j\leq \bar{t}$.
+With the definition of $G'$ above, it is straightforward to specify constraints that enforce desired values for $y$-variables.
+Whenever $y_{is}^{v_0}=1$, it indicates that the binomial tree rooted at $s$ is pruned at node with position $i$.
+%An obvious weakness of this approach is  that the number of nodes increases to $|V''|=\mathcal{O}(ns)$, and the dimension of variables is thus $\mathcal{O}(n^2s^2)$.
+%However, once a suitable partition is found, the arcs of binomial trees contained in $K_\alpha$ can be diversely shuffled while preserving the layour of binomial trees in $G$.
+%Instead of adding the entire complete graph $K_\alpha$, a single node $v_0$ with a loop $(v_0,v_0)$ is connected as an apex to the original $G$.
+%Let us denote this multigraph as $G'=(V',E')$, where $V'=V\cup\{v_0\}$, $E'=E\cup\{\{u,v_0\}:u\in V\}\cup\{\{v_0\}\}$.
+%The arc set is then analogously defined as $A'=A\cup\{(u,v_0): u\in V\}\cup\{(v_0,v_0)\}$.
+%The requirement for partition into binomial trees has to be adjusted accordingly.
+%The subtrees contained in $G$ remain unchanged, every arc $(u,v)\in A^k_i, i=1,\dots,s$ in $G''$ with $u\in V$ and $v\in V_\alpha$ becomes $(u,v_0)$ in $G'$,
+%and every $(u,v)\in A_\alpha$ becomes $(v_0,v_0)$.
+%So, $v_0$ acts as a universal node that can substitute several nodes in each binomial tree.
+Let us define the set $C(i)$ of $\beta$-positions of children (direct descendants) of node $v$ with $\beta(v)=i$ in a binomial tree of order $k$:
+\begin{equation}
+\label{eq:c1}
+C(i)=\{2^j+i:j=\lceil\log_2 i\rceil,\dots,k-1\}.
+\end{equation}
+The formulation based on binomial trees is the following:
+\begin{subequations}\label{mod:partition}
+\begin{align}
+\notag &\min\sum\limits_{j=0}^{\bar{t}}z_j,\\
+\notag \text{s. t. } \\
+\label{mod:part:nodeBelongs} \sum\limits_{i\in I}\sum\limits_{s\in S}y^v_{is} & = 1 & v\in V,\\
+\label{mod:part:treeHasIJ} \sum\limits_{v\in V'}y^v_{is} & = 1 & i\in I,s\in S,\\
+\label{mod:part:source1} y_{1s}^s & = 1  & s\in S,\\
+%\label{mod:part:noReturn} y^u_{ij}+y^v_{lj} &\leq 1 & i\in I,l\in C(i), j\in J, u\in V_\alpha,v\in V,\\
+%\label{mod:part:followArcs} y^u_{is}+y^v_{\ell s} &\leq 1 & i\in I,\ell\in C(i), s\in S, u,v\in V',(u,v)\not\in A',\\
+%\label{mod:part:followArcsA} y^u_{is}+y^v_{\ell s} &\leq 1 & i\in I,\ell\in C(i), s\in S, u,v\in V,\{u,v\}\not\in E,\\
+%\label{mod:part:followArcsB} y^{v_0}_{is}+y^v_{\ell s} &\leq 1 & i\in I,\ell\in C(i), s\in S, v\in V,\\
+%\label{mod:part:followArcsA}y^{v_0}_{is}+y^u_{i s} + \sum\limits_{v\in V\setminus N(u)}y^v_{\ell s}&\leq 1 & u\in V,i\in I,\ell\in C(i), s\in S,  \\
+%\label{mod:part:followArcsB}y^{v_0}_{is}+y^u_{\ell s} + \sum\limits_{v\in V\setminus N(u)}y^v_{i s}&\leq 1 & u\in V,i\in I,\ell\in C(i), s\in S,\\
+\label{mod:part:followArcsA}\sum\limits_{v\in \bar{N}(u)}y^v_{\ell s}&\leq \sum\limits_{v\in N(\bar{N}(u))}y_{is}^{v} & u\in V,i\in I,\ell\in C(i), s\in S,  \\
+\label{mod:part:followArcsB}\sum\limits_{v\in \bar{N}(\bar{N}(u))}y^v_{\ell s}&\leq \sum\limits_{v\in N(u)} y_{is}^{v} & u\in V,i\in I,\ell\in C(i), s\in S,\\
+\label{mod:part:yzrel}\sum\limits_{v\in V}y^v_{is} & \leq z_{\lceil\log i\rceil} & i\in I,s\in S,\\
+\label{mod:part:dim}&&y \in \{0,1\}^{I\times S\times V'}, z\in \{0,1\}^{\bar{t}}.
+\end{align}~
+\end{subequations}
+
+%As the model represents the decision problem, it suffices to find any feasible solution, and no objective function is needed.
+The interpretation of constraints \eqref{mod:part:nodeBelongs} is that every node in the original graph $G$ belongs to exactly one binomial tree.
+Note that these constraints are quantified only over $V$ and not over $V'$.
+In this way it is achieved that $v_0$ can be regarded as a part of several binomial trees.
+By \eqref{mod:part:treeHasIJ} is ensured that exactly one node, possibly $v_0$, is allocated to position $i$ of each binomial tree.
+By the summation over $V'$ is ensured, that pruned nodes are collectively represented by $v_0$.
+Next, \eqref{mod:part:source1} enforce that source nodes are always the first nodes in corresponding binomial trees, in accordance with definition \eqref{eq:beta} of the function $\beta$.
+The remaining two sets of constraints guarantee that the arcs of binomial trees follow edges in $E$.
+%In particular, it is enforced by \eqref{mod:part:followArcsA} that if $u$ and $v$ are not adjacent in $G$, then $v$ must not act as a child of $u$ in any binomial tree.
+In particular, it is enforced by \eqref{mod:part:followArcsA} that if there is some  non-neighbor $v$ of $u$  with a label $\ell$ in a binomial tree rooted at $s$,
+then there must be a neighbor of some non-neighbor of $u$ with label $i$ in the same binomial tree.
+Similarly, Constraints \eqref{mod:part:followArcsB} state that if there is a node $v$ with label $\ell$ in a binomial tree rooted at $s$ in the complement of neighborhood of all non-neighbors of $u$,
+there must also be a neighbor of $u$ with label $i$ in this binomial tree.
+This reflects the obvious fact that if a tree is pruned at some node, all its descendants must also be excluded from the tree.
+%The definition of $A'$ also prevents arcs of the binomial trees to be oriented from $V_\alpha$ to $V$.
+%In other words, once the signal leaves the original graph $G$ and enters $v_0$, it cannot return back to $G$.
+Without \eqref{mod:part:followArcsA} and \eqref{mod:part:followArcsB}, it could be possible to find a feasible solution, even when no partition of $G$ into pruned binomial trees exists.
+Finally, the relation \eqref{mod:part:yzrel} between $y$ and $z$ variables follows from Obs. \ref{obs:btspread}.
+It says that whenever there is a node in a position $i$, then the delay is at least $\lceil\log i\rceil$.
+%Constraints \eqref{mod:part:followArcsA} and \eqref{mod:part:followArcsB} can be replaced by stronger
+%\begin{subequations}
+%\begin{align}
+%\label{mod:part:followArcsAStrongerA}
+%y^{v_0}_{is}+y^u_{i s} + \sum\limits_{v\in V\setminus N(u)}y^v_{\ell s}&\leq 1 & u\in V,i\in I,\ell\in C(i), s\in S,  \\
+%\label{mod:part:followArcsAStrongerB}
+%y^{v_0}_{is}+y^u_{\ell s} + \sum\limits_{v\in V\setminus N(u)}y^v_{i s}&\leq 1 & u\in V,i\in I,\ell\in C(i), s\in S.
+%\end{align}
+%\end{subequations}
+%
+\subsubsection{Valid inequalities}
+Let $W$ be a maximal independent set in $G$.
+Model \eqref{mod:partition} is strengthened by
+\begin{align}
+\label{mod:part:vibasic}
+y^{v_0}_{is}+ \sum\limits_{v\in W}(y^v_{is}+y^v_{\ell s})&\leq 1 & i\in I,\ell\in C(i), s\in S,
+\end{align}
+which exploits the fact that no pair of nodes in $W$ is adjacent, and so there must be no two nodes with adjacent $\beta$-positions.
+
+We now generalize this idea by using the notion of graph power $G^m=(V,E^m)$ commonly defined as a graph with the same set of nodes as $G$,
+and an edge between two nodes in $G^m$ is present iff there is a path of length at most $m$ between them in $G$.
+For our purposes, we use a slightly modified definition of the edge set
+$$E^m=\{\{u,v\}:\text{there exists a path between $u$ and $v$ in $G$ of length $m$}\}.$$
+Definition \eqref{eq:c1} can be generalized to descendants of an arbitrary distance $m$ from $v$ in $B^k$:
+\begin{equation}
+C^{m+1}(i)=\bigcup_{j\in C^1(i)}C^m(j).
+\end{equation}
+For a given $m$, let $W_m$ be a maximal independent set in $G^m$.
+Further strengthening of model \eqref{mod:partition} is achieved by introducing valid inequalities
+\begin{align}
+\label{mod:part:vigeneral}
+y^{v_0}_{is}+ \sum\limits_{v\in W_m}(y^v_{is}+y^v_{\ell s})&\leq 1 & i\in I,\ell\in C^m(i), s\in S,1\leq m\leq \Delta_G-1.
+\end{align}
+Clearly, inequality \eqref{mod:part:vibasic} is included in \eqref{mod:part:vigeneral} for $m=1$.
+The distance between positions $i$ and $\ell=C^m(i)$ in a binomial tree is $m$.
+The maximal independent set $W_m$ contains nodes such that length of any path between any two nodes is different from $m$,
+and so there must not be two nodes in $W_m$ with positions $i$ and $\ell$ at the same time.
+
+\subsubsection{Symmetry removal}
+Another improvement of this model is achieved by a symmetry removal.
+If a broadcast tree is identical to a binomial tree, we notice that nodes with labels from $C(i)$, i.e., children of some node $v$ with $\beta(v)=i$, are informed in increasing time steps.
+For example in $B^3$, $C(2)=\{4,6\}$ and the corresponding nodes are informed in time step 2 and 3, respectively.
+If a label $\ell\in C(i)$ corresponds to a node of a binomial tree that is pruned (if $y^{v_0}_{\ell s}=1$ for some $s\in S$),
+all labels $j\in C(i)$ such that $j>\ell$ can also be pruned.
+Thus, adding
+\begin{align}
+\label{mod:part:sr}
+y^{v_0}_{js}&\leq y^{v_0}_{\ell s}&i\in I,j,\ell\in C(i),j<\ell, s\in S
+\end{align}
+to the model reduces the set of feasible solutions.
+
+\subsubsection{Decision version}
+
+In a similar manner as we derived the decision version \eqref{mod:basic:dec} of model \eqref{mod:basic}, it is possible to construct a decision version of the binomial tree model \eqref{mod:partition} as follows:
+\begin{subequations}\label{mod:genmatch}
+\begin{align}
+\notag \max\sum\limits_{v\in V}&\sum\limits_{i\in I}\sum\limits_{s\in S}   y_{is}^v,\\
+\notag \text{s. t. } \\
+\label{mod:genmatch:nodeBelongs} \sum\limits_{i\in I}\sum\limits_{s\in S}y^v_{is} & \leq 1 & v\in V,\\
+\notag\eqref{mod:part:treeHasIJ} - \eqref{mod:part:followArcsB},\\
+%\label{mod:genmatch:treeHasIJ} \sum\limits_{v\in V'}y^v_{is} & = 1 & i\in I,s\in V_T,\\
+%\label{mod:genmatch:source1} y_{1s}^s & = 1  & s\in V_T,\\
+%\label{mod:part:noReturn} y^u_{ij}+y^v_{lj} &\leq 1 & i\in I,l\in C(i), j\in J, u\in V_\alpha,v\in V,\\
+%\label{mod:part:followArcs} y^u_{is}+y^v_{\ell s} &\leq 1 & i\in I,\ell\in C(i), s\in S, u,v\in V',(u,v)\not\in A',\\
+%\label{mod:part:followArcsA} y^u_{is}+y^v_{\ell s} &\leq 1 & i\in I,\ell\in C(i), s\in S, u,v\in V,\{u,v\}\not\in E,\\
+%\label{mod:part:followArcsB} y^{v_0}_{is}+y^v_{\ell s} &\leq 1 & i\in I,\ell\in C(i), s\in S, v\in V,\\
+%\label{mod:genmatch:followArcsA}y^{v_0}_{is}+y^u_{i s} + \sum\limits_{v\in V\setminus N(u)}y^v_{\ell s}&\leq 1 & u\in V,i\in I,\ell\in C(i), s\in V_T,  \\
+%\label{mod:genmatch:followArcsB}y^{v_0}_{is}+y^u_{\ell s} + \sum\limits_{v\in V\setminus N(u)}y^v_{i s}&\leq 1 & u\in V,i\in I,\ell\in C(i), s\in V_T,\\
+\label{mod:genmatch:dim}&&y \in \{0,1\}^{I\times S\times V'}.
+\end{align}~
+\end{subequations}
+This model is a modification of formulation \eqref{mod:partition}, and uses the same type of variables.
+The objective function is to maximize the number of nodes involved in the binomial trees.
+In order to determine the minimum broadcast time, we are looking for the minimum $k$ such that each node can be assigned a label from the set $I=\{1,\dots,2^k\}$ while satisfying given constraints.
+%The index set $I=\{1,\dots,2^k\}$ depends on the input parameter $k$.
+The constraints \eqref{mod:genmatch:nodeBelongs} state that each node belongs to at most one binomial tree.
+Compared to \eqref{mod:part:nodeBelongs}, \eqref{mod:genmatch:nodeBelongs} is an inequality, because the binomial trees do not necessarily form a partition of $G$, and so not all nodes have to be used.
+The remaining constraints are taken from formulation \eqref{mod:partition}.
+
+The approach is then analogous to the idea indicated in Section \ref{sec:decbasic}.
+Assume we are given a lower bound $\underline{t}$ and an upper bound $\bar{t}$ on the minimum broadcast time.
+Initially, we define the set $I=\{1,\dots,2^{\underline{t}}\}$ and iteratively solve the model while doubling the set $I$ until the objective function attains the value $n$.
+That indicates that it is the first iteration in which all nodes are assigned a label, and it can be concluded that the minimum broadcast time is $\log_2|I|$.
+
+%An objective function is naturally lacking in the formulation of the decision problem.
+%It is nevertheless straightforward to create an ILP model for the corresponding optimization problem.
+%Let $z_i=1 \Leftrightarrow t=i$ be a new variable and let $\bar{t}$ be an upper bound on the delay in $(G,S)$.
+%Problem \ref{prob:min} is formulated as follows:
+%\begin{subequations}
+%\begin{align}
+%\notag &\min\sum\limits_{j=0}^{\bar{t}}z_j,\\
+%\notag \text{s. t. } \\
+%\notag \eqref{mod:part:nodeBelongs} - \eqref{mod:part:source1},& \eqref{mod:part:followArcsAStrongerA} - \eqref{mod:part:followArcsAStrongerB}, \eqref{mod:part:vi}, \eqref{mod:part:sr},\\
+%\notag\sum\limits_{v\in V}y^v_{is} & \leq z_{\lceil\log i\rceil} & i\in I,s\in S,\\
+%\notag\label{mod:part:optdim}y &\in \{0,1\}^{I\times S\times V'}, z \in \{0,1\}^{\bar{t}}.
+%\end{align}~
+%\end{subequations}
+
+
+Our preliminary experiments indicate that the published model in Paper IV determines an optimal solution faster, we believe that there is a room for improvement 
+
+
+\section{Inexact Algorithms}
+
+A number of heuristics methods as well as approximation algorithms along with associated theoretical results have been developed.
+

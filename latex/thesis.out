@@ -18,16 +18,18 @@
 \BOOKMARK [0][-]{chapter.3}{Minimum Broadcast Time}{}% 18
 \BOOKMARK [1][-]{section.3.1}{Network Model and Definitions}{chapter.3}% 19
 \BOOKMARK [1][-]{section.3.2}{Computational Complexity}{chapter.3}% 20
-\BOOKMARK [1][-]{section.3.3}{Solution Techniques}{chapter.3}% 21
-\BOOKMARK [0][-]{chapter.4}{Multi-Agent Path Finidng}{}% 22
-\BOOKMARK [1][-]{section.4.1}{Scenarios with adversaries}{chapter.4}% 23
-\BOOKMARK [2][-]{subsection.4.1.1}{Adversarial Cooperative Path Finding}{section.4.1}% 24
-\BOOKMARK [2][-]{subsection.4.1.2}{Area Protection Problem}{section.4.1}% 25
-\BOOKMARK [2][-]{subsection.4.1.3}{Area Protection Problem with Communication maintenance}{section.4.1}% 26
-\BOOKMARK [0][-]{chapter.5}{Contribution of the Thesis and Prospective Research}{}% 27
-\BOOKMARK [0][-]{chapter.6}{Attached Papers}{}% 28
-\BOOKMARK [1][-]{section.6.1}{Shared Multicast Trees in Ad Hoc Wireless Networks}{chapter.6}% 29
-\BOOKMARK [1][-]{section.6.2}{The Shared Broadcast Tree Problem and MST}{chapter.6}% 30
-\BOOKMARK [1][-]{section.6.3}{Integer Programming Formulations for the Shared Multicast Tree Problem}{chapter.6}% 31
-\BOOKMARK [1][-]{section.6.4}{Computing the Broadcast Time of a Graph}{chapter.6}% 32
-\BOOKMARK [0][-]{appendix.A}{List of NP-hard Problems}{}% 33
+\BOOKMARK [1][-]{section.3.3}{Integer Linear Programming Models}{chapter.3}% 21
+\BOOKMARK [2][-]{subsection.3.3.1}{Binomial Tree Model}{section.3.3}% 22
+\BOOKMARK [1][-]{section.3.4}{Inexact Algorithms}{chapter.3}% 23
+\BOOKMARK [0][-]{chapter.4}{Multi-Agent Path Finidng}{}% 24
+\BOOKMARK [1][-]{section.4.1}{Scenarios with adversaries}{chapter.4}% 25
+\BOOKMARK [2][-]{subsection.4.1.1}{Adversarial Cooperative Path Finding}{section.4.1}% 26
+\BOOKMARK [2][-]{subsection.4.1.2}{Area Protection Problem}{section.4.1}% 27
+\BOOKMARK [2][-]{subsection.4.1.3}{Area Protection Problem with Communication maintenance}{section.4.1}% 28
+\BOOKMARK [0][-]{chapter.5}{Contribution of the Thesis and Prospective Research}{}% 29
+\BOOKMARK [0][-]{chapter.6}{Attached Papers}{}% 30
+\BOOKMARK [1][-]{section.6.1}{Shared Multicast Trees in Ad Hoc Wireless Networks}{chapter.6}% 31
+\BOOKMARK [1][-]{section.6.2}{The Shared Broadcast Tree Problem and MST}{chapter.6}% 32
+\BOOKMARK [1][-]{section.6.3}{Integer Programming Formulations for the Shared Multicast Tree Problem}{chapter.6}% 33
+\BOOKMARK [1][-]{section.6.4}{Computing the Broadcast Time of a Graph}{chapter.6}% 34
+\BOOKMARK [0][-]{appendix.A}{List of NP-hard Problems}{}% 35
