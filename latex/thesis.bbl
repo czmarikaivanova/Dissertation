@@ -120,6 +120,15 @@
 \newblock In {\em IEEE Global Telecommunications Conference, 2004. GLOBECOM
   '04.\/} (Nov 2004), vol.~6, pp.~3962--3968 Vol.6.
 
+\bibitem{desousa18}
+{\sc de~Sousa, A., Gallo, G., Gutierrez, S., Robledo, F., Rodríguez-Bocca, P.,
+  and Romero, P.}
+\newblock Heuristics for the minimum broadcast time.
+\newblock {\em Electronic Notes in Discrete Mathematics 69\/} (2018), 165 --
+  172.
+\newblock Joint EURO/ALIO International Conference 2018 on Applied
+  Combinatorial Optimization (EURO/ALIO 2018).
+
 \bibitem{dijkstra59}
 {\sc Dijkstra, E.~W.}
 \newblock A note on two problems in connexion with graphs.
@@ -130,6 +139,12 @@
 \newblock The \&ldquo;real\&rdquo; approximation factor of the mst heuristic
   for the minimum energy broadcasting.
 \newblock {\em J. Exp. Algorithmics 11\/} (Feb. 2007).
+
+\bibitem{garey79}
+{\sc Garey, M.~R., and Johnson, D.~S.}
+\newblock {\em Computers and Intractability; A Guide to the Theory of
+  NP-Completeness}.
+\newblock W. H. Freeman \& Co., New York, NY, USA, 1979.
 
 \bibitem{halgamuge09}
 {\sc Halgamuge, M.~N., Zukerman, M., Ramamohanarao, K., and Vu, H.~L.}
@@ -149,6 +164,11 @@
   {ISCO} 2016, Vietri sul Mare, Italy, May 16-18, 2016, Revised Selected
   Papers\/} (2016), pp.~273--284.
 
+\bibitem{jansen95}
+{\sc Jansen, K., and Müller, H.}
+\newblock The minimum broadcast time problem for several processor networks.
+\newblock {\em Theoretical Computer Science 147}, 1 (1995), 69 -- 85.
+
 \bibitem{kirousis00}
 {\sc Kirousis, L.~M., Kranakis, E., Krizanc, D., and Pelc, A.}
 \newblock Power consumption in packet radio networks.
@@ -161,6 +181,12 @@
 \newblock In {\em Proceedings of the 3rd ACM International Symposium on Mobile
   Ad Hoc Networking \&Amp; Computing\/} (New York, NY, USA, 2002), MobiHoc '02,
   ACM, pp.~112--122.
+
+\bibitem{mcgarvey16}
+{\sc McGarvey, R.~G., Rieksts, B.~Q., Ventura, J.~A., and Ahn, N.}
+\newblock Binary linear programming models for robust broadcasting in
+  communication networks.
+\newblock {\em Discrete Appl. Math. 204}, C (2016), 173--184.
 
 \bibitem{mcgrath13}
 {\sc McGrath, M.~J., and Scanaill, C.~N.}
@@ -196,6 +222,11 @@
 {\sc Nemhauser, G.~L., and Wolsey, L.~A.}
 \newblock {\em Integer and Combinatorial Optimization}.
 \newblock Wiley-Interscience, New York, NY, USA, 1988.
+
+\bibitem{papadimitriou94}
+{\sc Papadimitriou, C.~H.}
+\newblock {\em Computational complexity.}
+\newblock Addison-Wesley, 1994.
 
 \bibitem{papadimitriou06}
 {\sc Papadimitriou, I., and Georgiadis, l.}

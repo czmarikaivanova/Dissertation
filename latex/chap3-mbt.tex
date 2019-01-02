@@ -48,8 +48,9 @@ In the literature, authors often consider the decision version, because some of 
 \begin{problem}\label{mbt:dec}
 Given $G=(V,E)$, $S\subseteq V$,  and a time limit $t\in \mathbb{Z}^+_0$, does $\tau(G,S)\leq t$ hold? 
 \end{problem}
-
-The \emph{broadcast center} of a graph is the set of all nodes having the smallest broadcast times ,i.e., $\arg\min\left\{\tau(G,\{v\}):v\in V\right\}$.
+A node is said to be informed at a given time if it is a source, or it already has received the signal from some other node. Otherwise, the node is said to be uninformed.
+Consequently, the set of informed nodes is initially exactly the set of sources.
+The \emph{broadcast center} of a graph is the set of all nodes having the smallest broadcast times, i.e., $\arg\min\left\{\tau(G,\{v\}):v\in V\right\}$.
 %\section{Problem Definition}
 
 %\section{Broadcast Graphs}
@@ -57,14 +58,14 @@ The \emph{broadcast center} of a graph is the set of all nodes having the smalle
 \section{Computational Complexity}
 
 MBT has been thoroughly studied from the perspective of computation complexity and approximability, particularly in the early 90'.
-ITS NP-completeness or belonging to P was shown for various graph classes and values of time limit $t$.
+Its NP-completeness or belonging to P was proved for various graph classes and values of time limit $t$.
 
-It has been shown that the problem is NP-complete for arbitrary graphs in \cite{garey79} and few years later, 
+It has been shown that the problem is NP-complete for arbitrary graphs \cite{garey79} and few years later, 
 this result was obtained for arbitrary graphs with deadline $t=4$ and a single source by reduction from \textsc{3D Matching}~\cite{slater81}. 
 The same work also contains a $\mathcal{O}(n)$ algorithm for determining broadcast time of a tree with a single source. 
 As a by-product, this algorithm determines the broadcast center of the input tree.
 
-These results are improved and extended in~\cite{jansen93}, where the authors exploit the properties of NP-complete problem \textsc{Planar 3-SAT}.
+These results are improved and extended in~\cite{jansen95}, where the authors exploit the properties of NP-complete problem \textsc{Planar 3-SAT}.
 First, they prove that \textsc{Planar 3,4-SAT} is NP-complete, and subsequently use this property to show that MBT is NP-complete for:
 \begin{itemize}
 \item bipartite planar graphs, deadline $t=2$ and maximum degree at most 3,
@@ -81,7 +82,7 @@ Another complexity result proving that MBT remains NP-complete for 3-regular pla
 is given in \cite{middendorf93} by reduction from \textsc{Exactly-one-in-three-3-SAT}.
 
 The complexity results above typically exploit sophisticated reductions.
-We provide a very simple and straightforward proof of NP-completeness of MEB for time limit at most $t=3$ on graphs with maximum degree at most 3.
+We provide a very simple and straightforward proof of NP-completeness of MBT for time limit at most $t=3$ on bipartite graphs with maximum degree at most 3.
 There are many restrictions on SAT that preserve NP-completeness.
 We concentrate on the variant of 3-SAT with the property that each variable is restricted to appear at most three times, and each literal at most twice. 
 This problem is known as 3-3-SAT, and its NP-completeness proof can be found in~\cite{papadimitriou94}. 
@@ -94,7 +95,7 @@ Let $\varphi$ be an instance of \textsc{3-3-SAT}, and let $G=(V,E)$ and $S\subse
 Then, $\varphi$ is satisfiable if and only if $\tau(G,S)\leq 3$.
 \end{lemma}
 \begin{proof}\label{prop:mbtnpc}
-An instance of Problem \ref{mbt:dec} is constructed from an instance $\varphi(x_1,\dots,x_n)$ of \textsc{3-3-SAT} as follows.
+An instance of Problem \ref{mbt:dec} is constructed from an instance $\varphi(x_1,\dots,x_n)$ of \textsc{3-3-SAT} with clauses $c_1,\dots,c_m$ as follows.
 For each variable $x_i$ $\varphi$, we construct a gadget comprising five $x_i$, $\bar{x}_i$, $u_i$, $v_i$, $w_i$, where $u_i$ is a source, $i=1,\dots n$ .
 The first two nodes represent possible literals associated with the variable $x_i$.
 The gadget further contains four edges, $\{u_i,x_i\}$, $\{u_i,\bar{x}_i\}$, $\{u_i,v_i\}$, and $\{v_i,w_i\}$.
@@ -137,7 +138,7 @@ reducing to the instance of Problem \ref{mbt:dec} depicted in Fig. \ref{fig:mbtn
 \end{figure}
 
 \begin{proposition}
-MBT is NP-complete for graphs with maximum node degree 4 and deadline 4.
+MBT is NP-complete for bipartite graphs with maximum node degree 3 and deadline 3.
 \end{proposition}
 \begin{proof}
 In \cite{slater81}, a polynomial algorithm for MBT in trees is devised.
@@ -145,18 +146,20 @@ As the sequence of vertices $V_0\subseteq\dots\subseteq V_t$ and function $\pi$ 
 it can be verified in polynomial time whether the broadcast time of each braodcast tree in $\mathcal{F}$ does not exceed 3, proving that MBT belongs to NP.
 This concludes together with Lemma~\ref{lemma:mbtred} that MBT is NP-complete for deadline at most 3.
 
-It remains to show that the problem remains NP-complete for graphs with maximum degree bounded by 3.
 As each literal appears at most twice in $\varphi$, the degree of nodes representing literals is at most 3. 
 Each clause node has degree at most 3 since $\varphi$ is in 3-CNF.
 Degrees of nodes $u_i$, $v_i$, and $w_i$ do not depend on $\varphi$, and have degrees 3, 2, and 1, respectively.
 Thus, none of the node degrees in the constructed MBT instance exceeds 3.
+
+Nodes of the constructed graph are divided into two disjoint sets $X=\{u_i,w_i,c_j\}$, $i=1,\dots,n$, $j=1,\dots,m$ and $Y=\{x_i,\bar{x}_i,v_i\}$, $i=1,\dots,n$.
+The graph is bipartite as there are no edges between any two nodes within $X$ or $Y$
 \end{proof}
 
 \section{Integer Linear Programming Models}
 
 A straightforward ILP formulation has been proposed in Paper IV together with a suitable solution method.
-A similar formulation has been recently published in \cite{mbtheurXX}.
-ILP formulation of the problem of \textsc{Minimum Broadcast Graph} are studied in \cite{McGarvey16}.
+A similar formulation has been recently published in \cite{desousa18}.
+ILP formulation of the problem of \textsc{Minimum Broadcast Graph} are studied in \cite{mcgarvey16}.
 The authors focus on the $c$-broadcasting  and $k$-fault-tolerant $c$-broadcasting variants of the problem.
 
 In the following, we present an unpublished ILP model for MBT.
@@ -168,7 +171,7 @@ A binomial tree $B^k$ of order $k$ is an ordered tree defined recursively as fol
 \item The binomial tree $B^0$ consists of a single node.
 \item The binomial tree $B^k$ has a root with $k$ children where the $i$-th child is the root of a binomial tree of order $k-i$, $i=1,\dots,k$.
 \end{itemize}
-An example of $B^3$ is depicted in Fig.\ref{fig:beta}.
+An example of $B^3$ is depicted in Fig.~\ref{fig:beta}.
 %If a solution to MBT consists of broadcast trees that are binomial, the number of informed nodes doubles in each time step.
 For a given time step $k$, the maximum number of informed nodes within $k$ steps is $|S|2^k$.
 This occurs when the solution of MBT consists of broadcast trees that are binomial.
@@ -176,7 +179,7 @@ This occurs when the solution of MBT consists of broadcast trees that are binomi
 %Problem \ref{prob:min} can therefore be restated as finding a partition of $G$ into $m$ pruned binomial trees
 \begin{observation}
 \label{obs:btspread}
-if $r$ is the root of $B^k$, then $\tau(B^k,\{r\})=k$.
+If $r$ is the root of $B^k$, then $\tau(B^k,\{r\})=k$.
 \end{observation}
 \begin{figure}
 \centering
@@ -260,7 +263,7 @@ A graph $G=(V,E)$ and $S\subseteq V$ has $\tau(G,S)\leq k$ iff it is possible to
 such that they form $m$ (pruned) integer binomial trees of order $k$ or smaller rooted at sources.
 \end{proposition}
 \begin{proof}
-Assume nodes in $V$ can be labeled by integers from $I=\{1,\dots,2^k\}$ so that they form (pruned) integer integer binomial trees $B_\ell$ of order at most $k$, $1\leq\ell\leq m$.
+Assume nodes in $V$ can be labeled by integers from $I=\{1,\dots,2^k\}$ so that they form (pruned) integer integer binomial trees $B_\ell$ of order at most $k$, $1\leq\ell\leq |S|$.
 For $r\in V_{B_\ell}$ with $\alpha(r)=r$ and $\beta(r)=1$, by Obs. \ref{obs:btspread}, $\tau(B_\ell,\{r\})\leq k$.
 The sequence of node sets $V_0,\dots,V_k$ is constructed by setting $V_0=\{v\in V:\beta(v)=1\}$, and $V_{i}=V_{i-1}\cup\{v\in V: \beta(v)\in I_i\}$.
 Moreover, $\pi(v)=u\Leftrightarrow \alpha(v)=\alpha(u)~\&~\pi'(\beta(v))=\beta(u)$.
@@ -272,19 +275,24 @@ Nodes are associated with integers from $I$ assigned according to the following 
 \item $\beta(s)=1$ for all $s\in V_0$,
 \item For $v\in V_i$, set $\beta(v)=j$ such that $j\in I_i$ and $(\pi'(\beta(v)),j)\in R, 1\leq i\leq k$.
 \end{enumerate}
-\qed
 \end{proof}
 \subsubsection{The formulation}
 Consider a graph $G'=(V',E')$ constructed  by adding a universal node $v_0$ to $G$.
 The set of nodes and edges is then $V'=V\cup \{v_0\}$ and $E'=E\cup\{\{v_0,v\}:v\in V\}$.
-Apart from $z$-variables introduced in model \eqref{mod:basic}, the ILP formulation based on partition into binomial trees uses
+The ILP formulation based on partition into binomial trees uses variables
 $$
-y_{is}^v=\begin{cases}
+z_{k}=
+\begin{cases}
+1, \text{ if } k\leq t,\\
+0, \text{ otherwise}.
+\end{cases}
+y_{is}^v=
+\begin{cases}
 1, \text{ if } \beta(v)=i \text{ and } \alpha(v)=s,\\
 0, \text{ otherwise},\\
 \end{cases}
 $$
-where $v\in V'$, $i\in I$, $s\in S$ and $0\leq j\leq \bar{t}$.
+where $v\in V'$, $i\in I$, $s\in S$ and $0\leq j\leq \bar{t}$ for some upper bound $\bar{t}$ on the broadcast time.
 With the definition of $G'$ above, it is straightforward to specify constraints that enforce desired values for $y$-variables.
 Whenever $y_{is}^{v_0}=1$, it indicates that the binomial tree rooted at $s$ is pruned at node with position $i$.
 %An obvious weakness of this approach is  that the number of nodes increases to $|V''|=\mathcal{O}(ns)$, and the dimension of variables is thus $\mathcal{O}(n^2s^2)$.
@@ -326,10 +334,10 @@ The formulation based on binomial trees is the following:
 The interpretation of constraints \eqref{mod:part:nodeBelongs} is that every node in the original graph $G$ belongs to exactly one binomial tree.
 Note that these constraints are quantified only over $V$ and not over $V'$.
 In this way it is achieved that $v_0$ can be regarded as a part of several binomial trees.
-By \eqref{mod:part:treeHasIJ} is ensured that exactly one node, possibly $v_0$, is allocated to position $i$ of each binomial tree.
+By \eqref{mod:part:treeHasIJ} is enforced that exactly one node, possibly $v_0$, is allocated to position $i$ of each binomial tree.
 By the summation over $V'$ is ensured, that pruned nodes are collectively represented by $v_0$.
 Next, \eqref{mod:part:source1} enforce that source nodes are always the first nodes in corresponding binomial trees, in accordance with definition \eqref{eq:beta} of the function $\beta$.
-The remaining two sets of constraints guarantee that the arcs of binomial trees follow edges in $E$.
+Constraints \eqref{mod:part:followArcsA} and \eqref{mod:part:followArcsB} guarantee that the arcs of binomial trees follow edges in $E$.
 %In particular, it is enforced by \eqref{mod:part:followArcsA} that if $u$ and $v$ are not adjacent in $G$, then $v$ must not act as a child of $u$ in any binomial tree.
 In particular, it is enforced by \eqref{mod:part:followArcsA} that if there is some  non-neighbor $v$ of $u$  with a label $\ell$ in a binomial tree rooted at $s$,
 then there must be a neighbor of some non-neighbor of $u$ with label $i$ in the same binomial tree.

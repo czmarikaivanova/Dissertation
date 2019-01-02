@@ -8,4 +8,6 @@ Others
 *.tar
 *.swo
 *.swp
-
+*.dvi
+*.fdb_latexmk
+*.blg

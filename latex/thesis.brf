@@ -56,7 +56,12 @@
 \backcite {ivanova16}{{17}{2.2.4}{figure.caption.21}}
 \backcite {halgamuge09}{{18}{2.2.4}{equation.2.2.3}}
 \backcite {chu17}{{19}{3}{Item.11}}
+\backcite {garey79}{{20}{3.2}{section.3.2}}
 \backcite {slater81}{{20}{3.2}{section.3.2}}
+\backcite {jansen95}{{20}{3.2}{section.3.2}}
 \backcite {middendorf93}{{21}{3.2}{section.3.2}}
+\backcite {papadimitriou94}{{21}{3.2}{section.3.2}}
 \backcite {slater81}{{22}{3.2}{proposition.6}}
-\backcite {cormen01}{{22}{3.3.1}{subsection.3.3.1}}
+\backcite {desousa18}{{22}{3.3}{section.3.3}}
+\backcite {mcgarvey16}{{22}{3.3}{section.3.3}}
+\backcite {cormen01}{{23}{3.3.1}{subsection.3.3.1}}
