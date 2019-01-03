@@ -7,6 +7,8 @@ If this inclusion is an equality, $G$ is said to be \emph{complete}.
  The set $A$ of arcs is derived from $E$ by considering both directions of orientation of the edges.
  Formally, $A=\left\{(i,j),(j,i):\left\{i,j\right\}\in E\right\}$.
 A~\emph{path} in graph is a sequence of edges connecting a sequence of distinct vertices.
+Consider the shortest paths between every two nodes in a graph $G$.
+The longest among these shortest paths is called the \emph{graph diameter}, and is usualy denoted ad $\Delta_G$.
 A~graph is said to be \emph{connected} if there exists a path between every two vertices, otherwise it is \emph{disconnected}.
 A~\emph{cycle} of a graph $G$ is a subset of $E$ that form a path such that the first node of the path corresponds to the last. 
 If $G$ contains a cycle, $G$ is called, \emph{cyclic}, otherwise it is called \emph{acyclic}.
@@ -23,6 +25,7 @@ A spanning tree of graph $G=(V,E)$ is a tree $T=(V_T,E_T)$ such that $T\subseteq
 A bipartite graph is a set of graph vertices decomposed into two disjoint sets such that no two vertices within the same set are adjacent.
 Every acyclic graph is bipartite.
 A cyclic graph is bipartite if and only if it does not contain a cycle of odd length.
+An \emph{independent set} is a subset $V'$ of vertices in a graph, where no two nodes in $V'$ are adjacent.
 
 In a \emph{weighted graph} $G=(V,E,w)$, a \emph{weight} or \emph{cost} $w_e$ is associated witch each edge $e\in E$.
 When use terms \emph{heavier, heavies} when comparing weights of different eges in a graph.

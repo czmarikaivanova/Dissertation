@@ -182,6 +182,11 @@
   Ad Hoc Networking \&Amp; Computing\/} (New York, NY, USA, 2002), MobiHoc '02,
   ACM, pp.~112--122.
 
+\bibitem{liestman85}
+{\sc Liestman, A.~L.}
+\newblock Fault-tolerant broadcast graphs.
+\newblock {\em Networks 15}, 2 (1985), 159--171.
+
 \bibitem{mcgarvey16}
 {\sc McGarvey, R.~G., Rieksts, B.~Q., Ventura, J.~A., and Ahn, N.}
 \newblock Binary linear programming models for robust broadcasting in

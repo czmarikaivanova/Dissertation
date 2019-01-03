@@ -51,6 +51,8 @@ Given $G=(V,E)$, $S\subseteq V$,  and a time limit $t\in \mathbb{Z}^+_0$, does $
 A node is said to be informed at a given time if it is a source, or it already has received the signal from some other node. Otherwise, the node is said to be uninformed.
 Consequently, the set of informed nodes is initially exactly the set of sources.
 The \emph{broadcast center} of a graph is the set of all nodes having the smallest broadcast times, i.e., $\arg\min\left\{\tau(G,\{v\}):v\in V\right\}$.
+
+In $c$-broadcasting, which is a generalization of regular broadcasting, a signal can be sent to up to $c$ nodes adjacent to an informed node in each time step.
 %\section{Problem Definition}
 
 %\section{Broadcast Graphs}
@@ -152,16 +154,13 @@ Degrees of nodes $u_i$, $v_i$, and $w_i$ do not depend on $\varphi$, and have de
 Thus, none of the node degrees in the constructed MBT instance exceeds 3.
 
 Nodes of the constructed graph are divided into two disjoint sets $X=\{u_i,w_i,c_j\}$, $i=1,\dots,n$, $j=1,\dots,m$ and $Y=\{x_i,\bar{x}_i,v_i\}$, $i=1,\dots,n$.
-The graph is bipartite as there are no edges between any two nodes within $X$ or $Y$
+The graph is bipartite as there are no edges between any two nodes within $X$ or $Y$.
 \end{proof}
 
 \section{Integer Linear Programming Models}
 
 A straightforward ILP formulation has been proposed in Paper IV together with a suitable solution method.
 A similar formulation has been recently published in \cite{desousa18}.
-ILP formulation of the problem of \textsc{Minimum Broadcast Graph} are studied in \cite{mcgarvey16}.
-The authors focus on the $c$-broadcasting  and $k$-fault-tolerant $c$-broadcasting variants of the problem.
-
 In the following, we present an unpublished ILP model for MBT.
 
 \subsection{Binomial Tree Model}
@@ -204,29 +203,6 @@ This function is defined recursively as
 \end{cases}
 \end{equation*}
 Nodes in Fig. \ref{fig:beta} are labeled with their $\beta$-values.
-Pairs of integers that are assigned to adjacent nodes in a binomial tree are defined by relation
-\begin{equation*}
-\label{eq:betarel}
-R=\{(i,j)\in\mathbb{N}\times\mathbb{N}:j=i+2^k,k\geq\log i,k\in \mathbb{Z}\}.
-\end{equation*}
-
-We further define the function $\pi':\mathbb{N}\to\mathbb{Z}_+$ that for a given integer $i$ associated with node $v$
-determines $\beta$-value of parent of $v$:
-\begin{align*}
-\label{eq:piprime}
-\pi'(1)&=0,& \\
-\pi'(j)&=j-2^{\lceil\log j\rceil -1}, &j > 1.
-\end{align*}
-Using functions $\alpha$, $\beta$, $\pi'$ and the relation $R$, we introduce the notion of binomial trees over positive integers.
-\begin{definition}
-A pair $(I,X)$ where $I=\{1,\dots,2^k\}$, $k\in\mathbb{Z}_+$, $(\alpha(u),\beta(u))=(\alpha(v),\beta(v))\Leftrightarrow u=v$ and
-$X=\{(i,j)\in R, i,j\in I\}$ is an \emph{integer binomial tree of order $k$}.
-
-$(I,X)$, where $I\subseteq\{1,\dots,2^k\}, k\in \mathbb{Z}_+,\pi(j)\in I$ for all $j\in I\setminus\{1\}$ and
-$X=\{(i,j)\in R, i,j\in I\}$ is an \emph{integer binomial tree of order $k$ pruned at $\{1,\dots,2^k\}\setminus I$}.
-\end{definition}
-We now develop a method for modelling Problem \ref{mbt:opt} whose main principle is finding a partition of $G$ into pruned binomial trees.
-For any integer $i$, let $I_i=\{2^{i-1}+1,\dots,2^i\}$.
 %\begin{problem}
 %\label{prob:dec}
 %Given $G=(V,E)$, $S\subseteq V$ and $t\in \mathbb{N}$, is there a sequence $S=V_0\subseteq\dots\subseteq V_t=V$
@@ -250,32 +226,6 @@ For any integer $i$, let $I_i=\{2^{i-1}+1,\dots,2^i\}$.
 %\begin{observation}\label{obs:childdeg}
 %Children of $v\in V^t$ with $\text{deg}^+(v)=\ell$ have out-degree $0,\dots,\ell-1$.
 %\end{observation}
-\begin{observation}\label{obs:eqbetalevel}
-$\pi'$ is injective.
-%For $i_1,i_2\in I_i$, $\pi'(i_1)=\pi'(i_2)\Leftrightarrow i_1=i_2$.
-\end{observation}
-\begin{proof}
-We notice that $\lceil\log (2^{i-1}+1)\rceil=\dots =\lceil\log 2^i\rceil$, and thus $\pi'(2^{i-1}+1),\dots,\pi'(2^i)$ are pairwise different.
-\end{proof}
-
-\begin{proposition}\label{lem:probeq}
-A graph $G=(V,E)$ and $S\subseteq V$ has $\tau(G,S)\leq k$ iff it is possible to assign integers to nodes
-such that they form $m$ (pruned) integer binomial trees of order $k$ or smaller rooted at sources.
-\end{proposition}
-\begin{proof}
-Assume nodes in $V$ can be labeled by integers from $I=\{1,\dots,2^k\}$ so that they form (pruned) integer integer binomial trees $B_\ell$ of order at most $k$, $1\leq\ell\leq |S|$.
-For $r\in V_{B_\ell}$ with $\alpha(r)=r$ and $\beta(r)=1$, by Obs. \ref{obs:btspread}, $\tau(B_\ell,\{r\})\leq k$.
-The sequence of node sets $V_0,\dots,V_k$ is constructed by setting $V_0=\{v\in V:\beta(v)=1\}$, and $V_{i}=V_{i-1}\cup\{v\in V: \beta(v)\in I_i\}$.
-Moreover, $\pi(v)=u\Leftrightarrow \alpha(v)=\alpha(u)~\&~\pi'(\beta(v))=\beta(u)$.
-Also, $\pi(u)=\pi(v)\Leftrightarrow u=v$ follows from Obs. \ref{obs:eqbetalevel}, because nodes in $V_i$ have $\beta$ values in $I_i$.
-
-Conversely, suppose there is a sequence of subsets and a function $\pi$ in $G$ with the desired properties.
-Nodes are associated with integers from $I$ assigned according to the following steps:
-\begin{enumerate}
-\item $\beta(s)=1$ for all $s\in V_0$,
-\item For $v\in V_i$, set $\beta(v)=j$ such that $j\in I_i$ and $(\pi'(\beta(v)),j)\in R, 1\leq i\leq k$.
-\end{enumerate}
-\end{proof}
 \subsubsection{The formulation}
 Consider a graph $G'=(V',E')$ constructed  by adding a universal node $v_0$ to $G$.
 The set of nodes and edges is then $V'=V\cup \{v_0\}$ and $E'=E\cup\{\{v_0,v\}:v\in V\}$.
@@ -454,3 +404,26 @@ That indicates that it is the first iteration in which all nodes are assigned a 
 %\section{Inexact Algorithms}
 
 %A number of heuristics methods as well as approximation algorithms along with associated theoretical results have been developed.
+
+\section{Broadcast Graphs}
+
+A related problem to MBT is the problem of finding minimum broadcast graphs.
+In this settings, $|S|=1$ is assumed.
+A \emph{broadcast graph} is a communication network on $n$ nodes with optimal broadcast time $\lceil \log n\rceil$ regardless of the source.
+Every complete graph $K_n$ satisfies this property, yet $K_n$ is not minimal. 
+The minimum number of edges in any broadcast graph on $n$ nodes is denoted as $B(n)$.
+A \emph{Minimum broadcast graph} is a broadcast graph with $B(n)$.
+
+In the generalized $c$-broadcasting, a \emph{$c$-broadcast graph} has a broadcast time $\lceil \log_{c+1} n\rceil$, and analogously, 
+$B_c(n)$ denotes the minimum number of edges in any $c$-broadcast graph.
+A $c$-broadcast graph with $B_c(n)$ edges is said to be a \emph{minimum $c$-broadcast graph}.
+A time-relaxed $c$-broadcasting \cite{mcgarvey16} allows additional $t$ time steps are allowed.
+Thus, a time-relaxed $c$-broadcast graph has broadcast time $\lceil \log_{c+1} n\rceil+t$.
+
+Another generalization is the $k$-fault tolerant broadcast problem \cite{liestman85}.
+The task is to identify sparse graphs with reliable transmission schemes.
+The protocols of a $k$-fault tolerant broadcast graph are predefined in such a way that if any $k$ edges in the protocol fail, the signal still reaches all nodes in the graph.
+
+ILP formulations to construct $c$-broadcast graphs, $k$-fault tolerant $c$-broadcast graphs and minimuim $c$-broadcast graphs are presented in \cite{mcgarvey16}.
+
+
