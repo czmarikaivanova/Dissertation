@@ -11,3 +11,6 @@ Others
 *.dvi
 *.fdb_latexmk
 *.blg
+*.out
+*.swn
+*.toc

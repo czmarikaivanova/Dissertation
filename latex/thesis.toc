@@ -37,7 +37,6 @@
 \contentsline {subsubsection}{Valid inequalities}{25}{section*.26}
 \contentsline {subsubsection}{Symmetry removal}{26}{section*.27}
 \contentsline {subsubsection}{Decision version}{26}{section*.28}
-\contentsline {section}{\numberline {3.4}Inexact Algorithms}{27}{section.3.4}
 \contentsline {chapter}{\numberline {4}Multi-Agent Path Finidng}{29}{chapter.4}
 \contentsline {section}{\numberline {4.1}Scenarios with adversaries}{29}{section.4.1}
 \contentsline {subsection}{\numberline {4.1.1}Adversarial Cooperative Path Finding}{29}{subsection.4.1.1}
