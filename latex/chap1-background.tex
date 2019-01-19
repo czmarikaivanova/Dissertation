@@ -27,7 +27,7 @@ Every acyclic graph is bipartite.
 A cyclic graph is bipartite if and only if it does not contain a cycle of odd length.
 An \emph{independent set} is a subset $V'$ of vertices in a graph, where no two nodes in $V'$ are adjacent.
 
-In a \emph{weighted graph} $G=(V,E,w)$, a \emph{weight} or \emph{cost} $w_e$ is associated witch each edge $e\in E$.
+In a \emph{weighted graph} $G$, a \emph{weight} or \emph{cost} $w:E\mapsto\mathbb{R}$ is associated witch each edge $e\in E$.
 When use terms \emph{heavier, heavies} when comparing weights of different eges in a graph.
 A~weight of $G$ is $\sum_{e\in E}w(e)$.
 A~spanning tree of $G$ with minimum weight is called a \emph{minimum spanning tree} of $G$.
@@ -167,9 +167,26 @@ Suppose that the IP and D are a weak-dual pair.
 
 \subsection{Solution methods}
 
-Linear programs are commonly solved in polynomial time by the \emph{simplex algorithm}.
-A MILP can be solved by the \emph{branch and bound} (B\&B) method which may take exponential time.
-These and other algorithms are an integral parts of most of the modern solvers such as CPLEX and GUROBI.
+%Linear programs are commonly solved in polynomial time by the \emph{simplex algorithm}.
+Several effective methods for solving ILPs are used in practice.
+Among these is the \emph{simplex method} and \emph{interior point method}.
+The simplex method sequentially tests adjacent vertices of the feasible region (a convex polytope) 
+so that at each new vertex the objective function is either improved or unchanged.
+The simplex method is very efficient in practice, converging in polynomial time.
+However, its worst-case complexity is exponential.
+
+The interior point method constructs a sequence of feasible points lying inside of the polytope but never on its boundary, that converges to the solution.
+Its time complexity is polynomial in both average and worst case.
+
+A MILP can be solved by the \emph{branch and bound} (B\&B) method which systematically enumerates candidate solutions by means of state space search.
+The set of candidate solutions gradually forms a rooted tree with the full set at the root. 
+The algorithm explores branches of this tree, which represent subsets of the solution set. 
+Before enumerating the candidate solutions of a branch, a bound on the best possible result of the branch is calculated and compared with upper and lower estimated bounds on the optimal solution.
+If a solution better than the best one found so far by the algorithm cannot be produced, the entire branch is discarded.
+Performance of the algorithm depends on efficient estimation of the lower and upper bounds of branches of the search space. 
+If bounds cannot be calculated, the algorithm becomes  an exhaustive search.
+
+These and other algorithms are an integral parts of most modern solvers such as CPLEX and GUROBI.
 
 \section{Problems and Complexity}\label{sect:probcomp}
 
@@ -247,39 +264,3 @@ is a $(1+\epsilon)$-approximation algorithm for minimization problems and $(1-\e
 \begin{proposition}
 APX-hard problems do not admit PTAS.
 \end{proposition}
-
-\section{Path Planning}
-
-Basic path-finding in (weighted) graphs is a well known task in computer science. The aim 
-is to find a route between two selected vertices. We also use the term \emph{source} and
-\emph{target} to refer to the initial vertex and target vertex, respectively.
-
-%\subsubsection{Dijkstra's algorithm}
-
-A shortest path can be found using \emph{Dijkstra's algorithm} \cite{dijkstra59}, which guarantees optimality.
-Dijkstra’s Algorithm visits vertices in the graph starting with the source. 
-It then repeatedly inspects the vertex which was not yet visited that lies closest to the source. 
-It expands outwards from the source until it reaches the target. 
-A drawback of this approach is that it may expand too many vertices that later turn out to lie very far from the target.
-
-%\subsubsection{Best first search}
-
-Another possibility is the greedy \emph{best first search} algorithm which can find the target faster, but the selected path is not guaranteed to be optimal.
-Instead of expanding vertices close to the source, it selects those close to the target.
-Obviously, which node is exactly the closest is not known without a previous preprocessing, and so it uses a heuristic estimation which guides the way towards the target.
-
-%\subsubsection{A*}
-
-The \emph{A*} algorithm combines the advantages of Dijkstra's and best first search algorithm.
-It guarantees to find an optimal path and also exploits a heuristic estimation of the distance to the target which helps to avoid expanding unsuitable vertices.
-
-The heuristic estimation is particularly useful when there is an incomplete information about the graph.
-For that reason, A* is popular in video game development, where the exact distances can not be predicted due to a frequent change of the environment. 
-
-Let us denote the source and target by $s$ and $t$, respectively.
-The following values are considered for every vertex $v$:
-\begin{itemize}
-	\item $g_v$, a distance from $s$ to $v$,
-	\item $h_v$, heuristic estimation of distance between $v$ and $t$, 
-	\item $f_v=g_v+h_v$.
-\end{itemize}

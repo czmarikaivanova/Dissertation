@@ -1,41 +1,234 @@
-\chapter{Multi-Agent Path Finidng}\label{sec:app}
+\chapter{Path Finding for Multiple Robots}\label{sec:app}
 
-In multi-robot path finding (MPF) we consider an environment with several identical moving entities referred to as 
-\emph{agents}. Source and target locations are uniquely determined for each agent. The objective
-is to find a route for every agent from its source to its target.
-Agents must not collide with obstacles and other agents that are also moving along
-planned routes towards their own targets.
-The environment is modeled as an undirected graph, where the agents are placed in the vertices, and move along the edges from one vertex to another. 
-Continuous time is divided into discrete time steps, where the relocation of an agent from one vertex to its neighbor takes exactly 1 time step.
+%Although the main focus of this chapter is the \textsc{Area Protection Problem} APP, 
+%we first provide and overview of relevant problems  \textsc{Multi-Agent Path Finding} (MPF) and its variants before pursuing APP itself because APP shares many features wih other modifications of MPF, 
+%and it is therefore more natural to introduce the simpler variants earlier.
 
-Different variants and restrictions have been studied.
+Before focusing on path finding for multiple robots, let us summarize techniques for simple path finding in graphs, which act as building blocks in environments with multiple robots.
 
-\emph{Muliti-agent path-finding} (MPF) \cite{source1}  supposes a group of agents in a given
-environment, where initial and target positions are determined for each agent.
-All individual agents must avoid collisions. Movement of the agents is carried
-out in discrete time steps. Agent can shift from one vertex to its neighbor on
-condition that the neighbor is either unoccupied or is being left by other agent
-in the same time step. At most one agent is allowed to pass an edge within one
-time step. That is, agents are not allowed to exchange their positions within one
-time step.
+\section{Basic Path Finding}
 
-\emph{Pebble motion on graphs} \cite{source1,source2} is a very similar problem as MPF. It can
-be regarded as a restricted variant of MPF. The difference consists in rules for
-movement. While MPF enables entering a vertex that is simultaneously being
-left by other agent, such transfer is not permissible in pebble motion. As an
-illustration we can mention 15 puzzle also known as Lloyd’s 15 \cite{lloydXX}.
+Basic path finding is a well known task in computer science.
+Given a graph $G=(V,E)$, the objective is to find a path between two selected points $s$ and $t$ referred to as  \emph{source} and \emph{target}, respectively.
+Graph searching methods such as breadth-first search and depth-first search find a path if given a sufficient amount of time. 
 
-\emph{Cooperative Path-finding} \cite{cpf} is a special case of MPF where each agent is
-assumed to have a full knowledge of all other agents and their planned routes.
-Precisely speaking, solving algorithm can take into account paths planned for
-agents that were processed earlier, and adjust paths searched later according to
-them.
+The aim is often to find a shortest path between source and target in $G$ with given edge costs.
+Exchausted search examining all possible paths employed in Bellman-Ford algorithm yields a shortest path in $\mathcal{O}(|V||E|)$.
 
+A common approach used for finding a shortest path is \emph{Dijkstra's algorithm} \cite{dijkstra59}, which guarantees to yield an optimal path in $\mathcal{O}(|E|\log|V|)$ time.
+Dijkstra’s Algorithm visits vertices in the graph starting with the source. 
+It then repeatedly inspects the vertex which was not yet visited that lies closest to the source. 
+It expands outwards from the source until it reaches the target. 
+A drawback of this approach is that it may expand too many vertices that later turn out to lie very far from the target.
+
+Another possibility is the greedy \emph{best first search} algorithm which can find the target faster, but the selected path is not guaranteed to be optimal.
+Instead of expanding vertices close to the source, it selects those close to the target.
+Obviously, which node is exactly the closest is not known without a previous preprocessing, and so it uses a heuristic estimation which guides the way towards the target.
+
+The \emph{A*} algorithm \cite{hart68} combines the advantages of Dijkstra's and best first search algorithm.
+It guarantees to find an optimal path and also exploits a heuristic estimation of the distance to the target, which helps to avoid expanding unsuitable vertices.
+The heuristic estimation is particularly useful when there is an incomplete information about the graph.
+For that reason, A* is popular in video game development, where the exact distances can not be predicted due to a frequent change of the environment, 
+or due to an incomplete information of the environment.
+
+A* searches a shortest path from $s$ to $t$ by maintaining a tree of paths originating at $s$ and extending those paths until its termination criterion is satisfied.
+Alg.~\ref{alg:astar} shows a pseudocode of A*.
+At each iteration, the algorithm determines which of its paths should be extend. 
+The selection is based on the cost of the path so far and a heuristic estimate of the cost required to extend the path all the way to $t$. 
+Specifically, A* chooses the path that minimizes
+$$
+    f(v)=g(v)+h(v),
+$$
+where $v$ is the node by which the path is extended, $g(n)$ is the cost of the path from the $s$ to $v$, 
+and $h(n)$ is a heuristic estimation of the cost of the cheapest path from $v$ to the target $t$. 
+A* terminates when the path it chooses to extend is a path from start to goal or if there are no paths eligible to be extended.
+
+The performance of A* strongly depends on the selected heuristic function $h$.
+The heuristic is \emph{admissible} if $h(v)\leq$ the shortest path from $v$ to $t$.
+An admissible heuristic is an optimistic estimation as it considers a shorter path than it actually is. 
+Thus, $f(v)$ is a lower bound on the path cost via $v$.
+The heuristic is said to be \emph{monotoneous} or \emph{consistent} if for some $v'\in N(v)$ we have that $h(v)\leq w_{vv'}+h(v')$.
+\begin{observation}
+Every monotoneous heuristics is admissible.
+\end{observation}
+\begin{proof}
+Let $s=v_1,v_2,\dots,v_k=t$ be an optimal path.
+As $h$ is monotonous, we have that $h(v_i)-h(v_{i+1})\leq w_{v_iv_{i+1}}$.
+	This implies that $h(v_1)\leq\sum_{i=1}^{k-1}w_{v_iv_{i+1}}$.
+\end{proof}
+\begin{observation}
+For a monotonous heuristic, the values of $f(n)$ are not decreasing along any path.
+\end{observation}
+\begin{proof}\label{obs:monnondec}
+	Let $v'\in N(v)$, i.e., $g(v')=g(v)+w_{vv'}$.
+Then, $f(v')=g(v')+h(v')=g(v)+w_{vv'}+h(v')\geq g(v)+h(v)=f(v)$.
+\end{proof}
+\begin{proposition}
+If $h$ is a monotonous heuristic, A* finds an optimal path.
+\end{proposition}
+\begin{proof}
+	A* selects for expansion the node $v$ with minimal value of $f$ 
+	By Obs.~\ref{obs:monnondec}, if $h$ is monotonous, the values of $f(v)$ are not decreasing along any path.
+	Thus, the path selected from $s$ to $v$ is optimal.
+\end{proof}
+If the trivial monotonous heuristic $h(v)=0$ for all $v\in V$ is used, the algorithms becomes Dijkstra's algorithm.
+
+\begin{algorithm}
+\DontPrintSemicolon
+\SetAlgoLined
+%\KwResult{Write here the result}
+\caption{A* algorithm}
+\BlankLine
+\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+\Input{$G=(V,E)$, $s,t\in V$, $w: E\mapsto\mathbb{R}^+$}
+%\Output{Write here the output}
+\BlankLine
+$C\leftarrow\emptyset$\;
+$O\leftarrow\left\{s\right\}$\;
+\For{$v\in V\setminus\left\{s\right\}$} {
+	$g(v)\leftarrow\infty$\;
+	$f(v)\leftarrow\infty$\;
+}
+$g(s)\leftarrow 0$\;
+$f(s)\leftarrow h(s)$\;
+\While {$O\neq\emptyset$}{
+	$v\leftarrow$ select a node from $\arg\min\left\{f(u):u\in O\right\}$\;
+	\textbf{if }{$v=t$}\textbf{ then return } path from $s$ to $t$ reconstructed using $\pi$\;
+	$O\leftarrow O\setminus\left\{v\right\}$\;
+	$C\leftarrow C\cup\left\{v\right\}$\;
+	\For{$u \in N(v)$} {
+		\textbf{if }{$u\in C$}\textbf{ then continue}\;
+		$tmp\leftarrow g(v) + w_{v,u}$\;
+		\textbf{if }$u\not\in O$ \textbf{ then } $O\leftarrow O\cup\left\{u\right\}$\textbf{ else if }{$tmp\geq g(u)$}\textbf{ then continue}\;
+		$\pi(u)\leftarrow v$\;
+		$g(u)\leftarrow tmp$\;
+		$f(u)\leftarrow g(u)+ h(u)$\;
+	}
+} 
+\textbf{return } failure
+\label{alg:astar}
+\end{algorithm}
+
+\section{Path Finding for Multiple Robots}
+
+The requirement of finding multiple non-colliding paths significantly increases the complexity of the problem.
+
+We consider an environment with several identical moving entities referred to as \emph{agents}. 
+Source and target locations are uniquely determined for each agent. 
+The objective is to find a route for every agent from its source to its target while avoiding obstacles in the environment..
+The environment is modeled as an undirected graph, where the agents are placed in the nodes, and move along the edges from one node to another. 
+In this context, the paths/routes are allowed to contain a node multiple times.
+Movement of the agents is carried out in discrete time steps, where the relocation of an agent from one node to its neighbor takes exactly 1 time step.
+Agents must not collide with obstacles and other agents that are also moving along planned routes towards their own targets.
+
+Methods for solving MPF are divided into two main approaches: \emph{centralized (coupled)} and \emph{decentralized (decoupled)}.
+A centralized approach incorporates a global decision maker that rergards all the agents as a single entity, and plans paths for them simultanously.
+On the other hand, a decentralised approach can considerably reduce computations by decomposing the problem into several smaller subtasks.
+Paths are typically computed for each agent individually, ignoring all other agents.
+The iteractions are handled along the way to avoid collisions.
+This is usually much faster but yields suboptimal solutions and loses completeness \cite{ryan08}.
+
+LRA* \cite{silver05} is a decentralized algorithm readily applicable to MPF.
+Each  agent searches for a route to the destination using the A* algorithm, ignoring all other agents except for its current neighbours. 
+The agents then start to follow their routes, until a collision is impending.  
+Whenever an agent is about to move into a position occupied by another agent, it instead replans the route from its current position.
+
+Problems dealing with navigating a group of mobile robots can be formulated as multi-agent pat planning.  
+However, the primary motivations for the problem are tasks of moving certain entities within an environment with obstacles.
+The constraint of limited free space represents a key aspect that makes the problem non-trivial. 
+Examples of applications include: 
+Parcel delivery in office building by multiple mobile robots \cite{hada01},
+navigation of robots within an industrial warehouse environment \cite{everett95},
+control and the management of a fleet of autonomous mobile robots for transshipment tasks in harbors, airports and marshalling yards \cite{alami98}.
+Shipping container rearranging can also be formulated as path-planning for multiple agents where agents are represented by containers \cite{surynek11}.
+
+
+There are the following two different models of dynamicity of the problem: \emph{Multi-Agent Path Finding} (MPF) and \emph{Pebble Motion on Graph} (PMG).
+
+\paragraph{Multi-Agent Path Finding}
+An agent can shift from one node to its neighbor on condition that the neighbor is either unoccupied or is being left by other agent in the same time step. 
+At most one agent is allowed to pass an edge within one time step. 
+That is, agents are not allowed to exchange their positions within one time step.
+
+In general, agents are considered as independent isolated units, and one agent is not aware of other agents' path plans.
+There are variants of MPF where this is not the case (see Sect.~\ref{sec:cpf}).
+
+
+\paragraph{Pebble Motion on Graphs}
+
+\emph{Pebble motion on graphs} \cite{source1,source2} can be regarded as a restricted variant of MPF. 
+The difference consists in rules for movement. 
+While MPF enables entering a vertex that is simultaneously being left by other agent, such transfer is not permissible in pebble motion. 
+Thus, the restriction of movement in pebble motion is that only one agent is allowed to move in each time step.
+As an illustration we can mention the $N\times N$ generalization of the 15-puzzle also known as Lloyd’s 15 \cite{ratner86}.
+
+\subsection{Cooperative Path-Finding}\label{sec:cpf}
+
+\emph{Cooperative Path-finding} \cite{silver05} is a special case of MPF where each agent is assumed to have a full knowledge of all other agents and their planned routes.
+Precisely speaking, solving algorithm can take into account paths planned for agents that were processed earlier, and adjust paths searched later according to them.
+The concept of CPF is most relevant to the contribution of this thesis, as all the studied variants assume a knowledge of at least some agents' path planning.
+
+An decoupled algorithm for solving CPF known as cooperative A* (CA*) has been introduced in \cite{silver05} together with several improvements reducing its complexity.
+Its basic version works with a \emph{spatial graph} $G'$ constructed from the initigal graph $G=(V, E)$.
+The spatial graph can be regarded as $k$ copies (layers) $G_0, G_1,\dots,G_k$ of $G$, which are arranged parallelly with each other.
+These layers represent the time dimension of the agents' movement.
+All edges within one layer are removed, because a movement along them would represent an agent's change of position in zero time, which is prohibited by the rules for movement.
+Consider nodes $v_i$ and $v_{i+1}$ in two consecutive layers of $G'$, both corresponding to node $v$ in the origianl graph.
+Further, let $v_{i+1}^1,\dots v_{i+1}^{|N(v)|}$ be the nodes in the $(i+1)$-th layer corresponding to neighbors of $v$ in the original graph.
+The spatial graph contains edge $\left\{v_i,v_{i+1}\right\}$, which represents an agent stayng at its node from time step $i$ to $i+1$, 
+and edges $\left\{v_i,v_{i+1}^{1}\right\},\dots,\left\{v_i,v_{i+1}^{|N(v)|}\right\}$ representing an agent's movement to the adjacent nodes.
+Edges in $G'$ are always directed from the lower layer to the higher layer, as it is forbidden to move ``back in time''.
+
+Agents are initially placed in the first layer of $G'$, and if a node $t$ is a target of some agent $a$ in the original graph, nodes corresponding to $t$ in each layer become targets of $a$ in $G'$,
+and $a$ must reach one of them.
+This models the fact that an agent can reach its target at any time step.
+The algorithm processes agents one by one, and always searches a path in $G'$ for a currently considered agent using A*.
+Once a path is found in $G'$, its nodes in $G'$ are \emph{reserved}, and agents processed afterwards must avoid the reserved nodes.
+
+CA* is neither complete, nor optimal. It is however popular becauase it does not pose any specific requirement on the instance and also because of its simplicity.
+An example of an instance for which CA* is unable to find a solution is depicted in Fig.~\ref{fig:castarfail}.
+\begin{figure}
+\centering
+	\includegraphics[scale=1.5]{figurer/castarfail.eps}
+\caption{An instance for which CA* fails to find a solution}
+\label{fig:castarfail}
+\end{figure}
+The instance consists of a path on five nodes and a node adjacent to the central node of the path.
+Agents $a_1$ and $a_2$ are placed at the two endpoints of the path, and have targets $t_1$ and $t_2$, respectively.
+This instance has a solution in which one agent uses the node outisde of the path in order to allow the other agent to pass towards its target.
+%It does not matter which agent is considered first by the algorithm, so let us assume $a_1$ is processed first.
+CA* finds a path in the spatial graph that corresponds to the shortest path from $a_1$'s initial position to $t_1$, and when $a_2$ is processed,
+a path to $t_2$ in $G'$ that avoid reserved nodes does not exist.
+If there was another node between $t_2$ and the central node of the path, the solution would have been found by CA*, in which agent $a_2$ makes a step aside so that the two agents can pass each other.
+
+The quality of a solution often depends on the order in which agents are processed. 
+In some ordering of agents, a solution may not exist, while there can be a solution for another ordering.
 \section{Scenarios with adversaries}
+
+Consider a problem of MPF where agents are divided into two (or more) adversarial teams competing for achieving some goal.
+The division into adversarial team is a generalization of MPF that increases the problem's complexity.
+The problem becomes a two-player game with full information, and so various search space algorithms developed for these types of games are applicable for adversarial versions of MPF.
+Examples of these algorithms are alpha-beta algorithm widely applied on computer chess, or Monte Carlo tree search which were recently successfully employed in the game of Go.
+These algorithms are often combined with Methods or machine learning such as neural networks and genetic algorithms. 
 
 \subsection{Adversarial Cooperative Path Finding}
 
+In \textsc{Adversarial Cooperative Path Finding} (ACPF), all the agents are defined by their initial and target node in a graph, 
+and the task of one team is to reach alll the targets by corresponding agents before the opponent's agents reach their positions.
+In general, it is not required that the teams are of the same size, although it is typically assumed that the teams are of equal number of agents.
+Similarly, the placement of targets of the teams does not have to be symmetric, and so the starting condition are not necessarily ``fair'' for the teams.
+The problem was proved to by PSPACE-hard in \cite{ivanova04} by a polynomial reduction from \textsc{Quantified Boolean Formula} (QBF).
+
 \subsection{Area Protection Problem}
+
+Another concept of adversarial MPF is the \textsc{Area Protection Problem} (APP), where two teams of agents compete in reaching their target positions. 
+Unlike ACPF, where the goals of both teams of agents is to reach their targets, the adversarial teams in APP have different objectives. 
+The first team of \emph{attackers} consists of agents whose goal is to capture a pre-defined targets in the area protected by the second team of \emph{defenders}. 
+There is a one-to-one mapping between attackers and target nodes.
+The opponent team of defenders aims to prevent the attackers from reaching their targets by occupying selected locations.
+The common feature in all MPF problems is that once a location is occupied by an agent, 
+it cannot be entered by another agent unless it is first vacated by the agent which occupies it (agents cannot push away each otehr). 
+This property is a key tool for the team of defenders.
 
 \subsection{Area Protection Problem with Communication maintenance}
 

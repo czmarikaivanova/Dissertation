@@ -5,6 +5,11 @@
 \newblock {\em Wireless Sensor Networks}.
 \newblock John Wiley \& Sons, Inc., New York, NY, USA, 2010.
 
+\bibitem{alami98}
+{\sc Alami, R., Fleury, S., Herrb, M., Ingrand, F., and Robert, F.}
+\newblock Multi-robot cooperation in the martha project.
+\newblock {\em IEEE Robotics Automation Magazine 5}, 1 (March 1998), 36--47.
+
 \bibitem{althaus03}
 {\sc Althaus, E., Calinescu, G., Mandoiu, I.~I., Prasad, S., Tchervenski, N.,
   and Zelikovsky, A.}
@@ -68,6 +73,13 @@
   {ISAAC} 2015, Nagoya, Japan, December 9-11, 2015, Proceedings\/} (2015),
   pp.~95--105.
 
+\bibitem{chrobak00}
+{\sc Chrobak, M., Gasieniec, L., and Rytter, W.}
+\newblock Fast broadcasting and gossiping in radio networks.
+\newblock In {\em Proceedings of the 41st Annual Symposium on Foundations of
+  Computer Science\/} (Washington, DC, USA, 2000), FOCS '00, IEEE Computer
+  Society, pp.~575--.
+
 \bibitem{chu17}
 {\sc Chu, X., and Chen, Y.}
 \newblock Time division inter-satellite link topology generation problem:
@@ -107,6 +119,13 @@
 \newblock {\em Introduction to Algorithms}, 2nd~ed.
 \newblock The MIT Press, 2001.
 
+\bibitem{ratner86}
+{\sc Daniel, R., and K., W.~M.}
+\newblock Finding a shortest solution for the n x n extension of the 15-puzzle
+  is intractable.
+\newblock In {\em AAAI\/} (1986), T.~Kehler, Ed., Morgan Kaufmann,
+  pp.~168--172.
+
 \bibitem{das03}
 {\sc Das, A.~K.}
 \newblock Minimum power broadcast trees for wireless networks: Integer
@@ -129,10 +148,31 @@
 \newblock Joint EURO/ALIO International Conference 2018 on Applied
   Combinatorial Optimization (EURO/ALIO 2018).
 
+\bibitem{dekker02}
+{\sc Dekker, A.}
+\newblock Applying social network analysis concepts to military . . .
+\newblock {\em Connections 24\/} (2002), 93--103.
+
+\bibitem{dietzfelbinger04}
+{\sc Dietzfelbinger, M.}
+\newblock Gossiping and broadcasting versus computing functions in networks.
+\newblock {\em Discrete Applied Mathematics 137}, 2 (2004), 127 -- 153.
+
 \bibitem{dijkstra59}
 {\sc Dijkstra, E.~W.}
 \newblock A note on two problems in connexion with graphs.
 \newblock {\em Numer. Math. 1}, 1 (1959), 269--271.
+
+\bibitem{everett95}
+{\sc Everett, H.~R., Gage, D.~W., Gilbreath, G.~A., Laird, R.~T., and Smurlo,
+  R.~P.}
+\newblock Real-world issues in warehouse navigation.
+\newblock vol.~2352, pp.~2352 -- 2352 -- 11.
+
+\bibitem{farley79}
+{\sc Farley, A., Hedetniemi, S., Mitchell, S., and Proskurowski, A.}
+\newblock Minimum broadcast graphs.
+\newblock {\em Discrete Mathematics 25}, 2 (1979), 189 -- 193.
 
 \bibitem{flammini07}
 {\sc Flammini, M., Navarra, A., and Perennes, S.}
@@ -146,10 +186,30 @@
   NP-Completeness}.
 \newblock W. H. Freeman \& Co., New York, NY, USA, 1979.
 
+\bibitem{hada01}
+{\sc Hada, Y., and Takase, K.}
+\newblock Multiple mobile robot navigation using the indoor global positioning
+  system (igps).
+\newblock In {\em Proceedings 2001 IEEE/RSJ International Conference on
+  Intelligent Robots and Systems. Expanding the Societal Role of Robotics in
+  the the Next Millennium (Cat. No.01CH37180)\/} (Oct 2001), vol.~2,
+  pp.~1005--1010 vol.2.
+
 \bibitem{halgamuge09}
 {\sc Halgamuge, M.~N., Zukerman, M., Ramamohanarao, K., and Vu, H.~L.}
 \newblock An estimation of sensor energy consumption.
 \newblock {\em Electromagnetics Research B}, 12 (2009), 259--295.
+
+\bibitem{hart68}
+{\sc Hart, P.~E., Nilsson, N.~J., and Raphael, B.}
+\newblock A formal basis for the heuristic determination of minimum cost paths.
+\newblock {\em IEEE Transactions on Systems Science and Cybernetics SSC-4(2)\/}
+  (1968), 100--107.
+
+\bibitem{harutyunyan99}
+{\sc Harutyunyan, H.~A., and Liestman, A.~L.}
+\newblock More broadcast graphs.
+\newblock {\em Discrete Applied Mathematics 98}, 1-2 (1999), 81--102.
 
 \bibitem{haugland11}
 {\sc Haugland, D., and Yuan, D.}
@@ -239,6 +299,12 @@
   single broadcast tree.
 \newblock {\em Mobile Networks and Applications 11}, 3 (Jun 2006), 361--375.
 
+\bibitem{ryan08}
+{\sc Ross Kinsella~Ryan, M.}
+\newblock Exploiting subgraph structure in multi-robot path planning.
+\newblock {\em Journal of Artificial Intelligence Research 31\/} (01 2008),
+  497--542.
+
 \bibitem{santi05}
 {\sc Santi, P.}
 \newblock Topology control in wireless ad hoc and sensor networks.
@@ -247,6 +313,12 @@
 \bibitem{sharma13}
 {\sc Sharma, D.~A., Verma, S., and Sharma, K.}
 \newblock Network topologies in wireless sensor networks : A review.
+
+\bibitem{silver05}
+{\sc Silver, D.}
+\newblock Cooperative pathfinding.
+\newblock In {\em Proc. of the 1st Artificial Intelligence and Interactive
+  Digital Entertainment Conference, 2005\/} (2005), pp.~117--122.
 
 \bibitem{sipser06}
 {\sc Sipser, M.}
@@ -257,6 +329,12 @@
 {\sc Slater, P., Cockayne, E., and Hedetniemi, S.}
 \newblock Information dissemination in trees.
 \newblock {\em SIAM Journal on Computing 10}, 4 (1981), 692--701.
+
+\bibitem{surynek11}
+{\sc Surynek, P.}
+\newblock Multi-robot path planning.
+\newblock In {\em Multi-Robot Systems}, T.~Yasuda, Ed. IntechOpen, Rijeka,
+  2011, ch.~14.
 
 \bibitem{toh01}
 {\sc Toh, C.~K.}

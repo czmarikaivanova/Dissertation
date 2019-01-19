@@ -41,6 +41,16 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/xspace.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/relsize/relsize.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/relsize/relsize.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/t1enc.def
@@ -90,8 +100,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/forloop/forloop.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/forloop/forloop.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/hypernat/hypernat.sty
@@ -370,9 +378,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/euler/eusm7.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmrc8t.tfm
-INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
-INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 OUTPUT chap2-adhoc.aux
 INPUT chap2-adhoc.tex
 INPUT chap2-adhoc.tex
@@ -381,6 +386,9 @@ INPUT figurer/omni-top.eps
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT figurer/omni-side.eps
 INPUT figurer/omni-side.eps
+INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
+INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/omsptm.fd
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT figurer/tran-graph.eps
 INPUT figurer/tran-graph.eps
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/helvetic/phvb7tn.tfm
@@ -457,6 +465,9 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/euler/eusm5.tfm
 OUTPUT chap4-mpf.aux
 INPUT chap4-mpf.tex
 INPUT chap4-mpf.tex
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
+INPUT figurer/castarfail.eps
+INPUT figurer/castarfail.eps
 INPUT thesis.bbl
 INPUT thesis.bbl
 INPUT thesis.brf
