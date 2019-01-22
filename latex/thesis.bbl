@@ -32,6 +32,11 @@
   mechanisms.
 \newblock In {\em WAOA\/} (2003).
 
+\bibitem{archer99}
+{\sc Archer, A.~F.}
+\newblock A modern treatment of the 15 puzzle.
+\newblock {\em American Mathematical Monthly 106\/} (1999), 793--799.
+
 \bibitem{barta10}
 {\sc Barta, J., Leggieri, V., Montemanni, R., Nobili, P., and Triki, C.}
 \newblock Some valid inequalities for the probabilistic minimum power
@@ -234,6 +239,13 @@
 \newblock Power consumption in packet radio networks.
 \newblock {\em Theor. Comput. Sci. 243}, 1-2 (July 2000), 289--305.
 
+\bibitem{kornhauser84}
+{\sc Kornhauser, D., Miller, G., and Spirakis, P.}
+\newblock Coordinating pebble motion on graphs, the diameter of permutation
+  groups, and applications.
+\newblock In {\em 25th Annual Symposium onFoundations of Computer Science,
+  1984.\/} (Oct 1984), pp.~241--250.
+
 \bibitem{liang02}
 {\sc Liang, W.}
 \newblock Constructing minimum-energy broadcast trees in wireless ad hoc
@@ -299,6 +311,10 @@
   single broadcast tree.
 \newblock {\em Mobile Networks and Applications 11}, 3 (Jun 2006), 361--375.
 
+\bibitem{jansen08}
+{\sc Renee~Jansen, M., and R.~Sturtevant, N.}
+\newblock Direction maps for cooperative pathfinding.
+
 \bibitem{ryan08}
 {\sc Ross Kinsella~Ryan, M.}
 \newblock Exploiting subgraph structure in multi-robot path planning.
@@ -309,6 +325,11 @@
 {\sc Santi, P.}
 \newblock Topology control in wireless ad hoc and sensor networks.
 \newblock {\em ACM Comput. Surv. 37}, 2 (June 2005), 164--194.
+
+\bibitem{standley10}
+{\sc Scott~Standley, T.}
+\newblock Finding optimal solutions to cooperative pathfinding problems.
+\newblock vol.~1.
 
 \bibitem{sharma13}
 {\sc Sharma, D.~A., Verma, S., and Sharma, K.}
@@ -329,6 +350,11 @@
 {\sc Slater, P., Cockayne, E., and Hedetniemi, S.}
 \newblock Information dissemination in trees.
 \newblock {\em SIAM Journal on Computing 10}, 4 (1981), 692--701.
+
+\bibitem{surynek10}
+{\sc Surynek, P.}
+\newblock An optimization variant of multi-robot path planning is intractable.
+\newblock In {\em AAAI\/} (2010).
 
 \bibitem{surynek11}
 {\sc Surynek, P.}
@@ -354,6 +380,13 @@
 \newblock Minimum-energy broadcasting in static ad hoc wireless networks.
 \newblock {\em Wireless Networks 8}, 6 (Nov 2002), 607--617.
 
+\bibitem{wang08}
+{\sc Wang, K.-H.~C., and Botea, A.}
+\newblock Fast and memory-efficient multi-agent pathfinding.
+\newblock In {\em Proceedings of the Eighteenth International Conference on
+  International Conference on Automated Planning and Scheduling\/} (2008),
+  ICAPS'08, AAAI Press, pp.~380--387.
+
 \bibitem{wieselthier00}
 {\sc Wieselthier, J.~E., Nguyen, G.~D., and Ephremides, A.}
 \newblock On the construction of energy-efficient broadcast and multicast trees
@@ -375,6 +408,14 @@
 \newblock Wireless ad hoc networks: technologies and challenges.
 \newblock {\em Wireless Communications and Mobile Computing 6}, 7 (2006),
   889--892, \href{http://dx.doi.org/10.1002/wcm.449}{doi: 10.1002/wcm.449}.
+
+\bibitem{yu13}
+{\sc Yu, J., and LaValle, S.~M.}
+\newblock Structure and intractability of optimal multi-robot path planning on
+  graphs.
+\newblock In {\em Proceedings of the Twenty-Seventh {AAAI} Conference on
+  Artificial Intelligence, July 14-18, 2013, Bellevue, Washington, {USA.}\/}
+  (2013).
 
 \bibitem{yuan05}
 {\sc Yuan, D.}
