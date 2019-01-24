@@ -60,4 +60,6 @@
 \contentsline {section}{\numberline {6.2}The Shared Broadcast Tree Problem and MST}{67}{section.6.2}
 \contentsline {section}{\numberline {6.3}Integer Programming Formulations for the Shared Multicast Tree Problem}{73}{section.6.3}
 \contentsline {section}{\numberline {6.4}Computing the Broadcast Time of a Graph}{107}{section.6.4}
-\contentsline {chapter}{\numberline {A}List of NP-hard Problems}{131}{appendix.A}
+\contentsline {section}{\numberline {6.5}Area Protection in Adversarial Path-finding Scenarios with Multiple Mobile Agents on Graphs}{131}{section.6.5}
+\contentsline {section}{\numberline {6.6}Maintaining Ad-Hoc Communication Network in Area Protection Scenarios with Adversarial Agents}{141}{section.6.6}
+\contentsline {chapter}{\numberline {A}List of NP-hard Problems}{149}{appendix.A}
