@@ -11,9 +11,9 @@
 	\node[fill=gray!40] (v3b) at (4,0) {~~~};
 	\node[fill=gray!40] (v4) at (5,0) {$t_1$};
 	\node[fill=green!40] (v5) at (6,0) {$a_2$};
-	\node[fill=gray!40] (v6) at (3,1) {~~~};
+	\node[fill=gray!40] (v6) at (4,1) {~~~};
 
- \foreach \from\to in {v1/v2,v2/v3,v3/v3a,v3a/v3b,v3b/v4,v4/v5,v3a/v6}
+ \foreach \from\to in {v1/v2,v2/v3,v3/v3a,v3a/v3b,v3b/v4,v4/v5,v3b/v6}
 	\draw (\from) edge  (\to);
 
  \end{tikzpicture}

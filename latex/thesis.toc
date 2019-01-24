@@ -52,11 +52,12 @@
 \contentsline {section}{\numberline {4.3}Scenarios with adversaries}{36}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}Adversarial Cooperative Path Finding}{36}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}Area Protection Problem}{37}{subsection.4.3.2}
-\contentsline {subsection}{\numberline {4.3.3}Area Protection Problem with Communication maintenance}{37}{subsection.4.3.3}
-\contentsline {chapter}{\numberline {5}Contribution of the Thesis and Prospective Research}{45}{chapter.5}
-\contentsline {chapter}{\numberline {6}Attached Papers}{47}{chapter.6}
-\contentsline {section}{\numberline {6.1}Shared Multicast Trees in Ad Hoc Wireless Networks}{49}{section.6.1}
-\contentsline {section}{\numberline {6.2}The Shared Broadcast Tree Problem and MST}{65}{section.6.2}
-\contentsline {section}{\numberline {6.3}Integer Programming Formulations for the Shared Multicast Tree Problem}{71}{section.6.3}
-\contentsline {section}{\numberline {6.4}Computing the Broadcast Time of a Graph}{105}{section.6.4}
-\contentsline {chapter}{\numberline {A}List of NP-hard Problems}{129}{appendix.A}
+\contentsline {subsubsection}{Target allocation}{38}{section*.37}
+\contentsline {subsection}{\numberline {4.3.3}Area Protection Problem with Communication maintenance}{38}{subsection.4.3.3}
+\contentsline {chapter}{\numberline {5}Contribution of the Thesis and Prospective Research}{47}{chapter.5}
+\contentsline {chapter}{\numberline {6}Attached Papers}{49}{chapter.6}
+\contentsline {section}{\numberline {6.1}Shared Multicast Trees in Ad Hoc Wireless Networks}{51}{section.6.1}
+\contentsline {section}{\numberline {6.2}The Shared Broadcast Tree Problem and MST}{67}{section.6.2}
+\contentsline {section}{\numberline {6.3}Integer Programming Formulations for the Shared Multicast Tree Problem}{73}{section.6.3}
+\contentsline {section}{\numberline {6.4}Computing the Broadcast Time of a Graph}{107}{section.6.4}
+\contentsline {chapter}{\numberline {A}List of NP-hard Problems}{131}{appendix.A}

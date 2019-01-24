@@ -153,6 +153,11 @@
 \newblock Joint EURO/ALIO International Conference 2018 on Applied
   Combinatorial Optimization (EURO/ALIO 2018).
 
+\bibitem{wilde13}
+{\sc de~Wilde, B., ter Mors, A., and Witteveen, C.}
+\newblock Push and rotate: cooperative multi-agent path planning.
+\newblock In {\em AAMAS\/} (2013).
+
 \bibitem{dekker02}
 {\sc Dekker, A.}
 \newblock Applying social network analysis concepts to military . . .
@@ -229,6 +234,30 @@
   {ISCO} 2016, Vietri sul Mare, Italy, May 16-18, 2016, Revised Selected
   Papers\/} (2016), pp.~273--284.
 
+\bibitem{ivanova14}
+{\sc Ivanov{\'{a}}, M., and Surynek, P.}
+\newblock Adversarial cooperative path-finding: Complexity and algorithms.
+\newblock In {\em 26th {IEEE} International Conference on Tools with Artificial
+  Intelligence, {ICTAI} 2014, Limassol, Cyprus, November 10-12, 2014\/} (2014),
+  pp.~75--82.
+
+\bibitem{ivanova18a}
+{\sc Ivanov{\'{a}}, M., Surynek, P., and Hirayama, K.}
+\newblock Area protection in adversarial path-finding scenarios with multiple
+  mobile agents on graphs - {A} theoretical and experimental study of
+  strategies for defense coordination.
+\newblock In {\em Proceedings of the 10th International Conference on Agents
+  and Artificial Intelligence, {ICAART} 2018, Volume 1, Funchal, Madeira,
+  Portugal, January 16-18, 2018.\/} (2018), pp.~184--191.
+
+\bibitem{ivanova18b}
+{\sc Ivanov{\'{a}}, M., Surynek, P., and Nguyen, D. T.~N.}
+\newblock Maintaining ad-hoc communication network in area protection scenarios
+  with adversarial agents.
+\newblock In {\em Proceedings of the Thirty-First International Florida
+  Artificial Intelligence Research Society Conference, {FLAIRS} 2018,
+  Melbourne, Florida, {USA.} May 21-23 2018.\/} (2018), pp.~348--353.
+
 \bibitem{jansen95}
 {\sc Jansen, K., and Müller, H.}
 \newblock The minimum broadcast time problem for several processor networks.
@@ -258,6 +287,14 @@
 {\sc Liestman, A.~L.}
 \newblock Fault-tolerant broadcast graphs.
 \newblock {\em Networks 15}, 2 (1985), 159--171.
+
+\bibitem{luna11}
+{\sc Luna, R., and Bekris, K.~E.}
+\newblock Push and swap: Fast cooperative path-finding with completeness
+  guarantees.
+\newblock In {\em Proceedings of the Twenty-Second International Joint
+  Conference on Artificial Intelligence - Volume Volume One\/} (2011),
+  IJCAI'11, AAAI Press, pp.~294--300.
 
 \bibitem{mcgarvey16}
 {\sc McGarvey, R.~G., Rieksts, B.~Q., Ventura, J.~A., and Ahn, N.}
@@ -335,11 +372,24 @@
 {\sc Sharma, D.~A., Verma, S., and Sharma, K.}
 \newblock Network topologies in wireless sensor networks : A review.
 
+\bibitem{sharon13}
+{\sc Sharon, G., Stern, R., Goldenberg, M., and Felner, A.}
+\newblock The increasing cost tree search for optimal multi-agent pathfinding.
+\newblock {\em Artificial Intelligence 195\/} (2013), 470 -- 495.
+
 \bibitem{silver05}
 {\sc Silver, D.}
 \newblock Cooperative pathfinding.
 \newblock In {\em Proc. of the 1st Artificial Intelligence and Interactive
   Digital Entertainment Conference, 2005\/} (2005), pp.~117--122.
+
+\bibitem{silver16}
+{\sc Silver, D., Huang, A., Maddison, C.~J., Guez, A., Sifre, L., van~den
+  Driessche, G., Schrittwieser, J., Antonoglou, I., Panneershelvam, V.,
+  Lanctot, M., Dieleman, S., Grewe, D., Nham, J., Kalchbrenner, N., Sutskever,
+  I., Lillicrap, T., Leach, M., Kavukcuoglu, K., Graepel, T., and Hassabis, D.}
+\newblock Mastering the game of {Go} with deep neural networks and tree search.
+\newblock {\em Nature 529}, 7587 (jan 2016), 484--489.
 
 \bibitem{sipser06}
 {\sc Sipser, M.}

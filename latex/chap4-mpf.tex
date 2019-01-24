@@ -76,18 +76,19 @@ If the trivial monotonous heuristic $h(v)=0$ for all $v\in V$ is used, the algor
 \begin{algorithm}
 \DontPrintSemicolon
 \SetAlgoLined
-%\KwResult{Write here the result}
+\KwResult{Write here the result}
 \caption{A* algorithm}
 \BlankLine
 \SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
 \Input{$G=(V,E)$, $s,t\in V$, $w: E\mapsto\mathbb{R}^+$}
-%\Output{Write here the output}
+\Output{A shortest path from $s$ to $t$ or failure if no such path exists}
 \BlankLine
-$C\leftarrow\emptyset$\;
-$O\leftarrow\left\{s\right\}$\;
+	$C\leftarrow\emptyset$ \tcp{Closed node set}
+	$O\leftarrow\left\{s\right\}$ \tcp{Open node set} 
 \For{$v\in V\setminus\left\{s\right\}$} {
 	$g(v)\leftarrow\infty$\;
 	$f(v)\leftarrow\infty$\;
+	$\pi(v)\leftarrow \text{ null}$ \tcp{Predecessor of node $v$}
 }
 $g(s)\leftarrow 0$\;
 $f(s)\leftarrow h(s)$\;
@@ -112,8 +113,8 @@ $f(s)\leftarrow h(s)$\;
 These are two different perspectives of the running time. 
 The first way counts the running time as a function of $|V|$ and $|E|$, which is more common in the context of graph theory.
 In this case, if the monotonous heuristic is determined in a constant time, the complexity of A* equals the complexity of Dijkstra's algorithm. 
-Another way popular in AI community is measuring the running time in terms of a depth of a solution and a branching factor.
-In this context, graphs are typically very large, and avoiding to examine the entire graph is desirable, in fact, it is one of the major goals of the algorithm.
+Another way, popular in the AI community, is measuring the running time in terms of a depth of a solution and a branching factor.
+In this context, graphs are typically very large, and avoiding examination of the entire graph is desirable, in fact, it is one of the major goals of the algorithm.
 If we examine every node at depth up to $d$ before the target is found, we end up visiting $\mathcal{O}(b^d)$ nodes before termination.
 \section{Path Finding for Multiple Robots}
 
@@ -142,7 +143,7 @@ Whenever an agent is about to move into a position occupied by another agent, it
 Problems dealing with navigating a group of mobile robots can be formulated as multi-agent pat planning.  
 However, the primary motivations for the problem are tasks of moving certain entities within an environment with obstacles.
 The constraint of limited free space represents a key aspect that makes the problem non-trivial. 
-Examples of applications include: 
+Examples of applications include, but are not limited to: 
 Parcel delivery in office building by multiple mobile robots \cite{hada01},
 navigation of robots within an industrial warehouse environment \cite{everett95},
 control and the management of a fleet of autonomous mobile robots for transshipment tasks in harbors, airports and marshalling yards \cite{alami98}.
@@ -152,18 +153,19 @@ Shipping container rearranging can also be formulated as path-planning for multi
 
 The problem of path finding for multiple robots is defined by a quadruple $(G,R,\lambda_0,\lambda_+)$, where
 \begin{enumerate}
-	\item $G=(V,E)$ is an undirected graph representing the environment,
+	\item $G=(V,E)$ is the undirected graph representing the environment,
 	\item $R=\left\{r_1,\dots,r_{|R|}\right\}$ is the set of robots or agents, $|R|\leq|V|$,
-	\item $\lambda_0:R\mapsto V$ is an injective function that assigns each agent its initial node, and
-	\item $\lambda_+:R\mapsto V$ denotes an injective function that assigns a target node to each agent.
+	\item $\lambda_0:R\mapsto V$ is the injective function that assigns each agent its initial node, and
+	\item $\lambda_+:R\mapsto V$ denotes the injective function that assigns a target node to each agent.
 \end{enumerate}
 In general, there is no restriction on the graph, but majority of works in this area considers 4 or 8-connected grid graphs with some missing nodes representing obstacles.
-There are the following two different models of dynamics of the movement: \emph{Multi-Agent Path Finding} (MPF) and \emph{Pebble Motion on Graph} (PMG).
+There are the following two different models of agents' movement dynamics: \emph{Multi-Agent Path Finding} (MPF) and \emph{Pebble Motion on Graph} (PMG).
 
 \paragraph{Multi-Agent Path Finding}
-An agent can shift from one node to its neighbor on condition that the neighbor is either unoccupied or is being left by other agent in the same time step. 
+An agent can shift from one node to its neighbor on condition that the neighbor is either unoccupied or is being left by other agent at the same time step. 
 At most one agent is allowed to pass an edge within one time step. 
 That is, agents are not allowed to exchange their positions within one time step.
+It is however possible that there is not a single unoccupied node, and agents still perform cyclic moves, although most of the studied instances contain at least one unoccupied node.
 Finally, no two agents can enter the same node at the same time, as there cannot be more than one agent simultaneously at a node.
 Under this settings, the optimization variant of MPF was shown to be NP-hard \cite{surynek10}.
 
@@ -172,16 +174,16 @@ There are variants of MPF where this is not the case (see Sect.~\ref{sec:cpf}).
 
 \paragraph{Pebble Motion on Graphs}
 \emph{Pebble motion on graphs} \cite{kornhauser84} can be regarded as a restricted variant of MPF. 
-The difference consists in rules for movement. 
+The difference lies in rules for movement. 
 While MPF enables entering a vertex that is simultaneously being left by other agent, such transfer is not permissible in pebble motion. 
 Thus, the restriction of movement in pebble motion is that only one agent is allowed to move in each time step.
 As an illustration we mention the 15-puzzle also known as Lloyd’s 15 \cite{archer99}.
 Its generalized $N\times N$ version has been proved to be NP-hard in \cite{ratner86}.  
 The situation becomes much easier when the optimality of the number of moves, i.e., when the problem is to find any sequence of movement so that the target locations are reached.
-In this case the problem belongs to $P$ \cite{kornhauser84}, and so is MPF when optimality is abandoned, as every solution to PMG is a solution to MPF.
+In this case the problem belongs to $P$ \cite{kornhauser84}, and so does MPF when the optimality is abandoned, as every solution to PMG is a solution to MPF.
 As all results relevant to this chapter consider the movement rules of MPF, PMG is not discussed any further.
 
-There are three most common optimization criteria \cite{yu13} to be pursued:
+There are three most common optimization criteria \cite{yu13} in problems belonging to path finding for multiple robots to be pursued:
 \begin{itemize}
         \item Minimum total arrival time - total number of time steps that the agents need before arriving in their targets.
         \item Minimum makespan - the number of time steps needed by the latest arriving agent.
@@ -201,7 +203,7 @@ Its basic version works with a \emph{spatial graph} $G'$ constructed from the in
 The spatial graph can be regarded as $k$ copies (layers) $G_0, G_1,\dots,G_k$ of $G$, which are arranged parallel with each other.
 These layers represent the time dimension of the agents' movement.
 All edges within one layer are removed, because a movement along them would represent an agent's change of position in zero time, which is prohibited by the rules for movement.
-Consider nodes $v_i$ and $v_{i+1}$ in two consecutive layers of $G'$, both corresponding to node $v$ in the origianal graph.
+Consider nodes $v_i$ and $v_{i+1}$ in two consecutive layers of $G'$, both corresponding to node $v$ in the original graph.
 Further, let $v_{i+1}^1,\dots v_{i+1}^{|N(v)|}$ be the nodes in the $(i+1)$-th layer corresponding to neighbors of $v$ in the original graph.
 The spatial graph contains edge $\left\{v_i,v_{i+1}\right\}$, which represents an agent staying at its node from time step $i$ to $i+1$, 
 and edges $\left\{v_i,v_{i+1}^{1}\right\},\dots,\left\{v_i,v_{i+1}^{|N(v)|}\right\}$ representing an agent's movement to the adjacent nodes.
@@ -212,25 +214,37 @@ and $a$ must reach one of them.
 This models the fact that an agent can reach its target at any time step.
 The algorithm processes agents one by one, and always searches a path in $G'$ for a currently considered agent using A*.
 Once a path is found in $G'$, its nodes in $G'$ are \emph{reserved}, and agents processed afterwards must avoid the reserved nodes.
+In this way it is ensured that no collisions occur during the agents' advancement.
 
 CA* is neither complete, nor optimal. It is however popular because it does not pose any specific requirement on the instance and also because of its simplicity.
 An example of an instance for which CA* is unable to find a solution is depicted in Fig.~\ref{fig:castarfail}.
 \begin{figure}
-\centering
-	\includegraphics[scale=1.5]{figurer/castarfail.eps}
-\caption{An instance for which CA* fails to find a solution}
-\label{fig:castarfail}
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics{figurer/castarfail.eps}
+        \caption{An instance for which CA* fails to find a solution}
+        \label{fig:castarfail}
+    \end{subfigure}\hspace{5mm}
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics{figurer/castarnofail.eps}
+        \caption{An instance for which CA* finds an optimal solution}
+        \label{fig:castarnofail}
+    \end{subfigure}
+  \label{fig:omni}
 \end{figure}
-The instance consists of a path on five nodes and a node adjacent to the central node of the path.
+The instance consists of a path on seven nodes and a node adjacent to the node in the middle of the path.
 Agents $a_1$ and $a_2$ are placed at the two endpoints of the path, and have targets $t_1$ and $t_2$, respectively.
 This instance has a solution in which one agent uses the node outside of the path in order to allow the other agent to pass towards its target.
 %It does not matter which agent is considered first by the algorithm, so let us assume $a_1$ is processed first.
 CA* finds a path in the spatial graph that corresponds to the shortest path from $a_1$'s initial position to $t_1$, and when $a_2$ is processed,
-a path to $t_2$ in $G'$ that avoid reserved nodes does not exist.
-If there was another node between $t_2$ and the central node of the path, the solution would have been found by CA*, in which agent $a_2$ makes a step aside so that the two agents can pass each other.
+a path to $t_2$ in $G'$ that avoids reserved nodes does not exist.
+Fig.~\ref{fig:castarnofail} depicts a slightly modified situation in which A* is able to find the optimal solution.
+The plan of $a_1$ is again to go through the shortest path towards $t_1$.
+When the path for $a_2$ is calculated in $G'$, the only option to avoid reserved nodes is to make a step aside in the 3rd step, let $a_1$ pass, and then continue towards $t_2$.
 
 The quality of a solution often depends on the order in which agents are processed. 
-In some ordering of agents, a solution may not exist, while there can be a solution for another ordering.
+Note that in some ordering of agents, a solution may not exist, while there can be a solution for another ordering.
+This is also the case of the instance in Fig~\ref{fig:castarnofail}, because if a path for $a_2$ was planned first, a solution would again not be found.
 
 \subsubsection{OD+ID}
 
@@ -242,13 +256,13 @@ The size of the state space is $\mathcal{O}(|V|^{|R|})$ with the branching facto
 
 An improvement of this naive approach is achieved by \emph{operator decomposition} (OD)\cite{standley10}.
 In this approach, a fixed ordering of agents is assumed, and a move is assigned to each agent in succession.
-Thus, a transition from one state to another corresponds to  moving only one agents while other agents' positions remain unchanged.
+Thus, a transition from one state to another corresponds to  moving only one agent while other agents' positions remain unchanged.
 Under this representation, every $|R|$-th state corresponds to a full move of the group of agents, and is known as \emph{standard state}. 
 The other states are referred to as \emph{intermediate states}.
 Standard and intermediate states are conceptually different, they are nevertheless treated equivalently by A*.
 
 Although operator decomposition allows the algorithm to avoid considering a substantial portion of the search space, the resulting algorithm is still exponential in the number of agents \cite{standley10}.
-Independence detection (ID) aims to plan a path for agents as independently as possible.
+Independence detection (ID) aims to plan paths for agents as independently as possible.
 The idea is to plan paths for agents separately whenever a cooperation is not needed as they would not collide if they moved along their shortest paths.
 When OD is combined with ID, agents are divided into groups which are then planned separately using OD.
 Once a plan for all groups is known, the movement is simulated, and if the plans for two or more groups contain conflicts,
@@ -269,6 +283,9 @@ However, in \cite{wilde13} were identified instances for which this algorithm fa
 Consequently, algorithm \emph{Push and Rotate} is then presented as an adaptation of the Push and Swap technique. 
 By fixing the Push and Swap’s shortcomings, the authors developed an algorithm that is complete for the class of instances that contain at least two unoccupied nodes.
 
+An alternative approach for arbitrary graphs introduces a two-level Increasing Cost Tree Search (ICTS) algorithm \cite{sharon13}, consequently compared with A* based techniques. 
+Another algorithm capable of solving a wider range of instances than ICST is Conflict-based Search (CBS) \cite{sharon13}. 
+Low-level searches in CBS are performed as single-agent path finding.
 \section{Scenarios with adversaries}
 
 Consider a problem of MPF where agents are divided into two (or more) adversarial teams competing for achieving some goal.
@@ -276,7 +293,7 @@ The teams move in turns so that the $i$-th team moves in every $i$-th time step,
 
 The division into adversarial team is a generalization of MPF that increases the problem's complexity.
 The problem becomes a two-player game with full information, and so various search space algorithms developed for these types of games are applicable for adversarial versions of MPF.
-Examples of these algorithms are alpha-beta algorithm widely applied on computer chess, or Monte Carlo tree search which were recently successfully employed in the game of Go.
+Examples of these algorithms are alpha-beta algorithm widely applied on computer chess, or Monte Carlo tree search which were recently successfully employed in the game of Go \cite{silver16}.
 These algorithms are often combined with methods of machine learning such as neural networks and genetic algorithms.
 
 In problems with adversarial element, we consider one specific team of agents, and try to solve the decision problem whether there exists a winning strategy for the selected team. 
@@ -299,20 +316,21 @@ Besides the points 1.-4. in Sect~\ref{sect:modvar}, the formal definition consis
 \end{enumerate}
 It is also assumed that there is a mechanism that determines the next move of a team different from $T_{t^*}$ when given the sequence of all agents' previous placements. 
 This mechanism is unknown, and is expected to act as an oracle that is able to determine the best possible move for an adversarial team in each time step.
+The decision version of ACPF is formulated as
 \begin{problem}
-Given an instance $(G,R,\lambda_0,\lambda_+,\mathcal{T},t^*)$, is it possible to determine the movement of team $T_{t^*}$ at every time step in which the team is to move 
+Given an instance $(G,R,\lambda_0,\lambda_+,\mathcal{T},t^*)$ of ACPF, is it possible to determine the movement of team $T_{t^*}$ at every time step in which the team is to move 
 so that every agent $a\in T_{t^*}$ reaches its target location $\lambda_+(a)$, and so that no other team reaches its desired locations earlier?
 \end{problem}
 
-The problem was proved to be PSPACE-hard for two teams in \cite{ivanova04} by a polynomial reduction from \textsc{Quantified Boolean Formula} (QBF).
-It is also known that the problem is EXPTIME, but Whether or not it belongs to PSPACE remains an open question.
+The problem was proved to be PSPACE-hard for two teams in \cite{ivanova14} by a polynomial reduction from \textsc{Quantified Boolean Formula} (QBF).
+It is also known that the problem is EXPTIME, but whether or not it belongs to PSPACE remains an open question.
 
 In experimental settings, a time limit during which the agents move is imposed.
 When this limit is up, the winner is the team whose agents captured the highest number of target nodes.
 
 \subsection{Area Protection Problem}
 
-Another concept of adversarial MPF is the \textsc{Area Protection Problem} (APP), where two teams of agents compete in reaching their target positions. 
+Another concept of adversarial MPF is the \textsc{Area Protection Problem} (APP).
 Unlike ACPF, where the goals of both teams of agents is to reach their targets, the adversarial teams in APP have different objectives. 
 The first team of \emph{attackers} consists of agents whose goal is to capture a pre-defined targets in the area protected by the second team of \emph{defenders}. 
 There is a one-to-one mapping between attackers and target nodes.
@@ -346,15 +364,26 @@ Like in problems without the adversarial element, there are several possible obj
 \end{itemize}
 The available literature focuses on the first objective.
 
+\subsubsection{Target allocation}\label{sec:appta}
+
+Finding a solution to APP can be viewed as two separate subproblems.
+As there are no predefined targets for defenders, the initial step is to identify nodes which are important  for attackers on paths towards their targets.
+This subproblem is called \emph{target allocation}.
+The nodes that are determined as important then become targets of defenders.
+The next subproblem is then to navigate defenders towards the targets allocated to them in the previous step.
+A typical candidates for defenders' targets are obviously attackers' targets, but it is not necessarily the smartest option.
+Particularly in instances where defenders are highly outnumbered by attackers, it is more reasonable to capture nodes lying in bottleneck through which attackers must pass.
+In this way, even a small group of defenders may be able to protect a large number of attackers' targets.
+
 \subsection{Area Protection Problem with Communication maintenance}
 
 An extension APP by a requirement of communication maintenance (APPC) has been introduced in Paper VI \cite{ivanova18b}.
 The environment is assumed to be a 4-connected grid graph with possible missing nodes (obstacles), which allows to define the connectivity constraints.
 
-Graph $G$ is embedded in a plane so that all edges have length 1 unit and each node $v$ has coordinates $(x_v,y_v)$.
-The physical location $l_v$ represented by $v$ is the unit square centered at $C_v=(x_v,y_v)$.
+A Graph $G$ representing the environment is embedded in a plane so that all edges have length 1 unit and each node $v$ has coordinates $C_v=(x_v,y_v)$.
+The physical location $l_v$ represented by $v$ is the unit square centered at $C_v$.
 Further, the set $B$ consists of square areas representing obstacles.
-The visibility range $r$ is the maximum distance between two locations between which the communication can be established.
+The visibility range $r$ is the maximum distance between two locations, such that if there are agents placed at them, they can communicate with each other.
 A communication is impossible between locations $l_u$ and $l_v$ if the line segment $C_uC_v$ intersect any obstacle. 
 \begin{definition}
 	Given a visibility range $r$, $G_r=(V,E_r)$ where \newline
@@ -368,3 +397,4 @@ The decision problem is derived from Prob.~\ref{prob:app} with the additional re
 	and the induced subgraph $G_r\left[S_t\right]$ of the connectivity graph remains connected at every time step?
 \end{problem}
 NP-hardness of APP implies also the same result for APPC.
+
