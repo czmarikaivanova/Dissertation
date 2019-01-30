@@ -1,18 +1,21 @@
-\chapter{List of NP-hard Problems}
+\begin{footnotesize}
+\chapter{List of Computationaly Hard Problems}
 
-The list below consists of NP-hard problems that appear throughout this thesis.
+The list below consists of NP-hard and PSPACE-hard problems that appear throughout this thesis.
 The problems are stated either in their decision or optimization form, depending on the context they are used.
-The decision versions are in fact NP-complete, however, the NP-hardness holds regardless.
+The decision versions are in fact NP-complete (PSPACE-complete), nevertheless, the NP-hardness (PSPACE-hardness) holds regardless.
+In some instances, several very similar problems differing only in small details are discussed in the thesis.
+In these cases, only the basic variants are stated in this list .
 
+\section{NP-hard Problems}
+\subsection{Satisfiability}
 
 \begin{problemA}
-  \problemtitle{\textsc{3D-Matching}}
-  \probleminput{Finite disjoint sets $X$, $Y$, and $Z$, a set $T\subseteq X\times Y \times Z$, and an integer $k$.}
-  \problemquestion{
-  	Does there exist a set $M \subseteq T$ with $|M| \geq k$ 
-	such that for any two distinct triples $(x_1, y_1, z_1) \in M$ and $(x_2, y_2, z_2) \in M$, we have $x_1 \neq x_2, y_1 \neq y_2$, and $z_1 \neq  z_2$?
-  }
+  \problemtitle{\textsc{Boolean Satisfiability (SAT)}}
+  \probleminput{A Boolean formula $\varphi$.}
+  \problemquestion{Is there a truth assignment to variables of $\varphi$ such that $\varphi$ evaluates to TRUE?}
 \end{problemA}
+
 
 \begin{problemA}
   \problemtitle{\textsc{3-SAT}}
@@ -27,10 +30,27 @@ The decision versions are in fact NP-complete, however, the NP-hardness holds re
 \end{problemA}
 
 \begin{problemA}
-  \problemtitle{\textsc{Boolean Satisfiability (SAT)}}
-  \probleminput{A Boolean formula $\varphi$.}
-  \problemquestion{Is there a truth assignment to variables of $\varphi$ such that $\varphi$ evaluates to TRUE?}
+  \problemtitle{\textsc{Planar 3-SAT}}
+  \probleminput{
+  	 A set of unnegated variables $X=\{x_1,\dots,x_n\}$ and negated variables $X=\{\bar{x}_1,\dots,\bar{x}_n\}$, a collection of clauses $C$ over $X\cup \bar{X}$ such that
+  	 \begin{enumerate}
+  	 \item The graph $G = (X\cup C, E)$ with edge set $E = \{\{x,c\}: x \in c \vee \bar{x} \in c\}$ is planar.
+  	 \item Each clause $e \in C$ contains two or three literals $y \in X \cup \bar{X}$.
+  	 \end{enumerate} 
+  }
+  \problemquestion{Does there exist a truth assignment for the variables such that each clause is satisfied?}
 \end{problemA}
+
+\begin{problemA}
+  \problemtitle{\textsc{Planar 3,4-SAT}}
+  \probleminput{
+  	Same as \textsc{Planar 3-SAT} with an additional requirement 
+  	that each clause $c\in C$ contains exactly three literals and that each variable $x_i$ appears in at most four clauses.
+  }
+  \problemquestion{Does there exist a truth assignment for the variables such that each clause is satisfied?}
+\end{problemA}
+
+\subsection{Graph Theory}
 
 \begin{problemA}
   \problemtitle{\textsc{Clique}}
@@ -39,19 +59,43 @@ The decision versions are in fact NP-complete, however, the NP-hardness holds re
 \end{problemA}
 
 \begin{problemA}
-  \problemtitle{\textsc{Minimum Broadcast Time (MBT)}}
-  \probleminput{A graph $G=(V,E)$ and a subset $S\subseteq V$.}
+  \problemtitle{\textsc{Minimum Steiner Tree}}
+  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $D\subseteq V$.}
+  \problemquestion{Find a minimum-weight tree in $G$ spanning $D$.}
+\end{problemA}
+
+\begin{problemA}
+  \problemtitle{\textsc{Travelling Salesman Problem}}
+  \probleminput{A complete graph $G=(V,E)$ with edge weights $c:E\mapsto\mathbb{R}^+_0$ and an integer $k$.} 
+  \problemquestion{Is there a path $P=(V,E')$ such that $E'\subseteq E$ and $\sum_{e\in E'}c(e)\leq k$?}
+\end{problemA}
+
+\begin{problemA}
+  \problemtitle{\textsc{Vertex Cover}}
+  \probleminput{A graph $G=(V,E)$ and an integer $k$.} 
+  \problemquestion{Is there a subset of $V'\subseteq V$ such that $\{u,v\}\in E\Rightarrow u\in V'$ or $v\in V'$ of size at most $k$?}
+\end{problemA}
+
+
+\subsection{Sets}
+
+\begin{problemA}
+  \problemtitle{\textsc{3D-Matching}}
+  \probleminput{Finite disjoint sets $X$, $Y$, and $Z$, a set $T\subseteq X\times Y \times Z$, and an integer $k$.}
   \problemquestion{
-   	Find the smallest integer $t\geq 0$
-   	for which there exists a sequence $V_0\subseteq\dots\subseteq V_t$ of node sets and a function $\pi:V\setminus S\mapsto V$, satisfying:
-   	\begin{enumerate}
-   	\item $V_0=S$ and $V_t=V$,
-   	\item for all $v\in V\setminus S, \left\{v,\pi(v)\right\}\in E$,
-   	\item for all $k=1,\dots t$ and all $v\in V_k$, $\pi(v)\in V_{k-1}$, and
-   	\item for all $u,v\in V_k\setminus V_{k-1}$, $\pi(u)=\pi(v)$ only if $u=v$.
-   	\end{enumerate}
+  	Does there exist a set $M \subseteq T$ with $|M| \geq k$ 
+	such that for any two distinct triples $(x_1, y_1, z_1) \in M$ and $(x_2, y_2, z_2) \in M$, we have $x_1 \neq x_2, y_1 \neq y_2$, and $z_1 \neq  z_2$?
   }
 \end{problemA}
+
+\begin{problemA}
+  \problemtitle{\textsc{Set Cover}}
+  \probleminput{A universe $U=\{1,2,\dots,n\}$, a collection $\mathcal{S}$ of sets such that $\cup_{S\in\mathcal{S}}S=U$, and an integer $k$.} 
+  \problemquestion{Is there a sub-collection $\mathcal{S}'$ of $\mathcal{S}$ of size at most $k$ such that $\cup_{S\in\mathcal{S}'}S=U$?}
+\end{problemA}
+
+
+\subsection{Wireless Networks}
 
 \begin{problemA}
   \problemtitle{\textsc{Minimum Energy Broadcast (MEB)}}
@@ -69,12 +113,6 @@ The decision versions are in fact NP-complete, however, the NP-hardness holds re
   	Find a power vector $(P_1,P_2,\dots,P_n)\in\mathbb{R}^n$ of minimum component sum such that
 	there exists a path from $s$ to each $t\in D\setminus\{s\}$ in $G^P=(V,A^P)$, where $A^P=\{(i,j)\in A: p_{ij}\leq P_i\}$.
   }
-\end{problemA}
-
-\begin{problemA}
-  \problemtitle{\textsc{Minimum Steiner Tree}}
-  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $D\subseteq V$.}
-  \problemquestion{Find a minimum-weight tree in $G$ spanning $D$.}
 \end{problemA}
 
 \begin{problemA}
@@ -104,62 +142,121 @@ The decision versions are in fact NP-complete, however, the NP-hardness holds re
   }
   \end{problemA}
 
+\subsection{Broadcast Time}
+
 \begin{problemA}
-  \problemtitle{\textsc{Planar 3-SAT}}
-  \probleminput{
-  	 A set of unnegated variables $X=\{x_1,\dots,x_n\}$ and negated variables $X=\{\bar{x}_1,\dots,\bar{x}_n\}$, a collection of clauses $C$ over $X\cup \bar{X}$ such that
-  	 \begin{enumerate}
-  	 \item The graph $G = (X\cup C, E)$ with edge set $E = \{\{x,c\}: x \in c \vee \bar{x} \in c\}$ is planar.
-  	 \item Each clause $e \in C$ contains two or three literals $y \in X \cup \bar{X}$.
-  	 \end{enumerate} 
+  \problemtitle{\textsc{Minimum Broadcast Time (MBT)}}
+  \probleminput{A graph $G=(V,E)$ and a subset $S\subseteq V$.}
+  \problemquestion{
+   	Find the smallest integer $t\geq 0$
+   	for which there exists a sequence $V_0\subseteq\dots\subseteq V_t$ of node sets and a function $\pi:V\setminus S\mapsto V$, satisfying:
+   	\begin{enumerate}
+   	\item $V_0=S$ and $V_t=V$,
+   	\item for all $v\in V\setminus S, \left\{v,\pi(v)\right\}\in E$,
+   	\item for all $k=1,\dots t$ and all $v\in V_k$, $\pi(v)\in V_{k-1}$, and
+   	\item for all $u,v\in V_k\setminus V_{k-1}$, $\pi(u)=\pi(v)$ only if $u=v$.
+   	\end{enumerate}
   }
-  \problemquestion{Does there exist a truth assignment for the variables such that each clause is satisfied?}
+\end{problemA}
+
+
+\subsection{Path Finding}
+
+\begin{problemA}
+  \problemtitle{\textsc{Multi-Robot Path Finding}}
+        \probleminput{An environment modeled by a graph $G=(V,E)$,
+        a set of agents $R$ with an initial and a target node for each agent defined by injective functions $\lambda_0: R\mapsto V$ and $\lambda_+: R\mapsto V$, respectively.}
+	\problemquestion{Find a path $(\lambda_0(a),\lambda_1(a),\dots,\lambda_{t(a)}(a)=\lambda_+(a))$  with possible repetition of nodes in $G$ for each agent $a\in R$
+        from its initial node to its target node satisfying
+        \begin{itemize}
+		\item $\forall a\in R,\forall i\in\left\{0,\dots,t(a)-1\right\}: \lambda_i(a)=\lambda_{i+1}(a) \vee \left\{\lambda_i(a),\lambda_{i+1}(a)\right\}\in E$,
+                        (that is, an agent moves along edges or stays at a node),
+		\item $\forall a,a'\in R,\forall i\in\left\{0,\dots,t(a)\right\}:\lambda_i(a)=\lambda_i(a')\Leftrightarrow a=a'$,
+			(that is, a node can be occupied by at most one agent at a time),
+		\item $\forall a,a'\in R, a\neq a',\forall u,v\in V,u\neq v,\forall i\in\left\{0,\dots,t(a)-1\right\}:
+			((\lambda_i(a)=u)\&(\lambda_{i+1}(a)=v)\&(\lambda_{i}^{-1}(v)=a'))\Rightarrow(\lambda_{i+1}(a')\not\in\left\{u,v\right\})$,
+			(that is, if an agent $a$ located at node $u$ at time $i$ moves to a node $v$ that  was occupied at time step $i$ by some agent $a'$ different from $a$, 
+			agent $a'$ must move away at the same time,
+			and two agents are not allowed to exchange their positions within one time step),
+	\end{itemize}
+	minimizing the makespan, i.e., $\min\max_{a\in R} t(a)$.
+        }
+\end{problemA}
+
+
+\begin{problemA}
+  \problemtitle{\textsc{Pebble Motion on Graph}}
+        \probleminput{An environment modeled by a graph $G=(V,E)$,
+        a set of agents $R$ with an initial and a target node for each agent defined by injective functions $\lambda_0: R\mapsto V$ and $\lambda_+: R\mapsto V$, respectively.}
+	\problemquestion{Find a path $(\lambda_0(a),\lambda_1(a),\dots,\lambda_{t(a)}(a)=\lambda_+(a))$  with possible repetition of nodes in $G$ for each agent $a\in R$
+        from its initial node to its target node satisfying
+        \begin{itemize}
+                \item $\forall a\in R,\forall i\in\left\{0,\dots,t(a)-1\right\}: \lambda_i(r)=\lambda_{i+1}(r) \vee \left\{\lambda_i(r),\lambda_{i+1}(r)\right\}\in E$,
+                        (that is, an agent moves along edges or stays at a node),
+		\item $\forall a,a'\in R,\forall i\in\left\{0,\dots,t(a)\right\}:\lambda_i(a)=\lambda_i(a')\Leftrightarrow a=a'$,
+			(that is, a node can be occupied by at most one agent at a time),
+		\item $\forall a,a'\in R, a\neq a',\forall u,v\in V,u\neq v,\forall i\in\left\{0,\dots,t(a)-1\right\}:
+			((\lambda_i(a)=u)\&(\lambda_{i+1}(a)=v))\Rightarrow(\lambda_{i}(a')\neq v)$,
+			(that is, an agent is not allowed to move to a node that is simultaneously being left by another agent, it can only move to an unoccupied node),
+	\end{itemize}
+	minimizing the makespan, i.e., $\min\max_{a\in R} t(a)$.
+	}
+\end{problemA}
+%\newpage
+\section{PSPACE-hard Problems}
+
+\subsection{Satisfiability}
+
+\begin{problemA}
+	\problemtitle{\textsc{True Quantified Boolean Formula (TQBF)}}
+  \probleminput{A fully quantified Boolean formula $\varphi$.}
+  \problemquestion{If $\varphi$ equivalent to TRUE?}
+\end{problemA}
+
+
+\subsection{Path Finding}
+
+\begin{problemA}
+\problemtitle{\textsc{Adversarial Cooperative Path Finding (ACPF)}}
+        \probleminput{An environment modeled by a graph $G=(V,E)$,
+        a set of agents $R$ with an initial and a target node for each agent defined by injective functions $\lambda_0: R\mapsto V$ and $\lambda_+: R\mapsto V$, respectively,
+	and a partition of $R$ into adversarial teams $T_1,\dots,T_k$.}
+	\problemquestion{Is there a strategy  deciding a next move for agents of $T_{1}$ so that all agents of $T_{1}$ arrive at their targets before
+	any other team does so, assuming the following movement rules are satisfied:
+        \begin{itemize}
+                \item $\forall a\in R,\forall i\in\left\{0,\dots,t(a)-1\right\}: \lambda_i(r)=\lambda_{i+1}(r) \vee \left\{\lambda_i(r),\lambda_{i+1}(r)\right\}\in E$,
+                        (that is, an agent moves along edges or stays at a node),
+		\item $\forall a,a'\in R,\forall i\in\left\{0,\dots,t(a)\right\}:\lambda_i(a)=\lambda_i(a')\Leftrightarrow a=a'$,
+			(that is, a node can be occupied by at most one agent at a time),
+		\item $\forall a,a'\in R, a\neq a',\forall u,v\in V,u\neq v,\forall i\in\left\{0,\dots,t(a)-1\right\}:
+			((\lambda_i(a)=u)\&(\lambda_{i+1}(a)=v))\Rightarrow(\lambda_{i}(a')\neq v)$,
+			(that is, an agent is not allowed to move to a node that is simultaneously being left by another agent, it can only move to an unoccupied node),
+		\item $\forall i\in \mathbb{Z}_0^+,\forall a \in  R \setminus T_{i+1 (\text{mod~} k)} : \lambda_i(a) =\lambda_{i+1}(a)$, 
+			(The only agents that can move between time step $i$ and $i + 1$ are those from the team $T_{i+1 (\text{mod~} k)}$),
+	\end{itemize}
+	Regardless of the movement of agents of other teams?
+	}
 \end{problemA}
 
 \begin{problemA}
-  \problemtitle{\textsc{Planar 3,4-SAT}}
-  \probleminput{
-  	Same as \textsc{Planar 3-SAT} with an additional requirement 
-  	that each clause $c\in C$ contains exactly three literals and that each variable $x_i$ appears in at most four clauses.
-  }
-  \problemquestion{Does there exist a truth assignment for the variables such that each clause is satisfied?}
+\problemtitle{\textsc{Area Protection Problem (APP) }}
+ \probleminput{An environment modeled by a graph $G=(V,E)$,
+        and a set of agents $R$ partitioned into the set of defenders $T_1$ and attackers $T_2$,
+	with an initial and a target node for each attacker defined by injective functions $\lambda_0: T_2\mapsto V$ and $\lambda_+: T_2\mapsto V$, respectively.}
+	\problemquestion{Is there a strategy  deciding a next move for the defenders so that no attacker reaches its target, assuming the following movement rules are satisfied:
+        \begin{itemize}
+                \item $\forall a\in R,\forall i\in\left\{0,\dots,t(a)-1\right\}: \lambda_i(r)=\lambda_{i+1}(r) \vee \left\{\lambda_i(r),\lambda_{i+1}(r)\right\}\in E$,
+                        (that is, an agent moves along edges or stays at a node),
+		\item $\forall a,a'\in R,\forall i\in\left\{0,\dots,t(a)\right\}:\lambda_i(a)=\lambda_i(a')\Leftrightarrow a=a'$,
+			(that is, a node can be occupied by at most one agent at a time),
+		\item $\forall a,a'\in R, a\neq a',\forall u,v\in V,u\neq v,\forall i\in\left\{0,\dots,t(a)-1\right\}:
+			((\lambda_i(a)=u)\&(\lambda_{i+1}(a)=v))\Rightarrow(\lambda_{i}(a')\neq v)$,
+			(that is, an agent is not allowed to move to a node that is simultaneously being left by another agent, it can only move to an unoccupied node),
+		\item $\forall i\in \mathbb{Z}_0^+,\forall a \in  R \setminus T_{i+1 (\text{mod~} 2)} : \lambda_i(a) =\lambda_{i+1}(a)$, 
+			(The only agents that can move between time step $i$ and $i + 1$ are those from the team $T_{i+1 (\text{mod~} 2)}$),
+	\end{itemize}
+	regardless of the movement of attackers?
+	}
 \end{problemA}
 
-\begin{problemA}
-  \problemtitle{\textsc{Set Cover}}
-  \probleminput{A universe $U=\{1,2,\dots,n\}$, a collection $\mathcal{S}$ of sets such that $\cup_{S\in\mathcal{S}}S=U$, and an integer $k$.} 
-  \problemquestion{Is there a sub-collection $\mathcal{S}'$ of $\mathcal{S}$ of size at most $k$ such that $\cup_{S\in\mathcal{S}'}S=U$?}
-\end{problemA}
-
-\begin{problemA}
-  \problemtitle{\textsc{Travelling Salesman Problem}}
-  \probleminput{A complete graph $G=(V,E)$ with edge weights $c:E\mapsto\mathbb{R}^+_0$ and an integer $k$.} 
-  \problemquestion{Is there a path $P=(V,E')$ such that $E'\subseteq E$ and $\sum_{e\in E'}c(e)\leq k$?}
-\end{problemA}
-
-\begin{problemA}
-  \problemtitle{\textsc{Vertex Cover}}
-  \probleminput{A graph $G=(V,E)$ and an integer $k$.} 
-  \problemquestion{Is there a subset of $V'\subseteq V$ such that $\{u,v\}\in E\Rightarrow u\in V'$ or $v\in V'$ of size at most $k$?}
-\end{problemA}
-
-%\begin{problemA}
-%  \problemtitle{\textsc{Symmetric Range Assignment Problem (SRAP)}}
-%  \problemdefinition{
-%	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
-%	A Steiner tree in $G$ is a tree that spans $S$.		
-%  }
-%  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
-%\problemquestion{Find a minimum-weight Steiner tree in $G$.}
-%\end{problemA}
-%
-%\begin{problemA}
-%  \problemtitle{\textsc{Weakly Symmetric Range Assignment Problem (WSRAP)}}
-%  \problemdefinition{
-%	 Let $G=(V, E)$ be a graph and let $S\subseteq V$ be a subset of vertices, called terminals. 
-%	A Steiner tree in $G$ is a tree that spans $S$.		
-%  }
-%  \probleminput{A graph $G=(V,E)$, non-negative edge-weights $c$, and $S\subseteq V$.}
-%\problemquestion{Find a minimum-weight Steiner tree in $G$.}
-%\end{problemA}
-
+\end{footnotesize}

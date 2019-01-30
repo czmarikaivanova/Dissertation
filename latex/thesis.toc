@@ -28,38 +28,54 @@
 \contentsline {subsection}{\numberline {2.2.4}Shared Broadcast Trees}{16}{subsection.2.2.4}
 \contentsline {chapter}{\numberline {3}Minimum Broadcast Time}{19}{chapter.3}
 \contentsline {section}{\numberline {3.1}Network Model and Definitions}{19}{section.3.1}
-\contentsline {section}{\numberline {3.2}Computational Complexity}{20}{section.3.2}
-\contentsline {section}{\numberline {3.3}Integer Linear Programming Models}{22}{section.3.3}
+\contentsline {section}{\numberline {3.2}Computational Complexity}{21}{section.3.2}
+\contentsline {section}{\numberline {3.3}Integer Linear Programming Models}{23}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Binomial Tree Model}{23}{subsection.3.3.1}
 \contentsline {subsubsection}{The formulation}{24}{section*.24}
-\contentsline {subsubsection}{Valid inequalities}{25}{section*.25}
+\contentsline {subsubsection}{Valid inequalities}{26}{section*.25}
 \contentsline {subsubsection}{Symmetry removal}{26}{section*.26}
-\contentsline {subsubsection}{Decision version}{26}{section*.27}
+\contentsline {subsubsection}{Decision version}{27}{section*.27}
 \contentsline {subsubsection}{Discussion}{27}{section*.28}
 \contentsline {section}{\numberline {3.4}Related Problems}{28}{section.3.4}
 \contentsline {subsection}{\numberline {3.4.1}Broadcast Graphs}{28}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}The Gossiping Problem}{28}{subsection.3.4.2}
-\contentsline {chapter}{\numberline {4}Path Finding for Multiple Robots}{29}{chapter.4}
-\contentsline {section}{\numberline {4.1}Basic Path Finding}{29}{section.4.1}
-\contentsline {section}{\numberline {4.2}Path Finding for Multiple Robots}{30}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Mathematical model and variants}{32}{subsection.4.2.1}
-\contentsline {paragraph}{Multi-Agent Path Finding}{33}{section*.31}
-\contentsline {paragraph}{Pebble Motion on Graphs}{33}{section*.32}
-\contentsline {subsection}{\numberline {4.2.2}Cooperative Path-Finding}{33}{subsection.4.2.2}
-\contentsline {subsubsection}{CA*}{34}{section*.33}
-\contentsline {subsubsection}{OD+ID}{35}{section*.35}
-\contentsline {subsubsection}{Other notable algorithms}{35}{section*.36}
-\contentsline {section}{\numberline {4.3}Scenarios with adversaries}{36}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Adversarial Cooperative Path Finding}{36}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}Area Protection Problem}{37}{subsection.4.3.2}
-\contentsline {subsubsection}{Target allocation}{38}{section*.37}
-\contentsline {subsection}{\numberline {4.3.3}Area Protection Problem with Communication maintenance}{38}{subsection.4.3.3}
-\contentsline {chapter}{\numberline {5}Contribution of the Thesis and Prospective Research}{47}{chapter.5}
-\contentsline {chapter}{\numberline {6}Attached Papers}{49}{chapter.6}
-\contentsline {section}{\numberline {6.1}Shared Multicast Trees in Ad Hoc Wireless Networks}{51}{section.6.1}
-\contentsline {section}{\numberline {6.2}The Shared Broadcast Tree Problem and MST}{67}{section.6.2}
-\contentsline {section}{\numberline {6.3}Integer Programming Formulations for the Shared Multicast Tree Problem}{73}{section.6.3}
-\contentsline {section}{\numberline {6.4}Computing the Broadcast Time of a Graph}{107}{section.6.4}
-\contentsline {section}{\numberline {6.5}Area Protection in Adversarial Path-finding Scenarios with Multiple Mobile Agents on Graphs}{131}{section.6.5}
-\contentsline {section}{\numberline {6.6}Maintaining Ad-Hoc Communication Network in Area Protection Scenarios with Adversarial Agents}{141}{section.6.6}
-\contentsline {chapter}{\numberline {A}List of NP-hard Problems}{149}{appendix.A}
+\contentsline {subsection}{\numberline {3.4.2}The Gossiping Problem}{29}{subsection.3.4.2}
+\contentsline {chapter}{\numberline {4}Path Finding for Multiple Robots}{31}{chapter.4}
+\contentsline {section}{\numberline {4.1}Basic Path Finding}{31}{section.4.1}
+\contentsline {section}{\numberline {4.2}Path Finding for Multiple Robots}{32}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Mathematical model and variants}{34}{subsection.4.2.1}
+\contentsline {paragraph}{Multi-Agent Path Finding}{35}{section*.31}
+\contentsline {paragraph}{Pebble Motion on Graphs}{35}{section*.32}
+\contentsline {subsection}{\numberline {4.2.2}Cooperative Path-Finding}{35}{subsection.4.2.2}
+\contentsline {subsubsection}{CA*}{36}{section*.33}
+\contentsline {subsubsection}{OD+ID}{37}{section*.35}
+\contentsline {subsubsection}{Other notable algorithms}{37}{section*.36}
+\contentsline {section}{\numberline {4.3}Scenarios with adversaries}{38}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Adversarial Cooperative Path Finding}{38}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Area Protection Problem}{39}{subsection.4.3.2}
+\contentsline {subsubsection}{Target allocation}{40}{section*.37}
+\contentsline {subsection}{\numberline {4.3.3}Area Protection Problem with Communication maintenance}{40}{subsection.4.3.3}
+\contentsline {chapter}{\numberline {5}Contribution of the Thesis and Prospective Research}{49}{chapter.5}
+\contentsline {section}{\numberline {5.1}Paper I: Shared Multicast Trees in Ad Hoc Wireless Networks}{49}{section.5.1}
+\contentsline {section}{\numberline {5.2}Paper II: Shared Multicast Trees in Ad Hoc Wireless Networks}{50}{section.5.2}
+\contentsline {section}{\numberline {5.3}Paper III: Integer Programming Formulations for the Shared Multicast Tree Problem}{50}{section.5.3}
+\contentsline {section}{\numberline {5.4}Paper IV: Computing the Broadcast Time of a Graph}{50}{section.5.4}
+\contentsline {section}{\numberline {5.5}Paper V: Area Protection in Adversarial Path-finding Scenarios with Multiple Mobile Agents on Graphs}{51}{section.5.5}
+\contentsline {section}{\numberline {5.6}Paper VI: Maintaining Ad-Hoc Communication Network in Area Protection Scenarios with Adversarial Agents}{51}{section.5.6}
+\contentsline {chapter}{\numberline {6}Attached Papers}{53}{chapter.6}
+\contentsline {section}{\numberline {6.1}Shared Multicast Trees in Ad Hoc Wireless Networks}{55}{section.6.1}
+\contentsline {section}{\numberline {6.2}The Shared Broadcast Tree Problem and MST}{71}{section.6.2}
+\contentsline {section}{\numberline {6.3}Integer Programming Formulations for the Shared Multicast Tree Problem}{77}{section.6.3}
+\contentsline {section}{\numberline {6.4}Computing the Broadcast Time of a Graph}{111}{section.6.4}
+\contentsline {section}{\numberline {6.5}Area Protection in Adversarial Path-finding Scenarios with Multiple Mobile Agents on Graphs}{135}{section.6.5}
+\contentsline {section}{\numberline {6.6}Maintaining Ad-Hoc Communication Network in Area Protection Scenarios with Adversarial Agents}{145}{section.6.6}
+\contentsline {chapter}{\numberline {A}List of Computationaly Hard Problems}{153}{appendix.A}
+\contentsline {section}{\numberline {A.1}NP-hard Problems}{153}{section.A.1}
+\contentsline {subsection}{\numberline {A.1.1}Satisfiability}{153}{subsection.A.1.1}
+\contentsline {subsection}{\numberline {A.1.2}Graph Theory}{153}{subsection.A.1.2}
+\contentsline {subsection}{\numberline {A.1.3}Sets}{154}{subsection.A.1.3}
+\contentsline {subsection}{\numberline {A.1.4}Wireless Networks}{154}{subsection.A.1.4}
+\contentsline {subsection}{\numberline {A.1.5}Broadcast Time}{155}{subsection.A.1.5}
+\contentsline {subsection}{\numberline {A.1.6}Path Finding}{155}{subsection.A.1.6}
+\contentsline {section}{\numberline {A.2}PSPACE-hard Problems}{155}{section.A.2}
+\contentsline {subsection}{\numberline {A.2.1}Satisfiability}{155}{subsection.A.2.1}
+\contentsline {subsection}{\numberline {A.2.2}Path Finding}{156}{subsection.A.2.2}

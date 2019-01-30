@@ -337,6 +337,11 @@
 \newblock {\em Integer and Combinatorial Optimization}.
 \newblock Wiley-Interscience, New York, NY, USA, 1988.
 
+\bibitem{pajor18}
+{\sc Pajor, T., Uchoa, E., and Werneck, R.~F.}
+\newblock A robust and scalable algorithm for the steiner problem in graphs.
+\newblock {\em Mathematical Programming Computation 10}, 1 (Mar 2018), 69--118.
+
 \bibitem{papadimitriou94}
 {\sc Papadimitriou, C.~H.}
 \newblock {\em Computational complexity.}
