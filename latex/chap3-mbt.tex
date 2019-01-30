@@ -34,6 +34,18 @@ for which there exist a sequence $V_0\subseteq\dots\subseteq V_t$ of node sets a
 \item for all $u,v\in V_k\setminus V_{k-1}$, $\pi(u)=\pi(v)$ only if $u=v$.
 \end{enumerate}
 \end{definition}
+A node is said to be \emph{informed} at a given time if it is a source, or it already has received the signal from some other node. Otherwise, the node is said to be \emph{uninformed}.
+Consequently, the set of informed nodes is initially exactly the set of sources.
+Each node set $V_i$, $0\leq i\leq t$ consists of nodes informed in time step $i$.
+The function $\pi(u)$ determines a parent node which forwarded the signal to node $u$.
+With this interpretation, the conditions 1.-4. of Def.~\ref{def:mbt} can be translated into natural language as 
+\begin{enumerate}
+\item Initially the only informed nodes are the sources, and at the end of the transmission, all nodes are informed.
+\item Nodes send signal along communication links defined by the set of edges.
+\item En each time step, a node is informed by its parent who was informed in the previous time step.
+\item A node can inform only one child node at a time.
+\end{enumerate}
+
 Any feasible solution determines a \emph{communication forest} $\mathcal{F}$ with the set of nodes $V$.
 Arcs in $\mathcal{F}$ are induced by the communication: if a node $u$ sends a message to $v$, $(u,v)$ is an arc in $\mathcal{F}$.
 It is easily verified that the $\mathcal{F}$ contains arborescences rooted at distinct sources.
@@ -52,8 +64,6 @@ In the literature, authors often consider the decision version, because some of 
 \begin{problem}\label{mbt:dec}
 Given $G=(V,E)$, $S\subseteq V$,  and a deadline $t\in \mathbb{Z}^+_0$, does $\tau(G,S)\leq t$ hold? 
 \end{problem}
-A node is said to be \emph{informed} at a given time if it is a source, or it already has received the signal from some other node. Otherwise, the node is said to be \emph{uninformed}.
-Consequently, the set of informed nodes is initially exactly the set of sources.
 
 Even though the set of sources in a MBT instance is an arbitrary subset of $V$, the following concept assumes a single source.
 In a given graph $G$, any node can be a source.
@@ -209,9 +219,22 @@ This function is defined recursively as
 \end{cases}
 \end{equation*}
 Nodes in Fig. \ref{fig:beta} are labeled with their positions according to $\beta$.
+\begin{definition}
+For a node $v\in V'$ with position $i=\beta(v)$, define the corresponding \emph{chidl position set}, $C(i)$, 
+consisting of positions of child nodes of $v$ in $B^k$.
+That is,
+$$
+	C(i)=\left\{\beta(u): \pi(u)=v,\text{ i.e., } u \text{ is a child of } v \text{ in } B^k\right\}.
+$$
+\end{definition}
+By the definition of $\beta$, it follows that 
+\begin{equation}
+\label{eq:c1}
+C(i)=\{2^j+i:j=\lceil\log_2 i\rceil,\dots,k-1\}.
+\end{equation}
 
 The idea behind this model is that every broadcasting from a single source follows arcs of a (potentially pruned) binomial tree.
-The value of $\tau(G,S)$ can be retrievd from the maximumg among the positions assigned to nodes.
+The value of $\tau(G,S)$ can be retrievd from the maximum among the positions assigned to nodes.
 Intuitively, an advantage of this concept is when applied on dense graph instances where feasible solutions should be found quickly.
 To see this, consider a complete graph $K_n$.
 Any assignment of positions $1,2,\dots,n$ to nodes is valid and optimal. 
@@ -241,14 +264,20 @@ Near complete graphs have therefore many optimal solutions, which are expected t
 %Children of $v\in V^t$ with $\text{deg}^+(v)=\ell$ have out-degree $0,\dots,\ell-1$.
 %\end{observation}
 \subsubsection{The formulation}
-Consider a graph $G'=(V',E')$ constructed  by adding a universal node $v_0$ to $G$.
+Consider a graph $G'=(V',E')$ constructed  by adding an auxiliary universal node $v_0$ to $G$.
 The set of nodes and edges is then $V'=V\cup \{v_0\}$ and $E'=E\cup\{\{v_0,v\}:v\in V\}$.
-The ILP formulation based on partition into binomial trees uses variables
+So far we have considered binomial trees $B^k$ of an arbitrary order $k$.
+For finding a valid assignment of positions to the nodes, we need a binomial tree of order at least $\tau(G,S)$.
+As $\tau(G,S)$ is unknown, we must determine some suitable upper bound $\bar{t}$ on $\tau(G,S)$.  
+\begin{observation}
+A trivial upper bound on $\tau(G,S)$ is $n-|S|$.
+\end{observation}
+The ILP formulation based on a partition into binomial trees uses variables
 $$
-z_{k}=
+z_{j}=
 \begin{cases}
-1, \text{ if } k\leq t,\\
-0, \text{ otherwise}.
+1, \text{ if } j\leq \bar{t},\\
+0, \text{ otherwise},
 \end{cases}
 y_{is}^v=
 \begin{cases}
@@ -256,7 +285,7 @@ y_{is}^v=
 0, \text{ otherwise},\\
 \end{cases}
 $$
-where $v\in V'$, $i\in I$, $s\in S$ and $0\leq j\leq \bar{t}$ for some upper bound $\bar{t}$ on the broadcast time.
+where $v\in V'$, $i\in I=\left\{1,\dots,2^{\bar{t}}\right\}$, $s\in S$ and $0\leq j\leq \bar{t}$.
 With the definition of $G'$ above, it is straightforward to specify constraints that enforce desired values for $y$-variables.
 Whenever $y_{is}^{v_0}=1$, it indicates that the binomial tree rooted at $s$ is pruned at node with position $i$.
 %An obvious weakness of this approach is  that the number of nodes increases to $|V''|=\mathcal{O}(ns)$, and the dimension of variables is thus $\mathcal{O}(n^2s^2)$.
@@ -268,19 +297,6 @@ Whenever $y_{is}^{v_0}=1$, it indicates that the binomial tree rooted at $s$ is 
 %The subtrees contained in $G$ remain unchanged, every arc $(u,v)\in A^k_i, i=1,\dots,s$ in $G''$ with $u\in V$ and $v\in V_\alpha$ becomes $(u,v_0)$ in $G'$,
 %and every $(u,v)\in A_\alpha$ becomes $(v_0,v_0)$.
 %So, $v_0$ acts as a universal node that can substitute several nodes in each binomial tree.
-\begin{definition}
-For nodes $v\in V'$ with corresponding position $i=\beta(v)$, define the corresponding \emph{chidl position set}, $C(i)$, 
-consisting of the position of the child nodes of $v$ in $B^k$.
-That is,
-$$
-	C(i)=\left\{\beta(u): \pi(u)=v,\text{ i.e., } u \text{ is a child of } v \text{ in } B^k\right\}.
-$$
-\end{definition}
-By the definition of $\beta$, it follows that 
-\begin{equation}
-\label{eq:c1}
-C(i)=\{2^j+i:j=\lceil\log_2 i\rceil,\dots,k-1\}.
-\end{equation}
 The formulation based on binomial trees is the following:
 \begin{subequations}\label{mod:partition}
 \begin{align}
@@ -312,13 +328,15 @@ Next, \eqref{mod:part:source1} enforce that source nodes are always the first no
 in accordance with definition \eqref{eq:beta} of the function $\beta$.
 Constraints \eqref{mod:part:followArcsA} and \eqref{mod:part:followArcsB} guarantee that the arcs of binomial trees follow edges in $E$.
 In particular, it is enforced by \eqref{mod:part:followArcsA} that if $u$ and $v$ are not adjacent in $G$, 
-`then $v$ must not have a position of child of $u$ in any binomial tree.
+then $v$ must not have a position of child of $u$ in any binomial tree.
 Similarly by \eqref{mod:part:followArcsB}, if $u$ and $v$ are not adjacent in $G$, then $v$ must not act as a parent of $u$ in any binomial tree.
 Without \eqref{mod:part:followArcsA} and \eqref{mod:part:followArcsB}, it could be possible to find a feasible solution, 
 even when no partition of $G$ into pruned binomial trees exists.
+Finally, the relation \eqref{mod:part:yzrel} between $y$ and $z$ variables follows from Obs. \ref{obs:btspread}.
+It says that whenever there is a node in a position $i$, then the delay is at least $\lceil\log i\rceil$.
 
 Consider a subset $U\subseteq V$.
-Let $N(U)=\left\{u:\left\{u,v\right\}\in E\right\}$, and for $U\subseteq V$, let $\bar{N}(U)=V\setminus N(U)$.
+Let $N(U)=\left\{v:\left\{u,v\right\}\in E, u\in U\right\}$, and $\bar{N}(U)=V\setminus N(U)$.
 Constraints \eqref{mod:part:followArcsA} - \eqref{mod:part:followArcsB} can then be replaced by stronger
 \begin{subequations}\label{mod:partition:imp}
 \begin{align}
@@ -331,9 +349,6 @@ then there must be a neighbor of some non-neighbor of $u$ with position $i$ in t
 Similarly, Constraints \eqref{mod:part:imp:followArcsB} state 
 that if there is a node $v$ with position $\ell$ in a binomial tree rooted at $s$ in the complement of neighborhood of all non-neighbors of $u$,
 This reflects the obvious fact that if a tree is pruned at some node, all its descendants must also be excluded from the tree.
-Finally, the relation \eqref{mod:part:yzrel} between $y$ and $z$ variables follows from Obs. \ref{obs:btspread}.
-It says that whenever there is a node in a position $i$, then the delay is at least $\lceil\log i\rceil$.
-
 \subsubsection{Valid inequalities}
 Let $W$ be a maximal independent set in $G$.
 Model \eqref{mod:partition} is strengthened by

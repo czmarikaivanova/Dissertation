@@ -93,9 +93,7 @@ Its main contribution lies in the proof that APP is PSPACE-hard.
 This result is achieved by demonstrating a polynomial-time reduction from the PSPACE-complete problem TQBF.
 
 Several strategies are investigated for the team of defenders.
-A building block of all the considered strategies is a so called single stage \emph{destination allocation}, in which a node is assigned to each defender at the beginning of the agents' movement.
-The defenders then try to reach these destinations by any CPF algorithm, in this case we selected LRA*.
-A destination can be regarded as a target node for defenders, the difference is that while a target is a part of the input, destination is determined by a solution method.
+A building block of all the considered strategies is a so called single stage target allocation, in which a target node is assigned to each defender at the beginning of the agents' movement.
 
 The strategies differ in the approach of target allocation.
 Two simplest methods, random and greedy allocation, select attackers' targets as targets for defenders.
@@ -107,15 +105,5 @@ This method is particularly successful in environments rich on bottlenecks, as i
 %
 % Paper VI
 %
-\section{Paper VI: Maintaining Ad-Hoc Communication Network in Area Protection Scenarios with Adversarial Agents}
+\section{Paper VI:}
 
-An extension of APP, in which agents are required to maintain the possibility of a communication among each other is presented in Paper VI.
-The possibility of communication is modeled by a connectivity of the communication graph, whose nodes are the agents locations, 
-and there is an edge between two nodes if and only if the agents can communicate.
-
-We approach this problem by dividing the defenders into \emph{communicators} and \emph{occupiers} with different purposes. 
-Occupiers have the same task as regular defenders, i.e., they intend to prevent attackers from reaching their targets, 
-while communicators are supposed to ensure the connectivity maintenance by moving to suitable nodes.
-
-From a theoretical point of view, the problem whether it is possible for communicators to maintain communication when all occupiers reach their destinations is NP-complete, 
-which was proved by reducing \textsc{Vertex Cover} to it.
