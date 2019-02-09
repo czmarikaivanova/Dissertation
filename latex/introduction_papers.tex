@@ -1,18 +1,18 @@
 \chapter{Contribution of the Thesis and Prospective Research}
 
 This thesis is a compilation of six papers in which three independent topics are looked into.
-The first three papers are focused on ad hoc wireless networks discussed in Chapter 2.
-The forth paper is a manuscript that deals with the broadcast time problem addressed in Chapter 3.
+The first three papers are focused on ad-hoc wireless networks discussed in Chapter~\ref{chap:wanet}.
+The fourth paper deals with the broadcast time problem addressed in Chapter~\ref{chap:mbt}.
 These four papers share integer programming as an initial method for obtaining solutions.
-The last two papers are more distant, as they study adversarial variants of path finding for multiple robots, 
-which are commonly approached by methods common in the field of artificial intelligence.
+The last two papers are more distant, as they study adversarial variants of path finding for multiple robots summarized in Chapter~\ref{chap:app}, 
+which are commonly approached by methods prevalent in the field of artificial intelligence.
 %
 % Paper I
 %
-\section{Paper I:  Shared Multicast Trees in Ad Hoc Wireless Networks}
+\section{Paper I:  Shared Multicast Trees in Ad-hoc Wireless Networks}
 
 Paper I introduces the Shared Multicast Tree (SMT) problem, a generalization of the Shared Broadcast Tree (SBT) problem.
-An ILP model for SMT is proposed by modification of a model for SBT presented in \cite{}.
+An ILP model for SMT is proposed by modification of a model for SBT presented in \cite{yuan12}.
 Additional constraints related to non-destination nodes are included in the model, and constraints in the existing model for SBT are quantified with respect to the non-destinations.
 The presented model is subsequently proved to be a correct formulation of SMT.
 Appendix A of Paper I contains details of the proof.
@@ -22,7 +22,7 @@ The first two methods are based on a construction of a solution to a different p
 followed by local search which identifies non-destinations whose presence in the solution is disadvantageous.
 These non-destinations are then eliminated from the solution.
 The third method is an algorithm devised specifically for SBT/SMT.
-Its main idea is to gradually add edges to the growing solution, anticipate subtree sizes in the resultin solution, 
+Its main idea is to gradually add edges to the growing solution, anticipate subtree sizes in the resulting solution, 
 and thereby give an estimation of the final objective function each time a new edge is appended. 
 
 The experimental part is divided into two sections.
@@ -33,34 +33,34 @@ In the second section, the comparison of the inexact algorithms indicates that t
 %
 % Paper II
 %
-\section{Paper II: Shared Multicast Trees in Ad Hoc Wireless Networks}
+\section{Paper II: The Shared Broadcast Tree Problem and MST}
 
 Because of the limited size of instances practically solvable to optimality, following from the computational complexity of SBT, 
-approximability and approximation algorithms are ofthen researched.
+approximability and approximation algorithms are often researched.
 Paper II presents an instance of SBT for which the algorithm that construct a MST yields a solution to SBT with objective function six time worse than the optimum, 
 proving that the approximation ratio of the MST algorithm is at least 6.
 In addition, experimental results then reveal that the ratio between the optimal objective function value,
-and the objective function value of MST solutions in randomly generated instances is much  more favourable than the lower bound on the approximation ration.
+and the objective function value of MST solutions in randomly generated instances is much  more favourable than the lower bound on the approximation ratio.
 
 %
 % Paper III
 %
 \section{Paper III: Integer Programming Formulations for the Shared Multicast Tree Problem}
 
-Two ILP formulations are developed in Paper III, the first model is based on broadcast trees whereas the second one utilizes network flow techniques.
+Two ILP formulations are developed in Paper III, the first model is based on broadcast trees whereas the second one adapts several network flow techniques presented in \cite{polzin01}.
 Both models are subsequently extended by redundant variables and corresponding constraints which strengthen the formulations.
 The models are further strengthened by introducing valid inequalities
 A theoretical study of the models proves that network flow based models are at least as strong as corresponding models built on broadcast trees.
 The experimental evaluation discovers instances showing that flow based models are in fact stronger.
 
-Experimental evaluation further exhibits a profound tradeoff between time necessary for obtaining a lower bound by solving an LP relaxation of the models and their strength.
-LP relaxations of the strongest model yields an integral solution in most of the instances, however, its running time rules out its practical usability.
+Experimental evaluation further exhibits a profound trade-off between time necessary for obtaining a lower bound by solving an LP relaxation of the models and their strength.
+LP relaxations of the strongest model yield an integral solution in most of the instances, however, its running time rules out its practical usability.
 For addressing this issue, a constraint generation (CG) technique is developed, which increases the size of practically solvable instances.
 A comparison of the lower bounds produced during the course of CG method with lower bounds that are yielded during standard branch and bound shows 
 that CG is able to obtain stronger lower bounds within the selected time limit of 20 minutes.
 
-Paper III also contains an adaptation of a metaheuristic algorithm from \cite{pajor18} originally developed for the minimum steiner tree problem, 
-together with local search methods developed in Paper I.
+Paper III also contains an adaptation of a metaheuristic algorithm from \cite{pajor18}, originally developed for the minimum Steiner tree problem, 
+combined with local search methods developed in Paper I.
 The algorithm is able to solve a vast majority of tested instances to optimality. 
 However, the optimality is proved only in instances for which it is possible apply branch and bound and solve them to optimality within a practical time.
 Larger instances are not proved to be optimal, but the results indicate a very good potential of the metaheuristic algorithm. 
@@ -69,18 +69,18 @@ Larger instances are not proved to be optimal, but the results indicate a very g
 %
 \section{Paper IV: Computing the Broadcast Time of a Graph}
 
-We develop a straightforward ILP model for the Minimum Broadcast Time (MBT) problem, and by exploiting the problem chareacteristics, 
+We develop a straightforward ILP model for the Minimum Broadcast Time (MBT) problem, and by exploiting the problem characteristics, 
 we introduce a method that iteratively solves a decision version of the ILP model and finally finds an optimal solution if given a sufficient time.
 This method is also applied on the LP relaxation of the model, and the outcome indicates this method yields strong lower bounds, often coinciding with the optimum.
 Besides the continuous relaxation, analytical and combinatorial lower bounding techniques are studied, 
 but according to the experimental evaluation, these methods provide weaker lower bounds than the LP relaxation.
 
-Uppere bounds are obtained by a greedy algorithm of which main aspect is an iterative construction of broadcast trees of restricted size.
-This algorithm is paramtetrized by the size limitation of the broadcast trees, and the larger trees are searched, the tighter upper bound can be achieved.
+Upper bounds are obtained by a greedy algorithm of which main aspect is an iterative construction of broadcast trees of restricted size.
+This algorithm is parametrized by the size limitation of the broadcast trees, and the larger trees are searched, the tighter upper bound can be achieved.
 
-The numberical experiments also provide an insight into the relation between some of the graph properties and its broadcast time. 
-It hsa been observed that graphs with more nodes as well as denser graphs tend to have its broadcast time closer to its trivial logarithmic lower bound 
-Also, increasing size and density of the graph instances the gap narrow the gap between upper and lower bounds.
+The numerical experiments also provide an insight into the relation between some of the graph properties and its broadcast time. 
+It has been observed that graphs with more nodes as well as denser graphs tend to have its broadcast time closer to its trivial logarithmic lower bound 
+Also, increasing size and density of the graph instances narrows the gap between upper and lower bounds.
 
 
 %
@@ -88,7 +88,7 @@ Also, increasing size and density of the graph instances the gap narrow the gap 
 %
 \section{Paper V: Area Protection in Adversarial Path-finding Scenarios with Multiple Mobile Agents on Graphs}
 
-Paper V introduces the Area Protection Problem (APP) as a modification of the previously studied Advarsarial Cooperative Path Finding (ACPF) \cite{ivanova14} problem.
+Paper V introduces the Area Protection Problem (APP) as a modification of the previously studied Adversarial Cooperative Path Finding (ACPF) \cite{ivanova14} problem.
 Its main contribution lies in the proof that APP is PSPACE-hard.
 This result is achieved by demonstrating a polynomial-time reduction from the PSPACE-complete problem TQBF.
 
@@ -98,20 +98,20 @@ The defenders then try to reach these destinations by any CPF algorithm, in this
 A destination can be regarded as a target node for defenders, the difference is that while a target is a part of the input, destination is determined by a solution method.
 
 The strategies differ in the approach of target allocation.
-Two simplest methods, random and greedy allocation, select attackers' targets as targets for defenders.
-A more sophisticated method, bottleneck simulation, runs a simulation of attackers movement and tries to predict locations frequently passed by attackers.
-These locations are assumed to be bottlenecks in the environment and blocking them may prevent a larger number of attackers from reaching their targets.
+Two simplest methods, random and greedy allocation, select attackers' targets as destinations for defenders.
+A more sophisticated method, \emph{bottleneck simulation}, runs a simulation of attackers' movement and tries to predict locations frequently passed by attackers.
+These locations are assumed to be bottlenecks in the environment, and blocking them may prevent a larger number of attackers from reaching their targets.
 
 The experiments are carried out on different environment types and different positions of teams.
-This method is particularly successful in environments rich on bottlenecks, as it successfuly identifies them.
+This method is particularly successful in environments rich on bottlenecks, as it successfully identifies them.
 %
 % Paper VI
 %
-\section{Paper VI: Maintaining Ad-Hoc Communication Network in Area Protection Scenarios with Adversarial Agents}
+\section{Paper VI: Maintaining Ad-hoc Communication Network in Area Protection Scenarios with Adversarial Agents}
 
-An extension of APP, in which agents are required to maintain the possibility of a communication among each other is presented in Paper VI.
-The possibility of communication is modeled by a connectivity of the communication graph, whose nodes are the agents locations, 
-and there is an edge between two nodes if and only if the agents can communicate.
+An extension of APP, in which defenders are required to maintain the possibility of a communication among each other, is presented in Paper VI.
+The possibility of communication is modeled by a connectivity of the communication graph, whose nodes are the defenders' locations, 
+and there is an edge between two nodes if and only if agents placed at the nodes can communicate.
 
 We approach this problem by dividing the defenders into \emph{communicators} and \emph{occupiers} with different purposes. 
 Occupiers have the same task as regular defenders, i.e., they intend to prevent attackers from reaching their targets, 

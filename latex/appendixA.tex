@@ -1,4 +1,4 @@
-\begin{footnotesize}
+\begin{small}
 \chapter{List of Computationaly Hard Problems}
 
 The list below consists of NP-hard and PSPACE-hard problems that appear throughout this thesis.
@@ -142,7 +142,7 @@ In these cases, only the basic variants are stated in this list .
   }
   \end{problemA}
 
-\subsection{Broadcast Time}
+\subsection{Broadcasting in Graphs}
 
 \begin{problemA}
   \problemtitle{\textsc{Minimum Broadcast Time (MBT)}}
@@ -154,6 +154,21 @@ In these cases, only the basic variants are stated in this list .
    	\item $V_0=S$ and $V_t=V$,
    	\item for all $v\in V\setminus S, \left\{v,\pi(v)\right\}\in E$,
    	\item for all $k=1,\dots t$ and all $v\in V_k$, $\pi(v)\in V_{k-1}$, and
+   	\item for all $u,v\in V_k\setminus V_{k-1}$, $\pi(u)=\pi(v)$ only if $u=v$.
+   	\end{enumerate}
+  }
+\end{problemA}
+
+\begin{problemA}
+  \problemtitle{\textsc{Minimum Broadcast Graph}}
+  \probleminput{An integer $n$.}
+  \problemquestion{
+	  Construct a graph $G=(V,E)$ with the minimum possible number of edges such that for every node $s\in V$ there exists a sequence 
+	  $\left\{s\right\}\subseteq\dots\subseteq V_{\lceil\log_2(n)\rceil}$ of node sets and a function $\pi:V\setminus \left\{s\right\}\mapsto V$, satisfying:
+   	\begin{enumerate}
+   	\item $V_{\lceil\log_2(n)\rceil}=V$,
+	\item for all $v\in V\setminus \left\{s\right\}, \left\{v,\pi(v)\right\}\in E$,
+   	\item for all $k=1,\dots, \lceil\log_2(n)\rceil$ and all $v\in V_k$, $\pi(v)\in V_{k-1}$, and
    	\item for all $u,v\in V_k\setminus V_{k-1}$, $\pi(u)=\pi(v)$ only if $u=v$.
    	\end{enumerate}
   }
@@ -259,4 +274,4 @@ In these cases, only the basic variants are stated in this list .
 	}
 \end{problemA}
 
-\end{footnotesize}
+\end{small}

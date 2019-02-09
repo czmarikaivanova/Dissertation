@@ -1,56 +1,62 @@
-\chapter{Background}\label{sec:back}
+\chapter{Preliminaries}\label{sec:back}
 
 \section{Graph Terminology}\label{sec:back:graph}
 
-A \emph{graph} $G$ is a pair $(V,E)$ of \emph{vertices} and \emph{edges}, where $E\subseteq {{V}\choose{2}}$.
+A \emph{graph} $G$ is a pair $(V,E)$ of \emph{vertices}
+\footnote{We use the term \emph{vertex} when a graph is considered as an abstract structure. 
+Whenever a graph is discussed in a context in which it represents real objects, we refer to vertices as \emph{nodes}. 
+}
+and \emph{edges}, where $E\subseteq {{V}\choose{2}}$.
 If this inclusion is an equality, $G$ is said to be \emph{complete}.
  The set $A$ of arcs is derived from $E$ by considering both directions of orientation of the edges.
  Formally, $A=\left\{(i,j),(j,i):\left\{i,j\right\}\in E\right\}$.
-A~\emph{path} in graph is a sequence of edges connecting a sequence of distinct vertices.
-Consider the shortest paths between every two nodes in a graph $G$.
-The longest among these shortest paths is called the \emph{graph diameter}, and is usualy denoted ad $\Delta_G$.
+A~\emph{path} in a graph is a sequence of edges connecting a sequence of distinct vertices.
+The \emph{length} of a path is its number of edges.
+Consider the set of shortest paths between any two nodes in a graph $G$.
+The length of the longest among these shortest paths is called the \emph{graph diameter}, and is usually denoted $\Delta_G$.
 A~graph is said to be \emph{connected} if there exists a path between every two vertices, otherwise it is \emph{disconnected}.
-A~\emph{cycle} of a graph $G$ is a subset of $E$ that form a path such that the first node of the path corresponds to the last. 
-If $G$ contains a cycle, $G$ is called, \emph{cyclic}, otherwise it is called \emph{acyclic}.
+A~\emph{cycle} in $G$ is a subset of $E$ that forms a path such that the first vertex of the path equals the last one. 
+If $G$ contains a cycle, $G$ is called \emph{cyclic}, otherwise it is called \emph{acyclic}.
 \begin{definition}
 A~tree is a graph that is connected and acyclic.
 \end{definition}
 For a vertex $v\in V$, a \emph{neighbourhood} of $v$ (open neighbourhood), denoted as $N(v)$, is the set of vertices adjacent to $v$.
-The size of neighbourhood of $v$ is called a \emph{degree} of $v$.
+The size of neighbourhood of $v$, $\text{deg}(v)$, is called a \emph{degree} of $v$.
 A \emph{subgraph} of $G=(V,E)$ is a graph $G'=(V',E')$ such that $V'\subseteq V$ and $E'\subseteq E$.
-This relation is often written as $G\subseteq G'$.
+This relation is often written as $G'\subseteq G$.
 \begin{definition}
 A spanning tree of graph $G=(V,E)$ is a tree $T=(V_T,E_T)$ such that $T\subseteq G$ and $V_T=V$.
 \end{definition}
-A bipartite graph is a set of graph vertices decomposed into two disjoint sets such that no two vertices within the same set are adjacent.
+A \emph{bipartite graph} is a graph with vertices decomposed into two disjoint sets such that no two vertices within the same set are adjacent.
 Every acyclic graph is bipartite.
 A cyclic graph is bipartite if and only if it does not contain a cycle of odd length.
-An \emph{independent set} is a subset $V'$ of vertices in a graph, where no two nodes in $V'$ are adjacent.
-For a given subset $U\subseteq V$ of nodes in $G$, $G\left[U\right]$ denotes the \emph{induced subgraph} which is the subset of nodes together with edges whose both endpoints are in $U$. 
+An \emph{independent set} in $G$ is a subset $V'\subseteq V$, where no two nodes in $V'$ are adjacent.
+For a given subset $V'\subseteq V$ of nodes in $G$, $G\left[V'\right]$ denotes the subgraph of $G$ \emph{induced by} $V'$ consisting of nodes in $V'$ and edges in $E$ whose both endpoints are in $V'$.
 
 In a \emph{weighted graph} $G$, a \emph{weight} or \emph{cost} $w:E\mapsto\mathbb{R}$ is associated witch each edge $e\in E$.
-When use terms \emph{heavier, heavies} when comparing weights of different eges in a graph.
-A~weight of $G$ is $\sum_{e\in E}w(e)$.
+We use the terms \emph{heavier} and \emph{heaviest} when comparing weights of different edges in a graph.
+The weight of $G$ is defined as $\sum_{e\in E}w(e)$.
 A~spanning tree of $G$ with minimum weight is called a \emph{minimum spanning tree} of $G$.
-Similar concept is used in paths in graphs.
-A~\emph{shortest path} from $u$ to $v$ in a weighted graph is a path consisting of edges of minimum sum of weights connecting $u$ and $v$.
+Analogous concept is defined for paths in graphs.
+A~\emph{shortest path} from $u$ to $v$ in a weighted graph is a path of minimum weight connecting $u$ and $v$.
 \begin{definition}
 	For a graph $G=(V,E)$ and a subset of vertices $D\subseteq V$, a Steiner tree of $G$ and $D$ is a tree $T=(V',E')$ such that $T\subseteq G$ and $D\subseteq V'$.
 \end{definition}
 Analogously in weighted graphs, a \emph{minimum Steiner tree} is a Steiner tree of minimum weight.
 
-If edges have a direction associated with them, we call such a graph a \emph{directed graph}, and its edges are referred to as \emph{arcs}
-Let $G=(V,A)$ be a directed graph. 
-The downstream neighbourhood $N^-(v)$ of node $v$ is the set $\{(u,v): u\in V, (u,v) \in A\}$. 
-Similarly, the upstream neighbourhood $N^+(v)$ is $\{(v,u): u\in V, (v,u) \in A\}$.
-We use the standard notation $\text{deg}^-(v)=|N^-(v)|$ and $\text{deg}^+(v)=|N^+(v)|$.
-These values are called \emph{in-degree} and \emph{out-degree} of $v$, respectively.
-An~\emph{arborescence} rooted at vertex $r$ is a directed tree with arcs directed from $r$.
-A~directed graph is \emph{strongly connected}, if for all pair of vertices $u,v\in V$, there is a path from $u$ to $v$ and from $v$ to $u$.
+A \emph{directed graph} is graph, where all the edges are directed from one vertex to another. 
+A directed graph is sometimes called a \emph{digraph}, and its edges are referred to as \emph{arcs}.
+%If edges have a direction associated with them, we call such a graph a \emph{directed graph}, and its edges are referred to as \emph{arcs}
+Let $\overrightarrow{G}=(V,A)$ be a directed graph. 
+The upstream neighbourhood $N^-(v)$ of node $v$ is the set $\{u\in V: (u,v) \in A\}$. 
+Similarly, the downstream neighbourhood $N^+(v)$ is $\{u\in V: (v,u) \in A\}$.
+We use the standard notation $\text{deg}^-(v)=|N^-(v)|$ and $\text{deg}^+(v)=|N^+(v)|$, called the \emph{in-degree} and the \emph{out-degree} of $v$, respectively.
+An~\emph{arborescence} rooted at vertex $r\in V$ is a directed tree with arcs directed from $r$.
+A~directed graph is \emph{strongly connected}, if for every pair of vertices $u,v\in V$, there is a path from $u$ to $v$ and from $v$ to $u$.
 
 A graph is \emph{planar}, if it can be drawn in a plane without crossing edges.
 According to this definition, every tree is planar. 
-A graphical representation of a graph $G$ is determined by function $\Phi(G):V\mapsto\mathbb{R}\times\mathbb{R}$ that assigns a coordinate to each node in $V$. 
+A graphical representation of a graph $G$ is determined by a function $\Phi:V\mapsto\mathbb{R}\times\mathbb{R}$ that assigns a coordinate to each node in $V$. 
 We say that $\Phi(G)$ is is an \emph{embedding of $G$ in a plane}.
 \begin{definition}\label{def:planemb}
 The embedding $\Phi(G)$ is planar if it is drawn in such a way that its straight line segments intersect only at their endpoints.
@@ -62,107 +68,104 @@ If $\Phi(G)$ is not planar, any two edges that intersect each other are referred
 \section{Combinatorial Optimization}
 
 Combinatorial optimization (CO) is a part of applied mathematics that tackles optimization problems over discrete structures.
-It combines methods from graph theory, linear programming, combinatorics and the theory of algorithms.
+It combines methods from graph theory, linear programming, combinatorics, and the theory of algorithms.
 In this section, we briefly introduce main concepts in CO used later in the text.
-For a comprehensive rendition of this topic, an interested reader is referred to \cite{wolsey98} and \cite{nemhauser88}.
+For a comprehensive rendition of this topic, interested readers are referred to \cite{wolsey98} and \cite{nemhauser88}.
 
-Combinatorial problems arise in many areas of computer science with a wide range of applications in various industrial disciplines 
-such as production scheduling, logistics, communication network design and many more.
-The core solving a problem by methods of CO is the identification of a discrete mathematical structure hidden in the problem,
+Combinatorial problems arise in many areas of computer science, with a wide range of applications in various industrial disciplines 
+such as production scheduling, logistics, communication network design, and many more.
+The core of tackling a problem by methods of CO is the identification of a discrete mathematical structure hidden in the problem,
 and finding a sufficient abstraction.
 
 CO concerns problems of minimization or maximization of an \emph{objective function} of several variables 
-subject to inequality and equality \emph{constraints} and integrality restriction on at least some of the variables.
-In this work, both the objective function and constraints are assumed to be linear.
-Combinatorial problems are often formulated as \emph{mixed integer linear programs} (MILP) of the standard form
+subject to inequality and equality \emph{constraints} and integrality restrictions on at least some of the variables.
+In this work, both the objective function and the constraints are assumed to be linear.
+Combinatorial problems are often formulated as \emph{mixed integer linear programs} (MILP, sometimes abbreviated as ILP or IP) of the standard form
 \begin{equation}
 \begin{array}{r@{}l}
 	\max\limits_{x,y}c^\top x + h^\top y & \\
 	\text{subject to}& \\
-	  Ax + Gy &\leq b, \\
+	  Ax + By &\leq b, \\
 	  x \in \mathbb{Z}^{n}_+, y & \in\mathbb{R}^{p}_+. 
 \end{array}
+	\label{eq:ilp}
 \end{equation}
 
-The problem instance is specified by the input data $c\in \mathbb{R}^n$, $h \in \mathbb{R}^n$, $A \in \mathbb{R}^{m\times n}$  $G \in\mathbb{R}^{m\times p}$ and $b \in \mathbb{R}^m$.
+The problem instance is specified by the input data $c\in \mathbb{R}^n$, $h \in \mathbb{R}^n$, 
+$A \in \mathbb{R}^{m\times n}$  $B \in\mathbb{R}^{m\times p}$ and $b \in \mathbb{R}^m$, $m,n,p\in \mathbb{N}$.
 A MILP that is not in the standard form, for example if the objective is to minimize or if the constraints contain equalities, can be straightforwardly converted into the standard form.
-If the integrality constraints are not present, we talk about a \emph{linear program} (LP)
+If the integrality constraints are not present, \eqref{eq:ilp} is a \emph{linear program} (LP).
 
 
-The set of points $S=\{(x_0,y_0):  x_0 \in \mathbb{Z}^{n}_+, y_0  \in\mathbb{R}^{p}_+, Ax_0 + Gy_0 \leq b\}$ is called the \emph{feasible region},  
-and a point $(x_0,y_0)\in S$ is referred to as a \emph{feasible point} (feasible solution) with \emph{objective function value} $c^\top x_0 + h^\top y_0$. 
-A feasible point $(x^*,y^*)$ is called an \emph{optimal solution} if for every feasible points $(x_0,y_0)$ we have that $c^\top x_0 + h^\top y_0 \leq c^\top x^* + h^\top y^*$. 
-Expression $c^\top x^* + h^\top y^*$ is then called the \emph{optimal value}. 
+The set of points $S=\{(x,y):  x \in \mathbb{Z}^{n}_+, y  \in\mathbb{R}^{p}_+, Ax + Gy \leq b\}$ is called the \emph{feasible region},  
+and a point $(x,y)\in S$ is referred to as a \emph{feasible point} (\emph{feasible solution}) with \emph{objective function value} $c^\top x + h^\top y$. 
+A feasible point $(x^*,y^*)$ is called an \emph{optimal solution} if for every feasible points $(x,y)$ we have that $c^\top x + h^\top y \leq c^\top x^* + h^\top y^*$. 
+Then, $c^\top x^* + h^\top y^*$ is then called the \emph{optimal objective function value}. 
 
 \subsection{Relaxation and Bounds}
 
 \begin{definition}
-	Let $S\subseteq \mathbb{R}^n$ and $\mathcal{F}$ be a MILP $\max\{f(x):x\in S\}$.
-	The problem $\mathcal{R}: \max\{g(x):x\in T\}$ is a relaxation of $\mathcal{F}$ if and only if
+	Let $\mathcal{F}$ be the MILP $\max\{c^\top x + h^\top y :(x,y)\in S\}$.
+	The problem $\mathcal{R}: \max\{g(x,y):(x,y)\in T\}$ is a relaxation of $\mathcal{F}$ if and only if
 	\begin{enumerate}
 		\item $T\supseteq S$, and
-		\item $g(x)\geq f(x) \text{ for all } x\in S$.
+		\item $g(x,y)\geq  c^\top x + h^\top y \text{ for all } (x,y)\in S$.
 	\end{enumerate}
 \end{definition}
 
 
-Let $z^*$ and $\underline{z}$ be the optimal value of a MILP and its relaxation, respectively. 
+Let $z^*$ and $\underline{z}$ be the optimal objective function value of a MILP and its relaxation, respectively. 
 Further, let $\bar{z}$ be the objective function value of some feasible point.
 Then, $\underline{z}\leq z^* \leq \bar{z}$.
-Values $\underline{z}$ and $\bar{z}$ are referred to as a lower bound and an upper bound, respectively.
+Values $\underline{z}$ and $\bar{z}$ are referred to as a \emph{lower bound} and an \emph{upper bound} on $z^*$, respectively.
 
 A \emph{combinatorial relaxation} of a MILP is achieved by omitting one or more constraints. 
-By omitting the integrality constraints of a MILP $\mathcal{F}$ we obtain its \emph{continuous relaxation}, also called \emph{LP relaxation}, denoted as LP$(\mathcal{F})$.
+By omitting the integrality constraints of a MILP $\mathcal{F}$, we obtain its \emph{continuous relaxation}, also called \emph{LP relaxation}, denoted as LP$(\mathcal{F})$.
 
 \subsection{Duality}
 
-Consider a LP (\emph{primal})
+Let $A\in \mathbb{R}^{m\times n}$ and $b\in\mathbb{R}^m$.
+Consider an LP (\emph{primal})
 \begin{equation}
-	\max c^\top x   
-	\text{ subject to } 
-	  Ax \leq b, 
-	  x   \geq 0. 
+	\max \left\{c^\top x  :  Ax \leq b, x \in\mathbb{R}_+^ 0\right\}. 
 \label{eq:primal}
 \end{equation}
 
 We are looking for the best upper bound. 
-If $x^*$ is an optimal solution to \eqref{eq:primal}, $y^\top Ax$ is a general linear combination of equations.
+If $x^*$ is an optimal solution to \eqref{eq:primal}, $y^\top Ax$ with $y\in \mathcal{R}^n_+$ is a general linear combination of equations.
 If it is possible to select a vector $y$ so that $y^\top Ax^*=c^\top x^*$, we have that $y^\top b \geq c^\top x^*$.
-The best bound for any $x$ is than the optimal solution to the following LP (\emph{dual})
+The best bound for any $x$ is then the optimal solution to the following LP (\emph{dual})
 \begin{equation}
-	\min b^\top y 
-	\text{ subject to }
-	  A^\top y \geq c,
-	  y   \geq 0. 
+	\min \left\{b^\top y :  A^\top y \geq c, y   \geq 0.\right\} 
 \label{eq:dual}
 \end{equation}
 The relation between primal and dual LP is summarized by
 \begin{proposition}
 If the primal has an optimal solution $x^*$ then the dual has an optimal solution $y^*$ such that $c^\top x^* = b^\top y^*$.
 \end{proposition}
-For LPs duality provides a standard way to obtain upper bounds.
+For LPs, duality provides a standard way to obtain upper bounds.
 This concept can be applied to IPs.
 \begin{definition}\cite{wolsey98}
 The two problems
-\begin{equation}
-z=\max\{c(x): x\in X
+\begin{equation}\label{eq:primal}
+	z=\max\{c(x): x\in X\}
 \end{equation}
 and
-\begin{equation}
-w=\max\{w(u): u\in U
+\begin{equation}\label{eq:dual}
+	w=\min\{\omega(u): u\in U\}
 \end{equation}
-form a (weak)-dual pair if $c(x)\leq w(u)$ for all $x\in X$ and all $u\in U$. 
+form a (weak)-dual pair if $c(x)\leq \omega(u)$ for all $x\in X$ and all $u\in U$. 
 When $z=w$, they form a strong-dual pair.
 \end{definition}
-For obtaining an upper bound from LP relaxation it is necessary to solve the relaxed program to optimality, whereas any dual feasible solution provides an upper bound on $z$.
+For obtaining an upper bound from the LP relaxation, it is necessary to solve the relaxed program to optimality, whereas any dual feasible solution provides an upper bound on $z$.
 \begin{proposition}\cite{wolsey98}
-The IP $z=\max\{cz: Ax\leq b, x\in Z^n_+\}$ and the LP $w^{LP}=\min\{ub:uA\geq c, u\in R^m_+\}$ form a weak dual pair.
+The IP $z=\max\{cx: Ax\leq b, x\in Z^n_+\}$ and the LP $w^{LP}=\min\{ub:uA\geq c, u\in R^m_+\}$ form a weak dual pair.
 \end{proposition}
 \begin{proposition}\cite{wolsey98}
-Suppose that the IP and D are a weak-dual pair.
+Suppose that problems \eqref{eq:primal} and \eqref{eq:dual} form a weak-dual pair.
 \begin{enumerate}
-\item If D is unbounded, IP is infeasible.
-\item If $x^*\in X$ and $u^*\in U$ satisfy $c(x^*)=w(u^*)$, then $x^*$ is optimal for IP and $u^*$ is optimal for D.
+	\item If $w$ is unbounded, \eqref{eq:primal} is infeasible, i.e., $X=\emptyset$.
+	\item If $x^*\in X$ and $u^*\in U$ satisfy $c(x^*)=w(u^*)$, then $x^*$ is optimal in \eqref{eq:primal} and $u^*$ is optimal in \eqref{eq:dual}.
 \end{enumerate}
 \end{proposition}
 
@@ -170,19 +173,18 @@ Suppose that the IP and D are a weak-dual pair.
 
 %Linear programs are commonly solved in polynomial time by the \emph{simplex algorithm}.
 Several effective methods for solving ILPs are used in practice.
-Among these is the \emph{simplex method} and \emph{interior point method}.
+Among these are the \emph{simplex method} and the \emph{interior point method}.
 The simplex method sequentially tests adjacent vertices of the feasible region (a convex polytope) 
 so that at each new vertex the objective function is either improved or unchanged.
-The simplex method is very efficient in practice, converging in polynomial time.
-However, its worst-case complexity is exponential.
+The simplex method is very efficient in practice, although its worst-case complexity is exponential.
 
 The interior point method constructs a sequence of feasible points lying inside of the polytope but never on its boundary, that converges to the solution.
-Its time complexity is polynomial in both average and worst case.
+Its worst-case time complexity is polynomial.
 
-A MILP can be solved by the \emph{branch and bound} (B\&B) method which systematically enumerates candidate solutions by means of state space search.
+A MILP can be solved by the \emph{branch and bound} (B\&B) method, which systematically enumerates candidate solutions by means of state space search.
 The set of candidate solutions gradually forms a rooted tree with the full set at the root. 
 The algorithm explores branches of this tree, which represent subsets of the solution set. 
-Before enumerating the candidate solutions of a branch, a bound on the best possible result of the branch is calculated and compared with upper and lower estimated bounds on the optimal solution.
+Before enumerating the candidate solutions of a branch, a bound on the best possible result of the branch is calculated and compared with estimated upper and lower bounds on the optimal solution.
 If a solution better than the best one found so far by the algorithm cannot be produced, the entire branch is discarded.
 Performance of the algorithm depends on efficient estimation of the lower and upper bounds of branches of the search space. 
 If bounds cannot be calculated, the algorithm becomes  an exhaustive search.
@@ -192,22 +194,22 @@ These and other algorithms are an integral parts of most modern solvers such as 
 \section{Problems and Complexity}\label{sect:probcomp}
 
 A \emph{computational problem} (problem) is an infinite collection of instances together with a solution for each instance.
-A problem that can be posed as a yes-no question of the input values is referred to as \emph{decision problem}.
+A problem that can be posed as a yes-no question of the input values is referred to as a \emph{decision problem}.
 An example of a decision problem is the \textsc{Clique} problem: Given a graph $G$ and an integer $k$, is there a clique in $G$ of size at least $k$?
-In \emph{optimization problems}, the task is to find a ``best possible'' solution from among the set of all feasible solutions the problem instance.
-The optimization version of \textsc{Clique} asks for finding the maximum clique in a given graph $G$.
+In \emph{optimization problems}, the task is to find a ``best possible'' solution in the set of all feasible solutions to the problem instance.
+The optimization version of \textsc{Clique} asks for a maximum clique in a given graph $G$.
 An optimization problem can be solved by answering a sequence of decision problems:
-Assume there is an oracle that is able to answer \textsc{Clique} problem for a given $(G,k)$.
-The \textsc{Maximum Clique} problem can then be solved by answering its optimization version for $k=1,2,\dots$ until the answer is ``no'' for some $k'$, and so the maximum clique has the size $k'-1$.
+Assume there is an oracle that is able to solve the \textsc{Clique} problem for a given $(G,k)$.
+The \textsc{Maximum Clique} problem can then be solved by answering its optimization version for $k=1,2,\dots$ until the answer is ``no'' for some $k=k'$, and so the maximum clique has the size $k'-1$.
 
-Throughout this thesis, we use several well known concepts from the complexity theory, which we state in the following.
-Detailed explanations of the terminology can be found in any textbook on this topic such as \cite{sipser06}.
+Throughout this thesis, we use several well known concepts from complexity theory, which we state in the following.
+Detailed explanations of the terminology can be found in any textbook on this topic, such as \cite{sipser06}.
 
 An \emph{algorithm} is a procedure that solves a given problem in a finite number of steps.
-Computational complexity of an algorithm is the amount of time needed for its run, and is measured in terms of the input size.
+The computational complexity of an algorithm is the amount of time needed for its run, and is measured in terms of the input size.
 A \emph{polynomial} algorithm runs in time $\mathcal{O}(n^c)$, for some constant $c$ and input $w$ of size $|w|=n$.
 A \emph{verifier} is an algorithm that determines whether a given certificate is a proof to the fact that $w$ is a yes-instance.
-An example of a certificate to \textsc{clique} is some subset of nodes of size $k$.
+An example of a certificate to \textsc{Clique} is some subset of nodes of size $k$.
 It can be verified in polynomial time whether there exists an edge between every two nodes.
 \begin{definition}
 	$P$ is the class of decision problems for which there exists a polynomial algorithm that solves them.
@@ -217,7 +219,7 @@ It can be verified in polynomial time whether there exists an edge between every
 \end{definition}
 \begin{definition}
 	Problem $X$ is polynomial time reducible to problem $X'$, if a polynomial computable function $f$ exists where for every $w$, 
-	$w$ is a yes-instance of $X\Leftrightarrow f(w)$ is a yes instance of $X'$.
+	$w$ is a yes-instance of $X$ if and only if $f(w)$ is a yes instance of $X'$.
 \end{definition}
 \begin{definition}\label{def:npc}
 	Decision problem $X$ is NP-complete if it satisfies:
@@ -229,39 +231,42 @@ It can be verified in polynomial time whether there exists an edge between every
 Remark:
 A verifier does not decide whether a certificate is an optimal solution to a given optimization problem instance. 
 When addressing optimization problems, we consider only the second property in Def.~\ref{def:npc}. 
-If this property is satisfied, we say that the problem is NP-hard.
+If this property is satisfied, we say that the problem is \emph{NP-hard}.
 
 There are many well know examples of NP-hard problems, and they can be formulated as ILP.
 Therefore, ILP itself is also NP-hard.
 
+The space complexity of an algorithm is the amount of memory space required for its run as a function of the size of the input.
+An algorithm runs in \emph{polynomial space} if for input of size $n$ requires the space $\mathcal{O}(n^c)$, for some constant $c$.
 \begin{definition}
 	PSPACE is the class of decision problems for which there exists an algorithm that solves them in a polynomial space.
 \end{definition}
 \begin{definition}\label{def:psc}
-	Decision problem $X$ is PSPACE-complete if it satisfies:
+	A decision problem $X$ is PSPACE-complete if it satisfies:
 	\begin{enumerate}
 		\item $X$ is in PSPACE.
 		\item Every $X'$ in PSPACE is polynomial time reducible to $X$.
 	\end{enumerate}
 \end{definition}
-If $X$ satisfies only the second condition in Def.~\ref{def:psc} we say that $X$ is \emph{PSPACE-hard}.
+If $X$ satisfies condition 2 in Def.~\ref{def:psc} we say that $X$ is \emph{PSPACE-hard}.
 
 \emph{Approximation algorithms} are polynomial algorithms that find approximate solution to NP-hard optimization problems with provable guarantee on the distance of the solution to the optimal one.
 \begin{definition}\cite{williamson11}
-A $\rho$-approximation algorithm for an optimization problem is a polynomial-time algorithm that for all instances of the problem produces a solution whose value is within a factor of
+Let $\rho\geq0$ be a real number.
+A $\rho$-approximation algorithm for an optimization problem is a polynomial-time algorithm, that for all instances of the problem produces a solution whose value is within a factor of
 $\rho$ of the value of an optimal solution.
 \end{definition}
 The factor $\rho$ is called the \emph{approximation ratio} or \emph{performance guarantee}.
 For minimization problems, $\rho > 1$, and for maximizations problems $\rho < 1$.
 \begin{definition}
-The class APX is the set of NP optimization problems that have an approximation algorithms with constant-ratio approximation algorithm.
+The class APX is the set of NP optimization problems for which there exists an approximation algorithm with constant approximation ratio.
 \end{definition}
 There are problems that are hard to approximate. 
 A problem for which there is a constant $\rho$ such that it is NP-hard to find an approximation algorithm with approximation ratio better than $\rho$ is said to be APX-hard.
 \begin{definition}\cite{williamson11}
-A polynomial-time approximation scheme (PTAS) is a family of algorithms $\{\mathcal{A}_\epsilon\}$, where there is an algorithm for each $\epsilon > 0$ such that $\mathcal{A}_\epsilon$
-is a $(1+\epsilon)$-approximation algorithm for minimization problems and $(1-\epsilon)$-approximation algorithm for maximization problems.
+A polynomial-time approximation scheme (PTAS) is a family of algorithms in which there is an algorithm $\mathcal{A}_\epsilon$ for each $\epsilon > 0$, such that $\mathcal{A}_\epsilon$
+is a $(1+\epsilon)$-approximation algorithm for minimization problems, and a $(1-\epsilon)$-approximation algorithm for maximization problems.
 \end{definition}
 \begin{proposition}
-APX-hard problems do not admit PTAS.
+APX-hard problems do not admit a PTAS.
 \end{proposition}

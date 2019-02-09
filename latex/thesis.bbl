@@ -353,6 +353,12 @@
   single broadcast tree.
 \newblock {\em Mobile Networks and Applications 11}, 3 (Jun 2006), 361--375.
 
+\bibitem{polzin01}
+{\sc Polzin, T., and Daneshmand, S.~V.}
+\newblock A comparison of steiner tree relaxations.
+\newblock {\em Discrete Applied Mathematics 112}, 1 (2001), 241 -- 261.
+\newblock Combinatorial Optimization Symposium, Selected Papers.
+
 \bibitem{jansen08}
 {\sc Renee~Jansen, M., and R.~Sturtevant, N.}
 \newblock Direction maps for cooperative pathfinding.

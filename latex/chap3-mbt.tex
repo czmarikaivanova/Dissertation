@@ -1,4 +1,4 @@
-\chapter{Minimum Broadcast Time}\label{sec:mbt}
+\chapter{Minimum Broadcast Time}\label{chap:mbt}
 
 Broadcasting is the information dissemination process in a communication network.
 \textsc{The Minimum Broadcast Time (MBT)} problem is identified by a set of communication devices (nodes), among which some selected ones act as originators of a signal.
@@ -133,9 +133,11 @@ For each clause $c_j$, there is a node $c_j$ and whenever the clause $c_j$ conta
 %Nodes representing literals are connected to at most two clause nodes, which is implied by the restriction imposed on $\varphi$.
 
 \begin{proposition}\label{lemma:mbtred}
-MBT is NP-hard.
+	MBT (Prob.~\ref{mbt:opt}) is NP-hard.
 \end{proposition}
 \begin{proof}\label{prop:mbtnpc}
+We show that an instance $\varphi$ of \textsc{3-3-SAT} is satisfiable iff $\tau(G,S)\leq 3$ for the corresponding instance $(G,S)$ of MBT.
+
 Let $\varphi$ be satisfiable.
 A source node $u_i$ sends the signal towards the node representing the literal that is evaluated as true in the given truth assignment.
 In the next two time steps, the signal is further relayed to the nodes representing clause that are satisfied by the literal.
@@ -157,7 +159,7 @@ and thereby cannot forward the signal to any clause nodes.
 \end{proof}
 
 \begin{proposition}
-The decision version of MBT (Prob.~\ref{mbt:dec} is NP-complete for bipartite graphs with maximum node degree 3 and deadline 3.
+	The decision version of MBT (Prob.~\ref{mbt:dec}) is NP-complete for bipartite graphs with maximum node degree 3 and deadline 3.
 \end{proposition}
 \begin{proof}
 In \cite{slater81}, a polynomial algorithm for MBT in trees is devised.
@@ -178,7 +180,7 @@ The graph is bipartite as there are no edges between any two nodes within $X$ or
 
 A straightforward ILP formulation of MBT has been proposed in Paper IV together with a suitable solution method.
 Independently, a similar formulation has recently been published in \cite{desousa18}.
-In the following, we present an unpublished ILP model for MBT.
+In the following, we present an unpublished ILP model for MBT, which exploits the regular structure of binomial trees.
 
 \subsection{Binomial Tree Model}
 
@@ -347,7 +349,7 @@ Constraints \eqref{mod:part:followArcsA} - \eqref{mod:part:followArcsB} can then
 It is enforced by \eqref{mod:part:imp:followArcsA} that if there is some  non-neighbor $v$ of $u$  with a position $\ell$ in a binomial tree rooted at $s$,
 then there must be a neighbor of some non-neighbor of $u$ with position $i$ in the same binomial tree.
 Similarly, Constraints \eqref{mod:part:imp:followArcsB} state 
-that if there is a node $v$ with position $\ell$ in a binomial tree rooted at $s$ in the complement of neighborhood of all non-neighbors of $u$,
+that if there is a node $v$ where $\beta(v)=\ell$ in a binomial tree rooted at $s$ in the complement of neighborhood of all non-neighbors of $u$,
 This reflects the obvious fact that if a tree is pruned at some node, all its descendants must also be excluded from the tree.
 \subsubsection{Valid inequalities}
 Let $W$ be a maximal independent set in $G$.
@@ -420,9 +422,9 @@ If the objective function attains the target value $|V|$,
 it is obvious that positions $\left\{1,2,\dots,2^k\right\}$ can be assigned to all nodes in $G$ under the given constraints, and therefore $\tau(G,S)\leq k$.
 If the objective function value is less than $|V|$, then clearly $\tau(G,S)>k$.
 
-An optimal solution to Prob.~\ref{mbt:opt} can be determined by a sequential solving of model \eqref{mod:genmatch} for varying deadlines $k$.
+An optimal solution to Prob.~\ref{mbt:opt} can be determined by a sequential solution to model \eqref{mod:genmatch} for varying deadlines $k$.
 Assume we are given a lower bound $\underline{t}$ and an upper bound $\bar{t}$ on the minimum broadcast time.
-Initially, we define the set $I=\{1,\dots,2^{\underline{t}}\}$ and iteratively solve the model while doubling the set $I$ until the objective function attains the value $n$.
+Initially, we define the set $I=\{1,\dots,2^{\underline{t}}\}$ and iteratively solve the model while doubling the set $I$ until the objective function attains the value $|V|$.
 That indicates that it is the first iteration in which all nodes are assigned a position, and it can be concluded that the minimum broadcast time is $\log_2|I|=\underline{t}$.
 If the target value $|V|$ is not met for $k=\bar{t}-1$, the last iteration with $k=\bar{t}$ does not have to be conducted, as it is already obvious that $\tau(G,S)=\bar{t}$.
 
@@ -478,17 +480,17 @@ We therefore describe only the problems closely related to MBT.
 
 \subsection{Broadcast Graphs}
 
-A related problem to MBT is the problem of finding minimum broadcast graphs.
+A related problem to MBT is the \textsc{Minimum Broadcast Graph} problem.
 In this settings, broadcast protocol according to Def.~\ref{def:mbt} and  $|S|=1$ are assumed.
 A \emph{broadcast graph} is a communication network on $n$ nodes with optimal broadcast time $\lceil \log n\rceil$ regardless of the source.
 Every complete graph $K_n$ satisfies this property, yet $K_n$ is not minimal. 
 The minimum number of edges in any broadcast graph on $n$ nodes is denoted as $B(n)$.
-A \emph{Minimum broadcast graph} is a broadcast graph with $B(n)$.
+A \emph{Minimum broadcast graph} is a broadcast graph with $B(n)$ edges.
 
 NP-completeness follows from the same result for MBT.
 A long list of paper deals with determining minimum broadcast graph for different number of nodes.
 The initial work \cite{farley79} shows minimum broadcast graphs for $n=2^k$ and $n\leq 15$.
-Further investigation \cite{harutyunyan99} leads to a technique for constructing broadcast graphs for many values of $n$.
+Further investigation \cite{harutyunyan99} leads to a technique for constructing broadcast graphs for many values of~$n$.
 
 In the generalized $c$-broadcasting, a \emph{$c$-broadcast graph} has a broadcast time $\lceil \log_{c+1} n\rceil$, and analogously, 
 $B_c(n)$ denotes the minimum number of edges in any $c$-broadcast graph.
