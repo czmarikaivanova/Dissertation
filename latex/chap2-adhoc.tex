@@ -196,7 +196,7 @@ The first analytical study of the three methods proposed in \cite{wieselthier00}
 It has been showed that the approximation ratio of MST and BIP lies in the interval $\left[6,12\right]$ and $\left[13/3,12\right]$, respectively.
 The approximation ratio of SPT is proved to be at least $n/2$.
 These results were gradually improved in several works. 
-The upper bound of the MST algorithm was improved to 6 in \cite{ambuhl05}, which closes the gap. %, and thus proves its optimality.
+The upper bound of the MST algorithm was improved to 6 in \cite{ambuhl05}, which closes the gap, and thus proves that the approximation ratio of the MST algorithm is 6. %, and thus proves its optimality.
 This upper bound is valid for BIP as well, due to a lemma in \cite{wan02},
 which says that for Euclidean instances of MEB, the objective function value of a solution obtained by BIP is at most the weight of a MST for this instance.
 The lower bound on the approximation ratio of BIP was strengthened to 4.598 in \cite{bauer09}. 
@@ -215,8 +215,14 @@ Another restriction considered in \cite{liang02} is that each node has the same 
 For this problem, another approximation algorithm, which delivers a solution within $\mathcal{O}(\log^3 n)$ times the optimum is devised.
 
 Probabilistic MEB, where a node reliability is considered, has also been investigated.
+The probabilistic settings aims to reflect the fact that the wireless devices may be subject to temporary or permanent failure.
+Each node $i$ is thus assigned a value $q_i\in \left[0,1\right]$ representing the probability that $i$ does not fail during the whole operating time.
+The value $q_i$ depends on the characteristic of the device represented by $i$ as well as its surroundings. 
+For example, in military settings, the nodes close to an enemy have smaller $q_i$ than those in a safer distance.
+The minimum reliability level $\alpha$ of each path from the source node $s$ to all other nodes has to be achieved.
+The probability of a multi-hop transmission along a path from $i$ to $j$ is equal to the product of the probabilities $q_k$ associated with the nodes involved in the path.
 Three ILP formulations of probabilistic MEB together with suitable solving methods are developed in \cite{montemanni08}.
-Another study of ILP formulations and suitable valid inequalities is pursued by \cite{barta10}.
+Another study of ILP formulations and associated valid inequalities is pursued by \cite{barta10}.
 
 A restriction of node locations can be imposed.
 One example is a random grid network, where nodes are chosen independently and randomly from points of a $\sqrt{n}\times\sqrt{n}$ square grid in the plane.
@@ -249,19 +255,26 @@ which can be further strengthened by introducing the multi-commodity flow variab
 Yet another network flow model formulation along with efficient solution techniques utilizes a fast solution of a combinatorial relaxation of the model \cite{min06}.
 
 \subsubsection{Planarity of an optimal solution}
-
 Alternatively to Problem~\ref{prob:meb1} and \ref{prob:meb2}, a MEB instance can be specified by $G=(V,E)$, $s\in $V, and coordinates $\left[x_v,y_v\right]$ for each node $v\in V$.
 %We recall from Section \ref{sect:back:graph} that an embedding of a graph in a plane assigns coordinates to nodes in a Euclidean plane.
 These coordinates implicitly imply distance $d_{ij}$ between every two nodes $i$ and $j$.
 
-We address the question whether an optimal solution to various MEB instances has a planar embedding.
+We address the question whether the embedding of an optimal solution to a Euclidean MEB instances is planar.
 To the best of our knowledge, the available literature does not provide results on this topic.
 The unpublished findings presented below are based on the assumption that a feasible solution to MEB is a tree as stated by Prob.~\ref{prob:meb2}.
 
 By inspecting a large number of instances and their optimal solution, the planarity of the optimum cannot be guaranteed in general, even though in the majority of cases, the optimum is indeed planar.
+%In the following, we sometimes associate a direction with a line segments in order to represent arcs of an arborescence. 
+%In such cases we use the notation $\overrightarrow{(A,B)}$ to denote the line segment $(A,B)$ with associated orientation from $A$ to $B$.
 \begin{proposition}\label{prop:mebplan}
-Consider nodes 4 nodes in an instance of MEB that form a convex quadrilateral $ABCD$.
-If two non-adjacent sides of the quadrilateral are shorter than the shorter diagonal, then in an optimal solution, edges with both endpoints in $ABCD$ do not cross each other.
+Consider a Euclidean instance of MEB containing five nodes that form a convex quadrilateral $ABCD$ and a node $S$.
+In the following cases, there exists an optimal solution in which the line segments $(A,C)$ and $(B,D)$ do not cross each other:
+%In an optimal solution, line segments $(A,C)$ and $(B,D)$ do not cross each other in the following cases:
+	\begin{enumerate}
+		\item $ABCD$ is a rectangle.
+		\item Three internal angles in $ABCD$ are obtuse.
+		\item Two adjacent internal angles in $ABCD$ are obtuse, and the other two are acute.
+	\end{enumerate}
 \end{proposition}
 \begin{proof}
 Consider the quadrilateral as depicted in Fig~\ref{fig:quad}. 
@@ -271,31 +284,74 @@ Consider the quadrilateral as depicted in Fig~\ref{fig:quad}.
   \caption{Four nodes forming a convex quadrilateral}
   \label{fig:quad}
 \end{figure}
-Without loss of generality, let $d_{AC}\leq d_{BD}$, $d_{AB}\leq d_{AC}\leq d_{BC}$ and $d_{CD}\leq d_{AC}\leq d_{AD}$.
-By the law of cosine, we have that 
-$$
-\cos{\beta}=\frac{d^2_{AB} + d^2_{BC} - d^2_{AC}}{2d_{AB}d_{BC}} \text{~~~ and ~~~}\cos{\delta}=\frac{d^2_{CD} + d^2_{AD} - d^2_{AC}}{2d_{CD}d_{AD}}.
-$$
-Both numerators are positive, both $\beta$ and $\delta$ are acute, which immediately implies that $\alpha $ and $\gamma$ are obtuse.
-
+It follows from the law of cosine that the longest side of an obtuse triangle is the one opposite to the obtuse angle.
+The proof analyzes possible solutions in which the two diagonals of $ABCD$ cross each other.
+An alternative solution without crossing and with no greater objective function value is then demonstrated in each case.
 Let $T=(V,A_T)$ be an optimal solution to the given instance.
-If $(A,C)\in A_T$ and $(B,D)\in A_T$, $(A,C)$ covers $B$ due to the wireless advantage, and $(B,D)$ covers $C$ because $\gamma$ is obtuse.
-Then, by replacing $(A,C)$ with $(A,B)$ we get rid of the crossing and all four nodes are covered.
-If $(A,C)\in A_T$ and $(D,B)\in A_T$, $(D,B)$ covers both $A$ and $C$ as $\alpha$ and $\gamma$ are obtuse, thus $(A,C)$ can be removed without disconnecting the solution.
-The remaining cases are symmetric.
+\begin{enumerate}
+	\item Assume without loss of generality that $B,C,D\not\in p_{S,A}$ and $(A,C),(B,D)\in A_T$.
+		By the law of cosine and the wireless advantage, if $(AC)\in A_T$, both $B$ and $D$ are covered (receive the signal). 
+		The arc $(B,D)$ is thus not needed in $T$.
+	\item Assume without loss of generality that $\delta$ is the acute angle.
+		\begin{itemize}
+			\item Let $A,C,D\not\in p_{S,B}$ and $(B,D)\in A_T$. Both $A$ and $C$ are covered by $(B,D)$, and so $(A,C)$ as well as $(C,A)$ are thus superfluous in the solution.
+			\item Let $A,B,C\not\in p_{S,D}$ and $(D,B)\in A_T$. The argument is analogous as above.
+%				The same argument applies if $(B,D)$ is replaced by $(D,B)$.
+%			\item Let $A,B,C\not\in p_{S,D}$ and $(D,B), (A,C)\in A_T$. An argument analogous to the case above applies.
+			\item Let $B,C,D\not\in p_{S,A}$ and $(A,C), (B,D)\in A_T$. $B$ is covered by $(A,C)$. 
+				If $(A,C)$ is replaced by $(A,B)$, $(B,D)$ covers $C$ without creating a crossing. 
+			\item Let $B,C,D\not\in p_{S,A}$ and $(A,C), (D,B)\in A_T$. $B$ is covered by $(A,C)$, $(D,B)$ is thus not needed. 
+%			\item An analogous argument applies to the case when $A,B,D\not\in p_{S,C}$, and .
+		\end{itemize}
+	\item Assume without loss of generality that $\beta$ and $\gamma$ are obtuse.
+			\begin{itemize}
+				\item Let $A,C,D\not\in p_{S,B}$, $d_{BD}<d_{AC}$, and $(B,D)\in A_T$. 
+					\begin{itemize}
+						\item If $(A,C)\in A_T$, $(B,D)$ covers $C$, and so $(A,C)$ can be eliminated.
+						\item If $(C,A)\in A_T$, $D$ is covered as $d_{CD}<d_{BD}<d_{AC}$.
+							$(B,D)$ can either be removed or replaced with $(B,C)$, if so is needed.
+					\end{itemize}
+				\item If $A,C,D\not\in p_{S,B}$, $d_{BD}>d_{AC}$ and $(B,D)\in A_T$., it is clear that $d_{BD}>d_{AB}$. 
+					Therefore, $(B,D)$ covers both $A$ and $C$, implying that neither $(A,C)$ nor $(C,A)$ is needed.
+				\item If $B,C,D\not\in p_{S,A}$ and $(A,C)\in A_T$.
+					\begin{itemize}
+						\item $(D,B)\in A_T$ is not needed, because $B$ is already covered by $(A,C)$.
+						\item If $(B,D)\in A_T$,$(A,C)$ does not cover $D$, so $(B,D)$ is needed. 
+							By replacing $(A,C)$ with $(A,B)$, the coverage of all nodes is achieved.
+					\end{itemize}
+%				\item If $B,C,D\not\in p_{S,A}$ and $d_{BD}>d_{AC}$, $(D,B)$ is not needed as $B$ is already covered.
+%				In case $(B,D)$ is necessary for covering $D$, 
+%					we can replace $(A,C)$ with $(A,B)$ as $C$ is covered by the longer diagonal.
+				\item The cases where $A,B,C\not\in p_{S,D}$ and $A,B,D\not\in p_{S,C}$ are resolved analogously.
+		\end{itemize}
+	
+\end{enumerate}
+
+%Without loss of generality, let $d_{AC}\leq d_{BD}$, $d_{AB}\leq d_{AC}\leq d_{BC}$ and $d_{CD}\leq d_{AC}\leq d_{AD}$.
+%By the law of cosine, we have that 
+%$$
+%\cos{\beta}=\frac{d^2_{AB} + d^2_{BC} - d^2_{AC}}{2d_{AB}d_{BC}} \text{~~~ and ~~~}\cos{\delta}=\frac{d^2_{CD} + d^2_{AD} - d^2_{AC}}{2d_{CD}d_{AD}}.
+%$$
+%Both numerators are positive, both $\beta$ and $\delta$ are acute, which immediately implies that $\alpha $ and $\gamma$ are obtuse.
+%
+%Let $T=(V,A_T)$ be an optimal solution to the given instance.
+%If $(A,C)\in A_T$ and $(B,D)\in A_T$, $(A,C)$ covers $B$ due to the wireless advantage, and $(B,D)$ covers $C$ because $\gamma$ is obtuse.
+%Then, by replacing $(A,C)$ with $(A,B)$ we get rid of the crossing and all four nodes are covered.
+%If $(A,C)\in A_T$ and $(D,B)\in A_T$, $(D,B)$ covers both $A$ and $C$ as $\alpha$ and $\gamma$ are obtuse, thus $(A,C)$ can be removed without disconnecting the solution.
+%The remaining cases are symmetric.
 \end{proof}
-If the condition that the shorter sides must not be adjacent is not met in Prop.~\ref{prop:mebplan}, a crossing may occur, as example in Fig.~\ref{fig:mebnonplan} demonstrates.
+Fig.~\ref{fig:mebnonplan} demonstrates an instance in which the conditions form Prop.~\ref{prop:mebplan} are not met. 
+In this instance, the quadrilateral $ABCD$ has three acute angles, and coordinates $A=[75,63]$, $B=[50,77]$, $C=[49,63]$, $D=[50,50]$, $X=[45,22]$ and $Y=[47,55]$.
+The blue edge weights correspond to the power requirements between two nodes. 
+For a convenient display, lengths of edges in the figure are not proportional.
 \begin{figure}[htb!]
   \centering
   \includegraphics[scale=1.4]{figurer/mebnonplanar.eps}
-  \caption{A unique optimal solution with crossing to a Euclidean instance of  MEB with source in node $A$.
-  The blue edge weights correspond to the power requirements between two nodes. 
-  The nodes have coordinates $A=[75,63]$, $B=[50,77]$, $C=[49,63]$, $D=[50,50]$, $X=[45,22]$ and $Y=[47,55]$.
-  For convenient display, lengths of edges in the figure are not proportional.}
+	\caption{A unique optimal solution with crossing to a Euclidean instance of  MEB with source in node $A$.}
   \label{fig:mebnonplan}
 \end{figure}
 
-\subsection{Range Assignment Problem}
+\subsection{The Range Assignment Problem}
 
 In the \textsc{Range Assignment Problem} (RAP), the task is to minimize the total power consumed under the constraint 
 that adequate power is provided to the nodes to ensure a strong connectivity of the graph.
@@ -306,9 +362,10 @@ Given a directed graph $G=(V,A)$ and power requirements $p$, find a power vector
 where $A^P=\{(i,j)\in A: p_{ij}\leq P_i\}$.
 %every where $E^P=\{(i,j)\in E: p_{ij}\leq P_i\wedge p_{ij}\leq P_j\}$.
 \end{problem}
-
+%In RAP, a single transmission graph is constructed, regardless of the source node.
+The requirement on strong connectivity ensures that broadcasting initiated by any node can take place.
 An obvious advantage of RAP over MEB is that a single transmission graph is constructed in RAP regardless of the source node.
-However, this can lead to solutions optimal with respect to RAP, but for certain sources initiating the transmission, the solution can be too expensive.
+However, this can lead to solutions that are optimal with respect to RAP, but for certain sources initiating the transmission, the solution may be too expensive.
 Sect.~\ref{sec:sbt} describes a problem with a more complicated objective function that combines advantages of both RAP and MEB.
 
 \subsubsection{Problem complexity and approximability}
@@ -321,37 +378,37 @@ and that for 3-dimensional space, the problem is APX-complete, thus does not adm
 Let us recall that unlike RAP, for $\alpha=1$, when the power requirements equal the distances, MEB  is solvable in polynomial time.
 An approximation algorithm improving the performance guarantee approaching 1.69 is presented in~\cite{calinescu02}.
 For the case $\alpha=1$, there exists an approximation algorithm with performance guarantee 1.5~\cite{ambuhl03}.
-A recent work \cite{carmi15} achieves an exact algorithm for the 1-dimensional problem that runs in $\mathcal{O}(n^2)$.
+A recent work \cite{carmi15} achieves an exact $\mathcal{O}(n^2)$ algorithm for instances with nodes arranged in 1-dimensional line.
 
 \subsubsection{Problem variants}
 
-A further constraint requires that diameter of the transmission graph has to be at most some constant value $h$.
+In an extension of RAP, a further constraint requires that diameter of the transmission graph has to be at most some constant value $h$.
 On a family of instances limiting the proximity of two nodes, this variant of RAP is in APX \cite{clementi01b}.
 The 1-dimensional problem with restricted diameter (number of hops) has been studied in \cite{clementi03}, where the authors introduce an exact algorithm that runs in $\mathcal{O}(hn^2)$.
 
-Another modifications imposes symmetric communication links.
+Another modification imposes symmetric communication links.
 This version is often found in the literature under the abbreviation SRAP.
 In a generalized version, weakly symmetric RAP (WSRAP), the symmetry requirement applies only to a pre-defined subset of edges.
 Other edges which are not essential for connectivity are allowed to be unidirectional.
 The motivation for studying WSRA stems from the observation that what is really important in the design of WANETs and WSNs is the existence of a connected backbone of symmetric edges \cite{santi05}.
-Imposing symmetry does not change the complexity of the problem, which remains NP-hard in two and three-dimensional networks \cite{blough02}.
+Imposing symmetry does not change the complexity of the problem, which remains NP-hard in networks with nodes arranged in two and three dimensions \cite{blough02}.
 
 The abbreviation SRAP is sometimes used for the Steiner RAP, where there is a predefined subset $D\subseteq V$ of destination nodes that are required to be included in a solution.
-The remaining Steiner nodes take part in the solution only if their presence reduces the objective function value.
-If not stated otherwise, SRAP in this work refers to the Symmetric RAP.
+The remaining nodes, referred to as \emph{Steiner nodes},  take part in the solution only if their presence reduces the objective function value.
+%If not stated otherwise, SRAP in this work refers to the Symmetric RAP.
 
 \subsubsection{ILP models}
 
-An ILP model with an exponential number of constraints along with a cutting plane method solving it is presented in \cite{althaus03}.
-A model based on network flows with polynomial number of constraints is introduced in \cite{das04}.
+An ILP model with an exponential number of constraints, along with a cutting plane method solving it, is presented in \cite{althaus03}.
+A model based on network flows with a polynomial number of constraints is introduced in \cite{das04}.
 Although this work concerns SRAP with directional antennas, their model can be adapted to the more common version with omnidirectional antennas.
 For modelling the power assignments, this model uses continuous power variables.
 By replacing them with binary ones and a corresponding adjustments in the model \cite{montemanni05, haugland11}, it is possible to achieve a stronger formulation.
-Even stronger model uses multi-commodity network flow variables \cite{haugland11}. 
+An even stronger model uses multi-commodity network flow variables \cite{haugland11}. 
 These strength results are analogous to those regarding MEB.
-Yet stronger formulation is obtained by using a multi-tree model \cite{haugland11}. 
+Yet a stronger formulation is obtained by using a multi-tree model \cite{haugland11}. 
 The authors employ binary variables indicating whether or not an arc $(i,j)$ is in the arborescence rooted at $t\in D$.
-This model is thus applicable for the Steiner RAP.
+This model is thus applicable to the Steiner RAP.
 
 \subsection{Shared Broadcast Trees}\label{sec:sbt}
 
@@ -362,14 +419,15 @@ A feasible solution to the SBT problem is any (undirected) spanning tree.
 This concept is motivated by the intention of incorporating the frequency of use of each node for different broadcast sessions.
 Every node can transmit a signal, but some are actively transmitting more often than others.
 We assume that a node acts as a source with a uniform probability. 
-A leave $l$ transmits a signal only when $l$ is the source, other intermediate nodes transmit more often as they also relay signals initiated in other nodes.
+A leaf $l$ transmits a signal only when $l$ is the source, whereas other nodes transmit more often as they also relay signals initiated in other nodes.
 
-Observe that a forwarding node that received a signal does not have to send it back to the node from which the signal was received.
-If the signal was received in a node $i$ from its most distant neighbor node $i_1$, it has to be forwarded to nodes that have not received it yet along the link to the second most distant node $i_2$.
+Observe that a forwarding node does not have to send a signal back to the node from which it is received.
+If the signal is received in a node $i$ from its most distant neighbor node $i_1$, it has to be forwarded to nodes that have not received it yet.
+That is ensured by relaying the signal along the link to the second most distant node $i_2$.
 Due to the wireless advantage, all other neighbor nodes closer than $i_2$ receive it as well.
-Conversely, if the signal was received by $i$ from a neighbor node different from its most distant neighbor $i_1$, node $i$ has to forward it to $i_1$. 
-It is therefore evident that $i$ does not have to always transmit with the power corresponding to the most distant neighbour.
-It transmits either with power level $p_{ii_2}$, if the signal came from the most distant node $i_1$, or with power level $p_{ii_2}$, otherwise.
+Conversely, if the signal is received by $i$ from a neighbor node different from its most distant neighbor $i_1$, node $i$ has to forward it to $i_1$. 
+It is therefore evident that $i$ does not always have to transmit with the power corresponding to its most distant neighbour.
+It transmits either with power level $p_{ii_2}$, if the signal comes from the most distant node $i_1$, or with power level $p_{ii_2}$, otherwise.
 The situation is depicted in Fig~\ref{fig:objexp}.
 \begin{figure}[htb!]
   \centering
@@ -379,26 +437,26 @@ The situation is depicted in Fig~\ref{fig:objexp}.
 \end{figure}
 
 Consider an edge $\{i,j\}$ in a solution $T$ to SBT.
-Let $T_{i/j}$ denote the subtree of $T$ consisting of nodes whose path to $j$ contains $(i,j)$. 
+Let $T_{i/j}$ denote the subtree of $T$ consisting of nodes from which the path to $j$ contains $(i,j)$. 
 A node $i$ in $T$ contributes to the objective function by the expression $c_T(i)$ as follows:
 \begin{equation}\label{eq:sbtnodecontr}
 c_T(i)=|T_{i_1/i}|p_{ii_2} + |T\setminus T_{i_1/i}|p_{ii_1}.
 \end{equation}
-We can also regard $c_T(i)$ as a weighted arithmetic mean of $i$'s power levels, with weights corresponding to the number of nodes whose signal is transmitted using the corresponding power level.
+We can also regard $c_T(i)$ as a convex combination of $i$'s power levels, with weights corresponding to the number of nodes whose signal is transmitted using the corresponding power level.
 The objective function is to minimize overall nodes' contributions, that is,
 \begin{equation}
 c(T)=\sum\limits_{i\in V}c_T(i).
 \label{eq:sbtcost}
 \end{equation}
-The problem under study is thus defined as follows:
+The SBT problem thus defined as follows:
 \begin{problem}
-Find a tree $T\subseteq G$ spanning $D$ minimizing \eqref{eq:sbtcost}.
+	Find a tree $T\subseteq G$ spanning $D$ minimizing $c(T)$.%\eqref{eq:sbtcost}.
 \end{problem}
 
 \emph{Remark:} The requirement that a solution must be a tree is necessary due to the nature of the objective function.
 
-Like in MEB, an optimal solution to SBT does not guarantee a planarity of the resulting tree, although vast majority of instances are planar. 
-As an example of non-planar optimum we state the instance on five nodes depicted in Fig~\ref{fig:sbtnonplanar}.
+Like in MEB, an optimal solution to SBT does not guarantee a planarity of the resulting tree, although a vast majority of its instances have optimal trees with a planar embedding. 
+As an example the converse, we state the instance on five nodes depicted in Fig~\ref{fig:sbtnonplanar}.
 \begin{figure}[htb!]
   \centering
   \includegraphics[scale=1.4]{figurer/sbtnonplanar.eps}
@@ -408,19 +466,19 @@ As an example of non-planar optimum we state the instance on five nodes depicted
   \label{fig:sbtnonplanar}
 \end{figure}
 
-The presence of Steiner nodes that are not required to be a part of the resulting tree leads to the Shared Multicast Tree (SMT).
-Some preliminary results were published in Paper I~\cite{ivanova16}, which contains ILP model and a heuristic methods with local search improvements.
-Further investigation of the ILP model and a more extensive experimental evaluation is given in Paper III.
+The introduction of Steiner nodes that are not required to be a part of the resulting tree leads to an extension of SBT referred to as the \textsc{Shared Multicast Tree} (SMT) problem.
+Some preliminary results are published in Paper I~\cite{ivanova16}, which contains an ILP model and heuristic methods with local search improvements.
+Further investigation of the ILP model and a more extensive experimental evaluation are given in Paper III.
 
 In SMT, the objective function has to be adjusted accordingly. 
 The contribution of a single node must reflect the fact that non-destination nodes do not initiate any transmission.
 Let us define the function $\mu: G\mapsto \mathbb{N}^+_0$ that returns the number of destinations in a given graph $G$.
-The contribution of one node in a solution $T$ to the resulting objective function given by Eq.~\ref{eq:sbtnodecontr} is in SMT changed to 
+The contribution of one node in a solution $T$ to the resulting objective function given by Eq.~\eqref{eq:sbtnodecontr} is in SMT changed to 
 \begin{equation}\label{eq:smtnodecontr}
 c_T(i)=\mu(T_{i_1/i})p_{ii_2} + \mu(T\setminus T_{i_1/i})p_{ii_1}.
 \end{equation}
 This objective function takes into account energy consumption by transmission only.
-Available literature of multicast versions of MEB and RAP applies this energy model too, however, it is also possible to incorporate other,
+Available literature on multicast versions of MEB and RAP applies this energy model too, however, it is also possible to incorporate other,
 less significant energy consumption sources as indicated by \cite{halgamuge09}.
 As each node that participates in the solution poses an additional energy outlay $\epsilon$, the objective function~\ref{eq:sbtcost} would then become
 \begin{equation}

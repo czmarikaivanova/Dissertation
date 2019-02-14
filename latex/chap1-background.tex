@@ -11,6 +11,8 @@ If this inclusion is an equality, $G$ is said to be \emph{complete}.
  The set $A$ of arcs is derived from $E$ by considering both directions of orientation of the edges.
  Formally, $A=\left\{(i,j),(j,i):\left\{i,j\right\}\in E\right\}$.
 A~\emph{path} in a graph is a sequence of edges connecting a sequence of distinct vertices.
+The notation $|G|$ is sometimes used for denoting the number of nodes in $G$, thus, $|G|=|V|$. 
+A path from $u$ to $v$ is denoted by $p_{u,v}$.
 The \emph{length} of a path is its number of edges.
 Consider the set of shortest paths between any two nodes in a graph $G$.
 The length of the longest among these shortest paths is called the \emph{graph diameter}, and is usually denoted $\Delta_G$.
@@ -54,16 +56,22 @@ We use the standard notation $\text{deg}^-(v)=|N^-(v)|$ and $\text{deg}^+(v)=|N^
 An~\emph{arborescence} rooted at vertex $r\in V$ is a directed tree with arcs directed from $r$.
 A~directed graph is \emph{strongly connected}, if for every pair of vertices $u,v\in V$, there is a path from $u$ to $v$ and from $v$ to $u$.
 
-A graph is \emph{planar}, if it can be drawn in a plane without crossing edges.
-According to this definition, every tree is planar. 
-A graphical representation of a graph $G$ is determined by a function $\Phi:V\mapsto\mathbb{R}\times\mathbb{R}$ that assigns a coordinate to each node in $V$. 
-We say that $\Phi(G)$ is is an \emph{embedding of $G$ in a plane}.
+%A graph is \emph{planar}, if it can be drawn in a plane without crossing edges.
+%According to this definition, every tree is planar. 
+An \emph{embedding} in plane of a graph $G$ is determined by a function $\Phi:V\mapsto\mathbb{R}\times\mathbb{R}$ that assigns a coordinate to each node in $V$. 
+The open and closed line segment between $\Phi(u)$ and $\Phi(v)$ is denoted by $\Phi(u,v)$ and $\Phi\left[u,v\right]$, respectively.
+The length of the line segment $\Phi(u,v)$ is denoted by $d(u,v)$.
+%We say that $\Phi(G)$ is is an \emph{embedding of $G$ in a plane}.
 \begin{definition}\label{def:planemb}
-The embedding $\Phi(G)$ is planar if it is drawn in such a way that its straight line segments intersect only at their endpoints.
+	$\Phi$ is a plannar embedding of $G$, of for all $\left\{u_1,v_1\right\},\left\{u_2,v_2\right\}\in E$, where $\left\{u_1,v_1\right\}\neq\left\{u_2,v_2\right\}$,
+	$\Phi(u_1,v_1)\cap\Phi(u_2,v_2)=\emptyset$.
+	If such an embedding exists then $G$ is planar.
+%The embedding $\Phi(G)$ is planar if it is drawn in such a way that its straight line segments intersect only at their endpoints.
 \end{definition}
-Clearly, whenever $\phi(G)$ is planar, then also $G$ is planar. 
-The opposite implication does not hold in general. 
-If $\Phi(G)$ is not planar, any two edges that intersect each other are referred to as \emph{crossing}.
+Every tree has a plannar embedding and is therefore planar.
+However, not every embedding of a tree is planar. 
+For an embedding that is not planar, $\Phi(u_1,v_1)\cap\Phi(u_2,v_2)\neq\emptyset$ is called \emph{crossing}.
+A Euclidean graph is a graph together with its embedding $\Phi$, and edges are assigned weights equal to the Euclidean distance between their endpoints given by $\Phi$.
 
 \section{Combinatorial Optimization}
 
@@ -91,7 +99,7 @@ Combinatorial problems are often formulated as \emph{mixed integer linear progra
 	\label{eq:ilp}
 \end{equation}
 
-The problem instance is specified by the input data $c\in \mathbb{R}^n$, $h \in \mathbb{R}^n$, 
+The problem instance is specified by the input data $c\in \mathbb{R}^n$, $h \in \mathbb{R}^p$, 
 $A \in \mathbb{R}^{m\times n}$  $B \in\mathbb{R}^{m\times p}$ and $b \in \mathbb{R}^m$, $m,n,p\in \mathbb{N}$.
 A MILP that is not in the standard form, for example if the objective is to minimize or if the constraints contain equalities, can be straightforwardly converted into the standard form.
 If the integrality constraints are not present, \eqref{eq:ilp} is a \emph{linear program} (LP).
@@ -127,31 +135,31 @@ By omitting the integrality constraints of a MILP $\mathcal{F}$, we obtain its \
 Let $A\in \mathbb{R}^{m\times n}$ and $b\in\mathbb{R}^m$.
 Consider an LP (\emph{primal})
 \begin{equation}
-	\max \left\{c^\top x  :  Ax \leq b, x \in\mathbb{R}_+^ 0\right\}. 
-\label{eq:primal}
+	\max \left\{c^\top x  :  Ax \leq b, x \geq 0\right\}. 
+\label{eq:lpprimal}
 \end{equation}
 
 We are looking for the best upper bound. 
-If $x^*$ is an optimal solution to \eqref{eq:primal}, $y^\top Ax$ with $y\in \mathcal{R}^n_+$ is a general linear combination of equations.
+If $x^*$ is an optimal solution to \eqref{eq:lpprimal}, $y^\top Ax$ with $y\in \mathcal{R}^n_+$ is a general linear combination of equations.
 If it is possible to select a vector $y$ so that $y^\top Ax^*=c^\top x^*$, we have that $y^\top b \geq c^\top x^*$.
 The best bound for any $x$ is then the optimal solution to the following LP (\emph{dual})
 \begin{equation}
 	\min \left\{b^\top y :  A^\top y \geq c, y   \geq 0.\right\} 
-\label{eq:dual}
+\label{eq:lpdual}
 \end{equation}
 The relation between primal and dual LP is summarized by
 \begin{proposition}
 If the primal has an optimal solution $x^*$ then the dual has an optimal solution $y^*$ such that $c^\top x^* = b^\top y^*$.
 \end{proposition}
 For LPs, duality provides a standard way to obtain upper bounds.
-This concept can be applied to IPs.
+A similar concept is applied to IPs.
 \begin{definition}\cite{wolsey98}
 The two problems
-\begin{equation}\label{eq:primal}
+\begin{equation}\label{eq:ipprimal}
 	z=\max\{c(x): x\in X\}
 \end{equation}
 and
-\begin{equation}\label{eq:dual}
+\begin{equation}\label{eq:ipdual}
 	w=\min\{\omega(u): u\in U\}
 \end{equation}
 form a (weak)-dual pair if $c(x)\leq \omega(u)$ for all $x\in X$ and all $u\in U$. 
@@ -162,10 +170,10 @@ For obtaining an upper bound from the LP relaxation, it is necessary to solve th
 The IP $z=\max\{cx: Ax\leq b, x\in Z^n_+\}$ and the LP $w^{LP}=\min\{ub:uA\geq c, u\in R^m_+\}$ form a weak dual pair.
 \end{proposition}
 \begin{proposition}\cite{wolsey98}
-Suppose that problems \eqref{eq:primal} and \eqref{eq:dual} form a weak-dual pair.
+Suppose that problems \eqref{eq:ipprimal} and \eqref{eq:ipdual} form a weak-dual pair.
 \begin{enumerate}
-	\item If $w$ is unbounded, \eqref{eq:primal} is infeasible, i.e., $X=\emptyset$.
-	\item If $x^*\in X$ and $u^*\in U$ satisfy $c(x^*)=w(u^*)$, then $x^*$ is optimal in \eqref{eq:primal} and $u^*$ is optimal in \eqref{eq:dual}.
+	\item If $w$ is unbounded, \eqref{eq:ipprimal} is infeasible, i.e., $X=\emptyset$.
+	\item If $x^*\in X$ and $u^*\in U$ satisfy $c(x^*)=w(u^*)$, then $x^*$ is optimal in \eqref{eq:ipprimal} and $u^*$ is optimal in \eqref{eq:ipdual}.
 \end{enumerate}
 \end{proposition}
 
@@ -258,6 +266,16 @@ $\rho$ of the value of an optimal solution.
 \end{definition}
 The factor $\rho$ is called the \emph{approximation ratio} or \emph{performance guarantee}.
 For minimization problems, $\rho > 1$, and for maximizations problems $\rho < 1$.
+An \emph{NP-optimization problem}  $A$ is a quadruple $(I,sol,m,goal)$ such that \cite{crescenzi97}
+\begin{enumerate}
+\item $I$ is the set of the instances of $A$ and it is recognizable in polynomial time. 
+\item Given an instance $x$ of $I$, $sol(x)$ denotes the set of feasible solutions of $x$. 
+	These solutions are short, that is, the size of any $y\in sol(x)$ is polynomial with respect to the size of $x$.
+	Moreover, it can be determined in polynomial time whether, for any $x$ and for any $y$, $y \in sol(x)$. 
+\item   Given an instance $x$ and a feasible solution $y$ of $x$, $m(x,y)$ denotes the positive integer measure of $y$. 
+	The function $m$ is computable in polynomial time. 
+\item $goal\in\left\{\min,\max\right\}$.
+\end{enumerate}
 \begin{definition}
 The class APX is the set of NP optimization problems for which there exists an approximation algorithm with constant approximation ratio.
 \end{definition}

@@ -124,6 +124,14 @@
 \newblock {\em Introduction to Algorithms}, 2nd~ed.
 \newblock The MIT Press, 2001.
 
+\bibitem{crescenzi97}
+{\sc Crescenzi, P., and Kann, V.}
+\newblock Approximation on the web: {A} compendium of {NP} optimization
+  problems.
+\newblock In {\em Randomization and Approximation Techniques in Computer
+  Science, International Workshop, RANDOM'97, Bolognna, Italy, July 11-12.
+  1997, Proceedings\/} (1997), pp.~111--118.
+
 \bibitem{ratner86}
 {\sc Daniel, R., and K., W.~M.}
 \newblock Finding a shortest solution for the n x n extension of the 15-puzzle

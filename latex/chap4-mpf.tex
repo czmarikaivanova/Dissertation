@@ -116,7 +116,7 @@ Another way, popular in the AI community, is measuring the running time in terms
 In this context, graphs are typically very large, and avoiding examination of the entire graph is desirable, in fact, it is one of the major goals of the algorithm.
 If we examine every node at depth up to $d$ before the target is found, we end up visiting $\mathcal{O}(b^d)$ nodes before termination.
 
-\section{Path Finding for Multiple Robots}
+\section{Path Finding for Multiple Robots}\label{sec:lrastar}
 
 The requirement of finding multiple non-colliding paths significantly increases the complexity of the problem.
 
@@ -221,29 +221,40 @@ An example of an instance for which CA* is unable to find a solution is depicted
 \begin{figure}
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
-        \includegraphics{figurer/castarfail.eps}
+	    \includegraphics[scale=2]{figurer/castarfail.eps}
         \caption{An instance for which CA* fails to find a solution}
         \label{fig:castarfail}
     \end{subfigure}\hspace{5mm}
     \begin{subfigure}[b]{0.48\textwidth}
-        \includegraphics{figurer/castarnofail.eps}
+	    \includegraphics[scale=2]{figurer/castarnofail.eps}
         \caption{An instance for which CA* finds an optimal solution}
         \label{fig:castarnofail}
     \end{subfigure}
+	\caption{Demonstration of incompleteness of CA*}
   %\label{fig:omni}
 \end{figure}
-The instance consists of a path on seven nodes and a node adjacent to the node in the middle of the path.
-Agents $a_1$ and $a_2$ are placed at the two endpoints of the path, and have targets $t_1$ and $t_2$, respectively.
-This instance has a solution in which one agent uses the node outside of the path in order to allow the other agent to pass towards its target.
+The instance consists of a path on five nodes $\lambda_0(a_1),A,B,C,\lambda_0(a_2)$, and a node $D$ adjacent to the node $B$ in the middle of the path.
+Agents $a_1$ and $a_2$ are placed at the two endpoints of the path, and have targets $\lambda_+(a_1)$ and $\lambda_+(a_2)$ at the opposite endpoints, respectively.
+This instance has a solution in which one agent uses the node $D$ outside of the path in order to allow the other agent to pass towards its target.
 %It does not matter which agent is considered first by the algorithm, so let us assume $a_1$ is processed first.
-CA* finds a path in the spatial graph that corresponds to the shortest path from $a_1$'s initial position to $t_1$, and when $a_2$ is processed,
-a path to $t_2$ in $G'$ that avoids reserved nodes does not exist.
+CA* finds a path in the spatial graph that corresponds to the shortest path from $a_1$'s initial position $\lambda_0(a_1)$ to $\lambda_+(a_1)$.
+When $a_2$ is subsequently processed, no path to $\lambda_+(a_2)$ in $G'$ that avoids reserved nodes and edges exists.
 Fig.~\ref{fig:castarnofail} depicts a slightly modified situation in which CA* is able to find the optimal solution.
-The plan of $a_1$ is again to go through the shortest path towards $t_1$.
-When the path for $a_2$ is calculated in $G'$, the only option to avoid reserved nodes is to make a step aside in the 3rd step, let $a_1$ pass, and then continue towards $t_2$.
-
+The plan of $a_1$ is again to go through the shortest path towards $\lambda_+(a_1)$, i.e., $\lambda_0(a_1), A, B, C, \lambda_+(a_1)$.
+When the path for $a_2$ is calculated in $G'$, the only option to avoid reserved nodes is to make a step aside in the 3rd step, let $a_1$ pass, and then continue towards $\lambda_+(a_2)$.
+Thus, $a_2$ passes the sequence of nodes $\lambda_0(a_2), C, D, D, C, B, A,\lambda_+(a_2)$.
+The spatial graph for instance in Fig.~\ref{fig:castarnofail} in which agent $a_1$ is processed first is displayed in Fig.~\ref{fig:spatial}.
+Green and blue nodes represent position of agent $a_1$ and $a_2$ in a certain time step.
+Coloured edges mark those edges along which an agent moves, and cannot be passed by another agent.
+Therefore, both directions are always marked, as no two agents are allowed to exchange their position within one time step.
+\begin{figure}
+    \centering
+	\includegraphics[scale=0.85]{figurer/castar3d.eps}
+	\caption{Spatial graph corresponding to the instance in Fig.~\ref{fig:castarnofail}}
+  \label{fig:spatial}
+\end{figure}
 The quality of a solution often depends on the order in which agents are processed. 
-Note that in some ordering of agents, a solution may not exist, while there can be a solution for another ordering.
+Note that in some orderings of agents, a solution may not exist, while there can be a solution for another ordering.
 This is also the case of the instance in Fig~\ref{fig:castarnofail}, because if a path for $a_2$ was planned first, a solution would again not be found.
 
 \subsubsection{OD+ID}
@@ -322,7 +333,7 @@ Given an instance $(G,R,\lambda_0,\lambda_+,\mathcal{T},t^*)$ of ACPF, does ther
 so that every agent $a\in T_{t^*}$ reaches its target location $\lambda_+(a)$, and so that no other team reaches its desired locations earlier?
 \end{problem}
 
-The problem was proved to be PSPACE-hard for two teams in \cite{ivanova14} by a polynomial reduction from \textsc{Quantified Boolean Formula} (QBF).
+The problem was proved to be PSPACE-hard for two teams in \cite{ivanova14} by a polynomial reduction from \textsc{True Quantified Boolean Formula} (TQBF).
 It is also known that the problem is EXPTIME, but whether or not it belongs to PSPACE remains an open question.
 
 In experimental settings, a time limit during which the agents move is imposed.

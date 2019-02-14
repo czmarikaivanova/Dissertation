@@ -3,27 +3,28 @@
 This thesis is a compilation of six papers in which three independent topics are looked into.
 The first three papers are focused on ad-hoc wireless networks discussed in Chapter~\ref{chap:wanet}.
 The fourth paper deals with the broadcast time problem addressed in Chapter~\ref{chap:mbt}.
-These four papers share integer programming as an initial method for obtaining solutions.
-The last two papers are more distant, as they study adversarial variants of path finding for multiple robots summarized in Chapter~\ref{chap:app}, 
+These four papers share the common characteristic that integer programming is an essential solution method.
+In this sense, the last two papers are distinguished from the former.
+They are devoted to adversarial variants of path finding for multiple robots summarized in Chapter~\ref{chap:app}, 
 which are commonly approached by methods prevalent in the field of artificial intelligence.
 %
 % Paper I
 %
 \section{Paper I:  Shared Multicast Trees in Ad-hoc Wireless Networks}
 
-Paper I introduces the Shared Multicast Tree (SMT) problem, a generalization of the Shared Broadcast Tree (SBT) problem.
+The contribution of Paper I lies in introducing the Shared Multicast Tree (SMT) problem, a generalization of the Shared Broadcast Tree (SBT) problem.
 An ILP model for SMT is proposed by modification of a model for SBT presented in \cite{yuan12}.
 Additional constraints related to non-destination nodes are included in the model, and constraints in the existing model for SBT are quantified with respect to the non-destinations.
 The presented model is subsequently proved to be a correct formulation of SMT.
 Appendix A of Paper I contains details of the proof.
 
 Further, several inexact construction methods are proposed.
-The first two methods are based on a construction of a solution to a different problems, specifically MST and MEB, respectively, 
-followed by local search which identifies non-destinations whose presence in the solution is disadvantageous.
+The first two methods are based on construction of a solution to different problems, specifically MST and MEB, respectively. 
+The construction is followed by local search, which identifies non-destinations whose presence in the solution is disadvantageous.
 These non-destinations are then eliminated from the solution.
 The third method is an algorithm devised specifically for SBT/SMT.
-Its main idea is to gradually add edges to the growing solution, anticipate subtree sizes in the resulting solution, 
-and thereby give an estimation of the final objective function each time a new edge is appended. 
+Its main idea is to gradually expand a solution by adding new edges, anticipate subtree sizes in the resulting solution, 
+and thereby give an estimate of the final objective function value each time a new edge is appended. 
 
 The experimental part is divided into two sections.
 The first section focuses on investigation of the instance sizes that are solvable by the proposed ILP model using the CPLEX solver.
@@ -37,8 +38,8 @@ In the second section, the comparison of the inexact algorithms indicates that t
 
 Because of the limited size of instances practically solvable to optimality, following from the computational complexity of SBT, 
 approximability and approximation algorithms are often researched.
-Paper II presents an instance of SBT for which the algorithm that construct a MST yields a solution to SBT with objective function six time worse than the optimum, 
-proving that the approximation ratio of the MST algorithm is at least 6.
+Paper II presents an instance of SBT for which the algorithm that construct a MST yields a solution to SBT with objective function value six times the optimum, 
+proving that the approximation ratio of the algorithm that constructs a MST as a solution to SBT is at least 6.
 In addition, experimental results then reveal that the ratio between the optimal objective function value,
 and the objective function value of MST solutions in randomly generated instances is much  more favourable than the lower bound on the approximation ratio.
 
@@ -47,39 +48,44 @@ and the objective function value of MST solutions in randomly generated instance
 %
 \section{Paper III: Integer Programming Formulations for the Shared Multicast Tree Problem}
 
-Two ILP formulations are developed in Paper III, the first model is based on broadcast trees whereas the second one adapts several network flow techniques presented in \cite{polzin01}.
+Two ILP formulations for SMT are developed in Paper III.
+The first model is based on broadcast trees, whereas the second one adapts several network flow techniques presented in \cite{polzin01}.
 Both models are subsequently extended by redundant variables and corresponding constraints which strengthen the formulations.
-The models are further strengthened by introducing valid inequalities
+The models are further strengthened by introducing valid inequalities.
 A theoretical study of the models proves that network flow based models are at least as strong as corresponding models built on broadcast trees.
 The experimental evaluation discovers instances showing that flow based models are in fact stronger.
 
-Experimental evaluation further exhibits a profound trade-off between time necessary for obtaining a lower bound by solving an LP relaxation of the models and their strength.
-LP relaxations of the strongest model yield an integral solution in most of the instances, however, its running time rules out its practical usability.
+Experimental evaluation further exhibits a profound trade-off between the time necessary for solving LP relaxation of the models, and the strength of the lower bound obtained.
+The LP relaxation of the strongest model yields an integral solution in most of the instances.
+However, its running time rules out its practical usability.
 For addressing this issue, a constraint generation (CG) technique is developed, which increases the size of practically solvable instances.
-A comparison of the lower bounds produced during the course of CG method with lower bounds that are yielded during standard branch and bound shows 
-that CG is able to obtain stronger lower bounds within the selected time limit of 20 minutes.
+Lower bounds are also yielded during the course of standard branch and bound algorithm.
+A comparison of lower bound produced from CG and branch and bound shows that CG is able to obtain stronger lower bounds within the selected time limit of 20 minutes.
 
 Paper III also contains an adaptation of a metaheuristic algorithm from \cite{pajor18}, originally developed for the minimum Steiner tree problem, 
 combined with local search methods developed in Paper I.
 The algorithm is able to solve a vast majority of tested instances to optimality. 
 However, the optimality is proved only in instances for which it is possible apply branch and bound and solve them to optimality within a practical time.
-Larger instances are not proved to be optimal, but the results indicate a very good potential of the metaheuristic algorithm. 
+In larger instances, the computed solutions are not proved to be optimal, but the results indicate a very good potential of the metaheuristic algorithm. 
 %
 % Paper IV
 %
+
 \section{Paper IV: Computing the Broadcast Time of a Graph}
 
-We develop a straightforward ILP model for the Minimum Broadcast Time (MBT) problem, and by exploiting the problem characteristics, 
-we introduce a method that iteratively solves a decision version of the ILP model and finally finds an optimal solution if given a sufficient time.
-This method is also applied on the LP relaxation of the model, and the outcome indicates this method yields strong lower bounds, often coinciding with the optimum.
-Besides the continuous relaxation, analytical and combinatorial lower bounding techniques are studied, 
-but according to the experimental evaluation, these methods provide weaker lower bounds than the LP relaxation.
+We develop a straightforward ILP model for the Minimum Broadcast Time (MBT) problem, as the existing literature focusing on matematical models for MBT is rather scarce. 
+Recently published \cite{chu17} contains a non-linear mathematical formulation of MBT, and authors in \cite{desousa18} present an ILP model.
+The models in these works serve for the purpose of formal description of MBT, and are not investigated further as potential solution methods.
+On the contrary, an exact method that exploits the problem characteristics and iteratively solves a decision version of the presented ILP model is devised in Paper IV.
+This method is also applied to the LP relaxation of the model, and the outcome indicates that it yields strong lower bounds, often coinciding with the optimum.
 
-Upper bounds are obtained by a greedy algorithm of which main aspect is an iterative construction of broadcast trees of restricted size.
+Besides the continuous relaxation, analytical and combinatorial lower bounding techniques are studied. 
+According to the experimental evaluation, these methods provide weaker lower bounds than the LP relaxation.
+Upper bounds are obtained by a greedy algorithm of which the main feature is an iterative construction of broadcast trees of restricted size.
 This algorithm is parametrized by the size limitation of the broadcast trees, and the larger trees are searched, the tighter upper bound can be achieved.
 
 The numerical experiments also provide an insight into the relation between some of the graph properties and its broadcast time. 
-It has been observed that graphs with more nodes as well as denser graphs tend to have its broadcast time closer to its trivial logarithmic lower bound 
+It has been observed that graphs with more nodes as well as denser graphs tend to have its broadcast time closer to its trivial lower bound $\log(n)$ (see Sect.~\ref{sec:bg}).
 Also, increasing size and density of the graph instances narrows the gap between upper and lower bounds.
 
 
@@ -90,15 +96,15 @@ Also, increasing size and density of the graph instances narrows the gap between
 
 Paper V introduces the Area Protection Problem (APP) as a modification of the previously studied Adversarial Cooperative Path Finding (ACPF) \cite{ivanova14} problem.
 Its main contribution lies in the proof that APP is PSPACE-hard.
-This result is achieved by demonstrating a polynomial-time reduction from the PSPACE-complete problem TQBF.
+This result is achieved by demonstrating a polynomial-time reduction from \textsc{True Quantified Boolean Formula} (TQBF).
 
 Several strategies are investigated for the team of defenders.
 A building block of all the considered strategies is a so called single stage \emph{destination allocation}, in which a node is assigned to each defender at the beginning of the agents' movement.
-The defenders then try to reach these destinations by any CPF algorithm, in this case we selected LRA*.
-A destination can be regarded as a target node for defenders, the difference is that while a target is a part of the input, destination is determined by a solution method.
+The defenders then try to reach these destinations by any CPF algorithm, in this case we selected LRA* (see Sect.~\ref{sec:lrastar}).
+A destination can be regarded as a target node for defenders, the difference is that while a target is part of the input, the destination is determined by a solution method.
 
 The strategies differ in the approach of target allocation.
-Two simplest methods, random and greedy allocation, select attackers' targets as destinations for defenders.
+The two simplest methods, random and greedy allocation, select attackers' targets as destinations for defenders.
 A more sophisticated method, \emph{bottleneck simulation}, runs a simulation of attackers' movement and tries to predict locations frequently passed by attackers.
 These locations are assumed to be bottlenecks in the environment, and blocking them may prevent a larger number of attackers from reaching their targets.
 
@@ -109,13 +115,13 @@ This method is particularly successful in environments rich on bottlenecks, as i
 %
 \section{Paper VI: Maintaining Ad-hoc Communication Network in Area Protection Scenarios with Adversarial Agents}
 
-An extension of APP, in which defenders are required to maintain the possibility of a communication among each other, is presented in Paper VI.
-The possibility of communication is modeled by a connectivity of the communication graph, whose nodes are the defenders' locations, 
-and there is an edge between two nodes if and only if agents placed at the nodes can communicate.
+An extension of APP, in which defenders are required to maintain the possibility of communication between each other, is presented in Paper VI.
+The possibility of communication is modeled by connectivity of the communication graph, whose nodes are the defenders' locations, 
+and whose edges connect node pairs between which agents can communicate. 
 
 We approach this problem by dividing the defenders into \emph{communicators} and \emph{occupiers} with different purposes. 
 Occupiers have the same task as regular defenders, i.e., they intend to prevent attackers from reaching their targets, 
 while communicators are supposed to ensure the connectivity maintenance by moving to suitable nodes.
 
-From a theoretical point of view, the problem whether it is possible for communicators to maintain communication when all occupiers reach their destinations is NP-complete, 
+From a theoretical point of view, we show that the problem whether it is possible for communicators to maintain communication when all occupiers reach their destinations is NP-complete, 
 which was proved by reducing \textsc{Vertex Cover} to it.

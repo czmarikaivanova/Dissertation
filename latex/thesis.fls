@@ -503,6 +503,11 @@ INPUT figurer/castarfail.eps
 INPUT figurer/castarfail.eps
 INPUT figurer/castarnofail.eps
 INPUT figurer/castarnofail.eps
+INPUT figurer/castar3d.eps
+INPUT figurer/castar3d.eps
+OUTPUT introduction_papers.aux
+INPUT introduction_papers.tex
+INPUT introduction_papers.tex
 INPUT thesis.bbl
 INPUT thesis.bbl
 INPUT thesis.brf
@@ -510,9 +515,6 @@ INPUT thesis.brf
 INPUT ./thesis.brf
 INPUT ./thesis.brf
 OUTPUT thesis.brf
-OUTPUT introduction_papers.aux
-INPUT introduction_papers.tex
-INPUT introduction_papers.tex
 OUTPUT papers.aux
 INPUT papers.tex
 INPUT papers.tex
